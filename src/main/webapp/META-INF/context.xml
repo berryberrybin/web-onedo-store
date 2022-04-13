@@ -30,9 +30,9 @@
          auth="Container"
          type="javax.sql.DataSource" 
          driverClassName="oracle.jdbc.OracleDriver"
-         url="jdbc:oracle:thin:@192.168.35.153:1521:XE"
-         username="c##scott" 
-         password="tiger" 
+         url="jdbc:oracle:thin:@stationery_high?TNS_ADMIN=C://wallet/Wallet_stationery"
+         username="c##admin" 
+         password="kostaTeamNo2" 
          maxActive="20" 
          maxIdle="10"
         maxWait="-1"/>
