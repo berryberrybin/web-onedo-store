@@ -10,7 +10,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/schema"/>
                         
         
         <property name="java-output-path" value="/web-onedo-store/build/classes"/>
