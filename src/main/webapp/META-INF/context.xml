@@ -31,7 +31,7 @@
          type="javax.sql.DataSource" 
          driverClassName="oracle.jdbc.OracleDriver"
          url="jdbc:oracle:thin:@stationery_high?TNS_ADMIN=C://wallet/Wallet_stationery"
-         username="c##admin" 
+         username="admin" 
          password="kostaTeamNo2" 
          maxActive="20" 
          maxIdle="10"
