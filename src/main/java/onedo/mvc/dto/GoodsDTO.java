@@ -2,7 +2,7 @@ package onedo.mvc.dto;
 
 public class GoodsDTO {
 	   private String goodsCode;
-	   private GoodsTypeDTO goodsTypeDto;
+	   private String goodsType;
 	   private String goodsName;
 	   private int goodsPrice;
 	   private int goodsStock;
@@ -13,11 +13,11 @@ public class GoodsDTO {
 	   
 	   public GoodsDTO() {}
 
-	public GoodsDTO(String goodsCode, GoodsTypeDTO goodsTypeDto, String goodsName, int goodsPrice, int goodsStock,
+	public GoodsDTO(String goodsCode, String goodsType, String goodsName, int goodsPrice, int goodsStock,
 			String goodsDetail, int isSoldout, int goodsView, String goodsImg) {
 		super();
 		this.goodsCode = goodsCode;
-		this.goodsTypeDto = goodsTypeDto;
+		this.goodsType = goodsType;
 		this.goodsName = goodsName;
 		this.goodsPrice = goodsPrice;
 		this.goodsStock = goodsStock;
@@ -35,12 +35,12 @@ public class GoodsDTO {
 		this.goodsCode = goodsCode;
 	}
 
-	public GoodsTypeDTO getGoodsTypeDto() {
-		return goodsTypeDto;
+	public String getGoodsType() {
+		return goodsType;
 	}
 
-	public void setGoodsTypeDto(GoodsTypeDTO goodsTypeDto) {
-		this.goodsTypeDto = goodsTypeDto;
+	public void setGoodsType(String goodsType) {
+		this.goodsType = goodsType;
 	}
 
 	public String getGoodsName() {
@@ -99,9 +99,8 @@ public class GoodsDTO {
 		this.goodsImg = goodsImg;
 	}
 	   
+	
 
-	
-	
 
 	
 	   
