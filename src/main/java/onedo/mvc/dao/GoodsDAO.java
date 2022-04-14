@@ -49,8 +49,15 @@ public interface GoodsDAO {
 	int update(GoodsDTO goodsDTO) throws SQLException;
 
 	/**
+<<<<<<< Updated upstream
 	 * 상품 정렬하기
 	 * */
+=======
+	 * 솔드아웃
+	 */
+	int isSoldoutUpdate(GoodsDTO goodsDTO) throws SQLException;
+
+>>>>>>> Stashed changes
 	
 
 }

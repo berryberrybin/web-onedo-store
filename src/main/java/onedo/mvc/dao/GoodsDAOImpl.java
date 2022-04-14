@@ -1,11 +1,26 @@
 package onedo.mvc.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 import onedo.mvc.dto.GoodsDTO;
+import onedo.mvc.util.DbUtil;
 
 public class GoodsDAOImpl implements GoodsDAO {
+	private Properties proFile = new Properties();
+
+	public GoodsDAOImpl() {
+		try {
+			proFile.load(getClass().getClassLoader().getResourceAsStream("dbQuery.properties"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	GoodsDTO goodsDTO = new GoodsDTO();
 
 	@Override
 	public List<GoodsDTO> selectAll() throws SQLException {
@@ -31,20 +46,91 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return 0;
 	}
 
+	/**
+	 * 상품등록
+	 */
 	@Override
 	public int insert(GoodsDTO goodsDTO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = proFile.getProperty("goods.insert");
+		try {
+			con = DbUtil.getConnection();
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, goodsDTO.getGoodsCode());
+			ps.setString(2, goodsDTO.getGoodsType());
+			ps.setString(3, goodsDTO.getGoodsName());
+			ps.setInt(4, goodsDTO.getGoodsPrice());
+			ps.setInt(5, goodsDTO.getGoodsStock());
+			ps.setString(6, goodsDTO.getGoodsDetail());
+			ps.setInt(7, goodsDTO.getIsSoldout());
+			ps.setInt(8, goodsDTO.getGoodsView());
+			ps.setString(9, goodsDTO.getGoodsImg());
+
+			result = ps.executeUpdate();
+
+			con.commit();
+
+		} finally {
+			con.rollback();
+			//DbUtil.dbClose(con, ps);
+		}
+		return result;
 	}
 
+	/**
+	 * 상품수정
+	 */
+	@Override
+	public int update(GoodsDTO goodsDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = proFile.getProperty("goods.update");
+		try {
+			con = DbUtil.getConnection();
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(sql);
+			ps.setString(1, goodsDTO.getGoodsName());
+			ps.setInt(2, goodsDTO.getGoodsPrice());
+			ps.setInt(3, goodsDTO.getGoodsStock());
+			ps.setString(4, goodsDTO.getGoodsDetail());
+			ps.setInt(5, goodsDTO.getIsSoldout());
+			ps.setString(6, goodsDTO.getGoodsImg());
+
+			result = ps.executeUpdate();
+			con.commit();
+
+		} finally {
+			con.rollback();
+			//DbUtil.dbClose(con, ps);
+		}
+		return result;
+	}
+
+	/**
+	 * 상품삭제
+	 */
 	@Override
 	public int delete(int goodsCode, String password) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/**
+	 * 상품 재고가 0이면 isSoldOut 0(품절)만들기
+	 *//*
+		 * public int isSoldoutUpdate(Connection con, int goodsCode) throws SQLException
+		 * { PreparedStatement ps = null; int result = 0; String sql =
+		 * proFile.getProperty("product.soldout"); // stock 0 ->soldOut try { con =
+		 * DbUtil.getConnection(); ps = con.prepareStatement(sql); ps.setString(1,
+		 * prodCode); result = ps.executeUpdate(); } finally { DbUtil.close(null, ps); }
+		 * return result; }
+		 */
 	@Override
-	public int update(GoodsDTO goodsDTO) throws SQLException {
+	public int isSoldoutUpdate(GoodsDTO goodsDTO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
