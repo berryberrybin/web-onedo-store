@@ -33,6 +33,10 @@ public class GoodsController implements Controller {
 	 * */
 	
 	/**
+	 * 상품검색 =selectByGoodsCode
+	 * */
+	
+	/**
 	 * 상품상세보기
 	 * */
 	
