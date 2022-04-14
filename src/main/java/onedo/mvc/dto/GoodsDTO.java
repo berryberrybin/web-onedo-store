@@ -98,11 +98,13 @@ public class GoodsDTO {
 	public void setGoodsImg(String goodsImg) {
 		this.goodsImg = goodsImg;
 	}
-	   
 
-	
-
-
+	@Override
+	public String toString() {
+		return "GoodsDTO [goodsCode=" + goodsCode + ", goodsType=" + goodsType + ", goodsName=" + goodsName
+				+ ", goodsPrice=" + goodsPrice + ", goodsStock=" + goodsStock + ", goodsDetail=" + goodsDetail
+				+ ", isSoldout=" + isSoldout + ", goodsView=" + goodsView + ", goodsImg=" + goodsImg + "]";
+	}
 	
 	   
 }
