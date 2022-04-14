@@ -9,12 +9,33 @@ public class UserDTO {
 	private String userAddr;
 	private String birth;
 	private String gender;
-	private String subState;
 	
 	public UserDTO() {}
 
+	public UserDTO(String userId, String userPwd) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+	}
+	
+	public UserDTO(String userId, String userPwd, String userPhone) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userPhone = userPhone;
+	}
+	
+	
+	public UserDTO(String userId, String userName, String userPhone, String birth) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPhone = userPhone;
+		this.birth = birth;
+	}
+
 	public UserDTO(String userId, String userPwd, String userName, String userPhone, String userAddr, String birth,
-			String gender, String subState) {
+			String gender) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -23,7 +44,6 @@ public class UserDTO {
 		this.userAddr = userAddr;
 		this.birth = birth;
 		this.gender = gender;
-		this.subState = subState;
 	}
 
 	public String getUserId() {
@@ -81,15 +101,5 @@ public class UserDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
-	public String getSubState() {
-		return subState;
-	}
-
-	public void setSubState(String subState) {
-		this.subState = subState;
-	}
-	
-	
 
 }
