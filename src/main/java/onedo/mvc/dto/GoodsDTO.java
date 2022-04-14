@@ -1,5 +1,7 @@
 package onedo.mvc.dto;
 
+import java.util.Objects;
+
 public class GoodsDTO {
 	   private int goodsCode;
 	   private String goodsType;
@@ -104,6 +106,23 @@ public class GoodsDTO {
 		return "GoodsDTO [goodsCode=" + goodsCode + ", goodsType=" + goodsType + ", goodsName=" + goodsName
 				+ ", goodsPrice=" + goodsPrice + ", goodsStock=" + goodsStock + ", goodsDetail=" + goodsDetail
 				+ ", isSoldout=" + isSoldout + ", goodsView=" + goodsView + ", goodsImg=" + goodsImg + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(goodsCode);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GoodsDTO other = (GoodsDTO) obj;
+		return goodsCode == other.goodsCode;
 	}
 	
 	   
