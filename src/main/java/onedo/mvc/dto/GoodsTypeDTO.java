@@ -1,23 +1,15 @@
 package onedo.mvc.dto;
 
 public class GoodsTypeDTO {
-	private String goodsCode;
 	private String goodsType;
+	private String goodsName;
 	
 	public GoodsTypeDTO() {}
 
-	public GoodsTypeDTO(String goodsCode, String goodsType) {
+	public GoodsTypeDTO(String goodsType, String goodsName) {
 		super();
-		this.goodsCode = goodsCode;
 		this.goodsType = goodsType;
-	}
-
-	public String getGoodsCode() {
-		return goodsCode;
-	}
-
-	public void setGoodsCode(String goodsCode) {
-		this.goodsCode = goodsCode;
+		this.goodsName = goodsName;
 	}
 
 	public String getGoodsType() {
@@ -27,6 +19,15 @@ public class GoodsTypeDTO {
 	public void setGoodsType(String goodsType) {
 		this.goodsType = goodsType;
 	}
+
+	public String getGoodsName() {
+		return goodsName;
+	}
+
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+
 	
 	
 	
