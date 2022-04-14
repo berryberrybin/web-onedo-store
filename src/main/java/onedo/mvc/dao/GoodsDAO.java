@@ -12,7 +12,7 @@ public interface GoodsDAO {
 	 * 상품 전체 검색
 	 */
 	List<GoodsDTO> selectAll() throws SQLException;
-
+	
 	/**
 	 * 상품 전체 검색(페이지처리)
 	 */
@@ -49,12 +49,8 @@ public interface GoodsDAO {
 	int update(GoodsDTO goodsDTO) throws SQLException;
 
 	/**
-	 * 전자제품에 해당하는 문의
-	 */
-
-	/**
-	 * 전자제품에 해당하는 후기
-	 */
+	 * 상품 정렬하기
+	 * */
 	
 
 }
