@@ -24,7 +24,7 @@ public interface GoodsDAO {
 	GoodsDTO selectBygoodsCode(int goodsCode) throws SQLException;
 
 	/**
-	 * 조회수를 증가하는 기능 update Electronics set readnum = readnum + 1 where model_num=?
+	 * 조회수를 증가하는 기능 update Goods set goods_view = goods_view + 1 where goods_code=?
 	 */
 	int increamentByReadgoodsCode(int goodsCode) throws SQLException;
 
