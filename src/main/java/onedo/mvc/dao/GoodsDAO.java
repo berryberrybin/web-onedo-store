@@ -21,7 +21,7 @@ public interface GoodsDAO {
 	/**
 	 * 상품코드에 해당하는 상품검색
 	 */
-	GoodsDTO selectBygoodsCode(int goodsCode) throws SQLException;
+	GoodsDTO selectByGoodsCode(int goodsCode) throws SQLException;
 
 	/**
 	 * 조회수를 증가하는 기능 update Goods set goods_view = goods_view + 1 where goods_code=?

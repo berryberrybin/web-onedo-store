@@ -2,7 +2,9 @@ package onedo.mvc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -24,20 +26,57 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 	@Override
 	public List<GoodsDTO> selectAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<GoodsDTO> list = new ArrayList<GoodsDTO>();
+		
+		String sql=proFile.getProperty("goods.selectAll");
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
+						rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+				list.add(goodsDTO);
+			}
+			
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return list;
 	}
-
+	
 	@Override
 	public List<GoodsDTO> getBoardList(int pageNo) throws SQLException {
-		// TODO Auto-generated method stub
+		//페이징처리
 		return null;
 	}
 
 	@Override
-	public GoodsDTO selectBygoodsCode(int goodsCode) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public GoodsDTO selectByGoodsCode(int goodsCode) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		String sql=proFile.getProperty("goods.selectByGoodsCode"); //select * from goods where goods_code=?
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1,goodsCode);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
+						rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+			}
+			
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return goodsDTO;
 	}
 
 	@Override

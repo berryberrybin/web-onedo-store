@@ -3,14 +3,18 @@ package onedo.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import onedo.mvc.dao.GoodsDAO;
+import onedo.mvc.dao.GoodsDAOImpl;
 import onedo.mvc.dto.GoodsDTO;
 
 public class GoodsServiceImpl implements GoodsService {
-
+	private GoodsDAO goodsDAO;
 	@Override
 	public List<GoodsDTO> selectAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		goodsDAO = new GoodsDAOImpl();
+		List<GoodsDTO> list = goodsDAO.selectAll();
+		
+		return list;
 	}
 
 	@Override
