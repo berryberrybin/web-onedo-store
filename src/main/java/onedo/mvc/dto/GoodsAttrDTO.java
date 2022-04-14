@@ -1,12 +1,22 @@
 package onedo.mvc.dto;
 
 public class GoodsAttrDTO {
+	private int goodsCode;
 	private int sour;
 	private int sweet;
 	private int aroma;
 	private int body;
 	
 	public GoodsAttrDTO() {}
+	
+	
+
+	public GoodsAttrDTO(int goodsCode) {
+		super();
+		this.goodsCode = goodsCode;
+	}
+
+
 
 	public GoodsAttrDTO(int sour, int sweet, int aroma, int body) {
 		super();
@@ -14,6 +24,23 @@ public class GoodsAttrDTO {
 		this.sweet = sweet;
 		this.aroma = aroma;
 		this.body = body;
+	}
+
+	public GoodsAttrDTO(int goodsCode, int sour, int sweet, int aroma, int body) {
+		super();
+		this.goodsCode = goodsCode;
+		this.sour = sour;
+		this.sweet = sweet;
+		this.aroma = aroma;
+		this.body = body;
+	}
+
+	public int getGoodsCode() {
+		return goodsCode;
+	}
+
+	public void setGoodsCode(int goodsCode) {
+		this.goodsCode = goodsCode;
 	}
 
 	public int getSour() {

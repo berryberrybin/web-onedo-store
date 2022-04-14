@@ -41,7 +41,7 @@ public class DispatcherServlet extends HttpServlet {
 		if(methodName==null || methodName.equals("")) {
 			methodName="select";
 		}
-	
+		System.out.println("key = " + key + " methodName = " + methodName);
 		
 		try {
 			Class<?> clz = clzMap.get(key);
