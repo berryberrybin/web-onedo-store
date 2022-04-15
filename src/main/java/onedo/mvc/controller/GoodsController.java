@@ -79,25 +79,6 @@ public class GoodsController implements Controller {
 	}
 	
 	/**
-	 * 상품상세보기
-	 * */
-	public ModelAndView viewDetail(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String goodsCode = request.getParameter("goodsCode");
-		GoodsDTO goodsDTO=null;
-		
-		try {
-			goodsDTO=service.selectByGoodsCode(goodsCode, true);
-		}catch(Exception e) {
-			e.printStackTrace();
-			//오류메시지
-		}
-		System.out.println(goodsDTO);
-		request.setAttribute("goods", goodsDTO);
-		return new ModelAndView("product-details.jsp");
-	}
-	
-	/**
 	 * ++
 	 * */
 	
