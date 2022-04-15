@@ -42,4 +42,8 @@ public interface GoodsService {
 	 */
 	void update(GoodsDTO goodsDTO) throws SQLException;
 
+	/**
+	 * 타입으로상품검색
+	 * */
+	List<GoodsDTO> selectByGoodsType(String goodsType) throws SQLException;
 }

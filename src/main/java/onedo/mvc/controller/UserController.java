@@ -42,7 +42,7 @@ public class UserController implements Controller {
 		PrintWriter out = response.getWriter();
 		out.print(result); //0,1
 		
-		return new ModelAndView("index.html");
+		return new ModelAndView("index.jsp");
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class UserController implements Controller {
 			session.setAttribute("loginName", dbDTO.getUserName());
 			
 			//index.jsp 이동 -> redirect 
-			return new ModelAndView("index.html", true);
+			return new ModelAndView("index.jsp", true);
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class UserController implements Controller {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		return new ModelAndView("index.html", true);
+		return new ModelAndView("index.jsp", true);
 	}
 	
 	/**

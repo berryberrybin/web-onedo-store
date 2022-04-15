@@ -1,213 +1,134 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <jsp:include page="common/header.jsp"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<jsp:include page="common/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title> ONE DO </title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/font-awesome.min.css" rel="stylesheet">
-    <link href="./css/prettyPhoto.css" rel="stylesheet">
-    <link href="./css/price-range.css" rel="stylesheet">
-    <link href="./css/animate.css" rel="stylesheet">
-	<link href="./css/main.css" rel="stylesheet">
-	<link href="./css/responsive.css" rel="stylesheet">
-    <!--[if lt IE 9]>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>ONE DO</title>
+<link href="${path}/css/bootstrap.min.css" rel="stylesheet">
+<link href="${path}/css/font-awesome.min.css" rel="stylesheet">
+<link href="${path}/css/prettyPhoto.css" rel="stylesheet">
+<link href="${path}/css/price-range.css" rel="stylesheet">
+<link href="${path}/css/animate.css" rel="stylesheet">
+<link href="${path}/css/main.css" rel="stylesheet">
+<link href="${path}/css/responsive.css" rel="stylesheet">
+<!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
-    <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
- </head>
+    <![endif]-->
+<link rel="shortcut icon" href="${path}images/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="${path}/images/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="${path}/images/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${path}/images/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="${path}/images/ico/apple-touch-icon-57-precomposed.png">
+</head>
 <body>
 
 	<section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
-				  <li><a href="#">Home</a></li>
-				  <li class="active">Shopping Cart</li>
+					<li><a href="#">Home</a></li>
+					<li class="active">Shopping Cart</li>
 				</ol>
 			</div>
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="image">Item</td>
-							<td class="description"></td>
-							<td class="price">Price</td>
-							<td class="quantity">Quantity</td>
-							<td class="total">Total</td>
+							<td class="image">상품이미지</td>
+							<td class="code">상품코드</td>
+							<td class="name">상품이름</td>
+							<td class="price">가격</td>
+							<td class="quantity">수량</td>
+							<td class="total">합계</td>
 							<td></td>
 						</tr>
 					</thead>
 					<tbody>
+					<c:choose>
+					<c:when test=${empty requestScope.cartItemList}>
 						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
+       						<td colspan="5">
+            					<p align="center"><b><span style="font-size:9pt;">등록된 상품이 없습니다.</span></b></p>
+        					</td>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${requestScope.cartItemList}" var="cartItem">
+							<tr>
+							<td class="itemImage">
+								<a href=""><img src="images/cart/one.png" alt=""></a> 
 							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
+							<td class="itemCode">
+								<h4>
+									<a href="">${cartItem.code}상품코드1</a>
+								</h4>
 							</td>
+							<td class="itemName">
+								<h4>
+									<a href="">${cartItem.name}상품이름1</a>
+								</h4>
+							</td>
+							
 							<td class="cart_price">
-								<p>$59</p>
+								<p>${cartItem.price}상품가격1</p>
 							</td>
+							
+							
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
 									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
+									 <input class="cart_quantity_input" type="text" name="quantity" value="${cartItem.amount}상품수량1" autocomplete="off" size="2">
+									  <a class="cart_quantity_down" href=""> - </a>
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
+								<p class="cart_total_price">${cartItem.price}*${cartItem.amount}</p>
 							</td>
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
-
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/two.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/three.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+						</c:forEach>
+						
+					</c:otherwise>
+					</c:choose>
+					
 					</tbody>
 				</table>
 			</div>
 		</div>
-	</section> <!--/#cart_items-->
+	</section>
+	<!--/#cart_items-->
 
 	<section id="do_action">
 		<div class="container">
 			<div class="heading">
-				<h3>What would you like to do next?</h3>
-				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+				<h3>배송비 및 할인 금액</h3>
+				<p>배송관련 금액과 할인금액 알 수 있음</p>
 			</div>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="chose_area">
-						<ul class="user_option">
-							<li>
-								<input type="checkbox">
-								<label>Use Coupon Code</label>
-							</li>
-							<li>
-								<input type="checkbox">
-								<label>Use Gift Voucher</label>
-							</li>
-							<li>
-								<input type="checkbox">
-								<label>Estimate Shipping & Taxes</label>
-							</li>
-						</ul>
-						<ul class="user_info">
-							<li class="single_field">
-								<label>Country:</label>
-								<select>
-									<option>United States</option>
-									<option>Bangladesh</option>
-									<option>UK</option>
-									<option>India</option>
-									<option>Pakistan</option>
-									<option>Ucrane</option>
-									<option>Canada</option>
-									<option>Dubai</option>
-								</select>
-								
-							</li>
-							<li class="single_field">
-								<label>Region / State:</label>
-								<select>
-									<option>Select</option>
-									<option>Dhaka</option>
-									<option>London</option>
-									<option>Dillih</option>
-									<option>Lahore</option>
-									<option>Alaska</option>
-									<option>Canada</option>
-									<option>Dubai</option>
-								</select>
-							
-							</li>
-							<li class="single_field zip-field">
-								<label>Zip Code:</label>
-								<input type="text">
-							</li>
-						</ul>
-						<a class="btn btn-default update" href="">Get Quotes</a>
-						<a class="btn btn-default check_out" href="">Continue</a>
-					</div>
-				</div>
+			
 				<div class="col-sm-6">
 					<div class="total_area">
 						<ul>
-							<li>Cart Sub Total <span>$59</span></li>
-							<li>Eco Tax <span>$2</span></li>
-							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span>$61</span></li>
+							<li>총 상품 가격 <span>${cartItem.price}*${cartItem.amount}</span></li>
+							<li>배송비 <span>3000</span></li>
+							<li>총 결제 예상 금액 <span>${cartItem.price}*${cartItem.amount}*0.9</span></li>
 						</ul>
-							<a class="btn btn-default update" href="">Update</a>
-							<a class="btn btn-default check_out" href="">Check Out</a>
+						<a class="btn btn-default update" href="">Update</a> <a class="btn btn-default check_out" href="">Check Out</a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section><!--/#do_action-->
+	</section>
+	<!--/#do_action-->
 
 </body>
-	<jsp:include page="common/footer.jsp"/>
+<jsp:include page="common/footer.jsp" />
 </html>

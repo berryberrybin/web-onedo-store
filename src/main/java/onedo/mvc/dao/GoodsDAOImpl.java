@@ -182,4 +182,13 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 	}
 
+	/**
+	 * 타입으로상품검색 =selectByGoodsType
+	 * */
+	@Override
+	public List<GoodsDTO> selectByGoodsType(String goodsType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

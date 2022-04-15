@@ -7,6 +7,10 @@ public class NoticeDTO {
 	private int noticeDate;
 	private String noticeImg;
 	
+	private String  fname; 
+	private int  fsize;
+	private int pageCnt;
+	
 	public NoticeDTO() {}
 
 	public NoticeDTO(int noticeNo, String noticeSubject, String noticeContent, int noticeDate, String noticeImg) {
@@ -16,6 +20,16 @@ public class NoticeDTO {
 		this.noticeContent = noticeContent;
 		this.noticeDate = noticeDate;
 		this.noticeImg = noticeImg;
+	}
+	
+
+	public NoticeDTO(int noticeNo, String noticeSubject, String noticeContent, int noticeDate, String noticeImg,
+			String fname, int fsize, int pageCnt) {
+		super();
+	
+		this.fname = fname;
+		this.fsize = fsize;
+	
 	}
 
 	public int getNoticeNo() {
@@ -56,6 +70,30 @@ public class NoticeDTO {
 
 	public void setNoticeImg(String noticeImg) {
 		this.noticeImg = noticeImg;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public int getFsize() {
+		return fsize;
+	}
+
+	public void setFsize(int fsize) {
+		this.fsize = fsize;
+	}
+
+	public int getPageCnt() {
+		return pageCnt;
+	}
+
+	public void setPageCnt(int pageCnt) {
+		this.pageCnt = pageCnt;
 	}
 	
 	

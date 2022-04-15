@@ -4,10 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import onedo.mvc.dao.GoodsDAO;
+import onedo.mvc.dao.GoodsDAOImpl;
 import onedo.mvc.dto.GoodsDTO;
 
 public class GoodsServiceImpl implements GoodsService {
-	private GoodsDAO goodsDAO;
+	private GoodsDAO goodsDAO = new GoodsDAOImpl();
 	
 	@Override
 	public List<GoodsDTO> selectAll() throws SQLException {
@@ -45,6 +46,17 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		return goodsDTO;
 	}
+	
+	/**
+	 * 타입으로상품검색 =selectByGoodsType
+	 * */
+	public List<GoodsDTO> selectByGoodsType(String goodsType) throws SQLException {
+		List<GoodsDTO> list = goodsDAO.selectByGoodsType(goodsType);
+		
+		//
+		
+		return list;
+	}
 
 	/**
 	 * 상품삭제 --품절이면 안보이게
@@ -64,5 +76,6 @@ public class GoodsServiceImpl implements GoodsService {
 		if (result == 0) throw new SQLException("수정 실패");
 
 	}
-
+	
+	
 }

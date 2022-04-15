@@ -1,0 +1,225 @@
+package onedo.mvc.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import onedo.mvc.dto.NoticeDTO;
+import onedo.mvc.paging.PageCnt;
+import onedo.mvc.util.DbUtil;
+
+public class NoticeDAOImpl implements NoticeDAO {
+	private Properties proFile = new Properties();
+	public NoticeDAOImpl() {
+		try {
+			//proFile.load(new FileInputStream("src/~~~~"));
+			
+			//현재 프로젝트가 런타임(실행)될때, 즉 서버에서 실행될때 classes폴더의 위치를 동적으로 가져와서 경로를 설정해야한다.
+			proFile.load(getClass().getClassLoader().getResourceAsStream("dbQuery.properties"));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	@Override
+	public List<NoticeDTO> selectAll() throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
+		
+		String sql = proFile.getProperty("");
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				NoticeDTO ndto = new NoticeDTO(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getInt(4),
+						rs.getString(5));
+
+				noticeList.add(ndto);
+			}
+			
+		}finally {
+			DbUtil.dbClose(rs, ps, con);	
+		}
+		
+		return noticeList;
+	}
+		
+
+	@Override
+	public List<NoticeDTO> getBoardList(int pageNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
+		String sql = proFile.getProperty("");
+		try {
+			//전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.
+			int totalCount = this.getTotalCount();
+			int totalPage = totalCount%PageCnt.getPagesize() ==0 ? totalCount/PageCnt.getPagesize() : (totalCount/PageCnt.getPagesize())+1 ;
+			
+			PageCnt pageCnt = new PageCnt();
+			pageCnt.setPageCnt(totalPage);//전페페이지수를 저장해준다.
+			pageCnt.setPageNo(pageNo); //사용자가 클릭한 page번호를 설정
+			
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			//?의 2개의 값 설정
+			ps.setInt(1, (pageNo-1)*PageCnt.pagesize+1); //시작점번호
+			ps.setInt(2, pageNo*PageCnt.pagesize); //끝점 번호
+
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				NoticeDTO ndto = new NoticeDTO(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getInt(4),
+						rs.getString(5));
+
+				noticeList.add(ndto);
+			}
+				
+			}finally {
+				DbUtil.dbClose(rs, ps, con);
+			}
+		return noticeList;
+	}
+	/**
+	 * 전체레코드 수
+	 * */
+	private int getTotalCount()throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int totalCount=0;
+		String sql = proFile.getProperty(" ");
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+					
+				}
+			}finally {
+				DbUtil.dbClose(rs, ps, con);
+			}
+			
+			return totalCount;
+		}
+
+	@Override
+	public NoticeDTO selectByNoticeCode(int noticeNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		NoticeDTO noticeDTO=null;
+		
+		String sql = proFile.getProperty("");
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, noticeNo);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				noticeDTO = new NoticeDTO(
+				rs.getInt(1),
+				rs.getString(2),
+				rs.getString(3),
+				rs.getInt(4),
+				rs.getString(5));
+			}
+			}finally {
+				DbUtil.dbClose(rs, ps, con);
+			}
+			return noticeDTO;
+			}
+	
+
+	@Override
+	public int insert(NoticeDTO noticeDTO) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql = proFile.getProperty(" ");
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1,noticeDTO.getNoticeNo() );
+			ps.setString(2,noticeDTO.getNoticeSubject() );
+			ps.setString(3,noticeDTO.getNoticeContent() );
+			ps.setInt(4,noticeDTO.getNoticeDate() );
+			ps.setString(5,noticeDTO.getNoticeImg() );
+		
+			
+		}finally {
+			DbUtil.dbClose(ps, con);
+		}
+		return result;
+	}
+	
+
+	@Override
+	public int delete(int noticeNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql = proFile.getProperty(" ");
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1,noticeNo);
+		
+			
+			result = ps.executeUpdate();
+			
+		}finally {
+			DbUtil.dbClose(ps, con);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int update(NoticeDTO noticeDTO) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql = proFile.getProperty(" ");
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			result = ps.executeUpdate();
+			
+			ps.setString(1,noticeDTO.getNoticeSubject() );
+			ps.setString(2,noticeDTO.getNoticeContent() );
+			ps.setInt(3,noticeDTO.getNoticeDate() );
+			ps.setString(4,noticeDTO.getNoticeImg() );
+			
+		}finally {
+			DbUtil.dbClose(ps, con);
+		}
+		return result;
+
+	}
+
+}

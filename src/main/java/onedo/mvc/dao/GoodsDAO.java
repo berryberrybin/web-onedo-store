@@ -57,6 +57,11 @@ public interface GoodsDAO {
 	 */
 	int isSoldoutUpdate(GoodsDTO goodsDTO) throws SQLException;
 
+	/**
+	 * 타입으로상품검색
+	 * */
+	List<GoodsDTO> selectByGoodsType(String goodsType);
+
 
 
 }

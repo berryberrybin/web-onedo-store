@@ -2,6 +2,7 @@ package onedo.mvc.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import onedo.mvc.dto.CartDTO;
+import onedo.mvc.dto.CartItemDTO;
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.service.CartService;
 import onedo.mvc.service.CartServiceImpl;
@@ -24,14 +26,18 @@ public class CartController implements Controller{
 
 	private Map<String, CartDTO> cartMap = new HashMap<>();
 
+	/**
+	 * 장바구니에 물건 담기 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		
 		String userId = request.getParameter("userId");
 		String goodsCode = request.getParameter("goodsCode");
-		
 		GoodsDTO goods = goodsService.selectByGoodsCode(goodsCode, false);
-		
 		int amount = Integer.parseInt(request.getParameter("amount"));
 
 		CartDTO cart = null;
@@ -50,7 +56,66 @@ public class CartController implements Controller{
 	}
 	
 	
+	/**
+	 * 장바구니 조회 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String userId = request.getParameter("userId");
+		
+		CartDTO cart = cartMap.get(userId);
+		
+		if(cart==null) {
+			// " 장바구니가 비어있습니다"
+		}else {
+			List<CartItemDTO> cartItemList = cart.getCartItemList();
+			request.setAttribute("cartItemList", cartItemList); //model에 데이터를 담아 보내는 역할
+			
+		}
+		
+		return new ModelAndView("cart.html");
+	}
 
+	public ModelAndView increaseAmount(HttpServletRequest request, HttpServletResponse response)throws Exception{
+		
+		String userId = request.getParameter("userId");
+		String goodsCode = request.getParameter("goodsCode");
+
+		List<CartItemDTO> cartItemList = cartMap.get(userId).getCartItemList();
+		
+		for(CartItemDTO cartItem : cartItemList) {
+			if(cartItem.getGoods().getGoodsCode()== Integer.parseInt(goodsCode)) {
+				int originAmount = cartItem.getAmount();
+				cartItem.setAmount(++originAmount);
+			}
+			
+		}
+		return new ModelAndView("cart.html");
+	}
+	
+
+	public ModelAndView decreaseAmount(HttpServletRequest request, HttpServletResponse response)throws Exception{
+		
+		String userId = request.getParameter("userId");
+		String goodsCode = request.getParameter("goodsCode");
+
+		List<CartItemDTO> cartItemList = cartMap.get(userId).getCartItemList();
+		
+		for(CartItemDTO cartItem : cartItemList) {
+			if(cartItem.getGoods().getGoodsCode()== Integer.parseInt(goodsCode)) {
+				int originAmount = cartItem.getAmount();
+				cartItem.setAmount(--originAmount);
+			}
+			
+		}
+		return new ModelAndView("cart.html");
+	}
+	
+	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
