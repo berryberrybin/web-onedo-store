@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <jsp:include page="common/header.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -26,6 +28,18 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
  </head>
+ <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+ <script type="text/javascript">
+	$(function(){
+		//전체검색
+		function searchSelectAll(){
+			document.setAttribute("key", "goods");
+			document.setAttribute("methodName", "searchSelectAll");
+			//out.print("key = " + $("key") + ", methodName = " + $("methodName"));
+		}
+		searchSelectAll();
+	});
+ </script>
 <body>
 
 	<section id="slider"><!--slider-->
@@ -101,6 +115,41 @@
 		<div class="row">
 		<jsp:include page="common/category.jsp"/>
 		<!-- 상품 페이지 추가-->
+		<c:choose>
+		<c:when test="${empty requestScope.list}">
+			<p align="center"><b><span style="font-size:9pt;">등록된 상품이 없습니다.</span></b></p>
+		</c:when>
+		<c:otherwise>
+		<c:forEach items="${requestScope.list}" var="goodsDTO">
+			<div class="col-sm-4">
+					<div class="product-image-wrapper">
+						<div class="single-products">
+								<div class="productinfo text-center">
+									<img src="images/home/product1.jpg" alt="" />
+									<h2>$56</h2>
+									<p>Easy Polo Black Edition</p>
+									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+								</div>
+								<div class="product-overlay">
+									<div class="overlay-content">
+										<h2>$56</h2>
+										<p>Easy Polo Black Edition</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+								</div>
+						</div>
+						<div class="choose">
+							<ul class="nav nav-pills nav-justified">
+								<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+								<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+		</c:forEach>
+		</c:otherwise>
+    	</c:choose>
 		</div>
 	</div>
 	</section>
