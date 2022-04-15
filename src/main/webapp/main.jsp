@@ -34,7 +34,7 @@
  		$(document).on("click","#goods",function(){
 				let goodsCode = $(this).attr("name");
 				//alert(idValue);
-				location.href="${path}/front?key=goods&methodName=viewDetail&goodsCode="+goodsCode;
+				location.href="${path}/front?key=goods&methodName=selectByGoodsCode&goodsCode="+goodsCode;
  		})
  	});
  </script>
