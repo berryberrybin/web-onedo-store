@@ -4,19 +4,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 import onedo.mvc.dao.GoodsDAO;
-import onedo.mvc.dao.GoodsDAOImpl;
 import onedo.mvc.dto.GoodsDTO;
 
 public class GoodsServiceImpl implements GoodsService {
-
-	
-	GoodsDAO goodsDAO = new GoodsDAOImpl();
+	private GoodsDAO goodsDAO;
 	
 	@Override
 	public List<GoodsDTO> selectAll() throws SQLException {
-		goodsDAO = new GoodsDAOImpl();
-		List<GoodsDTO> list = goodsDAO.selectAll();
-		
+        List<GoodsDTO> list = goodsDAO.selectAll();
+        
 		return list;
 	}
 
@@ -35,10 +31,19 @@ public class GoodsServiceImpl implements GoodsService {
 		if (result == 0) throw new SQLException("등록 실패");
 	}
 
+	/**
+	 * 상품검색,상세보기
+	 * */
 	@Override
 	public GoodsDTO selectByGoodsCode(String goodsCode, boolean flag) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		GoodsDTO goodsDTO = goodsDAO.selectByGoodsCode(Integer.parseInt(goodsCode));
+		
+		if(flag) {
+			//조회수 증가
+			int result = goodsDAO.increamentGoodsView(Integer.parseInt(goodsCode));
+		}
+		
+		return goodsDTO;
 	}
 
 	/**
