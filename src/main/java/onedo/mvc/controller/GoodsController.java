@@ -58,6 +58,25 @@ public class GoodsController implements Controller {
 		return new ModelAndView("shop.jsp");
 	}
 	
+	/**
+	 * 상품코드로검색 =selectByGoodsCode
+	 * */
+	public ModelAndView selectByGoodsCode(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		
+		String goodsCode = request.getParameter("goodsCode");
+		GoodsDTO goodsDTO = null;
+		
+		try {
+			goodsDTO = service.selectByGoodsCode(goodsCode, false);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("goodsDTO", goodsDTO);
+		return new ModelAndView("product-details.jsp");
+	}
 	
 	/**
 	 * 상품상세보기

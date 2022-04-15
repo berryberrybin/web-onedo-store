@@ -46,27 +46,4 @@ public class AjaxGoodsContorller implements AjaxController {
 	}
 	
 	
-	
-	/**
-	 * 상품코드로검색 =selectByGoodsCode
-	 * */
-	public void searchselectByGoodsCode(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		
-		String goodsCode = request.getParameter("goodsCode");
-		GoodsDTO goodsDTO = null;
-		
-		try {
-			goodsDTO = service.selectByGoodsCode(goodsCode, false);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		PrintWriter out = response.getWriter();
-		out.print(goodsDTO);
-	}
-	
-	
-
 }
