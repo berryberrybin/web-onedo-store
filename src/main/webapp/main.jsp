@@ -113,15 +113,15 @@
 					<div class="product-image-wrapper">
 						<div class="single-products">
 								<div class="productinfo text-center">
-									<img src="${path}/images/home/product1.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
+									<img src="${path}/img/${goodsDTO.goodsImg}" alt="" />
+									<h2><fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></h2>
+									<p>${goodsDTO.goodsName}</p>
 									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 								</div>
 								<div class="product-overlay">
 									<div class="overlay-content">
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
+										<h2><fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></h2>
+										<p>${goodsDTO.goodsName}</p>
 										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 								</div>
