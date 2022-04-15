@@ -28,6 +28,16 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${path}/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
  </head>
+ <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
+ <script type="text/javascript">
+ 	$(function(){
+ 		$(document).on("click","#goods",function(){
+				let goodsCode = $(this).attr("name");
+				//alert(idValue);
+				location.href="${path}/front?key=goods&methodName=viewDetail&goodsCode="+goodsCode;
+ 		})
+ 	});
+ </script>
 <body>
 
 	<section id="slider"><!--slider-->
@@ -118,7 +128,7 @@
 									<p>${goodsDTO.goodsName}</p>
 									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 								</div>
-								<div class="product-overlay">
+								<div class="product-overlay" id="goods" name="${goodsDTO.goodsCode}">
 									<div class="overlay-content">
 										<h2><fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></h2>
 										<p>${goodsDTO.goodsName}</p>
