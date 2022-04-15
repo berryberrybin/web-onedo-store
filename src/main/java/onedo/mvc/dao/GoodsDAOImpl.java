@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.util.DbUtil;
@@ -80,9 +81,22 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	@Override
-	public int increamentByReadgoodsCode(int goodsCode) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int increamentGoodsView(int goodsCode) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		
+		String sql=proFile.getProperty("goods.increamentGoodsView");//update goods set goods_view=goods_view+1 goods_view where goods_code=?
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, goodsCode);
+			result = ps.executeUpdate();
+			
+		}finally {
+			DbUtil.dbClose(ps, con);
+		}
+		return result;
 	}
 
 	/**
