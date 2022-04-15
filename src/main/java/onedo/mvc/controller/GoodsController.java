@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.service.GoodsService;
+import onedo.mvc.service.GoodsServiceImpl;
 
 public class GoodsController implements Controller {
-	private GoodsService service;
+	private GoodsService service = new GoodsServiceImpl();
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -36,7 +37,7 @@ public class GoodsController implements Controller {
 		}
 		
 		request.setAttribute("list", list);
-		return new ModelAndView("index.jsp");
+		return new ModelAndView("main.jsp");
 	}
 	
 	/**

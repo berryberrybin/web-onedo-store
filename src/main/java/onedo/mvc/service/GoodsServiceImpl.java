@@ -4,10 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import onedo.mvc.dao.GoodsDAO;
+import onedo.mvc.dao.GoodsDAOImpl;
 import onedo.mvc.dto.GoodsDTO;
 
 public class GoodsServiceImpl implements GoodsService {
-	private GoodsDAO goodsDAO;
+	private GoodsDAO goodsDAO = new GoodsDAOImpl();
 	
 	@Override
 	public List<GoodsDTO> selectAll() throws SQLException {
