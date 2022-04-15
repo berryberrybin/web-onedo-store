@@ -32,22 +32,17 @@
 <c:choose>
 	<c:when test="${empty loginUser}">
 	<section id="form"><!--form-->
-		<div class="container" method="post" action="${pageContext.request.contextPath}/front">
-		<input type="hidden" name="key" value = "user" /> <!-- Controller를 찾는 정보 -->
-		<input type="hidden" name="methodName" value = "login" />  <!-- 메소드이름 -->
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
 					<div class="login-form"><!--login form-->
 						<h2>회원 로그인</h2>
-						<form action="#">
+						<form method="post" action="${pageContext.request.contextPath}/front">
+							<input type="hidden" name="key" value = "user" /> <!-- Controller를 찾는 정보 -->
+							<input type="hidden" name="methodName" value = "login" />  <!-- 메소드이름 -->
 							<input type="text" class="form-control" id="userId" name="userId"
 							placeholder="아이디" />
 							<input type="password" class="form-control" id="userPwd" name="userPwd"
 							placeholder="비밀번호" />
-							<span>
-								<input type="checkbox" class="checkbox"> 
-								아이디 기억하기
-							</span>
 							<span>
 								<a href="">회원가입</a>
 							</span>
@@ -55,7 +50,6 @@
 						</form>
 					</div><!--/login form-->
 			</div>
-		</div>
 		</div>
 	</section><!--/form-->
 	</c:when>

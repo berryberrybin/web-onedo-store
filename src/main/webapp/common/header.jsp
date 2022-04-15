@@ -88,11 +88,19 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
+<<<<<<< Updated upstream
 								<li><a href="#"><i class="fa fa-user"></i> 마이페이지</a></li>
 								<li><a href="#"><i class="fa fa-star"></i> 커피추천</a></li>
 								<li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> 게시판</a></li>
 								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
 								<li><a href="login.jsp"><i class="fa fa-lock"></i> 로그인</a></li>
+=======
+								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+								<li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="${path}/user/login.jsp"><i class="fa fa-lock"></i> Login</a></li>
+>>>>>>> Stashed changes
 							</ul>
 						</div>
 					</div>
@@ -121,7 +129,7 @@
 										<li><a href="product-details.jsp">Product Details</a></li> 
 										<li><a href="checkout.jsp">Checkout</a></li> 
 										<li><a href="cart.jsp">Cart</a></li> 
-										<li><a href="login.jsp">Login</a></li> 
+										<li><a href="${path}/user/login.jsp">Login</a></li> 
                                     </ul>
                                 </li> 
 								<!-- <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>

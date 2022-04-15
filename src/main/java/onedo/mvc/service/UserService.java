@@ -26,14 +26,15 @@ public interface UserService {
 	
 	/**
 	 * 회원 수정 (해당 ID의 회원 수정)
+	 * @return 
 	 * */
-	int update(UserDTO userDTO);
+	void update(UserDTO userDTO) throws SQLException, AuthenticationException;
 	
 	
 	/**
 	 * 회원 삭제 (해당 ID의 회원 삭제)
 	 * */
-	int delete(String userId);
+	void delete(String userId) throws SQLException, AuthenticationException;
 
 	
 

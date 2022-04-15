@@ -101,15 +101,13 @@ public class UserController implements Controller {
 		
 		List<UserDTO> list = userService.selectAll();
 
-		
-		//list를 응답할 수 없기 때문에 list를 jsonArray 변환해서 보낸다
-		/*
-		 * JSONArray arr = JSONArray.fromObject(list);
-		 * 
-		 * PrintWriter out = response.getWriter(); out.print(arr);
-		 */
-		
-		return null;
+		try {
+			list = userService.selectAll();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		request.setAttribute("list", list);
+		return new ModelAndView("main.jsp");
 	}
 	
 	/**
@@ -127,10 +125,12 @@ public class UserController implements Controller {
 		String gender = request.getParameter("gender");
 		
 		UserDTO userDTO = new UserDTO(userId,userPwd,userName,userPhone,userAddr,birth,gender);
-		int result = userService.update(userDTO);
+		userService.update(userDTO);
 		
-		PrintWriter out = response.getWriter();
-		out.print(result);
+		/*
+		 * try { userService.selectAll(); }catch(Exception e){ e.printStackTrace(); }
+		 * request.setAttribute("list", list);
+		 */
 	}
 	
 	
@@ -142,9 +142,10 @@ public class UserController implements Controller {
 		
 		String userId = request.getParameter("userId");
 		
-		int result = userService.delete(userId);
-		PrintWriter out = response.getWriter();
-		out.print(result);
+		/*
+		 * try { userService.delete(); }catch(Exception e){ e.printStackTrace(); }
+		 * request.setAttribute("list", list);
+		 */
 
 	}
 
