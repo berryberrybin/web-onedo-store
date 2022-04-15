@@ -56,8 +56,10 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public void update(ReviewDTO reviewDTO) throws SQLException {
-		ReviewDTO dbRe = rdao.selectByGoodsCode(reviewDTO.getReviewNo());
-
+		
+		if(rdao.update(reviewDTO)==0) {
+			throw new SQLException("수정되지 않았습니다.");
+		}
 	}
 
 }
