@@ -5,6 +5,10 @@ public class FaqDTO {
 	private String faqSubject;
 	private String faqContent;
 	
+	private String  fname; 
+	private int  fsize;
+	private int pageCnt;
+	
 	public FaqDTO() {}
 
 	public FaqDTO(int faqNo, String faqSubject, String faqContent) {
@@ -12,6 +16,16 @@ public class FaqDTO {
 		this.faqNo = faqNo;
 		this.faqSubject = faqSubject;
 		this.faqContent = faqContent;
+	}
+	
+	
+
+	public FaqDTO(int faqNo, String faqSubject, String faqContent, String fname, int fsize, int pageCnt) {
+		super();
+	
+		this.fname = fname;
+		this.fsize = fsize;
+		this.pageCnt = pageCnt;
 	}
 
 	public int getFaqNo() {
@@ -37,6 +51,31 @@ public class FaqDTO {
 	public void setFaqContent(String faqContent) {
 		this.faqContent = faqContent;
 	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public int getFsize() {
+		return fsize;
+	}
+
+	public void setFsize(int fsize) {
+		this.fsize = fsize;
+	}
+
+	public int getPageCnt() {
+		return pageCnt;
+	}
+
+	public void setPageCnt(int pageCnt) {
+		this.pageCnt = pageCnt;
+	}
+	
 	
 	
 }
