@@ -13,6 +13,7 @@ public class GoodsDTO {
 	   private int goodsView; //조회수
 	   private String goodsImg;
 	   
+	   
 	   public GoodsDTO() {}
 
 	public GoodsDTO(int goodsCode, String goodsType, String goodsName, int goodsPrice, int goodsStock,

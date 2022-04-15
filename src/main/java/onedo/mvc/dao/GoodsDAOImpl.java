@@ -114,7 +114,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 		} finally {
 			con.rollback();
-			//DbUtil.dbClose(con, ps);
+			DbUtil.dbClose(ps, con);
 		}
 		return result;
 	}
@@ -144,7 +144,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 		} finally {
 			con.rollback();
-			//DbUtil.dbClose(con, ps);
+			DbUtil.dbClose(ps, con);
 		}
 		return result;
 	}
@@ -160,18 +160,12 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 	/**
 	 * 상품 재고가 0이면 isSoldOut 0(품절)만들기
-	 *//*
-		 * public int isSoldoutUpdate(Connection con, int goodsCode) throws SQLException
-		 * { PreparedStatement ps = null; int result = 0; String sql =
-		 * proFile.getProperty("product.soldout"); // stock 0 ->soldOut try { con =
-		 * DbUtil.getConnection(); ps = con.prepareStatement(sql); ps.setString(1,
-		 * prodCode); result = ps.executeUpdate(); } finally { DbUtil.close(null, ps); }
-		 * return result; }
-		 */
+	 */
 	@Override
 	public int isSoldoutUpdate(GoodsDTO goodsDTO) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		return 0;
+		
 	}
 
 }

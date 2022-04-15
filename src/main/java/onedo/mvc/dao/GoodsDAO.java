@@ -57,6 +57,6 @@ public interface GoodsDAO {
 	 */
 	int isSoldoutUpdate(GoodsDTO goodsDTO) throws SQLException;
 
-	
+
 
 }

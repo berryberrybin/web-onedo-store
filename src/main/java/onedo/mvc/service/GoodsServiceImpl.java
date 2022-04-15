@@ -8,7 +8,10 @@ import onedo.mvc.dao.GoodsDAOImpl;
 import onedo.mvc.dto.GoodsDTO;
 
 public class GoodsServiceImpl implements GoodsService {
-	private GoodsDAO goodsDAO;
+
+	
+	GoodsDAO goodsDAO = new GoodsDAOImpl();
+	
 	@Override
 	public List<GoodsDTO> selectAll() throws SQLException {
 		goodsDAO = new GoodsDAOImpl();
@@ -22,11 +25,14 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	/**
+	 * 상품등록
+	 * */
 	@Override
 	public void insert(GoodsDTO goodsDTO) throws SQLException {
-		// TODO Auto-generated method stub
-
+		int result = goodsDAO.insert(goodsDTO);
+		if (result == 0) throw new SQLException("등록 실패");
 	}
 
 	@Override
@@ -35,15 +41,22 @@ public class GoodsServiceImpl implements GoodsService {
 		return null;
 	}
 
+	/**
+	 * 상품삭제 --품절이면 안보이게
+	 * */
 	@Override
 	public void delete(String goodsCode, String password, String path) throws SQLException {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * 상품수정
+	 * */
 	@Override
 	public void update(GoodsDTO goodsDTO) throws SQLException {
-		// TODO Auto-generated method stub
+		int result = goodsDAO.update(goodsDTO);
+		if (result == 0) throw new SQLException("수정 실패");
 
 	}
 
