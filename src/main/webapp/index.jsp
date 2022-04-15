@@ -92,7 +92,7 @@
 	
 		<section id="advertisement"> <!-- 배너 클릭시 설문으로.. -->
 		<div class="container">
-			<img src="images/shop/OneDObanner.jpg" alt="" />
+			<a href="${path}/survey/survey.jsp"><img src="images/shop/OneDObanner.jpg" alt="" /></a>
 		</div>
 		</section>
 		
