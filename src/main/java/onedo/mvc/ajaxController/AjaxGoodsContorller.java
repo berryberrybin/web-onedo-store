@@ -20,47 +20,42 @@ public class AjaxGoodsContorller implements AjaxController {
 	/**
 	 * 상품등록
 	 * */
-	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response)
+	public void insert(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		return null;
 	}
 	
 	/**
 	 * 상품수정
 	 * */
-	public ModelAndView update(HttpServletRequest request, HttpServletResponse response)
+	public void update(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		return null;
 	}
 	
 
 	/**
 	 * 상품삭제
 	 * */
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response)
+	public void delete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		return null;
 	}
 	
 	/**
 	 * 상품전체검색
 	 * */
-	public ModelAndView searchSelectAll(HttpServletRequest request, HttpServletResponse response)
+	public void searchSelectAll(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		return null;
 	}
 	
 	/**
 	 * 타입으로상품검색 =selectByGoodsType
 	 * */
-	public ModelAndView selectByGoodsType(HttpServletRequest request, HttpServletResponse response)
+	public void selectByGoodsType(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		return null;
 	}
 
 }
