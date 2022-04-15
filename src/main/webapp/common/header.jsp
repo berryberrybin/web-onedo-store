@@ -88,11 +88,11 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.jsp"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="#"><i class="fa fa-user"></i> 마이페이지</a></li>
+								<li><a href="#"><i class="fa fa-star"></i> 커피추천</a></li>
+								<li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> 게시판</a></li>
+								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+								<li><a href="login.jsp"><i class="fa fa-lock"></i> 로그인</a></li>
 							</ul>
 						</div>
 					</div>

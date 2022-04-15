@@ -126,7 +126,6 @@
 									<img src="${path}/img/${goodsDTO.goodsImg}" alt="" />
 									<h2><fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></h2>
 									<p>${goodsDTO.goodsName}</p>
-									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 								</div>
 								<div class="product-overlay" id="goods" name="${goodsDTO.goodsCode}">
 									<div class="overlay-content">

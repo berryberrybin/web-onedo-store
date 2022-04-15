@@ -297,7 +297,6 @@
 									<img src="images/home/recommend1.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -309,7 +308,6 @@
 									<img src="images/home/recommend2.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -321,7 +319,6 @@
 									<img src="images/home/recommend3.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -335,7 +332,6 @@
 									<img src="images/home/recommend1.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -347,7 +343,6 @@
 									<img src="images/home/recommend2.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -359,7 +354,6 @@
 									<img src="images/home/recommend3.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
