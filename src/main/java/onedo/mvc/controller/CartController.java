@@ -164,7 +164,10 @@ public class CartController implements Controller {
 		}
 		List<CartItemDTO> cartItemList = cartMap.get(cartId).getCartItemList();
 		int sumTotalItemPrice = cartItemList.stream().mapToInt(cartItem -> cartItem.getTotalPrice()).sum();
-		int deliveryPrice = sumTotalItemPrice > 50000 ? 0 : 3000;
+		
+		
+		int deliveryPrice = (sumTotalItemPrice > 0 && sumTotalItemPrice < 50000) ? 3000 : 0;
+		
 		request.setAttribute("totalItemPrice", sumTotalItemPrice);
 		request.setAttribute("deliveryPrice", deliveryPrice);
 		request.setAttribute("paymentPrice", (sumTotalItemPrice - deliveryPrice));
