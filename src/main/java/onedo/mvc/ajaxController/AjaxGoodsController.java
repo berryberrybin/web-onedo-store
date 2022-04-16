@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import onedo.mvc.controller.ModelAndView;
 import onedo.mvc.dao.GoodsDAO;
 import onedo.mvc.dao.GoodsDAOImpl;
@@ -68,19 +69,18 @@ public class AjaxGoodsController implements AjaxController {
 	 * 상품전체검색
 	 * */
 	public void selectAll(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		List<GoodsDTO> list = null;
 		
-		try {
+		
 			list = goodsService.selectAll();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		
+			JSONArray arr = JSONArray.fromObject(list);
 		
 		PrintWriter out = response.getWriter();
-		out.print(list);
+		out.print(arr);
 		
 		
 	}

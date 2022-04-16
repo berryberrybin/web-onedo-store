@@ -43,12 +43,14 @@ public class HandlerMappingListener implements ServletContextListener {
 				if(className.getDeclaredConstructor().newInstance() instanceof Controller) {
 					controller = (Controller) className.getDeclaredConstructor().newInstance();
 					map.put(key, controller);
+					clzMap.put(key, className);
 				}else if(className.getDeclaredConstructor().newInstance() instanceof AjaxController) {
 					ajaxController = (AjaxController) className.getDeclaredConstructor().newInstance();
 					ajaxMap.put(key, ajaxController);
+					ajaxClzMap.put(key, className);
 				}
 
-				clzMap.put(key, className);
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
