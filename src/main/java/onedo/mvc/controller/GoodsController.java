@@ -36,7 +36,7 @@ public class GoodsController implements Controller {
 		}
 		
 		request.setAttribute("list", list);
-		return new ModelAndView("adminGoods.jsp");
+		return new ModelAndView("main.jsp");
 	}
 	
 	/**
