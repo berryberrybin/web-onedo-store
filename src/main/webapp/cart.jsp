@@ -107,7 +107,7 @@ td {
 											<p class="cart_total_price">${cartItem.totalPrice}</p>
 										</td>
 										<td class="cart_delete">
-											<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+											<a class="cart_quantity_delete" href="front?key=cart&methodName=delete&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"><i class="fa fa-times"></i></a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -125,8 +125,8 @@ td {
 	<section id="do_action">
 		<div class="container">
 			<div class="heading">
-				<h3>배송비 및 할인 금액</h3>
-				<p>배송관련 금액과 할인금액 알 수 있음</p>
+				<h3>배송비 및 총 결제 금액</h3>
+				<p>  배송비는 50,000원 이상 주문시 무료입니다.</p>
 			</div>
 
 			<div class="col-sm-6">
@@ -136,7 +136,8 @@ td {
 						<li>배송비 <span>${deliveryPrice}</span></li>
 						<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
 					</ul>
-					<a class="btn btn-default update" href="">Update</a> <a class="btn btn-default check_out" href="">Check Out</a>
+					<a class="btn btn-default update" href="">장바구니 비우기</a> 
+					<a class="btn btn-default check_out" href="">결제하기</a>
 				</div>
 			</div>
 		</div>

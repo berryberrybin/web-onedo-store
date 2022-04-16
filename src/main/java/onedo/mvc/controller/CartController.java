@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +56,34 @@ public class CartController implements Controller {
 		return new ModelAndView("cart.jsp", true); // 원래의 장바구니넣기한 상세페이지 머물러있어야 함!!
 	}
 
+	/**
+	 * 장바구니에 담긴 상품 중 선택한 상품 장바구니에서 삭제 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	
+	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String userId = request.getParameter("userId");
+		CartDTO cart = cartMap.get(userId);
+		List<CartItemDTO> cartItemList = cart.getCartItemList();
+		int goodsCode = Integer.parseInt(request.getParameter("goodsCode"));
+		
+		cartItemList = cartItemList.stream()
+		.filter(cartItem -> !(goodsCode==cartItem.getGoods().getGoodsCode()))
+		.collect(Collectors.toList());
+		
+		cart.setCartItemList(cartItemList);
+	
+		request.setAttribute("cartItemList", cartItemList);
+		checkTotalPrice(request);
 
+		return new ModelAndView("cart.jsp");
+
+	}
+
+	
 	/**
 	 * 장바구니 조회
 	 * 
@@ -102,7 +130,7 @@ public class CartController implements Controller {
 		}
 		List<CartItemDTO> cartItemList = cartMap.get(userId).getCartItemList();
 		int sumTotalItemPrice = cartItemList.stream().mapToInt(cartItem -> cartItem.getTotalPrice()).sum();
-		int deliveryPrice = sumTotalItemPrice > 30000 ? 0 : 3000;
+		int deliveryPrice = sumTotalItemPrice > 50000 ? 0 : 3000;
 		request.setAttribute("totalItemPrice", sumTotalItemPrice);
 		request.setAttribute("deliveryPrice", deliveryPrice);
 		request.setAttribute("paymentPrice", (sumTotalItemPrice - deliveryPrice));
