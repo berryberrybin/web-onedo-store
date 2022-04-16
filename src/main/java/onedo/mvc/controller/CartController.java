@@ -10,10 +10,12 @@ import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import onedo.mvc.dto.CartDTO;
 import onedo.mvc.dto.CartItemDTO;
 import onedo.mvc.dto.GoodsDTO;
+import onedo.mvc.dto.UserDTO;
 import onedo.mvc.service.CartService;
 import onedo.mvc.service.CartServiceImpl;
 import onedo.mvc.service.GoodsService;
@@ -27,6 +29,15 @@ public class CartController implements Controller {
 
 	private Map<String, CartDTO> cartMap = new HashMap<>();
 
+	
+	public List<CartItemDTO> findCartById(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String cartId = request.getParameter("userId");
+		CartDTO cart = cartMap.get(cartId);
+		List<CartItemDTO> cartItemList = cart.getCartItemList();
+		
+		return cartItemList;
+	}
+	
 	/**
 	 * 장바구니에 물건 담기
 	 * 
@@ -37,18 +48,21 @@ public class CartController implements Controller {
 	 */
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String userId = request.getParameter("userId");
+		HttpSession session = request.getSession();
+		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
+		
+		String cartId = dbDTO.getUserId();
 		String goodsCode = request.getParameter("goodsCode");
 		GoodsDTO goods = goodsService.selectByGoodsCode(goodsCode, false);
 		int amount = Integer.parseInt(request.getParameter("amount"));
 
 		CartDTO cart = null;
 
-		if (cartMap.containsKey(userId)) {
-			cart = cartMap.get(userId);
+		if (cartMap.containsKey(cartId)) {
+			cart = cartMap.get(cartId);
 		} else {
-			cart = new CartDTO(userId);
-			cartMap.put(userId, cart);
+			cart = new CartDTO(cartId);
+			cartMap.put(cartId, cart);
 		}
 
 		cartService.insert(cart, goods, amount);
@@ -57,48 +71,42 @@ public class CartController implements Controller {
 	}
 
 	/**
-	 * 장바구니에 담긴 상품 중 선택한 상품 장바구니에서 삭제 
+	 * 장바구니에 담긴 상품 중 선택한 상품 장바구니에서 삭제
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 * @throws Exception
 	 */
-	
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String userId = request.getParameter("userId");
-		CartDTO cart = cartMap.get(userId);
-		List<CartItemDTO> cartItemList = cart.getCartItemList();
-		int goodsCode = Integer.parseInt(request.getParameter("goodsCode"));
-		
-		cartItemList = cartItemList.stream()
-		.filter(cartItem -> !(goodsCode==cartItem.getGoods().getGoodsCode()))
-		.collect(Collectors.toList());
-		
-		cart.setCartItemList(cartItemList);
-	
-		request.setAttribute("cartItemList", cartItemList);
-		checkTotalPrice(request);
 
-		return new ModelAndView("cart.jsp");
+	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String cartId = request.getParameter("userId");
+		CartDTO cart = cartMap.get(cartId);
+		List<CartItemDTO> cartItemList = cart.getCartItemList();
+		
+		int goodsCode = Integer.parseInt(request.getParameter("goodsCode"));
+
+		cartItemList = cartItemList.stream().filter(cartItem -> !(goodsCode == cartItem.getGoods().getGoodsCode()))
+				.collect(Collectors.toList());
+
+		cart.setCartItemList(cartItemList);
+
+		return new ModelAndView("front?key=cart&methodName=select&userId="+cartId, true);
 
 	}
 
 	public ModelAndView deleteAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String userId = request.getParameter("userId");
-		CartDTO cart = cartMap.get(userId);
+		String cartId = request.getParameter("userId");
+		CartDTO cart = cartMap.get(cartId);
 		List<CartItemDTO> cartItemList = cart.getCartItemList();
-		
+
 		cartItemList.clear();
 		cart.setCartItemList(cartItemList);
-	
-		request.setAttribute("cartItemList", cartItemList);
-		checkTotalPrice(request);
 
-		return new ModelAndView("cart.jsp");
+		return new ModelAndView("front?key=cart&methodName=select&userId="+cartId, true);
 
 	}
-	
-	
+
 	/**
 	 * 장바구니 조회
 	 * 
@@ -109,9 +117,9 @@ public class CartController implements Controller {
 	 */
 	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String userId = request.getParameter("userId");
+		String cartId = request.getParameter("userId");
 
-		CartDTO cart = cartMap.get(userId);
+		CartDTO cart = cartMap.get(cartId);
 
 		if (cart == null) {
 			// " 장바구니가 비어있습니다"
@@ -119,7 +127,7 @@ public class CartController implements Controller {
 		} else {
 			List<CartItemDTO> cartItemList = cart.getCartItemList();
 			request.setAttribute("cartItemList", cartItemList); // model에 데이터를 담아 보내는 역할
-			
+
 		}
 
 		checkTotalPrice(request);
@@ -127,7 +135,6 @@ public class CartController implements Controller {
 		return new ModelAndView("cart.jsp");
 	}
 
-	
 	/**
 	 * 결제금액 및 배송비 체크
 	 * 
@@ -137,14 +144,14 @@ public class CartController implements Controller {
 	 */
 	public void checkTotalPrice(HttpServletRequest request) throws Exception {
 
-		String userId = request.getParameter("userId");
-		if (!cartMap.containsKey(userId)) {
+		String cartId = request.getParameter("userId");
+		if (!cartMap.containsKey(cartId)) {
 			request.setAttribute("totalItemPrice", 0);
 			request.setAttribute("deliveryPrice", 0);
 			request.setAttribute("paymentPrice", 0);
 			return;
 		}
-		List<CartItemDTO> cartItemList = cartMap.get(userId).getCartItemList();
+		List<CartItemDTO> cartItemList = cartMap.get(cartId).getCartItemList();
 		int sumTotalItemPrice = cartItemList.stream().mapToInt(cartItem -> cartItem.getTotalPrice()).sum();
 		int deliveryPrice = sumTotalItemPrice > 50000 ? 0 : 3000;
 		request.setAttribute("totalItemPrice", sumTotalItemPrice);
@@ -154,49 +161,43 @@ public class CartController implements Controller {
 
 	public ModelAndView increaseAmount(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String userId = request.getParameter("userId");
+		String cartId = request.getParameter("userId");
 		String goodsCode = request.getParameter("goodsCode");
 
-		List<CartItemDTO> cartItemList = cartMap.get(userId).getCartItemList();
+		List<CartItemDTO> cartItemList = cartMap.get(cartId).getCartItemList();
 
 		for (CartItemDTO cartItem : cartItemList) {
 			if (cartItem.getGoods().getGoodsCode() == Integer.parseInt(goodsCode)) {
 				int originAmount = cartItem.getAmount();
 				cartItem.setAmount(++originAmount);
 			}
-
 		}
-		request.setAttribute("cartItemList", cartItemList);
-		checkTotalPrice(request);
 
-		return new ModelAndView("cart.jsp");
+		return new ModelAndView("front?key=cart&methodName=select&userId="+cartId, true);
 	}
 
 	public ModelAndView decreaseAmount(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String userId = request.getParameter("userId");
+		String cartId = request.getParameter("userId");
 		String goodsCode = request.getParameter("goodsCode");
 
-		List<CartItemDTO> cartItemList = cartMap.get(userId).getCartItemList();
+		List<CartItemDTO> cartItemList = cartMap.get(cartId).getCartItemList();
 
 		for (CartItemDTO cartItem : cartItemList) {
 			if (cartItem.getGoods().getGoodsCode() == Integer.parseInt(goodsCode)) {
 				int originAmount = cartItem.getAmount();
-				if(originAmount>0) {
+				if (originAmount > 0) {
 					cartItem.setAmount(--originAmount);
-				}else {
+				} else {
 					cartItem.setAmount(0);
 				}
 			}
 
 		}
-		request.setAttribute("cartItemList", cartItemList);
-		checkTotalPrice(request);
 
-		return new ModelAndView("cart.jsp");
+		return new ModelAndView("front?key=cart&methodName=select&userId="+cartId, true);
 	}
 
-	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

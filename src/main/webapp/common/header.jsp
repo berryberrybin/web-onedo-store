@@ -93,7 +93,7 @@
 								<li><a href="#"><i class="fa fa-user"></i> 마이페이지</a></li>
 								<li><a href="#"><i class="fa fa-star"></i> 커피추천</a></li>
 								<li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> 게시판</a></li>
-								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+								<li><a href="front?key=cart&methodName=select&userId=soobin"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
 								<li><a href="login.jsp"><i class="fa fa-lock"></i> 로그인</a></li>
 =======
 			<div class="col-sm-8">

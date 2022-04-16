@@ -48,6 +48,7 @@ td {
 					<li class="active">Shopping Cart</li>
 				</ol>
 			</div>
+			
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
@@ -67,7 +68,7 @@ td {
 								<tr>
 									<td colspan="5">
 										<p align="center">
-											<b><span style="font-size: 9pt;">등록된 상품이 없습니다.</span></b>
+											<b><span style="font-size: 9pt;">장바구니에 담긴 상품이 없습니다.</span></b>
 										</p>
 									</td>
 								</tr>
@@ -96,6 +97,7 @@ td {
 											</h4>
 										</td>
 
+
 										<td class="cart_quantity">
 											<div class="cart_quantity_button"	id="itemAmount">
 												<a class="cart_quantity_up" id="itemAmountUp" href="front?key=cart&methodName=increaseAmount&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"> + </a> 
@@ -103,9 +105,12 @@ td {
 												<a class="cart_quantity_down" href="front?key=cart&methodName=decreaseAmount&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"> - </a>
 											</div>
 										</td>
+										
 										<td class="cart_total">
 											<p class="cart_total_price">${cartItem.totalPrice}</p>
 										</td>
+										
+										
 										<td class="cart_delete">
 											<a class="cart_quantity_delete" href="front?key=cart&methodName=delete&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"><i class="fa fa-times"></i></a>
 										</td>
