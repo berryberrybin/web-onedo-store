@@ -90,10 +90,7 @@
 								<li><a href="index.html" class="active">Home</a></li>
 								<li class="dropdown"><a href="#">상품관리<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="product-details.html">상품조회</a></li> 
-										<li><a href="product-details.html">상품등록</a></li> 
-										<li><a href="product-details.html">상품수정</a></li> 
-										<li><a href="product-details.html">상품삭제</a></li> 
+                                        <li><a href="adminGoods.jsp">상품조회</a></li> 
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">회원관리<i class="fa fa-angle-down"></i></a>

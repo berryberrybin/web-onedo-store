@@ -20,7 +20,7 @@ public interface GoodsService {
 	/**
 	 * GoodsDAOImpl의 레코드 삽입하는 메소드 호출
 	 */
-	void insert(GoodsDTO goodsDTO) throws SQLException;
+	int insert(GoodsDTO goodsDTO) throws SQLException;
 
 	/**
 	 * GoodsDAOImpl의 상품코드에 해당하는 레코드 검색하는 메소드 호출

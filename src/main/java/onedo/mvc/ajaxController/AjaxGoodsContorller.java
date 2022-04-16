@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import onedo.mvc.controller.ModelAndView;
+import onedo.mvc.dao.GoodsDAO;
+import onedo.mvc.dao.GoodsDAOImpl;
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.service.GoodsService;
 
 public class AjaxGoodsContorller implements AjaxController {
 	private GoodsService service;
+	private GoodsDAO goodsDAO = new GoodsDAOImpl();
 	@Override
 	public void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -21,18 +24,32 @@ public class AjaxGoodsContorller implements AjaxController {
 	}
 	
 	/**
-	 * 상품등록
+	 * 상품등록&수정
 	 * */
 	public void insert(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-	}
-	
-	/**
-	 * 상품수정
-	 * */
-	public void update(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+		int result =0 ;
+		String goodsCode = request.getParameter("goodsCode");
+		String goodsType = request.getParameter("goodsType");
+		String goodsName = request.getParameter("goodsName");
+		String goodsPrice = request.getParameter("goodsPrice");
+		String goodsStock = request.getParameter("goodsStock");
+		String goodsDetail = request.getParameter("goodsDetail");
+		String isSoldout = request.getParameter("isSoldout");
+		String goodsView = request.getParameter("goodsView");
+		String goodsImg = request.getParameter("goodsImg");
+		
+		GoodsDTO goodsDTO = new GoodsDTO(Integer.parseInt(goodsCode), goodsType, goodsName, 
+				Integer.parseInt(goodsPrice), Integer.parseInt(goodsStock), goodsDetail, 
+				Integer.parseInt(isSoldout), Integer.parseInt(goodsView),goodsImg);
+		try {
+			result = goodsDAO.insert(goodsDTO);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		PrintWriter out = response.getWriter();
+		out.print(result); //0,1
 		
 	}
 	
