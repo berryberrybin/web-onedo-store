@@ -27,9 +27,10 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 상품등록
 	 * */
 	@Override
-	public void insert(GoodsDTO goodsDTO) throws SQLException {
+	public int insert(GoodsDTO goodsDTO) throws SQLException {
 		int result = goodsDAO.insert(goodsDTO);
 		if (result == 0) throw new SQLException("등록 실패");
+		return result;
 	}
 
 	/**

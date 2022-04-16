@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <jsp:include page="common/header.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -35,7 +37,7 @@
 	<div class="product-details"><!--product-details상세페이지-->
 		<div class="col-sm-5">
 			<div class="view-product">
-				<img src="images/product-details/1.jpg" alt="" />
+				<img src="${path}/img/${goodsDTO.goodsImg}" alt="" />
 				<h3>ZOOM</h3>
 			</div>
 			<div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -72,19 +74,19 @@
 		<div class="col-sm-7">
 			<div class="product-information"><!--/product-information-->
 				<img src="images/product-details/new.jpg" class="newarrival" alt="" />
-				<h2>Anne Klein Sleeveless Colorblock Scuba</h2>
-				<p>Web ID: 1089772</p>
+				<h2>${goodsDTO.goodsName}</h2>
+				<p>goodsCode: ${goodsDTO.goodsCode}</p>
 				<img src="images/product-details/rating.png" alt="" />
 				<span>
-					<span>US $59</span>
+					<span>&#8361; <fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></span>
 					<label>Quantity:</label>
-					<input type="text" value="3" />
+					<input type="text" value="${goodsDTO.goodsStock}" />
 					<button type="button" class="btn btn-fefault cart">
 						<i class="fa fa-shopping-cart"></i>
 						Add to cart
 					</button>
 				</span>
-				<p><b>Availability:</b> In Stock</p>
+				<p><b>Availability:</b> ${goodsDTO.isSoldout}</p>
 				<p><b>Condition:</b> New</p>
 				<p><b>Brand:</b> E-SHOPPER</p>
 				<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
@@ -295,7 +297,6 @@
 									<img src="images/home/recommend1.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -307,7 +308,6 @@
 									<img src="images/home/recommend2.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -319,7 +319,6 @@
 									<img src="images/home/recommend3.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -333,7 +332,6 @@
 									<img src="images/home/recommend1.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -345,7 +343,6 @@
 									<img src="images/home/recommend2.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>
@@ -357,7 +354,6 @@
 									<img src="images/home/recommend3.jpg" alt="" />
 									<h2>$56</h2>
 									<p>Easy Polo Black Edition</p>
-									<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 								</div>
 							</div>
 						</div>

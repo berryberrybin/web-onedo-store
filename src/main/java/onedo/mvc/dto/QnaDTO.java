@@ -1,28 +1,49 @@
 package onedo.mvc.dto;
 
+import java.util.List;
+
+
+
 public class QnaDTO {
 	private int qnaNo;
-	private String qnaWriter;
-	private int qnaPwd;
+	private String userid;		
 	private String qnaSubject;
 	private String qnaContent;
 	private int qnaDate;
 	private String qnaImg;
+	private int qnaPwd;
 	private int goodsCode;
+	private String  fname; 
+	private int  fsize;
+
+	private List<QnaReply> repliesList;
+	
+	private int pageCnt;
 	
 	public  QnaDTO() {}
 
-	public QnaDTO(int qnaNo, String qnaWriter, int qnaPwd, String qnaSubject, String qnaContent, int qnaDate,
-			String qnaImg, int goodsCode) {
+	public QnaDTO(int qnaNo, String userid, String qnaSubject, String qnaContent, int qnaDate, String qnaImg,
+			int qnaPwd, int goodsCode) {
 		super();
 		this.qnaNo = qnaNo;
-		this.qnaWriter = qnaWriter;
-		this.qnaPwd = qnaPwd;
+		this.userid = userid;
 		this.qnaSubject = qnaSubject;
 		this.qnaContent = qnaContent;
 		this.qnaDate = qnaDate;
 		this.qnaImg = qnaImg;
+		this.qnaPwd = qnaPwd;
 		this.goodsCode = goodsCode;
+	}
+	
+	
+
+	public QnaDTO(int qnaNo, String userid, String qnaSubject, String qnaContent, int qnaDate, String qnaImg,
+			int qnaPwd, int goodsCode, String fname, int fsize, int pageCnt) {
+		super();
+		
+		this.fname = fname;
+		this.fsize = fsize;
+		this.pageCnt = pageCnt;
 	}
 
 	public int getQnaNo() {
@@ -33,20 +54,12 @@ public class QnaDTO {
 		this.qnaNo = qnaNo;
 	}
 
-	public String getQnaWriter() {
-		return qnaWriter;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setQnaWriter(String qnaWriter) {
-		this.qnaWriter = qnaWriter;
-	}
-
-	public int getQnaPwd() {
-		return qnaPwd;
-	}
-
-	public void setQnaPwd(int qnaPwd) {
-		this.qnaPwd = qnaPwd;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 	public String getQnaSubject() {
@@ -81,6 +94,14 @@ public class QnaDTO {
 		this.qnaImg = qnaImg;
 	}
 
+	public int getQnaPwd() {
+		return qnaPwd;
+	}
+
+	public void setQnaPwd(int qnaPwd) {
+		this.qnaPwd = qnaPwd;
+	}
+
 	public int getGoodsCode() {
 		return goodsCode;
 	}
@@ -89,5 +110,38 @@ public class QnaDTO {
 		this.goodsCode = goodsCode;
 	}
 
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public int getFsize() {
+		return fsize;
+	}
+
+	public void setFsize(int fsize) {
+		this.fsize = fsize;
+	}
+
+	public int getPageCnt() {
+		return pageCnt;
+	}
+
+	public void setPageCnt(int pageCnt) {
+		this.pageCnt = pageCnt;
+	}
+
+	public List<QnaReply> getRepliesList() {
+		return repliesList;
+	}
+
+	public void setRepliesList(List<QnaReply> repliesList) {
+		this.repliesList = repliesList;
+	}
+	
+	
 	
 }

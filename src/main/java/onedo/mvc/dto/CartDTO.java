@@ -18,6 +18,10 @@ public class CartDTO {
 	
 	
 	
+	public void setCartItemList(List<CartItemDTO> cartItemList) {
+		this.cartItemList = cartItemList;
+	}
+
 	public String getUserId() {
 		return userId;
 	}

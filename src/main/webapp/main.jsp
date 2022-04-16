@@ -126,21 +126,14 @@
 									<img src="${path}/img/${goodsDTO.goodsImg}" alt="" />
 									<h2><fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></h2>
 									<p>${goodsDTO.goodsName}</p>
-									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 								</div>
 								<div class="product-overlay" id="goods" name="${goodsDTO.goodsCode}">
 									<div class="overlay-content">
 										<h2><fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></h2>
 										<p>${goodsDTO.goodsName}</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<a href="front?key=cart&methodName=insert&goodsCode=${goodsDTO.goodsCode}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 								</div>
-						</div>
-						<div class="choose">
-							<ul class="nav nav-pills nav-justified">
-								<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-								<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-							</ul>
 						</div>
 					</div>
 				</div>

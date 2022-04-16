@@ -5,24 +5,29 @@ import java.util.Objects;
 public class CartItemDTO {
 	private GoodsDTO goods;
 	private int amount;
+	private int totalPrice;
 	
 	public CartItemDTO(GoodsDTO goods, int amount) {
 		super();
 		this.goods = goods;
 		this.amount = amount;
+		totalPrice = goods.getGoodsPrice()*amount;
 	}
 	
+	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
 	public GoodsDTO getGoods() {
 		return goods;
-	}
-	public void setGoods(GoodsDTO goods) {
-		this.goods = goods;
 	}
 	public int getAmount() {
 		return amount;
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
+		totalPrice = goods.getGoodsPrice()*amount;
 	}
 
 	@Override

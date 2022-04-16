@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="common/header.jsp" />
 <!DOCTYPE html>
@@ -27,6 +27,16 @@
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${path}/images/ico/apple-touch-icon-114-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${path}/images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="${path}/images/ico/apple-touch-icon-57-precomposed.png">
+
+<style>
+td {
+	text-align: center;
+}
+
+#itemAmount {
+	text-align: center;
+}
+</style>
 </head>
 <body>
 
@@ -38,6 +48,7 @@
 					<li class="active">Shopping Cart</li>
 				</ol>
 			</div>
+
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
@@ -52,54 +63,61 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:choose>
-					<c:when test=${empty requestScope.cartItemList}>
-						<tr>
-       						<td colspan="5">
-            					<p align="center"><b><span style="font-size:9pt;">등록된 상품이 없습니다.</span></b></p>
-        					</td>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${requestScope.cartItemList}" var="cartItem">
-							<tr>
-							<td class="itemImage">
-								<a href=""><img src="images/cart/one.png" alt=""></a> 
-							</td>
-							<td class="itemCode">
-								<h4>
-									<a href="">${cartItem.code}상품코드1</a>
-								</h4>
-							</td>
-							<td class="itemName">
-								<h4>
-									<a href="">${cartItem.name}상품이름1</a>
-								</h4>
-							</td>
-							
-							<td class="cart_price">
-								<p>${cartItem.price}상품가격1</p>
-							</td>
-							
-							
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									 <input class="cart_quantity_input" type="text" name="quantity" value="${cartItem.amount}상품수량1" autocomplete="off" size="2">
-									  <a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">${cartItem.price}*${cartItem.amount}</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						</c:forEach>
-						
-					</c:otherwise>
-					</c:choose>
-					
+						<c:choose>
+							<c:when test="${empty requestScope.cartItemList}">
+								<tr>
+									<td colspan="5">
+										<p align="center">
+											<b><span style="font-size: 9pt;">장바구니에 담긴 상품이 없습니다.</span></b>
+										</p>
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${requestScope.cartItemList}" var="cartItem">
+									<tr>
+										<td class="itemImage">
+											<a href=""><img src="${path}/img/${cartItem.goods.goodsImg}" width="100" alt=""></a>
+										</td>
+										<td class="itemCode">
+											<h4>
+												<a href="">${cartItem.goods.goodsCode}</a>
+											</h4>
+										</td>
+										<td class="itemName">
+											<h4>
+												<a href="">${cartItem.goods.goodsName}</a>
+											</h4>
+										</td>
+
+
+										<td class="itemPrice">
+											<h4>
+												<p>${cartItem.goods.goodsPrice}</p>
+											</h4>
+										</td>
+
+
+										<td class="cart_quantity">
+											<div class="cart_quantity_button" id="itemAmount">
+												<a class="cart_quantity_up" id="itemAmountUp" href="front?key=cart&methodName=increaseAmount&goodsCode=${cartItem.goods.goodsCode}"> + </a> <input class="cart_quantity_input" type="text" name="quantity" value="${cartItem.amount}" autocomplete="off" size="2"> <a class="cart_quantity_down" href="front?key=cart&methodName=decreaseAmount&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"> - </a>
+											</div>
+										</td>
+
+										<td class="cart_total">
+											<p class="cart_total_price">${cartItem.totalPrice}</p>
+										</td>
+
+
+										<td class="cart_delete">
+											<a class="cart_quantity_delete" href="front?key=cart&methodName=delete&goodsCode=${cartItem.goods.goodsCode}"><i class="fa fa-times"></i></a>
+										</td>
+									</tr>
+								</c:forEach>
+
+							</c:otherwise>
+						</c:choose>
+
 					</tbody>
 				</table>
 			</div>
@@ -110,21 +128,21 @@
 	<section id="do_action">
 		<div class="container">
 			<div class="heading">
-				<h3>배송비 및 할인 금액</h3>
-				<p>배송관련 금액과 할인금액 알 수 있음</p>
+				<h3>배송비 및 총 결제 금액</h3>
+				<p>배송비는 50,000원 이상 주문시 무료입니다.</p>
 			</div>
-			
-				<div class="col-sm-6">
-					<div class="total_area">
-						<ul>
-							<li>총 상품 가격 <span>${cartItem.price}*${cartItem.amount}</span></li>
-							<li>배송비 <span>3000</span></li>
-							<li>총 결제 예상 금액 <span>${cartItem.price}*${cartItem.amount}*0.9</span></li>
-						</ul>
-						<a class="btn btn-default update" href="">Update</a> <a class="btn btn-default check_out" href="">Check Out</a>
-					</div>
+
+			<div class="col-sm-6">
+				<div class="total_area">
+					<ul>
+						<li>총 상품 가격 <span>${totalItemPrice}</span></li>
+						<li>배송비 <span>${deliveryPrice}</span></li>
+						<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
+					</ul>
+					<a class="btn btn-default update" href="" front?key=cart&methodName=deleteAll">장바구니 비우기</a> <a class="btn btn-default check_out" href="">결제하기</a>
 				</div>
 			</div>
+		</div>
 		</div>
 	</section>
 	<!--/#do_action-->
