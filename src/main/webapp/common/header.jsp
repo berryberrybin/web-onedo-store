@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,6 +86,7 @@
 							</div> -->
 						</div>
 					</div>
+<<<<<<< Updated upstream
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
@@ -93,6 +95,26 @@
 								<li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> 게시판</a></li>
 								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
 								<li><a href="login.jsp"><i class="fa fa-lock"></i> 로그인</a></li>
+=======
+			<div class="col-sm-8">
+				<div class="shop-menu pull-right">
+					<ul class="nav navbar-nav">
+						<li><a href="#"><i class="fa fa-user"></i> 마이페이지</a></li>
+						<li><a href="#"><i class="fa fa-coffee"></i> 커피추천</a></li>
+						<li><a href="checkout.jsp"><i class="fa fa-list"></i> 게시판</a></li>
+						<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+						<li><a href="${path}/user/login.jsp"><i class="fa fa-unlock-alt"></i> 로그인</a></li>
+						
+				     <c:if test="${not empty loginUser}">
+					     <ul class="nav navbar-nav">
+					     	<li class="active"><a href="#">${loginUser.userId}님</a></li>
+					      	<li><a href="${pageContext.request.contextPath}/front?key=user&methodName=logout">
+					      	<i class="fa fa-lock"></i>로그아웃</a></li>
+					     </ul>
+				     </c:if>								
+
+							</ul>
+>>>>>>> Stashed changes
 						</div>
 					</div>
 				</div>

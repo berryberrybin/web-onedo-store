@@ -36,13 +36,9 @@ public class UserController implements Controller {
 		String birth = request.getParameter("birth");
 		String gender = request.getParameter("gender");
 		
-		int result = userService.userJoin(new UserDTO(userId,userPwd,userName,userPhone,userAddr,birth,gender));
-		
-		//회원가입 성공..
-		PrintWriter out = response.getWriter();
-		out.print(result); //0,1
-		
-		return new ModelAndView("index.jsp");
+		userService.userJoin(new UserDTO(userId,userPwd,userName,userPhone,userAddr,birth,gender));
+				
+		return new ModelAndView("login.jsp", true);
 	}
 	
 	/**

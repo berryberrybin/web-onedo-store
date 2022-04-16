@@ -26,30 +26,42 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    
  </head>
 <body>
+
 <c:choose>
 	<c:when test="${empty loginUser}">
 	<section id="form"><!--form-->
+		<div class="container" method="post" action="${pageContext.request.contextPath}/front">
+		<input type="hidden" name="key" value = "user" /> <!-- Controller를 찾는 정보 -->
+		<input type="hidden" name="methodName" value = "join" />  <!-- 메소드이름 -->
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
-					<div class="login-form"><!--login form-->
-						<h2>회원 로그인</h2>
-						<form method="post" action="${pageContext.request.contextPath}/front">
-							<input type="hidden" name="key" value = "user" /> <!-- Controller를 찾는 정보 -->
-							<input type="hidden" name="methodName" value = "login" />  <!-- 메소드이름 -->
-							<input type="text" class="form-control" id="userId" name="userId"
+					<div class="signup-form"><!--login form-->
+						<h2>회원 가입</h2>
+						<form action="login.jsp" method="post">
+							이름<input type="text" class="form-control" id="userName" name="userName"
+							placeholder="이름" />
+							아이디<input type="text" class="form-control" id="userId" name="userId"
 							placeholder="아이디" />
-							<input type="password" class="form-control" id="userPwd" name="userPwd"
+							비밀번호<input type="password" class="form-control" id="userPwd" name="userPwd"
 							placeholder="비밀번호" />
-							<span>
-								<a href="signup.jsp">회원가입</a>
-							</span>
-							<button type="submit" class="btn btn-default">로그인</button>
+							휴대폰번호<input type="text" class="form-control" id="userPhone" name="userPhone"
+							placeholder="휴대폰번호" />
+							생년월일<input type="text" class="form-control" id="birth" name="birth"
+							placeholder="생년월일 8자리" />
+							성별 <select name="gender">
+							  <option value=""selected>성별을 선택해주세요</option>
+							  <option value="female">여성</option>
+							  <option value="male">남성</option>
+							</select><br>
+							주소<input type="text" class="form-control" id="userAddr" name="userAddr"
+							placeholder="주소" />
+							<button type="submit" class="btn btn-default">가입하기</button>
 						</form>
 					</div><!--/login form-->
 			</div>
+		</div>
 		</div>
 	</section><!--/form-->
 	</c:when>

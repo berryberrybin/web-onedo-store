@@ -11,7 +11,7 @@ public interface UserService {
 	/**
 	 * 회원 가입
 	 * */
-	int userJoin(UserDTO userDTO)throws SQLException , AuthenticationException;
+	void userJoin(UserDTO userDTO)throws SQLException , AuthenticationException;
 	
 	
 	/**

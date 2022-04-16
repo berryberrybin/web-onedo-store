@@ -10,10 +10,9 @@ public interface UserDAO {
 	
 	/**
 	 * 회원가입 기능
-	 * @return 1이면 가입 성공, 0이면 가입 실패
+	 * @return 0이면 가입 실패
 	 * */
 	int join(UserDTO userDTO) throws SQLException;
-	
 	
 	/**
 	 * 로그인 기능
