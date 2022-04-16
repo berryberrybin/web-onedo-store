@@ -13,6 +13,10 @@ public class GoodsDTO {
 	   private int goodsView; //조회수
 	   private String goodsImg;
 	   
+	   /**
+	    * 상품속성
+	    * */
+	   private GoodsAttrDTO goodsAttrDTO;
 	   
 	   public GoodsDTO() {}
 
@@ -100,6 +104,15 @@ public class GoodsDTO {
 
 	public void setGoodsImg(String goodsImg) {
 		this.goodsImg = goodsImg;
+	}
+
+	
+	public GoodsAttrDTO getGoodsAttrDTO() {
+		return goodsAttrDTO;
+	}
+
+	public void setGoodsAttrDTO(GoodsAttrDTO goodsAttrDTO) {
+		this.goodsAttrDTO = goodsAttrDTO;
 	}
 
 	@Override
