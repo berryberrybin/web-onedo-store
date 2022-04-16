@@ -1,51 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="common/header.jsp" />
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <jsp:include page="common/adminheader.jsp"/>
+
 <!DOCTYPE html>
 <html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
 
 </head>
 <!--/head-->
 <body>
+
 	<header id="header">
 		<!--header-->
-		<div class="header_top">
-			<!--header_top-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="social-icons pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--/header_top-->
-
 		<div class="header-middle">
 			<!--header-middle-->
+		<div class="header-middle"><!--header-middle-->
+
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+							<!-- <a href="index.html"><img src="images/home/logo.png" alt="" /></a> -->
 						</div>
 					</div>
 					<div class="col-sm-8">
