@@ -65,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps =null;
 		ResultSet rs = null;
 		
-		String sql ="select * from users where user_id=? and user_pwd=?";
+		String sql ="select user_id,user_pwd,user_name,user_phone,user_addr,birth,gender from users where user_id=? and user_pwd=?";
 		UserDTO dbDTO = null;
 		
 		try {
@@ -76,7 +76,9 @@ public class UserDAOImpl implements UserDAO {
 			
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				dbDTO = new UserDTO(rs.getString(1), rs.getString(2), rs.getString(3));
+				dbDTO = new UserDTO(rs.getString(1),
+						rs.getString(2), rs.getString(3),
+						rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
 			}
 			
 		}finally {
