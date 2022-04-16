@@ -111,39 +111,39 @@
 					</div><!--/blog-post-area-->
 					
 
-					<table align="center" cellpadding="5" cellspacing="2" width="600" border="1" >
+					<table align="center" cellpadding="5" cellspacing="2" width="600" border="0" >
 
 
 
     <tr>
-        <td width="1220" height="20" colspan="2" bgcolor="#FE980F">
+        <td width="1400" height="40" colspan="2" bgcolor="#FE980F">
             <p align="center"><font color="white" size="3"><b> 문의 글 등록 </b></font></p>
         </td>
     </tr>
     <tr>
         <td width="150" height="20" >
-            <p align="right"><b><span style="font-size:9pt;">아이디</span></b></p>
+            <p align="center"><b><span style="font-size:9pt;">아이디</span></b></p>
         </td>
         <td width="450" height="20"><b><span style="font-size:9pt;">
 		<input type=text name="model_num" size="30"></span></b></td>
     </tr>
     <tr>
         <td width="150" height="20">
-            <p align="right"><b><span style="font-size:9pt;">제목</span></b></p>
+            <p align="center"><b><span style="font-size:9pt;">제목</span></b></p>
         </td>
         <td width="450" height="20"><b><span style="font-size:9pt;">
 		<input type=text name="model_name" size="30"></span></b></td>
     </tr>
     <tr>
         <td width="150" height="20">
-            <p align="right"><b><span style="font-size:9pt;">가격</span></b></p>
+            <p align="center"><b><span style="font-size:9pt;">가격</span></b></p>
         </td>
         <td width="450" height="20" ><b><span style="font-size:9pt;">
 		<input type=text name="price" size="50"></span></b></td>
     </tr>
     <tr>
         <td width="150" height="20">
-            <p align="right"><b><span style="font-size:9pt;">내용</span></b></p>
+            <p align="center"><b><span style="font-size:9pt;">내용</span></b></p>
         </td>
         <td width="450" height="20"><b><span style="font-size:9pt;">
 		<textarea name="description" cols="50" rows="10"></textarea></span></b></td>
@@ -151,7 +151,7 @@
     
      <tr>
         <td width="150" height="20">
-            <p align="right"><b><span style="font-size:9pt;">*파일첨부</span></b></p>
+            <p align="center"><b><span style="font-size:9pt;">*파일첨부</span></b></p>
         </td>
         <td width="450" height="20">
         	<b><span style="font-size:9pt;">
@@ -162,7 +162,7 @@
     
     <tr>
         <td width="150" height="20">
-            <p align="right"><b><span style="font-size:9pt;">비밀번호</span></b></p>
+            <p align="center"><b><span style="font-size:9pt;">비밀번호</span></b></p>
         </td>
         <td width="450" height="20">
         	<b><span style="font-size:9pt;">
