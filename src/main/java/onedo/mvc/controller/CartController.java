@@ -2,9 +2,7 @@ package onedo.mvc.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -25,14 +23,11 @@ import onedo.mvc.service.GoodsServiceImpl;
 public class CartController implements Controller {
 
 	private GoodsService goodsService = new GoodsServiceImpl();
-	private CartService cartService = new CartServiceImpl();
-
-	private Map<String, CartDTO> cartMap = new HashMap<>();
-
+	private CartService cartService = CartServiceImpl.getInstance();
 	
 	public List<CartItemDTO> findCartById(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String cartId = request.getParameter("userId");
-		CartDTO cart = cartMap.get(cartId);
+		String userId = request.getParameter("userId");
+		CartDTO cart =cartService.getCart(userId);
 		List<CartItemDTO> cartItemList = cart.getCartItemList();
 		
 		return cartItemList;
@@ -51,23 +46,15 @@ public class CartController implements Controller {
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
-		String cartId = dbDTO.getUserId();
+		String userId = dbDTO.getUserId();
 		String goodsCode = request.getParameter("goodsCode");
 		GoodsDTO goods = goodsService.selectByGoodsCode(goodsCode, false);
 		int amount = 1;
 
-		CartDTO cart = null;
-
-		if (cartMap.containsKey(cartId)) {
-			cart = cartMap.get(cartId);
-		} else {
-			cart = new CartDTO(cartId);
-			cartMap.put(cartId, cart);
-		}
-
+		CartDTO cart = cartService.getCart(userId);
 		cartService.insert(cart, goods, amount);
 
-		return new ModelAndView("front?key=cart&methodName=select&userId="+cartId, true); // 원래의 장바구니넣기한 상세페이지 머물러있어야 함!!
+		return new ModelAndView("front?key=cart&methodName=select&userId="+userId, true); // 원래의 장바구니넣기한 상세페이지 머물러있어야 함!!
 	}
 
 	/**
@@ -83,8 +70,8 @@ public class CartController implements Controller {
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
-		String cartId = dbDTO.getUserId();
-		CartDTO cart = cartMap.get(cartId);
+		String userId = dbDTO.getUserId();
+		CartDTO cart = cartService.getCart(userId);
 		List<CartItemDTO> cartItemList = cart.getCartItemList();
 		
 		int goodsCode = Integer.parseInt(request.getParameter("goodsCode"));
@@ -94,7 +81,7 @@ public class CartController implements Controller {
 
 		cart.setCartItemList(cartItemList);
 
-		return new ModelAndView("front?key=cart&methodName=select&userId="+cartId, true);
+		return new ModelAndView("front?key=cart&methodName=select&userId="+userId, true);
 
 	}
 
@@ -102,14 +89,14 @@ public class CartController implements Controller {
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
-		String cartId = dbDTO.getUserId();
-		CartDTO cart = cartMap.get(cartId);
+		String userId = dbDTO.getUserId();
+		CartDTO cart = cartService.getCart(userId);
 		List<CartItemDTO> cartItemList = cart.getCartItemList();
 
 		cartItemList.clear();
 		cart.setCartItemList(cartItemList);
 
-		return new ModelAndView("front?key=cart&methodName=select&userId="+cartId, true);
+		return new ModelAndView("front?key=cart&methodName=select&userId="+userId, true);
 
 	}
 
@@ -125,9 +112,9 @@ public class CartController implements Controller {
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
-		String cartId = dbDTO.getUserId();
+		String userId = dbDTO.getUserId();
 
-		CartDTO cart = cartMap.get(cartId);
+		CartDTO cart =cartService.getCart(userId);
 
 		if (cart == null) {
 			// " 장바구니가 비어있습니다"
@@ -155,16 +142,14 @@ public class CartController implements Controller {
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
-		String cartId = dbDTO.getUserId();
-		if (!cartMap.containsKey(cartId)) {
-			request.setAttribute("totalItemPrice", 0);
-			request.setAttribute("deliveryPrice", 0);
-			request.setAttribute("paymentPrice", 0);
-			return;
-		}
-		List<CartItemDTO> cartItemList = cartMap.get(cartId).getCartItemList();
+		String userId = dbDTO.getUserId();
+		
+		List<CartItemDTO> cartItemList = cartService.getCart(userId).getCartItemList();
 		int sumTotalItemPrice = cartItemList.stream().mapToInt(cartItem -> cartItem.getTotalPrice()).sum();
-		int deliveryPrice = sumTotalItemPrice > 50000 ? 0 : 3000;
+		
+		
+		int deliveryPrice = (sumTotalItemPrice > 0 && sumTotalItemPrice < 50000) ? 3000 : 0;
+		
 		request.setAttribute("totalItemPrice", sumTotalItemPrice);
 		request.setAttribute("deliveryPrice", deliveryPrice);
 		request.setAttribute("paymentPrice", (sumTotalItemPrice - deliveryPrice));
@@ -174,11 +159,11 @@ public class CartController implements Controller {
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
-		String cartId = dbDTO.getUserId();
+		String userId = dbDTO.getUserId();
 		
 		String goodsCode = request.getParameter("goodsCode");
 
-		List<CartItemDTO> cartItemList = cartMap.get(cartId).getCartItemList();
+		List<CartItemDTO> cartItemList = cartService.getCart(userId).getCartItemList();
 
 		for (CartItemDTO cartItem : cartItemList) {
 			if (cartItem.getGoods().getGoodsCode() == Integer.parseInt(goodsCode)) {
@@ -187,18 +172,18 @@ public class CartController implements Controller {
 			}
 		}
 
-		return new ModelAndView("front?key=cart&methodName=select&userId="+cartId, true);
+		return new ModelAndView("front?key=cart&methodName=select&userId="+userId, true);
 	}
 
 	public ModelAndView decreaseAmount(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
-		String cartId = dbDTO.getUserId();
+		String userId = dbDTO.getUserId();
 		
 		String goodsCode = request.getParameter("goodsCode");
 
-		List<CartItemDTO> cartItemList = cartMap.get(cartId).getCartItemList();
+		List<CartItemDTO> cartItemList = cartService.getCart(userId).getCartItemList();
 
 		for (CartItemDTO cartItem : cartItemList) {
 			if (cartItem.getGoods().getGoodsCode() == Integer.parseInt(goodsCode)) {
@@ -212,7 +197,7 @@ public class CartController implements Controller {
 
 		}
 
-		return new ModelAndView("front?key=cart&methodName=select&userId="+cartId, true);
+		return new ModelAndView("front?key=cart&methodName=select&userId="+userId, true);
 	}
 
 	@Override
