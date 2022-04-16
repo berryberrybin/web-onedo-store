@@ -25,6 +25,9 @@ public class GoodsDAOImpl implements GoodsDAO {
 
 	GoodsDTO goodsDTO = new GoodsDTO();
 
+	/**
+	 * 상품전체검색
+	 * */
 	@Override
 	public List<GoodsDTO> selectAll() throws SQLException {
 		Connection con=null;
@@ -186,9 +189,29 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * 타입으로상품검색 =selectByGoodsType
 	 * */
 	@Override
-	public List<GoodsDTO> selectByGoodsType(String goodsType) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GoodsDTO> selectByGoodsType(String goodsType) throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<GoodsDTO> list = new ArrayList<GoodsDTO>();
+		
+		String sql=proFile.getProperty("goods.selectByGoodsType"); //select * from goods where goods_type=? order by goods_code
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1,goodsType);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
+						rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+				list.add(goodsDTO);
+			}
+			
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return list;
 	}
 
 }

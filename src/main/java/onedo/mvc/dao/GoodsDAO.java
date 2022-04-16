@@ -60,7 +60,7 @@ public interface GoodsDAO {
 	/**
 	 * 타입으로상품검색
 	 * */
-	List<GoodsDTO> selectByGoodsType(String goodsType);
+	List<GoodsDTO> selectByGoodsType(String goodsType) throws SQLException;
 
 
 
