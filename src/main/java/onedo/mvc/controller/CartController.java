@@ -55,6 +55,7 @@ public class CartController implements Controller {
 		return new ModelAndView("cart.jsp", true); // 원래의 장바구니넣기한 상세페이지 머물러있어야 함!!
 	}
 
+
 	/**
 	 * 장바구니 조회
 	 * 
@@ -75,7 +76,7 @@ public class CartController implements Controller {
 		} else {
 			List<CartItemDTO> cartItemList = cart.getCartItemList();
 			request.setAttribute("cartItemList", cartItemList); // model에 데이터를 담아 보내는 역할
-
+			
 		}
 
 		checkTotalPrice(request);
@@ -99,17 +100,9 @@ public class CartController implements Controller {
 			request.setAttribute("paymentPrice", 0);
 			return;
 		}
-		int totalItemPrice = 0;
-		int sumTotalItemPrice = 0;
-		int deliveryPrice = 3000;
 		List<CartItemDTO> cartItemList = cartMap.get(userId).getCartItemList();
-		for (CartItemDTO cartItem : cartItemList) {
-			totalItemPrice = cartItem.getGoods().getGoodsPrice() * cartItem.getAmount();
-			sumTotalItemPrice += totalItemPrice;
-			if (sumTotalItemPrice > 15000) {
-				deliveryPrice = 0;
-			}
-		}
+		int sumTotalItemPrice = cartItemList.stream().mapToInt(cartItem -> cartItem.getTotalPrice()).sum();
+		int deliveryPrice = sumTotalItemPrice > 30000 ? 0 : 3000;
 		request.setAttribute("totalItemPrice", sumTotalItemPrice);
 		request.setAttribute("deliveryPrice", deliveryPrice);
 		request.setAttribute("paymentPrice", (sumTotalItemPrice - deliveryPrice));
@@ -130,6 +123,8 @@ public class CartController implements Controller {
 
 		}
 		request.setAttribute("cartItemList", cartItemList);
+		checkTotalPrice(request);
+
 		return new ModelAndView("cart.jsp");
 	}
 
@@ -152,9 +147,12 @@ public class CartController implements Controller {
 
 		}
 		request.setAttribute("cartItemList", cartItemList);
+		checkTotalPrice(request);
+
 		return new ModelAndView("cart.jsp");
 	}
 
+	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
