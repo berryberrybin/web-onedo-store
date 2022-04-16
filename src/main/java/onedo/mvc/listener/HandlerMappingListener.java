@@ -9,6 +9,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import onedo.mvc.ajaxController.AjaxController;
 import onedo.mvc.controller.Controller;
 
 //서버가 start될때 각각의 controller의 구현체를 미리 생성해서 Map에 저장하는 역할
@@ -22,6 +23,11 @@ public class HandlerMappingListener implements ServletContextListener {
 
 		Map<String, Class<?>> clzMap = new HashMap<String, Class<?>>();
 		
+		Map<String, AjaxController> ajaxMap = new HashMap<String, AjaxController>();
+
+		Map<String, Class<?>> ajaxClzMap = new HashMap<String, Class<?>>();
+
+		
 		ServletContext application = sce.getServletContext();
 		String fileName = application.getInitParameter("fileName");
 
@@ -32,9 +38,16 @@ public class HandlerMappingListener implements ServletContextListener {
 				System.out.println(key + " = " + value);
 
 				Class<?> className = Class.forName(value);
-				Controller controller = (Controller) className.getDeclaredConstructor().newInstance();
-				map.put(key, controller);
-				
+				Controller controller=null;
+				AjaxController ajaxController=null;
+				if(className.getDeclaredConstructor().newInstance() instanceof Controller) {
+					controller = (Controller) className.getDeclaredConstructor().newInstance();
+					map.put(key, controller);
+				}else if(className.getDeclaredConstructor().newInstance() instanceof AjaxController) {
+					ajaxController = (AjaxController) className.getDeclaredConstructor().newInstance();
+					ajaxMap.put(key, ajaxController);
+				}
+
 				clzMap.put(key, className);
 			}
 		} catch (Exception e) {
@@ -43,6 +56,8 @@ public class HandlerMappingListener implements ServletContextListener {
 		
 		application.setAttribute("map", map);
 		application.setAttribute("clzMap", clzMap);
+		application.setAttribute("ajaxMap", ajaxMap);
+		application.setAttribute("ajaxClzMap", ajaxClzMap);
 		application.setAttribute("path", application.getContextPath());//${path}
 	}
 }
