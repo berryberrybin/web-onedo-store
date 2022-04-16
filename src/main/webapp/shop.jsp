@@ -27,6 +27,16 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+ <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
+ <script type="text/javascript">
+ 	$(function(){
+ 		$(document).on("click","#goods",function(){
+				let goodsCode = $(this).attr("name");
+				//alert(idValue);
+				location.href="${path}/front?key=goods&methodName=selectByGoodsCode&goodsCode="+goodsCode;
+ 		})
+ 	});
+ </script>
  </head>
 <body>
 	<section>
