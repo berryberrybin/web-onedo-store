@@ -54,5 +54,31 @@ public class SalesController implements Controller {
 		return new ModelAndView("adminSales.jsp");
 	}
 
+public ModelAndView selectByOrderDate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		List<SalesDTO> salesList = null;
+		
+		try {
+			salesList = salesService.selectGroupByOrderDate();
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ModelAndView("error/error.jsp");
+		}
+
+		request.setAttribute("salesList", salesList);
+
+		String result="";
+		for(SalesDTO sales : salesList) {
+			if(result!="") {
+				result+=",";
+			}
+			result += "['"+sales.getOrderDate()+"', "+sales.getOrderPrice()+"]";
+		}
+		request.setAttribute("result", result);
+		
+
+		return new ModelAndView("adminDailySales.jsp");
+	}
+
 
 }

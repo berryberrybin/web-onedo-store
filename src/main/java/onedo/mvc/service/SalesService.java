@@ -12,5 +12,6 @@ public interface SalesService {
 	List<SalesDTO> selectAll() throws SQLException;
 
 	List<SalesDTO> selectGroupByGoodsCode() throws SQLException;
+	List<SalesDTO> selectGroupByOrderDate() throws SQLException;
 	
 }

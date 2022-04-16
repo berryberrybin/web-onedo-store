@@ -24,6 +24,16 @@ public class SalesDTO {
 	
 	
 
+	public SalesDTO(String orderDate, int orderPrice) {
+		super();
+		this.orderDate = orderDate;
+		this.orderPrice = orderPrice;
+	}
+
+
+
+
+
 	public SalesDTO(String goodsName, int goodsCode, int orderQuantity) {
 		super();
 		this.goodsName = goodsName;

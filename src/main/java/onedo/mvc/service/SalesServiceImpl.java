@@ -23,4 +23,9 @@ public class SalesServiceImpl implements SalesService{
 		return salesList;
 	}
 
+	@Override
+	public List<SalesDTO> selectGroupByOrderDate() throws SQLException {
+		List<SalesDTO> salesList = salesDAO.selectGroupByOrderDate();
+		return salesList;
+	}
 }

@@ -63,4 +63,28 @@ public class SalesDAOImpl implements SalesDAO {
 		return salesList;
 	}
 
+	@Override
+	public List<SalesDTO> selectGroupByOrderDate() throws SQLException {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		List<SalesDTO> salesList = new ArrayList<SalesDTO>();
+
+		String sql ="select To_char(order_date,'YYYYMMDD'), sum(order_price) from orders group by To_char(order_date,'YYYYMMDD')"; 
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				SalesDTO sales = new SalesDTO(rs.getString(1), rs.getInt(2));
+				salesList.add(sales);
+			}
+
+		} finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return salesList;
+	}
 }
