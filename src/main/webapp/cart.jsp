@@ -33,8 +33,8 @@ td {
 	text-align: center;
 }
 
-#itemAmount{
-	text-align:center;
+#itemAmount {
+	text-align: center;
 }
 </style>
 </head>
@@ -48,7 +48,7 @@ td {
 					<li class="active">Shopping Cart</li>
 				</ol>
 			</div>
-			
+
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
@@ -99,20 +99,18 @@ td {
 
 
 										<td class="cart_quantity">
-											<div class="cart_quantity_button"	id="itemAmount">
-												<a class="cart_quantity_up" id="itemAmountUp" href="front?key=cart&methodName=increaseAmount&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"> + </a> 
-												<input class="cart_quantity_input" type="text" name="quantity" value="${cartItem.amount}" autocomplete="off" size="2"> 
-												<a class="cart_quantity_down" href="front?key=cart&methodName=decreaseAmount&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"> - </a>
+											<div class="cart_quantity_button" id="itemAmount">
+												<a class="cart_quantity_up" id="itemAmountUp" href="front?key=cart&methodName=increaseAmount&goodsCode=${cartItem.goods.goodsCode}"> + </a> <input class="cart_quantity_input" type="text" name="quantity" value="${cartItem.amount}" autocomplete="off" size="2"> <a class="cart_quantity_down" href="front?key=cart&methodName=decreaseAmount&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"> - </a>
 											</div>
 										</td>
-										
+
 										<td class="cart_total">
 											<p class="cart_total_price">${cartItem.totalPrice}</p>
 										</td>
-										
-										
+
+
 										<td class="cart_delete">
-											<a class="cart_quantity_delete" href="front?key=cart&methodName=delete&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"><i class="fa fa-times"></i></a>
+											<a class="cart_quantity_delete" href="front?key=cart&methodName=delete&goodsCode=${cartItem.goods.goodsCode}"><i class="fa fa-times"></i></a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -131,7 +129,7 @@ td {
 		<div class="container">
 			<div class="heading">
 				<h3>배송비 및 총 결제 금액</h3>
-				<p>  배송비는 50,000원 이상 주문시 무료입니다.</p>
+				<p>배송비는 50,000원 이상 주문시 무료입니다.</p>
 			</div>
 
 			<div class="col-sm-6">
@@ -141,8 +139,7 @@ td {
 						<li>배송비 <span>${deliveryPrice}</span></li>
 						<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
 					</ul>
-					<a class="btn btn-default update" href=""front?key=cart&methodName=deleteAll&userId=soobin">장바구니 비우기</a> 
-					<a class="btn btn-default check_out" href="">결제하기</a>
+					<a class="btn btn-default update" href="" front?key=cart&methodName=deleteAll">장바구니 비우기</a> <a class="btn btn-default check_out" href="">결제하기</a>
 				</div>
 			</div>
 		</div>
