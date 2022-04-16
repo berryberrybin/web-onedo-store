@@ -83,6 +83,21 @@ public class CartController implements Controller {
 
 	}
 
+	public ModelAndView deleteAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String userId = request.getParameter("userId");
+		CartDTO cart = cartMap.get(userId);
+		List<CartItemDTO> cartItemList = cart.getCartItemList();
+		
+		cartItemList.clear();
+		cart.setCartItemList(cartItemList);
+	
+		request.setAttribute("cartItemList", cartItemList);
+		checkTotalPrice(request);
+
+		return new ModelAndView("cart.jsp");
+
+	}
+	
 	
 	/**
 	 * 장바구니 조회
@@ -112,6 +127,7 @@ public class CartController implements Controller {
 		return new ModelAndView("cart.jsp");
 	}
 
+	
 	/**
 	 * 결제금액 및 배송비 체크
 	 * 

@@ -136,7 +136,7 @@ td {
 						<li>배송비 <span>${deliveryPrice}</span></li>
 						<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
 					</ul>
-					<a class="btn btn-default update" href="">장바구니 비우기</a> 
+					<a class="btn btn-default update" href=""front?key=cart&methodName=deleteAll&userId=soobin">장바구니 비우기</a> 
 					<a class="btn btn-default check_out" href="">결제하기</a>
 				</div>
 			</div>
