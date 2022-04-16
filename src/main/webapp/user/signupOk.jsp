@@ -28,42 +28,15 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
  </head>
 <body>
-
-<c:choose>
-	<c:when test="${empty loginUser}">
 	<section id="form"><!--form-->
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
-					<div class="signup-form"><!--login form-->
-						<h2>회원 가입</h2>
-						<form method="post" action="signupOk.jsp">
-						<input type="hidden" name="key" value = "user" /> <!-- Controller를 찾는 정보 -->
-						<input type="hidden" name="methodName" value = "join" />  <!-- 메소드이름 -->
-							이름<input type="text" class="form-control" id="userName" name="userName"
-							placeholder="이름" />
-							아이디<input type="text" class="form-control" id="userId" name="userId"
-							placeholder="아이디" />
-							비밀번호<input type="password" class="form-control" id="userPwd" name="userPwd"
-							placeholder="비밀번호" />
-							휴대폰번호<input type="text" class="form-control" id="userPhone" name="userPhone"
-							placeholder="휴대폰번호" />
-							생년월일<input type="text" class="form-control" id="birth" name="birth"
-							placeholder="생년월일 8자리" />
-							성별 <select name="gender">
-							  <option value=""selected>성별을 선택해주세요</option>
-							  <option value="female">여성</option>
-							  <option value="male">남성</option>
-							</select><br>
-							주소<input type="text" class="form-control" id="userAddr" name="userAddr"
-							placeholder="주소" />
-							<button type="submit" class="btn btn-default">가입하기</button>
-						</form>
+						<h2>${loginUser.userName}님 회원 가입 완료되었습니다.</h2>
+						<h2>가입하신 아이디는 ${loginUser.userId} 입니다.</h2>
+							<button type="button" class="btn btn-default" onclick="location.href='login.jsp' ">로그인 하기</button>
 					</div><!--/login form-->
 			</div>
-		</div>
-		</div>
 	</section><!--/form-->
-	</c:when>
-</c:choose>
+
 </body>
 </html>
