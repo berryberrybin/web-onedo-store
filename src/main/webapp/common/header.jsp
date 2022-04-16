@@ -92,15 +92,23 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> 마이페이지</a></li>
+							
+								<c:if test="${not empty loginUser}">
+									<ul class="nav navbar-nav">
+										<%-- <li class="active"><a href="#">${loginUser.userId}님</a></li> --%>
+										<li><a href="#"><i class="fa fa-user"></i>   ${loginUser.userId}님</a></li>
+									</ul>
+								</c:if>
+							
 								<li><a href="#"><i class="fa fa-coffee"></i> 커피추천</a></li>
 								<li><a href="checkout.jsp"><i class="fa fa-list"></i> 게시판</a></li>
 								<li><a href="front?key=cart&methodName=select"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
-								<li><a href="${path}/user/login.jsp"><i class="fa fa-unlock-alt"></i> 로그인</a></li>
-
+								<li><a href="front?key=cart&methodName=select&userId=soobin"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+								<c:if test="${empty loginUser}">
+									<li><a href="${path}/user/login.jsp"><i class="fa fa-unlock-alt"></i> 로그인</a></li>
+								</c:if>
 								<c:if test="${not empty loginUser}">
 									<ul class="nav navbar-nav">
-										<li class="active"><a href="#">${loginUser.userId}님</a></li>
 										<li><a href="${pageContext.request.contextPath}/front?key=user&methodName=logout"> <i class="fa fa-lock"></i>로그아웃
 										</a></li>
 									</ul>

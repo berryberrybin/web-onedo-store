@@ -52,7 +52,14 @@
 			</div>
 		</div>
 	</section><!--/form-->
-	</c:when>
+		</c:when>
+	<%-- 		<c:otherwise>
+			<!--  로그인한 사용자가 접속시 화면  -->
+				<h3>로그인완료</h3>
+				<a href="#" class="alert-link">${loginUser} / ${loginName}</a>
+			</c:otherwise>
+		</c:choose> --%>
+
 </c:choose>
 </body>
 </html>
