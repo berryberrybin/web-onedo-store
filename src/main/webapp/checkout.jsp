@@ -1,269 +1,171 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <jsp:include page="common/header.jsp"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<jsp:include page="common/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title> ONE DO </title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/font-awesome.min.css" rel="stylesheet">
-    <link href="./css/prettyPhoto.css" rel="stylesheet">
-    <link href="./css/price-range.css" rel="stylesheet">
-    <link href="./css/animate.css" rel="stylesheet">
-	<link href="./css/main.css" rel="stylesheet">
-	<link href="./css/responsive.css" rel="stylesheet">
-    <!--[if lt IE 9]>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>ONE DO</title>
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/font-awesome.min.css" rel="stylesheet">
+<link href="./css/prettyPhoto.css" rel="stylesheet">
+<link href="./css/price-range.css" rel="stylesheet">
+<link href="./css/animate.css" rel="stylesheet">
+<link href="./css/main.css" rel="stylesheet">
+<link href="./css/responsive.css" rel="stylesheet">
+<!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
-    <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
- </head>
+    <![endif]-->
+<link rel="shortcut icon" href="images/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+<style>
+td {
+	text-align: center;
+}
+</style>
+
+</head>
 <body>
 
 	<section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
-				  <li><a href="#">Home</a></li>
-				  <li class="active">Check out</li>
+					<li><a href="#">Home</a></li>
+					<li class="active">Check out</li>
 				</ol>
-			</div><!--/breadcrums-->
+			</div>
+			<!--/breadcrums-->
 
 			<div class="step-one">
-				<h2 class="heading">Step1</h2>
+				<h2 class="heading">결제</h2>
 			</div>
-			<div class="checkout-options">
-				<h3>New User</h3>
-				<p>Checkout options</p>
-				<ul class="nav">
-					<li>
-						<label><input type="checkbox"> Register Account</label>
-					</li>
-					<li>
-						<label><input type="checkbox"> Guest Checkout</label>
-					</li>
-					<li>
-						<a href=""><i class="fa fa-times"></i>Cancel</a>
-					</li>
-				</ul>
-			</div><!--/checkout-options-->
 
-			<div class="register-req">
-				<p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-			</div><!--/register-req-->
 
 			<div class="shopper-informations">
 				<div class="row">
-					<div class="col-sm-3">
-						<div class="shopper-info">
-							<p>Shopper Information</p>
-							<form>
-								<input type="text" placeholder="Display Name">
-								<input type="text" placeholder="User Name">
-								<input type="password" placeholder="Password">
-								<input type="password" placeholder="Confirm password">
-							</form>
-							<a class="btn btn-primary" href="">Get Quotes</a>
-							<a class="btn btn-primary" href="">Continue</a>
+					<div class="col-sm-5 clearfix">
+						<div class="bill-to">
+							<p>회원 정보</p>
+							<div class="total_area">
+								<ul>
+									<li>아이디<span>${userId}</span></li>
+									<li>고객명<span>${userName}</span></li>
+									<li>폰번호<span>${userPhone}</span></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 					<div class="col-sm-5 clearfix">
 						<div class="bill-to">
-							<p>Bill To</p>
-							<div class="form-one">
-								<form>
-									<input type="text" placeholder="Company Name">
-									<input type="text" placeholder="Email*">
-									<input type="text" placeholder="Title">
-									<input type="text" placeholder="First Name *">
-									<input type="text" placeholder="Middle Name">
-									<input type="text" placeholder="Last Name *">
-									<input type="text" placeholder="Address 1 *">
-									<input type="text" placeholder="Address 2">
-								</form>
-							</div>
-							<div class="form-two">
-								<form>
-									<input type="text" placeholder="Zip / Postal Code *">
-									<select>
-										<option>-- Country --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
-									</select>
-									<select>
-										<option>-- State / Province / Region --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
-									</select>
-									<input type="password" placeholder="Confirm password">
-									<input type="text" placeholder="Phone *">
-									<input type="text" placeholder="Mobile Phone">
-									<input type="text" placeholder="Fax">
-								</form>
+							<p>배송지 정보</p>
+
+							<div class="total_area">
+								<ul>
+									<li>주소<span>${userAddr}</span></li>
+								</ul>
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-4">
-						<div class="order-message">
-							<p>Shipping Order</p>
-							<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
-							<label><input type="checkbox"> Shipping to bill address</label>
-						</div>	
-					</div>					
+
+					<div class="col-sm-3">
+						<div class="bill-to">
+							<p>총 결제금액</p>
+							<div class="total_area">
+								<ul>
+									<li>총 상품 가격 <span>${totalItemPrice}</span></li>
+									<li>배송비 <span>${deliveryPrice}</span></li>
+									<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="review-payment">
-				<h2>Review & Payment</h2>
+
+			<div class="step-one">
+				<h2 class="heading">구매내역</h2>
 			</div>
 
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="image">Item</td>
-							<td class="description"></td>
-							<td class="price">Price</td>
-							<td class="quantity">Quantity</td>
-							<td class="total">Total</td>
+							<td class="code">상품코드</td>
+							<td class="name">상품이름</td>
+							<td class="price">가격</td>
+							<td class="quantity">수량</td>
+							<td class="total">합계</td>
 							<td></td>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+						<c:choose>
+							<c:when test="${empty requestScope.cartItemList}">
+								<tr>
+									<td colspan="5">
+										<p align="center">
+											<b><span style="font-size: 9pt;">장바구니에 담긴 상품이 없습니다.</span></b>
+										</p>
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${requestScope.cartItemList}" var="cartItem">
+									<tr>
+										<td class="itemCode">
+											<h4>
+												<a href="">${cartItem.goods.goodsCode}</a>
+											</h4>
+										</td>
+										<td class="itemName">
+											<h4>
+												<a href="">${cartItem.goods.goodsName}</a>
+											</h4>
+										</td>
 
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/two.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/three.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="4">&nbsp;</td>
-							<td colspan="2">
-								<table class="table table-condensed total-result">
-									<tr>
-										<td>Cart Sub Total</td>
-										<td>$59</td>
+
+										<td class="itemPrice">
+											<h4>
+												<p>${cartItem.goods.goodsPrice}</p>
+											</h4>
+										</td>
+
+
+										<td class="cart_quantity">
+
+											<div class="cart_quantity_button" id="itemAmount">
+												<p>${cartItem.amount}</p>
+											</div>
+										</td>
+
+										<td class="cart_total">
+											<p class="cart_total_price">${cartItem.totalPrice}</p>
+										</td>
 									</tr>
-									<tr>
-										<td>Exo Tax</td>
-										<td>$2</td>
-									</tr>
-									<tr class="shipping-cost">
-										<td>Shipping Cost</td>
-										<td>Free</td>										
-									</tr>
-									<tr>
-										<td>Total</td>
-										<td><span>$61</span></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>
-			<div class="payment-options">
-					<span>
-						<label><input type="checkbox"> Direct Bank Transfer</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Check Payment</label>
-					</span>
-					<span>
-						<label><input type="checkbox"> Paypal</label>
-					</span>
-				</div>
+			<a class="btn btn-primary" href="front?key=cart&methodName=select">장바구니 돌아가기</a> <a class="btn btn-primary" href="">결제하기</a>
 		</div>
-	</section> <!--/#cart_items-->
+		<br>
+
+	</section>
+
+
 </body>
-	<jsp:include page="common/footer.jsp"/>
+<jsp:include page="common/footer.jsp" />
 </html>

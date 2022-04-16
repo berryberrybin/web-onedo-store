@@ -33,8 +33,6 @@ td {
 	text-align: center;
 }
 
-
-
 </style>
 </head>
 <body>
@@ -101,7 +99,7 @@ td {
 											<div class="cart_quantity_button" id="itemAmount">
 												<a class="cart_quantity_up" id="itemAmountUp" href="front?key=cart&methodName=increaseAmount&goodsCode=${cartItem.goods.goodsCode}"> + </a> 
 												<input class="cart_quantity_input" type="text" name="quantity" value="${cartItem.amount}" autocomplete="off" size="2"> 
-												<a class="cart_quantity_down" href="front?key=cart&methodName=decreaseAmount&userId=soobin&goodsCode=${cartItem.goods.goodsCode}"> - </a>
+												<a class="cart_quantity_down" href="front?key=cart&methodName=decreaseAmount&goodsCode=${cartItem.goods.goodsCode}"> - </a>
 											</div>
 										</td>
 
@@ -141,7 +139,7 @@ td {
 						<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
 					</ul>
 					<a class="btn btn-default update" href="front?key=cart&methodName=deleteAll">장바구니 비우기</a>
-					 <a class="btn btn-default check_out" href="checkout.jsp">결제하기</a>
+					 <a class="btn btn-default check_out" href="front?key=checkout&methodName=select">결제하기</a>
 				</div>
 			</div>
 		</div>
