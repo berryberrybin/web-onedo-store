@@ -111,7 +111,7 @@
 									<li><a href="#"><i class="fa-solid fa-toolbox"></i>   ${loginUser.userId}님</a></li>
 								</c:if> --%>
 							
-								<li><a href="#"><i class="fa fa-coffee"></i> 커피추천</a></li>
+								<li><a href="${path}/survey/survey.jsp"><i class="fa fa-coffee"></i> 커피추천</a></li>
 								<li><a href="checkout.jsp"><i class="fa fa-list"></i> 게시판</a></li>
 								<li><a href="front?key=cart&methodName=select"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
 								<c:if test="${empty loginUser}">
