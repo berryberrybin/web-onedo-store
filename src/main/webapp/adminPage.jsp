@@ -95,7 +95,7 @@
                                 </li> 
 								<li class="dropdown"><a href="#">회원관리<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">회원조회</a></li>
+                                        <li><a href="${path}/front?key=user&methodName=userSelectAll">회원조회</a></li>
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">매출관리<i class="fa fa-angle-down"></i></a>

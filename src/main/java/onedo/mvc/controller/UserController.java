@@ -102,7 +102,7 @@ public class UserController implements Controller {
 			e.printStackTrace();
 		}
 		request.setAttribute("list", list);
-		return new ModelAndView("main.jsp");
+		return new ModelAndView("user/userAllTest.jsp");
 	}
 	
 	/**

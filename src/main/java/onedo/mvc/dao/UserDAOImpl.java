@@ -84,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
 		}finally {
 			DbUtil.dbClose(rs, ps, con);
 		}
-
+		
 		return dbDTO;
 	
 	}
@@ -104,14 +104,15 @@ public class UserDAOImpl implements UserDAO {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				UserDTO user = new UserDTO(rs.getString(1), rs.getString(2),rs.getString(3)
-						,rs.getString(4));
+				UserDTO user = new UserDTO(rs.getString(1), rs.getString(2), rs.getString(3), 
+						rs.getString(4), rs.getString(5), rs.getString(6));
 				
 				userList.add(user);
 			}
 		}finally {
 			DbUtil.dbClose(rs, ps, con);
 		}
+
 		return userList;
 	}
 
