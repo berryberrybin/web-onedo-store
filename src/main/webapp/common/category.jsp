@@ -30,7 +30,7 @@
 	$(function(){
 		$("a[name=category-name]").click(function(){
 			let goodsType = $(this).attr("id");
-			location.href="${path}/front?key=goods&methodName=selectGoodsByType&goodsType="+goodsType;
+			location.href="${path}/front?key=goods&methodName=selectMulipleGoods&searchField=goodsType&searchValue="+goodsType;
 		})
 	});
 </script>

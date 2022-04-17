@@ -43,7 +43,7 @@ public interface GoodsService {
 	void update(GoodsDTO goodsDTO) throws SQLException;
 
 	/**
-	 * 타입으로상품검색
+	 *  상품이름이나 타입으로 상품검색
 	 * */
-	List<GoodsDTO> selectByGoodsType(String goodsType) throws SQLException;
+	List<GoodsDTO> selectMulipleGoods(String searchField, String searchValue) throws SQLException;
 }

@@ -52,10 +52,10 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	/**
-	 * 타입으로상품검색 =selectByGoodsType
+	 *  상품이름이나 타입으로 상품검색
 	 * */
-	public List<GoodsDTO> selectByGoodsType(String goodsType) throws SQLException {
-		List<GoodsDTO> list = goodsDAO.selectByGoodsType(goodsType);
+	public List<GoodsDTO> selectMulipleGoods(String searchField, String searchValue) throws SQLException {
+		List<GoodsDTO> list = goodsDAO.selectMulipleGoods(searchField, searchValue);
 		
 		return list;
 	}
