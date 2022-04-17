@@ -45,7 +45,9 @@ public interface UserService {
 	 * */
 	void delete(String userId) throws SQLException, AuthenticationException;
 
-	
-
+	/**
+	 * 유저타입변경
+	 */
+	int typeUpdate(String userId, String userType) throws Exception;
 
 }

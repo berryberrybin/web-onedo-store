@@ -9,6 +9,7 @@ public class UserDTO {
 	private String userAddr;
 	private String birth;
 	private String gender;
+	private int userType;
 	
 	public UserDTO() {}
 
@@ -38,7 +39,7 @@ public class UserDTO {
 		this.birth = birth;
 	}
 	
-	public UserDTO(String userId, String userName, String userPhone, String userAddr, String birth, String gender) {
+	public UserDTO(String userId, String userName, String userPhone, String userAddr, String birth, String gender, int userType) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -46,6 +47,7 @@ public class UserDTO {
 		this.userAddr = userAddr;
 		this.birth = birth;
 		this.gender = gender;
+		this.userType = userType;
 	}
 
 	public UserDTO(String userId, String userPwd, String userName, String userPhone, String userAddr, String birth,
@@ -115,5 +117,15 @@ public class UserDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
+	}
+	
+	
 
 }

@@ -44,5 +44,10 @@ public interface UserDAO {
 	 * 회원 삭제 (해당 ID의 회원 삭제)
 	 * */
 	int delete(String userId);
+	
+	/**
+	 * 회원타입변경
+	 */
+	int userType(String userId, int type);
 
 }

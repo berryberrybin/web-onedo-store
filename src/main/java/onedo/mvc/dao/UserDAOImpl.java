@@ -98,14 +98,14 @@ public class UserDAOImpl implements UserDAO {
 		List<UserDTO> userList = new ArrayList<UserDTO>();
 		//String sql = proFile.getProperty("query.select");
 		
-		String sql =proFile.getProperty("user.select");
+		String sql =proFile.getProperty("user.selectAll");
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				UserDTO user = new UserDTO(rs.getString(1), rs.getString(2), rs.getString(3), 
-						rs.getString(4), rs.getString(5), rs.getString(6));
+						rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
 				
 				userList.add(user);
 			}
@@ -194,5 +194,32 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return result;
 	}
+
+	@Override
+	public int userType(String userId, int type) {
+		PreparedStatement ps = null;
+		Connection con =null;
+		String sql = proFile.getProperty("user.typeUpdate");
+		int result=0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, type);
+			ps.setString(2, userId);
+			
+			   
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose( ps , con);
+		}
+		System.out.println(result);
+		return result;
+	}
+			
+		
+	
+	
 
 }
