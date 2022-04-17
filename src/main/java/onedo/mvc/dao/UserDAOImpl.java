@@ -126,15 +126,15 @@ public class UserDAOImpl implements UserDAO {
 		  
 		  try {
 		   con = DbUtil.getConnection();
-		   ps = con.prepareStatement("update users set userPwd=?, userName=?, userPhone=?,userAddr=?, birth=?, gender=? where userId=?");
+		   ps = con.prepareStatement("update users set user_Pwd=?, user_Name=?, user_Phone=?, user_Addr=?, birth=?, gender=? where user_Id=?");
 		   
-			ps.setString(1, userDTO.getUserId());
-			ps.setString(2, userDTO.getUserPwd());
-			ps.setString(3, userDTO.getUserName());
-			ps.setString(4, userDTO.getUserPhone());
-			ps.setString(5, userDTO.getUserAddr());
-			ps.setString(6, userDTO.getBirth());
-			ps.setString(7, userDTO.getGender());
+			ps.setString(1, userDTO.getUserPwd());
+			ps.setString(2, userDTO.getUserName());
+			ps.setString(3, userDTO.getUserPhone());
+			ps.setString(4, userDTO.getUserAddr());
+			ps.setString(5, userDTO.getBirth());
+			ps.setString(6, userDTO.getGender());
+			ps.setString(7, userDTO.getUserId());
 		   
 		   result = ps.executeUpdate();
 		   

@@ -137,12 +137,11 @@
 						</div>
 					</div>
 				</div>
-				
 		</c:forEach>
 		</c:otherwise>
     	</c:choose>
+    	</div>
 		</div>
-	</div>
 	</section>
 
 </body>
