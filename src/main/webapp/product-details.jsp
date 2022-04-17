@@ -101,11 +101,11 @@
 				<img src="images/product-details/rating.png" alt="" />
 				<span>
 					<span>&#8361; <fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></span>
-					<label>Quantity:</label>
-					<input type="text" value="${goodsDTO.goodsStock}" />
+					<label for="quantity">수량:</label>
+					<input type="number" id="quantity" name="quantity" min="1" max="99" value="1"/>
 					<button type="button" class="btn btn-fefault cart">
 						<i class="fa fa-shopping-cart"></i>
-						Add to cart
+						장바구니
 					</button>
 				</span>
 				<p><b>Availability:</b> ${goodsDTO.isSoldout}</p>
