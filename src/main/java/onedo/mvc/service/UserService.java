@@ -11,7 +11,7 @@ public interface UserService {
 	/**
 	 * 회원 가입
 	 * */
-	UserDTO userJoin(UserDTO userDTO)throws SQLException , AuthenticationException;
+	void userJoin(UserDTO userDTO)throws SQLException , AuthenticationException;
 	
 	
 	/**
@@ -25,7 +25,7 @@ public interface UserService {
 	 * @return: true이면 중복이다, false이면 중복아니다
 	 *  SELECT ID FROM MEMBER WHERE ID=?
 	 * */
-     boolean duplicateById(String userId);
+     boolean idCheck(String userId) throws SQLException, AuthenticationException;
 	
 	
 	/**

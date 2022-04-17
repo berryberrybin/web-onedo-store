@@ -6,13 +6,15 @@ import java.util.List;
 
 public class QnaDTO {
 	private int qnaNo;
+	private int goodsCode;
 	private String userid;		
 	private String qnaSubject;
 	private String qnaContent;
-	private int qnaDate;
+	private String qnaDate;
 	private String qnaImg;
-	private int qnaPwd;
-	private int goodsCode;
+	private String qnaPwd;
+	
+	
 	private String  fname; 
 	private int  fsize;
 
@@ -22,93 +24,111 @@ public class QnaDTO {
 	
 	public  QnaDTO() {}
 
-	public QnaDTO(int qnaNo, String userid, String qnaSubject, String qnaContent, int qnaDate, String qnaImg,
-			int qnaPwd, int goodsCode) {
+	
+	
+	public QnaDTO(int qnaNo, int goodsCode, String userid, String qnaSubject, String qnaContent, String qnaDate,
+			String qnaImg, String qnaPwd) {
 		super();
 		this.qnaNo = qnaNo;
+		this.goodsCode = goodsCode;
 		this.userid = userid;
 		this.qnaSubject = qnaSubject;
 		this.qnaContent = qnaContent;
 		this.qnaDate = qnaDate;
 		this.qnaImg = qnaImg;
 		this.qnaPwd = qnaPwd;
-		this.goodsCode = goodsCode;
 	}
-	
-	
 
-	public QnaDTO(int qnaNo, String userid, String qnaSubject, String qnaContent, int qnaDate, String qnaImg,
-			int qnaPwd, int goodsCode, String fname, int fsize, int pageCnt) {
+
+	public QnaDTO(String fname, int fsize, List<QnaReply> repliesList, int pageCnt) {
 		super();
-		
 		this.fname = fname;
 		this.fsize = fsize;
+		this.repliesList = repliesList;
 		this.pageCnt = pageCnt;
 	}
+
+
 
 	public int getQnaNo() {
 		return qnaNo;
 	}
 
+
 	public void setQnaNo(int qnaNo) {
 		this.qnaNo = qnaNo;
 	}
 
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
-	public String getQnaSubject() {
-		return qnaSubject;
-	}
-
-	public void setQnaSubject(String qnaSubject) {
-		this.qnaSubject = qnaSubject;
-	}
-
-	public String getQnaContent() {
-		return qnaContent;
-	}
-
-	public void setQnaContent(String qnaContent) {
-		this.qnaContent = qnaContent;
-	}
-
-	public int getQnaDate() {
-		return qnaDate;
-	}
-
-	public void setQnaDate(int qnaDate) {
-		this.qnaDate = qnaDate;
-	}
-
-	public String getQnaImg() {
-		return qnaImg;
-	}
-
-	public void setQnaImg(String qnaImg) {
-		this.qnaImg = qnaImg;
-	}
-
-	public int getQnaPwd() {
-		return qnaPwd;
-	}
-
-	public void setQnaPwd(int qnaPwd) {
-		this.qnaPwd = qnaPwd;
-	}
 
 	public int getGoodsCode() {
 		return goodsCode;
 	}
 
+
 	public void setGoodsCode(int goodsCode) {
 		this.goodsCode = goodsCode;
 	}
+
+
+	public String getUserid() {
+		return userid;
+	}
+
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+
+	public String getQnaSubject() {
+		return qnaSubject;
+	}
+
+
+	public void setQnaSubject(String qnaSubject) {
+		this.qnaSubject = qnaSubject;
+	}
+
+
+	public String getQnaContent() {
+		return qnaContent;
+	}
+
+
+	public void setQnaContent(String qnaContent) {
+		this.qnaContent = qnaContent;
+	}
+
+
+	public String getQnaDate() {
+		return qnaDate;
+	}
+
+
+	public void setQnaDate(String qnaDate) {
+		this.qnaDate = qnaDate;
+	}
+
+
+	public String getQnaImg() {
+		return qnaImg;
+	}
+
+
+	public void setQnaImg(String qnaImg) {
+		this.qnaImg = qnaImg;
+	}
+
+
+	public String getQnaPwd() {
+		return qnaPwd;
+	}
+
+
+	public void setQnaPwd(String qnaPwd) {
+		this.qnaPwd = qnaPwd;
+	}
+
 
 	public String getFname() {
 		return fname;

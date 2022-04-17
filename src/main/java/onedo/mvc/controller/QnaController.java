@@ -11,7 +11,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import onedo.mvc.dto.QnaDTO;
-import onedo.mvc.dto.ReviewDTO;
 import onedo.mvc.service.QnaService;
 import onedo.mvc.service.QnaServiceImpl;
 
@@ -28,18 +27,33 @@ public class QnaController implements Controller {
 	/**
 	 *  전체검색하기 
 	 * */
-	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String pageNo = request.getParameter("pageNo");//현재페이지번호 
-		if(pageNo==null || pageNo.equals("")) {
-			pageNo="1";
-		}
+	public ModelAndView qnaSelectAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		/*
+		 * String pageNo = request.getParameter("pageNo");//현재페이지번호 if(pageNo==null ||
+		 * pageNo.equals("")) { pageNo="1"; }
+		 */
 		
-		List<QnaDTO> revList = qnaService.selectAll(Integer.parseInt(pageNo));
+		List<QnaDTO> list = qnaService.selectAll();
 		
-		 request.setAttribute("list", revList);
-		    request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
-	
-		    return null; // 전체검색 후 위치 변경
+
+		/*
+		 * try { list = qnaService.selectAll(); }catch(Exception e){
+		 * e.printStackTrace(); }
+		 */
+		/*
+		 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
+		 */		 
+			
+		    
+
+		    request.setAttribute("list", list);
+		    return new ModelAndView("board/single.jsp") ; // 전체검색 후 위치 변경
+			/*
+			 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
+			 */		  
+		   
+		   
+
 	}
 	
 	/**
@@ -62,7 +76,7 @@ public class QnaController implements Controller {
 	  		String qnaPwd = m.getParameter("qna_pwd"); 
 	  		String goodsCode = m.getParameter("goods_code"); 
 	  		
-	  		QnaDTO elec = new QnaDTO(Integer.parseInt(qnaNo),userId,qnaSubject,qnaContent,Integer.parseInt(qnaDate),qnaImg,Integer.parseInt(qnaPwd),Integer.parseInt(goodsCode));
+	  		QnaDTO elec = new QnaDTO();
 	  		
 	  		//파일첨부가되었다면...
 	  		if(m.getFilesystemName("file") != null) {
@@ -119,7 +133,7 @@ public class QnaController implements Controller {
 		String goodsCode = request.getParameter("goodsCode"); 
 	 
 		
-		QnaDTO qnaDTO = new QnaDTO(Integer.parseInt(qnaNo),userId,qnaSubject,qnaContent,Integer.parseInt(qnaDate),qnaImg,Integer.parseInt(qnaPwd),Integer.parseInt(goodsCode));
+		QnaDTO qnaDTO = new QnaDTO();
 			
 		qnaService.update(qnaDTO);
 		

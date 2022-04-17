@@ -12,7 +12,7 @@ public interface UserDAO {
 	 * 회원가입 기능
 	 * @return 0이면 가입 실패
 	 * */
-	UserDTO join(UserDTO userDTO) throws SQLException;
+	int join(UserDTO userDTO) throws SQLException;
 	
 	/**
 	 * 로그인 기능
@@ -25,7 +25,7 @@ public interface UserDAO {
 	 * @return: true이면 중복이다, false이면 중복아니다
 	 *  SELECT ID FROM MEMBER WHERE ID=?
 	 * */
-     boolean duplicateById(String userId);
+     boolean idCheck(String userId);
 	
 	
 	/**
