@@ -69,7 +69,7 @@ public class QnaController implements Controller {
 	  		String qnaPwd = m.getParameter("qna_pwd"); 
 	  		String goodsCode = m.getParameter("goods_code"); 
 	  		
-	  		QnaDTO elec = new QnaDTO(Integer.parseInt(qnaNo),userId,qnaSubject,qnaContent,Integer.parseInt(qnaDate),qnaImg,Integer.parseInt(qnaPwd),Integer.parseInt(goodsCode));
+	  		QnaDTO elec = new QnaDTO();
 	  		
 	  		//파일첨부가되었다면...
 	  		if(m.getFilesystemName("file") != null) {
