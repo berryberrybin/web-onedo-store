@@ -26,17 +26,40 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+	<style>
+	    
+	   h2{
+	   		text-align: center;
+	   }
+	    
+       #btn{
+        width:100px;
+        margin:auto;
+        display:block;
+	}
+	    
+	</style>
+
+
  </head>
 <body>
+
+
 	<section id="form"><!--form-->
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
-						<h2>${loginUser.userName}님 회원 가입 완료되었습니다.</h2>
-						<h2>가입하신 아이디는 ${loginUser.userId} 입니다.</h2>
+			<div id="logo" class="row">
+				<div class="col-md-6 col-md-offset-2">
+						<h2>회원 가입 완료되었습니다.</h2><br><br>
+						<button type="button" id="btn" class="btn btn-default" onclick="location.href='login.jsp' ">로그인 하기</button>
+					</div>
+<%-- 				<div class="col-md-4 col-md-offset-4">
+					<div class="col-sm-12">
+						<h2>가입하신 아이디는 ${userId} 입니다.</h2>
 							<button type="button" class="btn btn-default" onclick="location.href='login.jsp' ">로그인 하기</button>
-					</div><!--/login form-->
+					</div><!--/login form--> --%>
 			</div>
 	</section><!--/form-->
+
 
 </body>
 </html>

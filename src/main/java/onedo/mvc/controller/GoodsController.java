@@ -23,8 +23,7 @@ public class GoodsController implements Controller {
 	/**
 	 * 상품전체검색
 	 * */
-	public ModelAndView searchSelectAll(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public ModelAndView searchSelectAll(HttpServletRequest request, HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
 		
 		List<GoodsDTO> list = null;
@@ -33,25 +32,25 @@ public class GoodsController implements Controller {
 			list = service.selectAll();
 		}catch(Exception e){
 			e.printStackTrace();
+			return new ModelAndView("error/error.jsp");
 		}
 		
 		request.setAttribute("list", list);
-		return new ModelAndView("adminGoods.jsp");
+		return new ModelAndView("main.jsp");
 	}
 	
 	/**
 	 * 타입으로상품검색 =selectByGoodsType
 	 * */
-	public ModelAndView selectGoodsByType(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public ModelAndView selectGoodsByType(HttpServletRequest request, HttpServletResponse response){
 		String goodsType = request.getParameter("goodsType");
 		List<GoodsDTO> list = null;
 		
 		try {
 			list =service.selectByGoodsType(goodsType);
-		}catch(Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-			//오류메시지
+			return new ModelAndView("error/error.jsp");
 		}
 		
 		request.setAttribute("list", list);
@@ -61,8 +60,7 @@ public class GoodsController implements Controller {
 	/**
 	 * 상품코드로검색 =selectByGoodsCode
 	 * */
-	public ModelAndView selectByGoodsCode(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public ModelAndView selectByGoodsCode(HttpServletRequest request, HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
 		
 		String goodsCode = request.getParameter("goodsCode");
@@ -70,8 +68,9 @@ public class GoodsController implements Controller {
 		
 		try {
 			goodsDTO = service.selectByGoodsCode(goodsCode, false);
-		}catch(Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
+			return new ModelAndView("error/error.jsp");
 		}
 		
 		request.setAttribute("goodsDTO", goodsDTO);

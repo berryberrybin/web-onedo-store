@@ -11,13 +11,22 @@ public interface UserService {
 	/**
 	 * 회원 가입
 	 * */
-	void userJoin(UserDTO userDTO)throws SQLException , AuthenticationException;
+	UserDTO userJoin(UserDTO userDTO)throws SQLException , AuthenticationException;
 	
 	
 	/**
-	 * 로그인 체크(아이디 중복)
+	 * 로그인 체크
 	 * */
 	UserDTO loginCheck(UserDTO userDTO)throws SQLException , AuthenticationException;
+	
+	
+	/**
+	 * ID중복여부 체크
+	 * @return: true이면 중복이다, false이면 중복아니다
+	 *  SELECT ID FROM MEMBER WHERE ID=?
+	 * */
+     boolean duplicateById(String userId);
+	
 	
 	/**
 	 * 전체 회원 검색
