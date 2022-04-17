@@ -13,6 +13,7 @@ public class QnaDTO {
 	private String qnaImg;
 	private int qnaPwd;
 	private int goodsCode;
+	
 	private String  fname; 
 	private int  fsize;
 

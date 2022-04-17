@@ -28,18 +28,25 @@ public class QnaController implements Controller {
 	/**
 	 *  전체검색하기 
 	 * */
-	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String pageNo = request.getParameter("pageNo");//현재페이지번호 
-		if(pageNo==null || pageNo.equals("")) {
-			pageNo="1";
-		}
+	public ModelAndView qnaSelectAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		/*
+		 * String pageNo = request.getParameter("pageNo");//현재페이지번호 if(pageNo==null ||
+		 * pageNo.equals("")) { pageNo="1"; }
+		 */
+		response.setContentType("text/html;charset=UTF-8");
 		
-		List<QnaDTO> revList = qnaService.selectAll(Integer.parseInt(pageNo));
+		List<QnaDTO> list = qnaService.selectAll();
 		
-		 request.setAttribute("list", revList);
-		    request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
-	
-		    return null; // 전체검색 후 위치 변경
+		 try {
+			 list = qnaService.selectAll();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		/*
+		 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
+		 */		 
+			request.setAttribute("list", list);
+		    return new ModelAndView("board/qnaAllTest.jsp") ; // 전체검색 후 위치 변경
 	}
 	
 	/**
