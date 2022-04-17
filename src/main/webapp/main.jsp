@@ -34,7 +34,8 @@
  		$(document).on("click","#goods",function(){
 				let goodsCode = $(this).attr("name");
 				//alert(idValue);
-				location.href="${path}/front?key=goods&methodName=selectByGoodsCode&goodsCode="+goodsCode;
+				//상품클릭시 조회수증가 함
+				location.href="${path}/front?key=goods&methodName=selectByGoodsCode&isIncrement=y&goodsCode="+goodsCode;
  		})
  	});
  </script>

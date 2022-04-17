@@ -17,6 +17,9 @@ public class GoodsServiceImpl implements GoodsService {
 		return list;
 	}
 
+	/**
+	 * 상품전체검색
+	 * */
 	@Override
 	public List<GoodsDTO> selectAll(int pageNo) throws SQLException {
 		// TODO Auto-generated method stub
@@ -42,7 +45,7 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		if(flag) {
 			//조회수 증가
-			int result = goodsDAO.increamentGoodsView(Integer.parseInt(goodsCode));
+			goodsDAO.increamentGoodsView(Integer.parseInt(goodsCode));
 		}
 		
 		return goodsDTO;
@@ -53,8 +56,6 @@ public class GoodsServiceImpl implements GoodsService {
 	 * */
 	public List<GoodsDTO> selectByGoodsType(String goodsType) throws SQLException {
 		List<GoodsDTO> list = goodsDAO.selectByGoodsType(goodsType);
-		
-		//
 		
 		return list;
 	}
