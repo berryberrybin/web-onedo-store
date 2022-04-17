@@ -27,6 +27,27 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	<script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			let attrs = [{name:'신맛',score:${goodsDTO.goodsAttrDTO.sour}},{name:'단맛',score:${goodsDTO.goodsAttrDTO.sweet}},
+						{name:'향미',score:${goodsDTO.goodsAttrDTO.aroma}},{name:'바디감',score:${goodsDTO.goodsAttrDTO.body}}];
+			
+			let str="";
+			$.each(attrs,function(index,item){
+				str+=item.name+" : ";
+				for(let i=0;i<item.score;i++){
+					str+="★";
+				}
+				for(let i=5;i>item.score;i--){
+					str+="☆";
+				}
+				str+="<br>"
+			});
+			
+			$("#goodsAttr").html(str);
+		});
+	</script>
  </head>
 <body>
 
@@ -97,7 +118,7 @@
 	<div class="category-tab shop-details-tab"><!--category-tab-->
 		<div class="col-sm-12">
 			<ul class="nav nav-tabs">
-				<li><a href="#details" data-toggle="tab">Details</a></li>
+				<li><a href="#details" data-toggle="tab">상세정보</a></li>
 				<li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
 				<li><a href="#tag" data-toggle="tab">Tag</a></li>
 				<li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
@@ -105,52 +126,9 @@
 		</div>
 		<div class="tab-content">
 			<div class="tab-pane fade" id="details" >
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="images/home/gallery1.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="images/home/gallery2.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="images/home/gallery3.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="images/home/gallery4.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-							</div>
-						</div>
+				<div class="col-sm-12">
+					<div id="goodsAttr">
+						<!-- 상품속성정보 -->
 					</div>
 				</div>
 			</div>
