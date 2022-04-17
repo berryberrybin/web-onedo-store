@@ -37,9 +37,7 @@ private Properties proFile = new Properties();
 		
 		List<QnaDTO> qnaList = new ArrayList<QnaDTO>();
 		
-		//String sql = proFile.getProperty("select * from QnA_board order by goods_code");
-		String sql = "select * from QnA_board order by goods_code";
-		
+		String sql = proFile.getProperty("");
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -47,21 +45,20 @@ private Properties proFile = new Properties();
 			while (rs.next()) {
 				QnaDTO qdto = new QnaDTO(
 						rs.getInt(1),
-						rs.getInt(2),	
+						rs.getString(2),
 						rs.getString(3),
 						rs.getString(4),
-						rs.getString(5),
+						rs.getInt(5),
 						rs.getString(6),
-						rs.getString(7),
-						rs.getString(8));
-	
+						rs.getInt(7),
+						rs.getInt(8));
 				
 				qnaList.add(qdto);
-				}
+			}
 			}finally {
 				DbUtil.dbClose(rs, ps, con);	
 			}
-			System.out.println(qnaList);
+			
 			return qnaList;
 		}
 
@@ -156,8 +153,13 @@ private Properties proFile = new Properties();
 						rs.getString(4),
 						rs.getString(5),
 						rs.getString(6),
+<<<<<<< HEAD
 						rs.getString(7),
 						rs.getString(8));					
+=======
+						rs.getInt(7),
+						rs.getInt(8));						
+>>>>>>> df0cd9ccff92080f9745c075b2451f2abac6d105
 			}
 		}finally {
 			DbUtil.dbClose(rs, ps, con);

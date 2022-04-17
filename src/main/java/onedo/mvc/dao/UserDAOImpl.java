@@ -30,12 +30,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public UserDTO join(UserDTO userDTO) throws SQLException {
+	public int join(UserDTO userDTO) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps =null;
 		int result = 0;
 		UserDTO dbDTO = null;
-		String sql ="insert into Users(user_id, user_Pwd, user_Name, user_Phone, user_Addr, birth, gender) values(?,?,?,?,?,?,?)";
+		String sql ="insert into Users(user_id, user_Pwd, user_Name, user_Phone, user_Addr, birth, gender) values(?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			con=DbUtil.getConnection();
@@ -54,7 +54,7 @@ public class UserDAOImpl implements UserDAO {
 			DbUtil.dbClose(ps, con);
 		}
 
-		return dbDTO;
+		return result;
 	}
 	
 	
@@ -170,29 +170,29 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean duplicateById(String userId) {
-		Connection con=null;
-		PreparedStatement ps=null;
-		ResultSet rs=null;
-		boolean result=false;
-		String sql="select user_Id from users where user_Id=?";
-		try {
-			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			//?가 있다면 개수만큼 setXxx()필요
-			ps.setString(1, userId);
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				result = true;
+	public boolean idCheck(String userId) {
+			Connection con=null;
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			boolean result=false;
+			String sql="select user_Id from users where user_Id=?";
+			try {
+				con = DbUtil.getConnection();
+				ps = con.prepareStatement(sql);
+				//?가 있다면 개수만큼 setXxx()필요
+				ps.setString(1, userId);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					result = true;
+				}
+				
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				DbUtil.dbClose(rs, ps, con);
 			}
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			DbUtil.dbClose(rs, ps, con);
+			return result;
 		}
-		return result;
 	}
 
-}
