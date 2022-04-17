@@ -46,7 +46,7 @@ public class QnaController implements Controller {
 		 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
 		 */		 
 			request.setAttribute("list", list);
-		    return new ModelAndView("board/qnaAllTest.jsp") ; // 전체검색 후 위치 변경
+		    return new ModelAndView("board/single.jsp") ; // 전체검색 후 위치 변경
 	}
 	
 	/**
@@ -126,7 +126,7 @@ public class QnaController implements Controller {
 		String goodsCode = request.getParameter("goodsCode"); 
 	 
 		
-		QnaDTO qnaDTO = new QnaDTO(Integer.parseInt(qnaNo),userId,qnaSubject,qnaContent,Integer.parseInt(qnaDate),qnaImg,Integer.parseInt(qnaPwd),Integer.parseInt(goodsCode));
+		QnaDTO qnaDTO = new QnaDTO();
 			
 		qnaService.update(qnaDTO);
 		

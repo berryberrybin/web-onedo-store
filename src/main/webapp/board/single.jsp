@@ -241,9 +241,26 @@
         <td bgcolor="#FE980F">
             <p align="center"><font color="white"><b><span style="font-size:9pt;">파일용량</span></b></font></p>
         </td>
-        
+         <td bgcolor="#FE980F">
+            <p align="center"><font color="white"><b><span style="font-size:9pt;">비밀번호</span></b></font></p>
+        </td>
     </tr>
-    
+
+			
+			<c:forEach items="${list}" var="qnaBoard">
+				<tr>
+					<td>${qnaBoard.qnaNo}</td>
+					<td>${qnaBoard.goodsCode}</td>
+					<td>${qnaBoard.userid}</td>
+					<td>${qnaBoard.qnaSubject}</td>
+					<td>${qnaBoard.qnaContent}</td>
+					<td>${qnaBoard.qnaDate}</td>
+					<td>${qnaBoard.qnaImg}</td>
+					<td>${qnaBoard.qnaPwd}</td>
+	
+				</tr>
+			</c:forEach>
+		
     <c:choose>
     <c:when test="${empty requestScope.list}">
 	   <tr>
@@ -253,51 +270,11 @@
     </tr>
     </c:when>
     <c:otherwise>
-	<c:forEach items="${requestScope.list}" var="elecDto">
-		    <tr onmouseover="this.style.background='#eaeaea'"
-		        onmouseout="this.style.background='white'">
-		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">
-		            ${elecDto.modelNum}</span></p>
-		        </td>
-		        <td bgcolor="">
-					<p><span style="font-size:9pt;">
-					<a href="${path}/front?key=elec&methodName=selectByModelNum&modelNum=${elecDto.modelNum}&pageNo=${pageNo}">
-					  ${elecDto.modelName}
-					</a>
-					</span></p>
-		        </td>
-		        
-		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">
-		            <fmt:formatNumber value="${elecDto.price}"/></span></p>
-		        </td>
-		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">
-		            ${elecDto.writeday}</span></p>
-		        </td>
-		         
-		         <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">
-		            ${elecDto.fname}</span></p>
-		        </td>
-		         <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">
-		            <fmt:formatNumber value="${elecDto.fsize}"/> byte</span></p>
-		        </td>
-		        <td bgcolor="">
-		            <p align="center"><span style="font-size:9pt;">
-		            ${elecDto.readnum}</span></p>
-		        </td>
-		    </tr>
-    </c:forEach>
+	
 	</c:otherwise>
     </c:choose>
 </table>
-	<div align="left">
-	<span style="font-size:9pt;"><a class="btn btn-primary" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll">조회하기</a></span>
-	</div>
-
+	
 	<div align=right>
 	<span style="font-size:9pt;"><a class="btn btn-primary" href="${path}/writing.jsp">글쓰기</a></span>
 	</div>

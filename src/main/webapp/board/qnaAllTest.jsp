@@ -27,13 +27,14 @@
 			<c:forEach items="${list}" var="qnaBoard">
 				<tr>
 					<td>${qnaBoard.qnaNo}</td>
+					<td>${qnaBoard.qnaPwd}</td>
 					<td>${qnaBoard.goodsCode}</td>
 					<td>${qnaBoard.userid}</td>
 					<td>${qnaBoard.qnaSubject}</td>
 					<td>${qnaBoard.qnaContent}</td>
 					<td>${qnaBoard.qnaDate}</td>
 					<td>${qnaBoard.qnaImg}</td>
-					<td>${qnaBoard.qnaPwd}</td>
+					
 					
 					
 					

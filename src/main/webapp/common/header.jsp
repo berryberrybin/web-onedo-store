@@ -112,8 +112,8 @@
 								</c:if> --%>
 
 								<li><a href="${path}/survey/survey.jsp"><i class="fa fa-coffee"></i> 커피추천</a></li>
-								<li><a href="checkout.jsp"><i class="fa fa-list"></i> 게시판</a></li>
-								<li><a href="front?key=cart&methodName=select"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+								<li><a href="${path}/front?key=qnaBoard&methodName=qnaSelectAll"><i class="fa fa-list"></i> 게시판</a></li>
+								<li><a href="checkout.jsp"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
 
 								<c:if test="${empty loginUser}">
 									<li><a href="${path}/user/login.jsp"><i class="fa fa-unlock-alt"></i> 로그인</a></li>

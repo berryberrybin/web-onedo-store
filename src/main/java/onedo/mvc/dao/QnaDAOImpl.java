@@ -93,13 +93,13 @@ private Properties proFile = new Properties();
 			rs = ps.executeQuery();
 			while(rs.next()) {QnaDTO qdto = new QnaDTO(
 					rs.getInt(1),
-					rs.getString(2),
+					rs.getInt(2),	
 					rs.getString(3),
 					rs.getString(4),
-					rs.getInt(5),
+					rs.getString(5),
 					rs.getString(6),
-					rs.getInt(7),
-					rs.getInt(8));
+					rs.getString(7),
+					rs.getString(8));
 			
 			qnaList.add(qdto);
 		}
@@ -151,13 +151,13 @@ private Properties proFile = new Properties();
 			if(rs.next()) {
 				qnaDTO = new QnaDTO(
 						rs.getInt(1),
-						rs.getString(2),
+						rs.getInt(2),	
 						rs.getString(3),
 						rs.getString(4),
-						rs.getInt(5),
+						rs.getString(5),
 						rs.getString(6),
 						rs.getString(7),
-						rs.getString(8));						
+						rs.getString(8));					
 			}
 		}finally {
 			DbUtil.dbClose(rs, ps, con);
@@ -180,9 +180,9 @@ private Properties proFile = new Properties();
 			ps.setString(2, qnaDTO.getUserid());
 			ps.setString(3, qnaDTO.getQnaSubject());
 			ps.setString(4, qnaDTO.getQnaContent());
-			ps.setInt(5, qnaDTO.getQnaDate());
+			ps.setString(5, qnaDTO.getQnaDate());
 			ps.setString(6, qnaDTO.getQnaImg());
-			ps.setInt(7, qnaDTO.getQnaPwd());
+			ps.setString(7, qnaDTO.getQnaPwd());
 			ps.setInt(8, qnaDTO.getGoodsCode());
 			
 			
@@ -226,9 +226,9 @@ private Properties proFile = new Properties();
 			
 			ps.setString(1, qnaDTO.getQnaSubject());
 			ps.setString(2, qnaDTO.getQnaContent());
-			ps.setInt(3, qnaDTO.getQnaDate());
+			ps.setString(3, qnaDTO.getQnaDate());
 			ps.setString(4, qnaDTO.getQnaImg());
-			ps.setInt(5, qnaDTO.getQnaPwd());
+			ps.setString(5, qnaDTO.getQnaPwd());
 			
 			
 			result = ps.executeUpdate();
