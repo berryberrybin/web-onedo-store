@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
-
+import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.util.DbUtil;
 
@@ -59,6 +58,9 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return null;
 	}
 
+	/**
+	 * 상품코드로 상품검색
+	 * */
 	@Override
 	public GoodsDTO selectByGoodsCode(int goodsCode) throws SQLException {
 		Connection con=null;
@@ -66,6 +68,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		ResultSet rs=null;
 		
 		String sql=proFile.getProperty("goods.selectByGoodsCode"); //select * from goods where goods_code=?
+		GoodsAttrDTO attrDTO = goodsDTO.getGoodsAttrDTO();
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -75,6 +78,8 @@ public class GoodsDAOImpl implements GoodsDAO {
 			while(rs.next()) {
 				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
 						rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+				//상품속성 가져오기
+				attrDTO = new GoodsAttrDTO(rs.getInt(10), rs.getInt(11), rs.getInt(12), rs.getInt(13));
 			}
 			
 		}finally {
@@ -83,6 +88,9 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return goodsDTO;
 	}
 
+	/**
+	 * 상품조회수증가
+	 * */
 	@Override
 	public int increamentGoodsView(int goodsCode) throws SQLException {
 		Connection con=null;

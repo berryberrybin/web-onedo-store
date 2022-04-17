@@ -28,8 +28,8 @@
 <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("a").click(function(){
-			let goodsType = $(this).attr("name");
+		$("a[name=category-name]").click(function(){
+			let goodsType = $(this).attr("id");
 			location.href="${path}/front?key=goods&methodName=selectGoodsByType&goodsType="+goodsType;
 		})
 	});
@@ -45,17 +45,17 @@
 							
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#" name="O">원두</a></h4>
+									<h4 class="panel-title"><a href="#" name="category-name" id="O">원두</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#" name="C">캡슐</a></h4>
+									<h4 class="panel-title"><a href="#" name="category-name" id="C">캡슐</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#" name="D">드립백</a></h4>
+									<h4 class="panel-title"><a href="#" name="category-name" id="D">드립백</a></h4>
 								</div>
 							</div>
 							<div class="panel panel-default">

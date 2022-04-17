@@ -12,12 +12,13 @@ public class UserServiceImpl implements UserService {
 	private UserDAO dao = new UserDAOImpl();
 	
 	@Override
-	public void userJoin(UserDTO userDTO) throws SQLException, AuthenticationException {
-		int result = dao.join(userDTO);
-		if(result==0) {
+	public UserDTO userJoin(UserDTO userDTO) throws SQLException, AuthenticationException {
+		UserDTO dbDTO = dao.join(userDTO);
+		if(dbDTO==null) {
 			throw new AuthenticationException("회원 가입에 실패했습니다.");
 		}
-
+		
+		return dbDTO;
 	}
 	
 	@Override
@@ -52,6 +53,15 @@ public class UserServiceImpl implements UserService {
 		if(result==0) {
 			throw new AuthenticationException("회원정보 삭제에 실패했습니다.");
 		}
+	}
+
+	@Override
+	public boolean duplicateById(String userId) {
+		boolean result = dao.duplicateById(userId);
+		if(result) {
+			
+		}
+		return false;
 	}
 
 

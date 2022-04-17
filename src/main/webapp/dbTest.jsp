@@ -13,6 +13,8 @@
 <%
 	Connection con = DbUtil.getConnection();
 	out.println("con = " + con);
+
+	
 %>
 </body>
 </html>

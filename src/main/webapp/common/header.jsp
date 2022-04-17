@@ -63,7 +63,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.jsp"><img src="${path}/images/home/OneDologo.png" alt="" /></a>
+							<a href="${path}/index.jsp"><img src="${path}/images/home/OneDologo.png" alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<!-- 							<div class="btn-group">
@@ -93,16 +93,28 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 							
-								<c:if test="${not empty loginUser}">
-									<ul class="nav navbar-nav">
-										<%-- <li class="active"><a href="#">${loginUser.userId}님</a></li> --%>
-										<li><a href="#"><i class="fa fa-user"></i>   ${loginUser.userId}님</a></li>
-									</ul>
-								</c:if>
-							
-								<li><a href="#"><i class="fa fa-coffee"></i> 커피추천</a></li>
-								<li><a href="single.jsp"><i class="fa fa-list"></i> 게시판</a></li>
-								<li><a href="checkout.jsp"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+							<c:choose>
+								<c:when test="${loginUser.userId=='admin'}">
+									<li><a href="${path}/adminPage.jsp"><i class="fa fa-cog"></i> 관리자</a></li>
+								</c:when>
+								<c:otherwise>
+									<c:if test="${not empty loginUser}">
+										<ul class="nav navbar-nav">
+											<%-- <li class="active"><a href="#">${loginUser.userId}님</a></li> --%>
+											<li><a href="#"><i class="fa fa-user"></i>   ${loginUser.userId}님</a></li>
+										</ul>
+									</c:if>
+								</c:otherwise>
+							</c:choose>
+
+<%-- 								<c:if test="${loginUser.userId=='admin'}">
+									<li><a href="#"><i class="fa-solid fa-toolbox"></i>   ${loginUser.userId}님</a></li>
+								</c:if> --%>
+
+								<li><a href="${path}/survey/survey.jsp"><i class="fa fa-coffee"></i> 커피추천</a></li>
+								<li><a href="checkout.jsp"><i class="fa fa-list"></i> 게시판</a></li>
+								<li><a href="front?key=cart&methodName=select"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+
 								<c:if test="${empty loginUser}">
 									<li><a href="${path}/user/login.jsp"><i class="fa fa-unlock-alt"></i> 로그인</a></li>
 								</c:if>
@@ -132,7 +144,7 @@
 							</button>
 						</div>
 						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
+			<%-- 				<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="index.jsp" class="active">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
@@ -142,7 +154,7 @@
 										<li><a href="cart.jsp">Cart</a></li>
 										<li><a href="${path}/user/login.jsp">Login</a></li>
 									</ul></li>
-								<!-- <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="blog.html">Blog List</a></li>
 										<li><a href="blog-single.html">Blog Single</a></li>
@@ -150,7 +162,7 @@
                                 </li> 
 								<li><a href="404.html">404</a></li>
 								<li><a href="contact-us.html">Contact</a></li>
-							</ul> -->
+							</ul> --%>
 						</div>
 					</div>
 					<div class="col-sm-3">

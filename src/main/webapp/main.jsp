@@ -60,7 +60,7 @@
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div> -->
 								<div class="col-sm-12">
-									<img src="${path}/images/home/OneDomain.jpg" class="girl img-responsive" alt="" />
+									<img src="${path}/images/home/OneDomain05.jpg" class="girl img-responsive" alt="" />
 								</div>
 							</div>
 							<div class="item">
@@ -71,7 +71,7 @@
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div> -->
 								<div class="col-sm-12">
-									<img src="${path}/images/home/girl2.jpg" class="girl img-responsive" alt="" />
+									<img src="${path}/images/home/OneDomain04.jpg" class="girl img-responsive" alt="" />
 								</div>
 							</div>
 							
@@ -83,7 +83,7 @@
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div> -->
 								<div class="col-sm-12">
-									<img src="${path}/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+									<img src="${path}/images/home/OneDomain03.jpg" class="girl img-responsive" alt="" />
 								</div>
 							</div>
 							

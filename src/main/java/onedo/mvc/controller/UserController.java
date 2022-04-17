@@ -36,8 +36,10 @@ public class UserController implements Controller {
 		String gender = request.getParameter("gender");
 		
 		userService.userJoin(new UserDTO(userId,userPwd,userName,userPhone,userAddr,birth,gender));
-				
-		return new ModelAndView("login.jsp", true);
+		
+		request.setAttribute("userName", userName);
+		request.setAttribute("userId", userId);
+		return new ModelAndView("user/signupOk.jsp",true);
 	}
 	
 	/**
@@ -96,11 +98,6 @@ public class UserController implements Controller {
 		
 		List<UserDTO> list = userService.selectAll();
 
-		try {
-			list = userService.selectAll();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 		request.setAttribute("list", list);
 		return new ModelAndView("user/userAllTest.jsp");
 	}
@@ -143,5 +140,12 @@ public class UserController implements Controller {
 		 */
 
 	}
+	
+	/**
+	 * 휴면 회원 (2일때 휴면 처리)
+	 * */
+	
+	
+	
 
 }
