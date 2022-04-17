@@ -45,7 +45,8 @@
 				str+="<br>"
 			});
 			
-			$("#goodsAttr").html(str);
+			let goodsDetail="<h3 style='color:#363432'>"+"${goodsDTO.goodsDetail}"+"</h3><p>";
+			$("#goodsAttr").html(goodsDetail+"<h4 style='color:#FE980F'>"+str+"</h4>");
 		});
 	</script>
  </head>
