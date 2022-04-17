@@ -98,11 +98,6 @@ public class UserController implements Controller {
 		
 		List<UserDTO> list = userService.selectAll();
 
-		try {
-			list = userService.selectAll();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 		request.setAttribute("list", list);
 		return new ModelAndView("user/userAllTest.jsp");
 	}
