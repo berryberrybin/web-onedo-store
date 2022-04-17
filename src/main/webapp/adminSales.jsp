@@ -36,7 +36,10 @@ google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
 	var data = google.visualization.arrayToDataTable([ ['goodsName', 'quantity'], ${result} ]); 
-	var options = { title: '상품별 주문 통계' }; 
+	var options = { 
+		title: '상품별 주문 통계',
+		colors: ['#FF9AA2', '#FFDAC1', '#E2F0CB', '#B5EAD7', '#C7CEEA', '#FFB7B2']
+	}; 
 	var chart = new google.visualization.PieChart(document.getElementById('piechart')); 
 	chart.draw(data, options); } 
 </script>
@@ -74,7 +77,7 @@ td {
 									</ul></li>
 								<li class="dropdown"><a href="#">매출관리<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
-										<li><a href="blog.html">일별매출조회</a></li>
+										<li><a href="front?key=sales&methodName=selectByOrderDate">일별매출조회</a></li>
 										<li><a href="blog.html">조건별 매출조회</a></li>
 										<li><a href="front?key=sales&methodName=selectByGoodsCode">상품별 매출조회</a></li>
 									</ul></li>
@@ -137,7 +140,7 @@ td {
 		</div>
 	</section>
 	
-	<div id="piechart" style="width: 900px; height: 500px;"></div>
+	<div id="piechart" style="width: 1400px; height: 500px; margin:0 auto;"></div>
 
 	<!--/#do_action-->
 

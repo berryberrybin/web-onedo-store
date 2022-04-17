@@ -72,7 +72,7 @@ public class SalesDAOImpl implements SalesDAO {
 
 		List<SalesDTO> salesList = new ArrayList<SalesDTO>();
 
-		String sql ="select To_char(order_date,'YYYYMMDD'), sum(order_price) from orders group by To_char(order_date,'YYYYMMDD')"; 
+		String sql ="select * from (select To_char(order_date,'YYYYMMDD'), sum(order_price) from orders group by To_char(order_date,'YYYYMMDD') order by To_char(order_date,'YYYYMMDD') desc) where rownum <= 10"; 
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);

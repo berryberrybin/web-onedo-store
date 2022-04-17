@@ -38,11 +38,13 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['주문 일자', '총 매출금액'],${result}
+          ['주문 일자', '일별 매출금액', '누적 매출금'],${result}
         ]);
 
         var options = {
-          title: '일자별 주문통계 '
+          title: '일자별 주문통계',
+          pointSize: 10,
+          curveType: 'function'
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
@@ -138,7 +140,7 @@ td {
 			</div>
 		</div>
 	</section>
-	  <div id="chart_div" style="width: 900px; height: 500px;"></div>
+	  <div id="chart_div" style="width: 1400px; height: 500px; margin:0 auto;"></div>
 
 
 	<!--/#do_action-->
