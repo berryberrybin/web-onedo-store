@@ -27,18 +27,22 @@ public class FaqController implements Controller{
 	/**
 	 *  전체검색하기 
 	 * */
-	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String pageNo = request.getParameter("pageNo");//현재페이지번호 
-		if(pageNo==null || pageNo.equals("")) {
-			pageNo="1";
-		}
+	public ModelAndView faqSelectAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		/*
+		 * String pageNo = request.getParameter("pageNo");//현재페이지번호 if(pageNo==null ||
+		 * pageNo.equals("")) { pageNo="1"; }
+		 */
 		
-		List<FaqDTO> revList = faqService.selectAll(Integer.parseInt(pageNo));
+		List<FaqDTO> list = faqService.selectAll();
 		
-		 request.setAttribute("list", revList);
-		    request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
-	
-		    return null; // 전체검색 후 위치 변경
+		System.out.println(list.size());
+		
+		 request.setAttribute("list", list);
+		 return new ModelAndView("board/faqAllTest.jsp") ; // 전체검색 후 위치 변경
+			/*
+			 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
+			 */	
+		
 	}
 	
 	/**

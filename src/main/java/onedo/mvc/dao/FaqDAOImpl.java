@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import onedo.mvc.dto.FaqDTO;
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.ReviewDTO;
 import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
@@ -37,7 +38,7 @@ private Properties proFile = new Properties();
 		
 		List<FaqDTO> faqList = new ArrayList<FaqDTO>();
 		
-		String sql = proFile.getProperty("");
+		String sql = "SELECT * FROM FAQ_BOARD";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -47,15 +48,17 @@ private Properties proFile = new Properties();
 						rs.getInt(1),
 						rs.getString(2),
 						rs.getString(3));
+				
 				faqList.add(rdto);
 			}
 			
 		}finally {
 			DbUtil.dbClose(rs, ps, con);	
 		}
-		
+		System.out.println(faqList.size()+"dao");
 		return faqList;
 	}
+
 
 	@Override
 	public List<FaqDTO> getBoardList(int pageNo) throws SQLException {
