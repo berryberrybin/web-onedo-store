@@ -79,7 +79,8 @@ public class GoodsDAOImpl implements GoodsDAO {
 				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
 						rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
 				//상품속성 가져오기
-				attrDTO = new GoodsAttrDTO(rs.getInt(10), rs.getInt(11), rs.getInt(12), rs.getInt(13));
+				attrDTO = new GoodsAttrDTO(rs.getInt(1), rs.getInt(10), rs.getInt(11), rs.getInt(12), rs.getInt(13));
+				goodsDTO.setGoodsAttrDTO(attrDTO);
 			}
 			
 		}finally {
@@ -194,21 +195,26 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	/**
-	 * 타입으로상품검색 =selectByGoodsType
+	 *  상품이름이나 타입으로 상품검색
 	 * */
 	@Override
-	public List<GoodsDTO> selectByGoodsType(String goodsType) throws SQLException{
+	public List<GoodsDTO> selectMulipleGoods(String searchField, String searchValue) throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
 		List<GoodsDTO> list = new ArrayList<GoodsDTO>();
 		
-		String sql=proFile.getProperty("goods.selectByGoodsType"); //select * from goods where goods_type=? order by goods_code
+		String sql=proFile.getProperty("goods.selectMulipleGoods"); //select * from goods where 
+		switch(searchField) {
+		case "goodsType" : sql+="goods_type = ?"; break;
+		case "goodsName" : sql+="goods_name like ?"; break;
+		}
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setString(1,goodsType);
+			if(searchField.equals("goodsType"))ps.setString(1,searchValue);
+			else if(searchField.equals("goodsName")) ps.setString(1,"%"+searchValue+"%");
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),

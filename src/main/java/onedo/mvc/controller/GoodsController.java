@@ -40,14 +40,15 @@ public class GoodsController implements Controller {
 	}
 	
 	/**
-	 * 타입으로상품검색 =selectByGoodsType
+	 *  상품이름이나 타입으로 상품검색
 	 * */
-	public ModelAndView selectGoodsByType(HttpServletRequest request, HttpServletResponse response){
-		String goodsType = request.getParameter("goodsType");
+	public ModelAndView selectMulipleGoods(HttpServletRequest request, HttpServletResponse response){
+		String searchField = request.getParameter("searchField");
+		String searchValue = request.getParameter("searchValue");
 		List<GoodsDTO> list = null;
 		
 		try {
-			list =service.selectByGoodsType(goodsType);
+			list =service.selectMulipleGoods(searchField,searchValue);
 		}catch(Exception e){
 			e.printStackTrace();
 			return new ModelAndView("error/error.jsp");
@@ -58,16 +59,21 @@ public class GoodsController implements Controller {
 	}
 	
 	/**
-	 * 상품코드로검색 =selectByGoodsCode
+	 * 상품코드로검색 =상품상세페이지 조회
 	 * */
 	public ModelAndView selectByGoodsCode(HttpServletRequest request, HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
 		
 		String goodsCode = request.getParameter("goodsCode");
-		GoodsDTO goodsDTO = null;
 		
+		//조회수증가여부
+		String isIncrement = request.getParameter("isIncrement"); //y이면 증가함, n이면 증가안함
+		boolean flag = false;
+		if(isIncrement.equals("y")||isIncrement.equals("Y")) flag=true;
+		
+		GoodsDTO goodsDTO = null;
 		try {
-			goodsDTO = service.selectByGoodsCode(goodsCode, false);
+			goodsDTO = service.selectByGoodsCode(goodsCode, flag);
 		}catch(Exception e){
 			e.printStackTrace();
 			return new ModelAndView("error/error.jsp");
@@ -76,10 +82,4 @@ public class GoodsController implements Controller {
 		request.setAttribute("goodsDTO", goodsDTO);
 		return new ModelAndView("product-details.jsp");
 	}
-	
-	/**
-	 * ++
-	 * */
-	
-
 }

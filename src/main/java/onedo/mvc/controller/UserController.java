@@ -105,8 +105,10 @@ public class UserController implements Controller {
 	/**
 	 * 회원 수정
 	 * */
-	public void userUpdate (HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView userUpdate (HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+
 		
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
@@ -123,6 +125,8 @@ public class UserController implements Controller {
 		 * try { userService.selectAll(); }catch(Exception e){ e.printStackTrace(); }
 		 * request.setAttribute("list", list);
 		 */
+		
+		return new ModelAndView("user/modifyOk.jsp");
 	}
 	
 	

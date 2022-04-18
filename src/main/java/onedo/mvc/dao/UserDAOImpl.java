@@ -98,14 +98,14 @@ public class UserDAOImpl implements UserDAO {
 		List<UserDTO> userList = new ArrayList<UserDTO>();
 		//String sql = proFile.getProperty("query.select");
 		
-		String sql =proFile.getProperty("user.select");
+		String sql =proFile.getProperty("user.selectAll");
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				UserDTO user = new UserDTO(rs.getString(1), rs.getString(2), rs.getString(3), 
-						rs.getString(4), rs.getString(5), rs.getString(6));
+						rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
 				
 				userList.add(user);
 			}
@@ -126,15 +126,15 @@ public class UserDAOImpl implements UserDAO {
 		  
 		  try {
 		   con = DbUtil.getConnection();
-		   ps = con.prepareStatement("update users set userPwd=?, userName=?, userPhone=?,userAddr=?, birth=?, gender=? where userId=?");
+		   ps = con.prepareStatement("update users set user_Pwd=?, user_Name=?, user_Phone=?, user_Addr=?, birth=?, gender=? where user_Id=?");
 		   
-			ps.setString(1, userDTO.getUserId());
-			ps.setString(2, userDTO.getUserPwd());
-			ps.setString(3, userDTO.getUserName());
-			ps.setString(4, userDTO.getUserPhone());
-			ps.setString(5, userDTO.getUserAddr());
-			ps.setString(6, userDTO.getBirth());
-			ps.setString(7, userDTO.getGender());
+			ps.setString(1, userDTO.getUserPwd());
+			ps.setString(2, userDTO.getUserName());
+			ps.setString(3, userDTO.getUserPhone());
+			ps.setString(4, userDTO.getUserAddr());
+			ps.setString(5, userDTO.getBirth());
+			ps.setString(6, userDTO.getGender());
+			ps.setString(7, userDTO.getUserId());
 		   
 		   result = ps.executeUpdate();
 		   
@@ -194,5 +194,34 @@ public class UserDAOImpl implements UserDAO {
 			}
 			return result;
 		}
-	}
+	
 
+
+	@Override
+	public int userType(String userId, int type) {
+		PreparedStatement ps = null;
+		Connection con =null;
+		String sql = proFile.getProperty("user.typeUpdate");
+		int result=0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, type);
+			ps.setString(2, userId);
+			
+			   
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtil.dbClose( ps , con);
+		}
+		System.out.println(result);
+		return result;
+	}
+			
+		
+	
+	
+
+}

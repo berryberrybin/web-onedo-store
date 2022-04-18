@@ -62,5 +62,18 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	@Override
+	public int typeUpdate(String userId, String userType) throws Exception {
+		int type;
+		if(userType.equals("정지")) {
+			type = 2;
+		}else{
+			type = 1;
+		}
+		int result = dao.userType(userId, type);
+		return result;
+	}
+
+	
 }
 
