@@ -28,18 +28,20 @@ public class NoticeController implements Controller {
 	/**
 	 *  전체검색하기 
 	 * */
-	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String pageNo = request.getParameter("pageNo");//현재페이지번호 
-		if(pageNo==null || pageNo.equals("")) {
-			pageNo="1";
-		}
-		List<NoticeDTO> revList = notService.selectAll(Integer.parseInt(pageNo));
+	public ModelAndView noticeSelectAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		/*
+		 * String pageNo = request.getParameter("pageNo");//현재페이지번호 if(pageNo==null ||
+		 * pageNo.equals("")) { pageNo="1"; }
+		 */
+		List<NoticeDTO> list = notService.selectAll();
 		
-		 request.setAttribute("list", revList);
-		    request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
-	
-		    return null; // 전체검색 후 위치 변경
+		 request.setAttribute("list", list);
+			/*
+			 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
+			 */	
+		 return new ModelAndView("board/Notice.jsp") ;
 	}
+	
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String saveDir= request.getServletContext().getRealPath("/save");
 		int maxSize =1024*1024*100;//100M
@@ -54,7 +56,7 @@ public class NoticeController implements Controller {
 	    String noticeDate = m.getParameter("notice_date");
 	    String noticeImg = m.getParameter("notice_img");
 	    
-	    NoticeDTO elec = new NoticeDTO(Integer.parseInt(noticeNo),noticeSubject,noticeContent,Integer.parseInt(noticeDate),noticeImg);
+	    NoticeDTO elec = new NoticeDTO();
 	    
 	  //파일첨부가되었다면...
   		if(m.getFilesystemName("file") != null) {
@@ -109,7 +111,7 @@ public class NoticeController implements Controller {
 		String noticeImg = request.getParameter("noticeImg");
 	 
 		
-		NoticeDTO noticeDTO = new NoticeDTO(Integer.parseInt(noticeNo),noticeSubject,noticeContent,Integer.parseInt(noticeDate),noticeImg);
+		NoticeDTO noticeDTO = new NoticeDTO();
 			
 		notService.update(noticeDTO);
 		

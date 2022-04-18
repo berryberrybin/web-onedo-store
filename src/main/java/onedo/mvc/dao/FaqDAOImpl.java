@@ -38,7 +38,7 @@ private Properties proFile = new Properties();
 		
 		List<FaqDTO> faqList = new ArrayList<FaqDTO>();
 		
-		String sql = "SELECT * FROM FAQ_BOARD";
+		String sql = "select * from FAQ_board order by FAQ_NO";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
