@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
 import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.dto.GoodsDTO;
+import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
 public class GoodsDAOImpl implements GoodsDAO {
@@ -50,12 +52,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 			DbUtil.dbClose(rs, ps, con);
 		}
 		return list;
-	}
-	
-	@Override
-	public List<GoodsDTO> getBoardList(int pageNo) throws SQLException {
-		//페이징처리
-		return null;
 	}
 
 	/**
@@ -196,23 +192,43 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 *  상품이름이나 타입으로 상품검색
 	 * */
 	@Override
-	public List<GoodsDTO> selectMulipleGoods(String searchField, String searchValue) throws SQLException{
+	public List<GoodsDTO> selectMultipleGoods(String searchField, String searchValue, int pageNo) throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
 		List<GoodsDTO> list = new ArrayList<GoodsDTO>();
 		
-		String sql=proFile.getProperty("goods.selectMulipleGoods"); //select * from goods where 
+		String sql=proFile.getProperty("goods.selectMultipleGoods");//select * from (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM goods where 
+		
 		switch(searchField) {
-		case "goodsType" : sql+="goods_type = ?"; break;
-		case "goodsName" : sql+="goods_name like ?"; break;
+			case "goodsType" : sql+="goods_type = ?";  break;
+			case "goodsName" : sql+="goods_name like ?"; break;
 		}
+		
 		try {
+			sql+=" ORDER BY goods_code) a) where rnum>=? and rnum <=?";
+		   
+			System.out.println("sql="+sql);
+			
+			int totalCount = this.getTotalCount(searchField, searchValue);
+			int totalPage = totalCount%PageCnt.getPagesize()==0? totalCount/PageCnt.getPagesize() : totalCount/PageCnt.getPagesize()+1;
+			
+			PageCnt pageCnt = new PageCnt();
+			pageCnt.setPageCnt(totalPage); //전체페이지수를 저장해준다.
+			pageCnt.setPageNo(pageNo); //사용자가 클릭한 page번호를 설정
+			
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			if(searchField.equals("goodsType"))ps.setString(1,searchValue);
-			else if(searchField.equals("goodsName")) ps.setString(1,"%"+searchValue+"%");
+			
+			switch(searchField) {
+			  case "goodsType" : ps.setString(1, searchValue);  break;
+			  case "goodsName" : ps.setString(1, "%"+searchValue+"%"); break;
+			}
+			
+			ps.setInt(2,(pageNo-1)*PageCnt.pagesize+1); //시작점번호
+			ps.setInt(3, pageNo*PageCnt.pagesize); //끝점 번호
+			
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
@@ -224,6 +240,40 @@ public class GoodsDAOImpl implements GoodsDAO {
 			DbUtil.dbClose(rs, ps, con);
 		}
 		return list;
+	}
+	
+	/**
+	 * 전체레코드수 가져오기
+	 * */
+	private int getTotalCount(String searchField, String searchValue) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int totalCount=0;
+		
+		String sql = proFile.getProperty("goods.totalCount");//select count(*) from goods where
+		switch(searchField) {
+		case "goodsType" : sql+="goods_type = ?"; break;
+		case "goodsName" : sql+="goods_name like ?"; break;
+		}
+		System.out.println(sql);
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			if(searchField.equals("goodsType"))ps.setString(1,searchValue);
+			else if(searchField.equals("goodsName")) ps.setString(1,"%"+searchValue+"%");
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return totalCount;
 	}
 
 }

@@ -13,11 +13,6 @@ public interface GoodsService {
 	List<GoodsDTO> selectAll() throws SQLException;
 
 	/**
-	 * paging처리
-	 */
-	List<GoodsDTO> selectAll(int pageNo) throws SQLException;
-
-	/**
 	 * GoodsDAOImpl의 레코드 삽입하는 메소드 호출
 	 */
 	int insert(GoodsDTO goodsDTO) throws SQLException;
@@ -45,5 +40,5 @@ public interface GoodsService {
 	/**
 	 *  상품이름이나 타입으로 상품검색
 	 * */
-	List<GoodsDTO> selectMulipleGoods(String searchField, String searchValue) throws SQLException;
+	List<GoodsDTO> selectMultipleGoods(String searchField, String searchValue, int pageNo) throws SQLException;
 }

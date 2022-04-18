@@ -39,22 +39,31 @@ public class GoodsController implements Controller {
 		return new ModelAndView("main.jsp");
 	}
 	
+	
 	/**
 	 *  상품이름이나 타입으로 상품검색
 	 * */
-	public ModelAndView selectMulipleGoods(HttpServletRequest request, HttpServletResponse response){
+	public ModelAndView selectMultipleGoods(HttpServletRequest request, HttpServletResponse response){
 		String searchField = request.getParameter("searchField");
 		String searchValue = request.getParameter("searchValue");
+		
+		//paging처리하기
+		String pageNo = request.getParameter("pageNo"); //현재페이지번호
+		if(pageNo==null || pageNo=="") {
+			pageNo="1";
+		}
+		System.out.println("controller의 pageNo = " + pageNo);
 		List<GoodsDTO> list = null;
 		
 		try {
-			list =service.selectMulipleGoods(searchField,searchValue);
+			list =service.selectMultipleGoods(searchField,searchValue,Integer.parseInt(pageNo));
 		}catch(Exception e){
 			e.printStackTrace();
 			return new ModelAndView("error/error.jsp");
 		}
 		
 		request.setAttribute("list", list);
+		request.setAttribute("pageNo", pageNo);
 		return new ModelAndView("shop.jsp");
 	}
 	
