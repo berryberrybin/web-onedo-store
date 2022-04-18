@@ -38,7 +38,7 @@ public class FaqController implements Controller{
 		System.out.println(list.size());
 		
 		 request.setAttribute("list", list);
-		 return new ModelAndView("board/faqAllTest.jsp") ; // 전체검색 후 위치 변경
+		 return new ModelAndView("board/Faq.jsp") ; // 전체검색 후 위치 변경
 			/*
 			 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
 			 */	

@@ -52,92 +52,7 @@ th, td {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<div class="left-sidebar">
-						<h2>게시판</h2>
-						<div class="panel-group category-products" id="accordian">
-							<!--category-productsr-->
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian"
-											href="#sportswear"> <span class="badge pull-right"><i
-												class="fa fa-plus"></i></span> 문의게시판
-										</a>
-									</h4>
-								</div>
-								<div id="sportswear" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">Nike </a></li>
-											<li><a href="">Under Armour </a></li>
-											<li><a href="">Adidas </a></li>
-											<li><a href="">Puma</a></li>
-											<li><a href="">ASICS </a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian"
-											href="#mens"> <span class="badge pull-right"><i
-												class="fa fa-plus"></i></span> 공지게시판
-										</a>
-									</h4>
-								</div>
-								<div id="mens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">Fendi</a></li>
-											<li><a href="">Guess</a></li>
-											<li><a href="">Valentino</a></li>
-											<li><a href="">Dior</a></li>
-											<li><a href="">Versace</a></li>
-											<li><a href="">Armani</a></li>
-											<li><a href="">Prada</a></li>
-											<li><a href="">Dolce and Gabbana</a></li>
-											<li><a href="">Chanel</a></li>
-											<li><a href="">Gucci</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-
-
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a href="#">자주 묻는 질문</a>
-									</h4>
-								</div>
-							</div>
-
-
-						</div>
-						<!--/category-products-->
-
-						<div class="brands_products">
-							<!--brands_products-->
-							<h2>Brands</h2>
-							<!-- <div class="brands-name">
-								
-							</div> -->
-						</div>
-						<!--/brands_products-->
-
-						<!-- <div class="price-range">price-range
-							<h2>Price Range</h2>
-							<div class="well">
-								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-								 <b>$ 0</b> <b class="pull-right">$ 600</b>
-							</div>
-						</div>/price-range -->
-						<!-- 
-						<div class="shipping text-center">shipping
-							<img src="images/home/shipping.jpg" alt="" />
-						</div>/shipping -->
-					</div>
+					<jsp:include page="../board/Leftmenu.jsp" />
 				</div>
 				<div class="col-sm-9">
 					<div class="blog-post-area">
@@ -183,9 +98,9 @@ th, td {
 
 						<c:forEach items="${list}" var="faqBoard">
 							<tr>
-								<td>${qnaBoard.faqNo}</td>
-								<td>${qnaBoard.faqSubject}</td>
-								<td>${qnaBoard.faqContent}</td>
+								<td>${faqBoard.faqNo}</td>
+								<td>${faqBoard.faqSubject}</td>
+								<td>${faqBoard.faqContent}</td>
 
 
 							</tr>
@@ -205,11 +120,7 @@ th, td {
 
 							</c:otherwise>
 						</c:choose>
-					</table>
-					<div align="left">
-						<span style="font-size: 9pt;"><a class="btn btn-primary"
-							href="${path}/front?key=faqBoard&methodName=faqSelectAll">조회하기</a></span>
-					</div>
+					</table>	
 
 					<div align=right>
 						<span style="font-size: 9pt;"><a class="btn btn-primary"

@@ -214,6 +214,17 @@ td {
 
 	</section>
 
+<div class="col-sm-6">
+	<div class="total_area">
+		<ul>
+			<li>총 상품 가격 <span>${totalItemPrice}</span></li>
+			<li>배송비 <span>${deliveryPrice}</span></li>
+			<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
+		</ul>
+		<a class="btn btn-default update" href="front?key=cart&methodName=deleteAll">장바구니 비우기</a>
+		 <a class="btn btn-default check_out" href="front?key=checkout&methodName=select">결제하기</a>
+	</div>
+</div>
 
 </body>
 <jsp:include page="common/footer.jsp" />

@@ -34,7 +34,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 		
 		List<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
 		
-		String sql = proFile.getProperty("");
+		String sql = "select * from notice_board order by notice_no";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 						rs.getInt(1),
 						rs.getString(2),
 						rs.getString(3),
-						rs.getInt(4),
+						rs.getString(4),
 						rs.getString(5));
 
 				noticeList.add(ndto);
@@ -89,7 +89,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 						rs.getInt(1),
 						rs.getString(2),
 						rs.getString(3),
-						rs.getInt(4),
+						rs.getString(4),
 						rs.getString(5));
 
 				noticeList.add(ndto);
@@ -143,7 +143,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 				rs.getInt(1),
 				rs.getString(2),
 				rs.getString(3),
-				rs.getInt(4),
+				rs.getString(4),
 				rs.getString(5));
 			}
 			}finally {
@@ -166,7 +166,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 			ps.setInt(1,noticeDTO.getNoticeNo() );
 			ps.setString(2,noticeDTO.getNoticeSubject() );
 			ps.setString(3,noticeDTO.getNoticeContent() );
-			ps.setInt(4,noticeDTO.getNoticeDate() );
+			ps.setString(4,noticeDTO.getNoticeDate() );
 			ps.setString(5,noticeDTO.getNoticeImg() );
 		
 			
@@ -212,7 +212,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 			
 			ps.setString(1,noticeDTO.getNoticeSubject() );
 			ps.setString(2,noticeDTO.getNoticeContent() );
-			ps.setInt(3,noticeDTO.getNoticeDate() );
+			ps.setString(3,noticeDTO.getNoticeDate() );
 			ps.setString(4,noticeDTO.getNoticeImg() );
 			
 		}finally {

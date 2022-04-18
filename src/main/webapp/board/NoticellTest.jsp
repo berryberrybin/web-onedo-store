@@ -18,14 +18,19 @@
 				<th>글번호</th>
 				<th>제목</th>
 				<th>내용</th>
+				<th>작성일</th>
+				<th>이미지</th>
 			
 			</tr>
 			
-			<c:forEach items="${list}" var="faqBoard">
+			<c:forEach items="${list}" var="noticeBoard">
 				<tr>
-					<td>${faqBoard.faqNo}</td>
-					<td>${faqBoard.faqSubject}</td>
-					<td>${faqBoard.faqContent}</td>
+					<td>${noticeBoard.noticeNo}</td>
+					<td>${noticeBoard.noticeSubject}</td>
+					<td>${noticeBoard.noticeContent}</td>
+					<td>${noticeBoard.noticeDate}</td>
+					<td>${noticeBoard.noticeImg}</td>
+				
 					
 				</tr>
 			</c:forEach>

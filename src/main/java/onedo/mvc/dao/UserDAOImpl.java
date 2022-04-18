@@ -65,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps =null;
 		ResultSet rs = null;
 		
-		String sql ="select user_id,user_pwd,user_name,user_phone,user_addr,birth,gender from users where user_id=? and user_pwd=?";
+		String sql ="select user_id,user_pwd,user_name,user_phone,user_addr,TO_CHAR(birth, 'YYYYMMDD'),gender from users where user_id=? and user_pwd=?";
 		UserDTO dbDTO = null;
 		
 		try {
