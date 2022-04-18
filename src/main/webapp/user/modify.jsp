@@ -31,6 +31,70 @@
     	span{width:150px; color:orange}
 
     </style>
+    
+    <script type="text/javascript">
+    
+    function joinCheck() {
+		//변수에 입력 값 담기
+
+		var userName = document.getElementById("userName"); //이름
+		var userId = document.getElementById("userId"); //아이디
+		var userPwd = document.getElementById("userPwd"); //비밀번호
+		var userPhone = document.getElementById("userPhone");//핸드폰 번호
+		
+		if(userName.value==""){
+			alert("이름을 입력해주세요")
+			userName.focus();
+			return;
+		};
+		
+		
+		if(userId.value==""){
+			alert("아이디를 입력해주세요")
+			userId.focus();
+			return;
+		};
+		
+
+		if(userPwd.value==""){
+			alert("비밀번호를 입력해주세요")
+			userPwd.focus();
+			return false;
+		};
+		
+	
+		if(userPhone.value==""){
+			alert("휴대폰 번호를 입력해주세요")
+			userPhone.focus();
+			return false;
+		};
+
+		//입력 값 전송
+		document.join.submit();
+		
+	};
+    
+	////////////휴대폰 번호에 숫자,- 이외에는 입력 불가능 하도록
+	function chkPhCode(event) {
+		const regExp = /[^0-9\-]/g;
+		  const ele = event.target;
+		  if (regExp.test(ele.value)) {
+		    ele.value = ele.value.replace(regExp, '');
+		  }
+	};
+	
+	////////////생년월일에 숫자 이외에는 입력 불가능 하도록
+	function chkBdCode(event) {
+		const regExp = /[^0-9]/g;
+		  const ele = event.target;
+		  if (regExp.test(ele.value)) {
+		    ele.value = ele.value.replace(regExp,'');
+		  }
+	};
+	
+    
+    </script>
+    
 
 	<script type="text/javascript"> //비밀번호 눈
 	    $(document).ready(function(){
@@ -94,19 +158,19 @@
 						<form name="join" method="post" action="${pageContext.request.contextPath}/front">
 						<input type="hidden" name="key" value = "user" /> <!-- Controller를 찾는 정보 -->
 						<input type="hidden" name="methodName" value = "userUpdate" />  <!-- 메소드이름 -->
-							이름<input type="text" class="form-control" id="userName" name="userName"
-							value="${loginUser.userName}"/>
-							아이디<input type="text" class="form-control" id="userId" name="userId"
+							* 이름<input type="text" class="form-control" id="userName" name="userName"
+							value="${loginUser.userName}" onKeyDown="if(event.keyCode == 13) joinCheck()"/>
+							* 아이디<input type="text" class="form-control" id="userId" name="userId"
 							value="${loginUser.userId}" readonly="readonly"/><span></span>
 							<div class="pw">
-							비밀번호 <input type="password" class="form-control" id="userPwd" name="userPwd"
-							placeholder="비밀번호"/>
+							* 비밀번호 <input type="password" class="form-control" id="userPwd" name="userPwd"
+							placeholder="비밀번호" onKeyDown="if(event.keyCode == 13) joinCheck()"/>
 							<i class="fa fa-eye fa-lg"></i>
 							</div><br>
-							휴대폰번호<input type="text" class="form-control" id="userPhone" name="userPhone"
-							value="${loginUser.userPhone}" placeholder="ex)010-0000-0000"/>
+							* 휴대폰번호<input type="text" class="form-control" id="userPhone" name="userPhone"
+							value="${loginUser.userPhone}" placeholder="ex)010-0000-0000" onkeyup="chkPhCode(event)" onKeyDown="if(event.keyCode == 13) joinCheck()"/>
 							생년월일<input type="text" class="form-control" id="birth" name="birth"
-							value="${loginUser.birth}" placeholder="생년월일 8자리 ex)20220101"/>
+							value="${loginUser.birth}" placeholder="생년월일 8자리 ex)20220101" onkeyup="chkBdCode(event)" maxlength='8'/>
 							성별 <select name="gender">
 							  <option value=""selected>성별을 선택해주세요</option>
 							  <option value="${loginUser.gender}">여성</option>
@@ -114,7 +178,7 @@
 							</select><br><br>
 							주소<input type="text" class="form-control" id="userAddr" name="userAddr"
 							value="${loginUser.userAddr}" /><br>
-							<button type="submit" class="btn btn-default">수정하기</button>
+							<button type="button" onclick="joinCheck();" class="btn btn-default">수정하기</button>
 						</form>
 					</div><!--/login form-->
 			</div>

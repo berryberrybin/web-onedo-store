@@ -26,6 +26,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     
     <style type="text/css">
     	span{width:150px; color:orange}
@@ -52,53 +53,84 @@
 	
 	function joinCheck() {
 		//변수에 입력 값 담기
-		var userName = document.getElementById("userName");
-		var userId = document.getElementById("userId");
-		var userPwd = document.getElementById("userPwd");
-		var userPhone = document.getElementById("userPhone");
-		var birth = document.getElementById("birth");
-		var gender = document.getElementById("gender");
-		var userAddr = document.getElementById("userAddr");
+
+		var userName = document.getElementById("userName"); //이름
+		var userId = document.getElementById("userId"); //아이디
+		var userPwd = document.getElementById("userPwd"); //비밀번호
+		var userPhone = document.getElementById("userPhone");//핸드폰 번호
 		
-		if(userName==""){
-			alert("성함을 입력해주세요")
+		if(userName.value==""){
+			alert("이름을 입력해주세요")
 			userName.focus();
-			return false;
+			return;
 		};
 		
-		if(userId==""){
+		let regid = /^[a-z]+$/; // 영문 소문자만
+		
+		if(userId.value==""){
 			alert("아이디를 입력해주세요")
 			userId.focus();
-			return false;
+			return;
 		};
+		
+		
+/* 	//아이디 특수문자 사용 불가능하게 체크
+		var idck = /?^!@#$%^&*-=+ ;*/
+		
+		if(!regid.test(userId.value)){
+			alert("아이디는 영문 소문자만 사용 가능합니다")
+			userId.focus();
+			return;
+		} 
+		
 
-		if(userPwd==""){
+		if(userPwd.value==""){
 			alert("비밀번호를 입력해주세요")
 			userPwd.focus();
 			return false;
 		};
 		
-		if(birth==""){
-			alert("생년월일을 입력해주세요")
-			birth.focus();
-			return false;
-		};
-		
-		if(gender==""){
-			alert("성별을 입력해주세요")
+/* 		var reg = /^[0-9]+/g ; //숫자만 입력하는 정규식
+ */		
+		if(userPhone.value==""){
+			alert("휴대폰 번호를 입력해주세요")
 			userPhone.focus();
 			return false;
 		};
-		
-		
-		if(userAddr==""){
-			alert("주소를 입력해주세요")
-			userName.focus();
-			return false;
-		};
 
+		//입력 값 전송
+		document.join.submit();
+		
 	};
 
+	////////////아이디에 한글 입력 불가능 하도록
+	function chkCharCode(event) {
+		const regExp = /[^0-9a-zA-Z]/g;
+		  const ele = event.target;
+		  if (regExp.test(ele.value)) {
+		    ele.value = ele.value.replace(regExp, '');
+		  }
+	};
+	
+	////////////휴대폰 번호에 숫자,- 이외에는 입력 불가능 하도록
+	function chkPhCode(event) {
+		const regExp = /[^0-9\-]/g;
+		  const ele = event.target;
+		  if (regExp.test(ele.value)) {
+		    ele.value = ele.value.replace(regExp, '');
+		  }
+	};
+	
+	////////////생년월일에 숫자 이외에는 입력 불가능 하도록
+	function chkBdCode(event) {
+		const regExp = /[^0-9]/g;
+		  const ele = event.target;
+		  if (regExp.test(ele.value)) {
+		    ele.value = ele.value.replace(regExp,'');
+		  }
+	};
+	
+	
 	</script>
 
 
@@ -151,22 +183,22 @@
 				<div class="col-md-4 col-md-offset-4">
 					<div class="signup-form"><!--login form-->
 						<h2>회원 가입</h2>
-						<form name="join" method="post" action="${pageContext.request.contextPath}/front">
+						<form name="join" method="post" action="${pageContext.request.contextPath}/front" onsubmit="return joinCheck()">
 						<input type="hidden" name="key" value = "user" /> <!-- Controller를 찾는 정보 -->
 						<input type="hidden" name="methodName" value = "join" />  <!-- 메소드이름 -->
-							이름<input type="text" class="form-control" id="userName" name="userName"
-							placeholder="이름"/>
-							아이디<input type="text" class="form-control" id="userId" name="userId"
-							placeholder="아이디" /><span></span><br><br>
+							* 이름<input type="text" class="form-control" id="userName" name="userName"
+							placeholder="이름" onKeyDown="if(event.keyCode == 13) joinCheck()"/>
+							* 아이디<input type="text" class="form-control" id="userId" name="userId"
+							placeholder="영문과 숫자만 입력가능합니다" onkeyup="chkCharCode(event)" onKeyDown="if(event.keyCode == 13) joinCheck()"/><span></span><br><br>
 							<div class="pw">
-							비밀번호 <input type="password" class="form-control" id="userPwd" name="userPwd"
-							placeholder="비밀번호"/>
+							* 비밀번호 <input type="password" class="form-control" id="userPwd" name="userPwd"
+							placeholder="비밀번호" onKeyDown="if(event.keyCode == 13) joinCheck()"/>
 							<i class="fa fa-eye fa-lg"></i>
 							</div><br>
-							휴대폰번호<input type="text" class="form-control" id="userPhone" name="userPhone"
-							placeholder="ex)010-0000-0000" />
+							* 휴대폰번호<input type="text" class="form-control" id="userPhone" name="userPhone"
+							placeholder="ex)010-0000-0000" onkeyup="chkPhCode(event)" onKeyDown="if(event.keyCode == 13) joinCheck()"/>
 							생년월일<input type="text" class="form-control" id="birth" name="birth"
-							placeholder="생년월일 8자리" />
+							placeholder="생년월일 8자리" onkeyup="chkBdCode(event)" maxlength='8'/>
 							성별 <select name="gender">
 							  <option value=""selected>성별을 선택해주세요</option>
 							  <option value="f">여성</option>
@@ -174,7 +206,7 @@
 							</select><br><br>
 							주소<input type="text" class="form-control" id="userAddr" name="userAddr"
 							placeholder="주소" /><br>
-							<button type="submit" class="btn btn-default">가입하기</button>
+							<button type="button" onclick="joinCheck();" class="btn btn-default">가입하기</button>
 						</form>
 					</div><!--/login form-->
 			</div>
