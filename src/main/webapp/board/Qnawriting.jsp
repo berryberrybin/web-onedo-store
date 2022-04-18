@@ -88,7 +88,6 @@
 								</div>
 							</div>
 							
-							
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title"><a href="#">자주 묻는 질문</a></h4>
