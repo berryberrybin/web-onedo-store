@@ -70,7 +70,7 @@ private Properties proFile = new Properties();
 		
 		List<QnaDTO> qnaList = new ArrayList<QnaDTO>();
 		
-		String sql = ;
+		String sql = "";
 		try {
 			/**
 			 전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.
