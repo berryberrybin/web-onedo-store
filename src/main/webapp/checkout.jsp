@@ -27,7 +27,51 @@
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+		<!-- jQuery --> 
+	    <script type="text/javascript" src="js/jquery-3.6.0.min.js" ></script> 
+		<!-- iamport.payment.js --> 
+	    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	    <script type="text/javascript">
 
+		    $(document).ready(function(){ 
+				$("#iamportPayment").click(function(){ 
+					iamport(); //버튼 클릭하면 호출 
+					
+			    }); 
+			})
+	
+	
+			function iamport(){//결재하기 클랙했을때
+		    	
+				//가맹점 식별코드
+				IMP.init('imp81895788');
+				IMP.request_pay({
+				    pg : 'kcp',
+				    pay_method : 'card',
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    name : $("#payGoodsName").val() , //결제창에서 보여질 이름
+				    amount : ${paymentPrice}, //실제 결제되는 가격
+				    buyer_email : '${userId}',
+				    buyer_name : '${userName}',
+				    buyer_tel : ${userPhone},
+				    buyer_addr : '${userAddr}',
+				    buyer_postcode : '123-456'
+				}, function(rsp) {
+					console.log(rsp);
+				    if ( rsp.success ) {
+				    	var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				    } else {
+				    	 var msg = '결제에 실패하였습니다.';
+				         msg += '에러내용 : ' + rsp.error_msg;
+				    }
+				    alert(msg);
+				});
+			}
+	    </script>
 <style>
 td {
 	text-align: center;
@@ -159,7 +203,12 @@ td {
 					</tbody>
 				</table>
 			</div>
-			<a class="btn btn-primary" href="front?key=cart&methodName=select">장바구니 돌아가기</a> <a class="btn btn-primary" href="">결제하기</a>
+			
+			<a class="btn btn-primary" href="front?key=cart&methodName=select">장바구니 돌아가기</a> 
+			<c:if test="${not empty requestScope.cartItemList}">
+			      <input type="hidden" value="${cartItemList.get(0).goods.goodsName}" name="payGoodsName" id="payGoodsName"/>
+			      <a class="btn btn-primary" href="#" id = "iamportPayment">결제하기</a>
+			</c:if>
 		</div>
 		<br>
 

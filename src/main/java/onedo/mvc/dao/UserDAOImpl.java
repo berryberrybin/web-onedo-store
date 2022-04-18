@@ -22,8 +22,8 @@ public class UserDAOImpl implements UserDAO {
 			//proFile.load(new FileInputStream("src/~"));
 			//현재 프로젝트가 런타임(실행)될때, 즉 서버에서 실행될때 classes 폴더의 위치를 동적으로 가져와서 경로를 설정해야한다.
 			proFile.load(getClass().getClassLoader().getResourceAsStream("dbQuery.properties"));
-			String value = proFile.getProperty("user.select");
-			System.out.println("value = " + value);
+			//String value = proFile.getProperty("user.select");
+			//System.out.println("value = " + value);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

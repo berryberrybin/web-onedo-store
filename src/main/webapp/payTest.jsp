@@ -14,31 +14,39 @@
 		//문서가 준비되면 제일 먼저 실행
 			$(document).ready(function(){ 
 				$("#iamportPayment").click(function(){ 
-			    	payment(); //버튼 클릭하면 호출 
+					iamport(); //버튼 클릭하면 호출 
 			    }); 
 			})
 	
 	
-			//버튼 클릭하면 실행
-			function payment(data) {
-			    IMP.init('imp81895788');//아임포트 관리자 콘솔에서 확인한 '가맹점 식별코드' 입력
-			    IMP.request_pay({// param
-			        pg: "kakaopay.TC0ONETIME", //pg사명 or pg사명.CID (잘못 입력할 경우, 기본 PG사가 띄워짐)
-			        pay_method: "card", //지불 방법
-			        merchant_uid: "onedo", //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
-			        name: "원두", //결제창에 노출될 상품명
-			        amount: 500, //금액
-			        buyer_email : "testiamport@naver.com", 
-			        buyer_name : "홍길동",
-			        buyer_tel : "01012341234"
-			        buyer_addr : "경기도 양주시"
-			    }, function (rsp) { // callback
-			        if (rsp.success) {
-			            alert("완료 -> imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : " +rsp.merchant_uid);
-			        } else {
-			            alert("실패 : 코드("+rsp.error_code+") / 메세지(" + rsp.error_msg + ")");
-			        }
-			    });
+			function iamport(){
+				//가맹점 식별코드
+				IMP.init('imp81895788');
+				IMP.request_pay({
+				    pg : 'kcp',
+				    pay_method : 'card',
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    name : '상품1' , //결제창에서 보여질 이름
+				    amount : 100, //실제 결제되는 가격
+				    buyer_email : 'iamport@siot.do',
+				    buyer_name : '구매자이름',
+				    buyer_tel : '010-1234-5678',
+				    buyer_addr : '서울 강남구 도곡동',
+				    buyer_postcode : '123-456'
+				}, function(rsp) {
+					console.log(rsp);
+				    if ( rsp.success ) {
+				    	var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				    } else {
+				    	 var msg = '결제에 실패하였습니다.';
+				         msg += '에러내용 : ' + rsp.error_msg;
+				    }
+				    alert(msg);
+				});
 			}
 		</script>
 	</head>
@@ -48,7 +56,7 @@
 	    <div> 
 	        <h2>IAMPORT 결제 데모</h2> 
 	        <li> 
-	           	<button id="iamportPayment" type="button">결제테스트</button> 
+	           	<button id = "iamportPayment">결제하기</button>
 	        </li> 
 	    </div> 
 	</body>
