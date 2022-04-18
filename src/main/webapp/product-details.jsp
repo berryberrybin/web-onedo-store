@@ -103,10 +103,9 @@
 					<span>&#8361; <fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></span>
 					<label for="quantity">수량:</label>
 					<input type="number" id="quantity" name="quantity" min="1" max="99" value="1"/>
-					<button type="button" class="btn btn-fefault cart">
-						<i class="fa fa-shopping-cart"></i>
-						장바구니
-					</button>
+					<a href="front?key=cart&methodName=insert&goodsCode=${goodsDTO.goodsCode}" class="btn btn-default add-to-cart">
+					<i class="fa fa-shopping-cart"></i>Add to cart</a>
+					
 				</span>
 				<p><b>Availability:</b> ${goodsDTO.isSoldout}</p>
 				<p><b>Condition:</b> New</p>
