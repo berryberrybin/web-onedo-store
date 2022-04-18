@@ -19,6 +19,20 @@ public class GoodsDTO {
 	   private GoodsAttrDTO goodsAttrDTO;
 	   
 	   public GoodsDTO() {}
+	   
+
+	public GoodsDTO(int goodsCode, String goodsType, String goodsName, int goodsPrice, int goodsStock,
+			String goodsDetail, int isSoldout) {
+		super();
+		this.goodsCode = goodsCode;
+		this.goodsType = goodsType;
+		this.goodsName = goodsName;
+		this.goodsPrice = goodsPrice;
+		this.goodsStock = goodsStock;
+		this.goodsDetail = goodsDetail;
+		this.isSoldout = isSoldout;
+	}
+
 
 	public GoodsDTO(int goodsCode, String goodsType, String goodsName, int goodsPrice, int goodsStock,
 			String goodsDetail, int isSoldout, int goodsView, String goodsImg) {
@@ -32,6 +46,21 @@ public class GoodsDTO {
 		this.isSoldout = isSoldout;
 		this.goodsView = goodsView;
 		this.goodsImg = goodsImg;
+	}
+	
+
+	public GoodsDTO(int goodsCode, String goodsType, String goodsName, int goodsPrice, int goodsStock,
+			String goodsDetail, int isSoldout, String goodsImg) {
+		super();
+		this.goodsCode = goodsCode;
+		this.goodsType = goodsType;
+		this.goodsName = goodsName;
+		this.goodsPrice = goodsPrice;
+		this.goodsStock = goodsStock;
+		this.goodsDetail = goodsDetail;
+		this.isSoldout = isSoldout;
+		this.goodsImg = goodsImg;
+		
 	}
 
 	public int getGoodsCode() {

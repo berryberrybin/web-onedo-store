@@ -8,6 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import net.sf.json.JSONArray;
 import onedo.mvc.controller.ModelAndView;
 import onedo.mvc.dao.GoodsDAO;
@@ -30,7 +33,7 @@ public class AjaxGoodsController implements AjaxController {
 	 * 상품등록&수정
 	 * */
 	public void insert(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws Exception {
 		
 		int result =0 ;
 		String goodsCode = request.getParameter("goodsCode");
@@ -40,20 +43,27 @@ public class AjaxGoodsController implements AjaxController {
 		String goodsStock = request.getParameter("goodsStock");
 		String goodsDetail = request.getParameter("goodsDetail");
 		String isSoldout = request.getParameter("isSoldout");
-		String goodsView = request.getParameter("goodsView");
-		String goodsImg = request.getParameter("goodsImg");
 		
-		GoodsDTO goodsDTO = new GoodsDTO(Integer.parseInt(goodsCode), goodsType, goodsName, 
-				Integer.parseInt(goodsPrice), Integer.parseInt(goodsStock), goodsDetail, 
-				Integer.parseInt(isSoldout), Integer.parseInt(goodsView),goodsImg);
-		try {
-			result = goodsDAO.insert(goodsDTO);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		PrintWriter out = response.getWriter();
-		out.print(result); //0,1
 		
+		
+		
+		System.out.println(goodsCode);
+		System.out.println(goodsType);
+		System.out.println(goodsName);
+		System.out.println(goodsPrice);
+		System.out.println(goodsStock);
+		System.out.println(goodsDetail);
+		System.out.println(isSoldout);
+		
+		
+		  GoodsDTO goodsDTO = new GoodsDTO(Integer.parseInt(goodsCode), goodsType,
+		  goodsName, Integer.parseInt(goodsPrice), Integer.parseInt(goodsStock),
+		  goodsDetail, Integer.parseInt(isSoldout)); 
+		  result =goodsService.insert(goodsDTO); 
+	
+		  PrintWriter out = response.getWriter(); 
+		  out.print(result); //0,1
+		 		
 	}
 	
 
@@ -76,7 +86,7 @@ public class AjaxGoodsController implements AjaxController {
 		
 		
 			list = goodsService.selectAll();
-		
+		System.out.println(list);
 			JSONArray arr = JSONArray.fromObject(list);
 		
 		PrintWriter out = response.getWriter();

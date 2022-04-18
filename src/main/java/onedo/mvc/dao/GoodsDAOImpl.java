@@ -131,8 +131,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 			ps.setInt(5, goodsDTO.getGoodsStock());
 			ps.setString(6, goodsDTO.getGoodsDetail());
 			ps.setInt(7, goodsDTO.getIsSoldout());
-			ps.setInt(8, goodsDTO.getGoodsView());
-			ps.setString(9, goodsDTO.getGoodsImg());
 
 			result = ps.executeUpdate();
 
