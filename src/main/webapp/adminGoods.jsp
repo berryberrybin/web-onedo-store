@@ -153,6 +153,40 @@
 			}//if(state)끝
 
 		});//click이벤트 끝
+		
+		/////////////////////////////수정
+		//상품코드를 클릭했을 때 이벤트 처리
+		$(document).on("click",  function() {
+			var goodsCode = document.getElementById("goodsCode"); //이름
+			var goodsType = document.getElementById("goodsCode");
+			var goodsName = document.getElementById("goodsCode");
+			var goodsPrice = document.getElementById("goodsCode");
+			var goodsStock = document.getElementById("goodsCode");
+			var isSoldout = document.getElementById("goodsCode");
+			
+			//[object HTMLInputElement]
+			alert(goodsCode);
+			//text박스에 값넣기
+			
+			
+
+			
+			goodsCode.val($(this).text());
+			/* $("#goodsType").val(goodsCode.text());
+			$("#goodsName").val(goodsType.text());
+			$("#goods").val(goodsName.text());
+			$("#goodsStock").val(goodsPrice.text());
+			$("#isSoldout").val(goodsStock.text());
+			 */
+			//goodsCode비활성화(입력불가능)
+			$("#goodsCode").attr("readonly", "readonly");
+			
+			
+			
+			
+			//btn의 글씨 수정로 변경
+			$("#btn").val("수정");
+		});
 
 		selectAll();
 	});//ready끝
