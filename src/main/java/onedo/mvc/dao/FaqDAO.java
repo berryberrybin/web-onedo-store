@@ -36,5 +36,6 @@ public interface FaqDAO {
 		    * @return : 1-수정성공 , 0 - 수정실패
 		    * */
 		  int update(FaqDTO faqDTO) throws SQLException;
+		
 	  
 }

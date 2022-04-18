@@ -43,16 +43,12 @@ public class QnaController implements Controller {
 		/*
 		 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
 		 */		 
-			
-		    
 
 		    request.setAttribute("list", list);
-		    return new ModelAndView("board/single.jsp") ; // 전체검색 후 위치 변경
+		    return new ModelAndView("board/Qna.jsp") ; // 전체검색 후 위치 변경
 			/*
 			 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
 			 */		  
-		   
-		   
 
 	}
 	

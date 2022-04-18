@@ -16,27 +16,16 @@
 	<table>
 			<tr>
 				<th>글번호</th>
-				<th>상품코드</th>
-				<th>아이디</th>
 				<th>제목</th>
 				<th>내용</th>
-				<th>날짜</th>
-				<th>이미지</th>
-				<th>비밀번호</th>
+			
 			</tr>
-			<c:forEach items="${list}" var="qnaBoard">
+			
+			<c:forEach items="${list}" var="faqBoard">
 				<tr>
-					<td>${qnaBoard.qnaNo}</td>
-					<td>${qnaBoard.qnaPwd}</td>
-					<td>${qnaBoard.goodsCode}</td>
-					<td>${qnaBoard.userid}</td>
-					<td>${qnaBoard.qnaSubject}</td>
-					<td>${qnaBoard.qnaContent}</td>
-					<td>${qnaBoard.qnaDate}</td>
-					<td>${qnaBoard.qnaImg}</td>
-					
-					
-					
+					<td>${faqBoard.faqNo}</td>
+					<td>${faqBoard.faqSubject}</td>
+					<td>${faqBoard.faqContent}</td>
 					
 				</tr>
 			</c:forEach>
