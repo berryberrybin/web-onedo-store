@@ -63,16 +63,18 @@ public class QnaController implements Controller {
 				new MultipartRequest(request, saveDir,maxSize,encoding , new DefaultFileRenamePolicy());
 	  
 	    //전송된 데이터 받기 
-	  		String qnaNo = m.getParameter("qna_no"); 
+	  		String qnaNo = m.getParameter("qna_no");
+	  		String goodsCode = m.getParameter("goods_code"); 
 	  		String userId = m.getParameter("user_id"); 
 	  		String qnaSubject = m.getParameter("qna_subject"); 
 	  		String qnaContent = m.getParameter("qna_content"); 
 	  		String qnaDate = m.getParameter("qna_date"); 
 	  		String qnaImg = m.getParameter("qna_img"); 
 	  		String qnaPwd = m.getParameter("qna_pwd"); 
-	  		String goodsCode = m.getParameter("goods_code"); 
 	  		
-	  		QnaDTO elec = new QnaDTO();
+	  		QnaDTO elec = new QnaDTO(Integer.parseInt(qnaNo),Integer.parseInt(goodsCode),userId,qnaSubject,
+	  				qnaContent,qnaDate,qnaImg,qnaPwd
+	  				);
 	  		
 	  		//파일첨부가되었다면...
 	  		if(m.getFilesystemName("file") != null) {
@@ -86,7 +88,7 @@ public class QnaController implements Controller {
 	  		qnaService.insert(elec);
 	  		
 	  		
-	  		return new ModelAndView("front", true);
+	  		return new ModelAndView("board/Qna.jsp", true);
 	  	}
 	
 	/**

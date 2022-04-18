@@ -72,7 +72,7 @@
 							<tr>
 								<td width="1400" height="40" colspan="2" bgcolor="#FE980F">
 									<p align="center">
-										<font color="white" size="3"><b> 문의 글 등록 </b></font>
+										<font color="white" size="3"><b> 공지사항 등록 </b></font>
 									</p>
 								</td>
 							</tr>
@@ -120,17 +120,7 @@
 									</span></b></td>
 							</tr>
 
-							<tr>
-								<td width="150" height="20">
-									<p align="center">
-										<b><span style="font-size: 9pt;">비밀번호</span></b>
-									</p>
-								</td>
-								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <input type=password
-											name="password" size="12">(글 수정, 삭제시 필요합니다.)
-									</span></b></td>
-							</tr>
+
 							<tr>
 								<td width="450" height="20" colspan="2" align="center"><b><span
 										style="font-size: 9pt;"><input type=submit value=글쓰기>
