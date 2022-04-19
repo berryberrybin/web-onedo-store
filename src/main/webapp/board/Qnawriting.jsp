@@ -84,7 +84,7 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <input type=text
-											name="model_num" size="30"></span></b></td>
+											name="goodsCode" size="30"></span></b></td>
 							</tr>
 							<tr>
 								<td width="150" height="20">
@@ -94,7 +94,7 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <input type=text
-											name="model_name" size="30"></span></b></td>
+											name="qnaSubject" size="30"></span></b></td>
 							</tr>
 							
 							<tr>
@@ -104,7 +104,7 @@
 									</p>
 								</td>
 								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <textarea name="description"
+										style="font-size: 9pt;"> <textarea name="qnaContent"
 												cols="50" rows="10"></textarea></span></b></td>
 							</tr>
 
@@ -115,7 +115,7 @@
 									</p>
 								</td>
 								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <input type="file" name="file"
+										style="font-size: 9pt;"> <input type="file" name="qnaImg"
 											maxlength="60" size="40">
 									</span></b></td>
 							</tr>
@@ -128,7 +128,7 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <input type=password
-											name="password" size="12">(글 수정, 삭제시 필요합니다.)
+											name="qnaPwd" size="12">(글 수정, 삭제시 필요합니다.)
 									</span></b></td>
 							</tr>
 							<tr>

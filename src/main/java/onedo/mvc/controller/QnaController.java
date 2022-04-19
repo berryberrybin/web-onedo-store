@@ -6,11 +6,13 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import onedo.mvc.dto.QnaDTO;
+import onedo.mvc.dto.UserDTO;
 import onedo.mvc.service.QnaService;
 import onedo.mvc.service.QnaServiceImpl;
 
@@ -51,34 +53,41 @@ public class QnaController implements Controller {
 	 * 등록하기
 	 */
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
+		
+		String userId = dbDTO.getUserId();
+		
 		String saveDir = request.getServletContext().getRealPath("/save");
 		int maxSize = 1024 * 1024 * 100;// 100M
 		String encoding = "UTF-8";
+		
 		MultipartRequest m = new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
 
 		// 전송된 데이터 받기
-		String qnaNo = m.getParameter("qna_no");
-		String goodsCode = m.getParameter("goods_code");
-		String userId = m.getParameter("user_id");
-		String qnaSubject = m.getParameter("qna_subject");
-		String qnaContent = m.getParameter("qna_content");
-		String qnaDate = m.getParameter("qna_date");
-		String qnaImg = m.getParameter("qna_img");
-		String qnaPwd = m.getParameter("qna_pwd");
-
-		QnaDTO elec = new QnaDTO(Integer.parseInt(qnaNo), Integer.parseInt(goodsCode), userId, qnaSubject, qnaContent,
-				qnaDate, qnaImg, qnaPwd);
-
+		
+		String goodsCode = m.getParameter("goodsCode");
+		String qnaSubject = m.getParameter("qnaSubject");
+		String qnaContent = m.getParameter("qnaContent");
+		String qnaImg = m.getParameter("qnaImg");
+		String qnaPwd = m.getParameter("qnaPwd");
+		
+		System.out.println(goodsCode+userId + qnaSubject +qnaContent+ qnaImg+qnaPwd+"123");
+		
+		QnaDTO qdto = new QnaDTO(Integer.parseInt(goodsCode),userId, qnaSubject, qnaContent, qnaPwd);
+		
+		System.out.println(goodsCode+userId + qnaSubject +qnaContent+ qnaImg+qnaPwd+"456");
+		
 		// 파일첨부가되었다면...
 		if (m.getFilesystemName("file") != null) {
 			// 파일이름 저장
-			elec.setFname(m.getFilesystemName("file"));
+			qdto.setFname(m.getFilesystemName("file"));
 
 			// 파일크기 저장
-			elec.setFsize((int) m.getFile("file").length());
+			qdto.setFsize((int) m.getFile("file").length());
 		}
 
-		qnaService.insert(elec);
+		qnaService.insert(qdto);
 
 		return new ModelAndView("board/Qna.jsp", true);
 	}

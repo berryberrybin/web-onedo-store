@@ -34,6 +34,18 @@
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
+
+<script type="text/javascript">
+ 	$(function(){
+ 		$(document).on("click",function(){
+				let goodsCode = $(this).attr("name");
+				
+ 		})
+ 		
+ 		//현재페이지 a태그에 active속성 주기
+ 		
+ 	});
+ </script>
 <!--/head-->
 <style>
 .listTable {
@@ -57,72 +69,9 @@ th, td {
 				<div class="col-sm-9">
 					<div class="blog-post-area">
 						<h2 class="title text-center">Latest From our Blog</h2>
-						<!-- <div class="single-blog-post">
-							<h3>Girls Pink T Shirt arrived in store</h3>
-							<div class="post-meta">
-								<ul>
-									<li><i class="fa fa-user"></i> Mac Doe</li>
-									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-								</ul>
-								<span>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-half-o"></i>
-								</span>
-							</div>
-							<a href="">
-								<img src="images/blog/blog-one.jpg" alt="">
-							</a>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> <br>
-
-							<p>
-								Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p> <br>
-
-							<p>
-								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p> <br>
-
-							<p>
-								Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-							</p>
-							<div class="pager-area">
-								<ul class="pager pull-right">
-									<li><a href="#">Pre</a></li>
-									<li><a href="#">Next</a></li>
-								</ul>
-							</div>
-						</div> -->
+						
 					</div>
 					<!--/blog-post-area-->
-
-					<!-- <div class="rating-area">
-						<ul class="ratings">
-							<li class="rate-this">Rate this item:</li>
-							<li>
-								<i class="fa fa-star color"></i>
-								<i class="fa fa-star color"></i>
-								<i class="fa fa-star color"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-							</li>
-							<li class="color">(6 votes)</li>
-						</ul>
-						<ul class="tag">
-							<li>TAG:</li>
-							<li><a class="color" href="">Pink <span>/</span></a></li>
-							<li><a class="color" href="">T-Shirt <span>/</span></a></li>
-							<li><a class="color" href="">Girls</a></li>
-						</ul>
-					</div>/rating-area -->
-
-					<!-- <div class="socials-share">
-						<a href=""><img src="images/blog/socials.png" alt=""></a>
-					</div>/socials-share -->
-
-
 
 
 					<table align="center" border="0" cellpadding="5" cellspacing="2"
@@ -218,70 +167,36 @@ th, td {
 
 
 <jsp:useBean class="onedo.mvc.paging.PageCnt" id="p"/> 
-    
-   \${p.pageCnt} = ${p.pageCnt} / \${p.blockcount}   = ${p.blockcount}  <p>
-
- 
+     
  <!--  블럭당  -->
  <nav class="pagination-container">
-		<div class="pagination">
+		<ul class="pagination">
 		<c:set var="doneLoop" value="false"/>
 		
 		<c:set var="temp" value="${(pageNo-1) % p.blockcount}"/> <!-- (1-1)%2  =0  , (2-1)%2    1 , (3-1)%2  0 -->
 		<c:set var="startPage" value="${pageNo - temp}"/> <!--   1- 1 -->
-		
-	\${pageNo} = ${pageNo} , 	\${temp}=${temp}  ,   \${startPage}=${startPage}  , <br>
 	
-		  <!-- 
-     if( ( 시작페이지 - 한블록당뿌려질[]개수) > 0 ){ // if()
-	       [이전]출력한다.	
-     } 
-     ex) if( ( startPage -blockcount) > 0 ){
-
-          }
-		-->
-		
-		<!-- 
-		 시작페이지 구한다(몇번부터 출력할지를 정함 [번호] )
-           방법 => int temp=(현재페이지번호-1)% 한블록당 보여질[]개수;
-                   int startPage=현재페이지번호 -temp; => 시작번호[]
-             
-             
-					   int temp = (pageNo-1) % p.blockcount ;         //시작 페이지 구하기
-				      int startPage = pageNo - temp;
-		 -->
-		
 		  <c:if test="${(startPage-p.blockcount) > 0}"> <!-- (-2) > 0  -->
-		      <a class="pagination-newer" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll&pageNo=${startPage-1}">PREV</a>
+		      <li><a class="pagination-newer" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll&pageNo=${startPage-1}">&laquo;</a></li>
 		  </c:if>
 		  
-		<span class="pagination-inner"> 
+	
 		  <c:forEach var='i' begin='${startPage}' end='${(startPage-1)+p.blockcount}'> 
 			  <c:if test="${(i-1)>=p.pageCnt}">
 			       <c:set var="doneLoop" value="true"/>
 			    </c:if> 
 			  <c:if test="${not doneLoop}" >
-			         <a class="${i==pageNo?'pagination-active':page}" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll&pageNo=${i}">${i}</a> 
+			         <li><a class="${i==pageNo?'pagination-active':page}" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll&pageNo=${i}">${i}</a> </li>
 		     </c:if>
 		</c:forEach>
-		</span> 
-				<!-- 
-				[다음]
- 
-					  if( (시작페이지+한블록당뿌려질[]개수)<= 총페이지수){
-					      [다음]출력;
-					  }  
-					
-					  ex)if( (startPage+blockCount) <= pageCount){
-					
-					      }
-				 -->
+		
+	
+				
 		 <c:if test="${(startPage+p.blockcount)<=p.pageCnt}">
-		     <a class="pagination-older" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll&pageNo=${startPage+p.blockcount}">NEXT</a>
+		     <li><a class="pagination-older" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll&pageNo=${startPage+p.blockcount}">&raquo;</a></li>
 		 </c:if>
-				 
-
-				</div>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</section>
