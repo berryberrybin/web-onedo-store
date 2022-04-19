@@ -120,13 +120,12 @@ public class GoodsDAOImpl implements GoodsDAO {
 			con = DbUtil.getConnection();
 			con.setAutoCommit(false);
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, goodsDTO.getGoodsCode());
-			ps.setString(2, goodsDTO.getGoodsType());
-			ps.setString(3, goodsDTO.getGoodsName());
-			ps.setInt(4, goodsDTO.getGoodsPrice());
-			ps.setInt(5, goodsDTO.getGoodsStock());
-			ps.setString(6, goodsDTO.getGoodsDetail());
-			ps.setInt(7, goodsDTO.getIsSoldout());
+			ps.setString(1, goodsDTO.getGoodsType());
+			ps.setString(2, goodsDTO.getGoodsName());
+			ps.setInt(3, goodsDTO.getGoodsPrice());
+			ps.setInt(4, goodsDTO.getGoodsStock());
+			ps.setString(5, goodsDTO.getGoodsDetail());
+			ps.setInt(6, goodsDTO.getIsSoldout());
 
 			result = ps.executeUpdate();
 
@@ -170,21 +169,48 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	/**
-	 * 상품삭제
+	 * 상품삭제 : isSoldout을 2판매중지로 바꾸는 메소드
 	 */
 	@Override
-	public int delete(int goodsCode, String password) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(int goodsCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = proFile.getProperty("goods.delete");//update goods set is_soldout = 2 where goods_code = ?
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, goodsCode);
+			
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(ps, con);
+		}
+		return result;
+		
 	}
+	
+	
+	  
+	 
 
 	/**
-	 * 상품 재고가 0이면 isSoldOut 0(품절)만들기
+	 * 상품 품절 자동처리
 	 */
 	@Override
-	public int isSoldoutUpdate(GoodsDTO goodsDTO) throws SQLException {
-		
-		return 0;
+	public int isSoldoutUpdate(Connection con, int goodsCode) throws SQLException {
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = proFile.getProperty("goods.soldout"); // stock 0 ->soldOut
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, goodsCode);
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(ps, null);
+		}
+		return result;
 		
 	}
 
@@ -242,6 +268,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return list;
 	}
 	
+
 	/**
 	 * 전체레코드수 가져오기
 	 * */
@@ -275,5 +302,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 		}
 		return totalCount;
 	}
+
 
 }

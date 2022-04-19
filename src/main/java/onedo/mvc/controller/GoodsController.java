@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.service.GoodsService;
 import onedo.mvc.service.GoodsServiceImpl;
@@ -91,4 +92,10 @@ public class GoodsController implements Controller {
 		request.setAttribute("goodsDTO", goodsDTO);
 		return new ModelAndView("product-details.jsp");
 	}
+	
+	/**
+	 * 이미지 넣기
+	 * */
+	
+	
 }

@@ -30,7 +30,7 @@ public interface GoodsService {
 	 * GoodsDAOImpl의 상품코드에 해당하는 레코드 삭제 메소드 호출 path를 넣은 이유 : 레코드가 삭제되면 레코드의 첨부된
 	 * 파일도 없애려고 save파일 경로 찾기
 	 */
-	void delete(String goodsCode, String password, String path) throws SQLException;
+	void delete(int goodsCode) throws SQLException;
 
 	/**
 	 * GoodsDAOImpl의 상품코드에 해당하는 레코드 수정 메소드 호출

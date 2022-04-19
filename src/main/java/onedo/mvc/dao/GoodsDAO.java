@@ -1,5 +1,6 @@
 package onedo.mvc.dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public interface GoodsDAO {
 	 * 
 	 * @return : 1-삭제성공 , 0 - 삭제실패
 	 */
-	int delete(int goodsCode, String password) throws SQLException;
+	int delete(int goodsCode) throws SQLException;
 
 	/**
 	 * 상품코드에 해당하는 레코드 수정
@@ -50,7 +51,7 @@ public interface GoodsDAO {
 	/**
 	 * 솔드아웃
 	 */
-	int isSoldoutUpdate(GoodsDTO goodsDTO) throws SQLException;
+	int isSoldoutUpdate(Connection con, int goodsCode) throws SQLException;
 
 	/**
 	 *  상품이름이나 타입으로 상품검색

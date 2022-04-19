@@ -58,8 +58,10 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 상품삭제 --품절이면 안보이게
 	 * */
 	@Override
-	public void delete(String goodsCode, String password, String path) throws SQLException {
-		// TODO Auto-generated method stub
+	public void delete(int goodsCode) throws SQLException {
+		int result = goodsDAO.delete(goodsCode);
+		if (result == 0)
+			throw new SQLException("삭제 실패");
 
 	}
 
