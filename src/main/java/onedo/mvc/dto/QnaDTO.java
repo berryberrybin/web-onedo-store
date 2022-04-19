@@ -38,6 +38,24 @@ public class QnaDTO {
 		this.qnaImg = qnaImg;
 		this.qnaPwd = qnaPwd;
 	}
+	
+	
+
+
+
+
+
+
+
+	public QnaDTO(int goodsCode, String userid, String qnaSubject, String qnaContent, String qnaPwd) {
+		super();
+		this.goodsCode = goodsCode;
+		this.userid = userid;
+		this.qnaSubject = qnaSubject;
+		this.qnaContent = qnaContent;
+		this.qnaPwd = qnaPwd;
+	}
+
 
 
 	public QnaDTO(String fname, int fsize, List<QnaReply> repliesList, int pageCnt) {

@@ -34,7 +34,7 @@ public class UploadServlet extends HttpServlet {
 	    MultipartRequest m = new MultipartRequest(request, path, maxSize, encoding, 
 				new DefaultFileRenamePolicy());
 	    
-	    //servier -> dao -> insert 완료~~
+	   //servier -> dao -> insert 완료~~
 	   String name =  m.getParameter("name");
 	   String subject =  m.getParameter("subject");
 	   String filesystemName =  m.getFilesystemName("file");

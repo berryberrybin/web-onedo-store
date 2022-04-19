@@ -3,13 +3,13 @@ package onedo.mvc.dto;
 public class ReviewDTO {
 
 	private int reviewNo;
+	private int goodsCode;
 	private String userId;
 	private String reviewSubject;
 	private String reviewContent;
-	private int reviewDate;
+	private String reviewDate;
 	private String reviewImg;
 	private int reviewScore;
-	private int goodsCode;
 	
 	private String  fname; 
 	private int  fsize;
@@ -18,24 +18,24 @@ public class ReviewDTO {
 	
 	public  ReviewDTO() {}
 
-	public ReviewDTO(int reviewNo, String userId, String reviewSubject, String reviewContent, int reviewDate,
-			String reviewImg, int reviewScore, int goodsCode) {
+	public ReviewDTO(int reviewNo, int goodsCode, String userId, String reviewSubject, String reviewContent, String reviewDate,
+			String reviewImg, int reviewScore) {
 		super();
 		this.reviewNo = reviewNo;
+		this.goodsCode = goodsCode;
 		this.userId = userId;
 		this.reviewSubject = reviewSubject;
 		this.reviewContent = reviewContent;
 		this.reviewDate = reviewDate;
 		this.reviewImg = reviewImg;
 		this.reviewScore = reviewScore;
-		this.goodsCode = goodsCode;
 		
 	}
 	
 
-	public ReviewDTO(int reviewNo, String userId, String reviewSubject, String reviewContent, int reviewDate,
-			String reviewImg, int reviewScore, int goodsCode, String fname, int fsize, int pageCnt) {
-		this(reviewNo,userId,reviewSubject,reviewContent,reviewDate,reviewImg,reviewScore,goodsCode);
+	public ReviewDTO(int reviewNo, int goodsCode, String userId, String reviewSubject, String reviewContent, String reviewDate,
+			String reviewImg, int reviewScore, String fname, int fsize, int pageCnt) {
+		this(reviewNo,goodsCode,userId,reviewSubject,reviewContent,reviewDate,reviewImg,reviewScore);
 		this.fname = fname;
 		this.fsize = fsize;
 		
@@ -75,11 +75,11 @@ public class ReviewDTO {
 		this.reviewContent = reviewContent;
 	}
 
-	public int getReviewDate() {
+	public String getReviewDate() {
 		return reviewDate;
 	}
 
-	public void setReviewDate(int reviewDate) {
+	public void setReviewDate(String reviewDate) {
 		this.reviewDate = reviewDate;
 	}
 
@@ -129,6 +129,14 @@ public class ReviewDTO {
 
 	public void setFsize(int fsize) {
 		this.fsize = fsize;
+	}
+
+	@Override
+	public String toString() {
+		return "ReviewDTO [reviewNo=" + reviewNo + ", goodsCode=" + goodsCode + ", userId=" + userId
+				+ ", reviewSubject=" + reviewSubject + ", reviewContent=" + reviewContent + ", reviewDate=" + reviewDate
+				+ ", reviewImg=" + reviewImg + ", reviewScore=" + reviewScore + ", fname=" + fname + ", fsize=" + fsize
+				+ ", pageCnt=" + pageCnt + "]";
 	}
 
 	

@@ -13,11 +13,6 @@ public interface GoodsService {
 	List<GoodsDTO> selectAll() throws SQLException;
 
 	/**
-	 * paging처리
-	 */
-	List<GoodsDTO> selectAll(int pageNo) throws SQLException;
-
-	/**
 	 * GoodsDAOImpl의 레코드 삽입하는 메소드 호출
 	 */
 	int insert(GoodsDTO goodsDTO) throws SQLException;
@@ -35,7 +30,7 @@ public interface GoodsService {
 	 * GoodsDAOImpl의 상품코드에 해당하는 레코드 삭제 메소드 호출 path를 넣은 이유 : 레코드가 삭제되면 레코드의 첨부된
 	 * 파일도 없애려고 save파일 경로 찾기
 	 */
-	void delete(String goodsCode, String password, String path) throws SQLException;
+	void delete(int goodsCode) throws SQLException;
 
 	/**
 	 * GoodsDAOImpl의 상품코드에 해당하는 레코드 수정 메소드 호출
@@ -45,5 +40,5 @@ public interface GoodsService {
 	/**
 	 *  상품이름이나 타입으로 상품검색
 	 * */
-	List<GoodsDTO> selectMulipleGoods(String searchField, String searchValue) throws SQLException;
+	List<GoodsDTO> selectMultipleGoods(String searchField, String searchValue, int pageNo) throws SQLException;
 }

@@ -72,7 +72,7 @@
 							<tr>
 								<td width="1400" height="40" colspan="2" bgcolor="#FE980F">
 									<p align="center">
-										<font color="white" size="3"><b> 문의 글 등록 </b></font>
+										<font color="white" size="3"><b> 자주 묻는 질문 등록 </b></font>
 									</p>
 								</td>
 							</tr>
@@ -84,7 +84,7 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <input type=text
-											name="goodsCode" size="30"></span></b></td>
+											name="model_num" size="30"></span></b></td>
 							</tr>
 							<tr>
 								<td width="150" height="20">
@@ -94,7 +94,7 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <input type=text
-											name="qnaSubject" size="30"></span></b></td>
+											name="model_name" size="30"></span></b></td>
 							</tr>
 							
 							<tr>
@@ -104,33 +104,10 @@
 									</p>
 								</td>
 								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <textarea name="qnaContent"
+										style="font-size: 9pt;"> <textarea name="description"
 												cols="50" rows="10"></textarea></span></b></td>
 							</tr>
 
-							<tr>
-								<td width="150" height="20">
-									<p align="center">
-										<b><span style="font-size: 9pt;">*파일첨부</span></b>
-									</p>
-								</td>
-								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <input type="file" name="qnaImg"
-											maxlength="60" size="40">
-									</span></b></td>
-							</tr>
-
-							<tr>
-								<td width="150" height="20">
-									<p align="center">
-										<b><span style="font-size: 9pt;">비밀번호</span></b>
-									</p>
-								</td>
-								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <input type=password
-											name="qnaPwd" size="12">(글 수정, 삭제시 필요합니다.)
-									</span></b></td>
-							</tr>
 							<tr>
 								<td width="450" height="20" colspan="2" align="center"><b><span
 										style="font-size: 9pt;"><input type=submit value=글쓰기>

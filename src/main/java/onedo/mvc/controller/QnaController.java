@@ -6,11 +6,13 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import onedo.mvc.dto.QnaDTO;
+import onedo.mvc.dto.UserDTO;
 import onedo.mvc.service.QnaService;
 import onedo.mvc.service.QnaServiceImpl;
 
@@ -23,133 +25,132 @@ public class QnaController implements Controller {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/**
-	 *  전체검색하기 
-	 * */
-	public ModelAndView qnaSelectAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		/*
-		 * String pageNo = request.getParameter("pageNo");//현재페이지번호 if(pageNo==null ||
-		 * pageNo.equals("")) { pageNo="1"; }
-		 */
+	 * 전체검색하기
+	 */
+	public ModelAndView qnaSelectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		List<QnaDTO> list = qnaService.selectAll();
+		String pageNo = request.getParameter("pageNo");//현재페이지번호 
+		if(pageNo==null || pageNo.equals("")) {
+			pageNo="1";
+		}
+		 
+
+		List<QnaDTO> list = qnaService.selectAll(Integer.parseInt(pageNo));
+
+	
+		 request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
+		 
+
+		request.setAttribute("list", list);
+		return new ModelAndView("board/Qna.jsp"); // 전체검색 후 위치 변경
 		
-
-		/*
-		 * try { list = qnaService.selectAll(); }catch(Exception e){
-		 * e.printStackTrace(); }
-		 */
-		/*
-		 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
-		 */		 
-
-		    request.setAttribute("list", list);
-		    return new ModelAndView("board/Qna.jsp") ; // 전체검색 후 위치 변경
-			/*
-			 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
-			 */		  
 
 	}
-	
+
 	/**
 	 * 등록하기
-	 * */
-	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String saveDir= request.getServletContext().getRealPath("/save");
-		int maxSize =1024*1024*100;//100M
-	    String encoding="UTF-8";
-	    MultipartRequest m = 
-				new MultipartRequest(request, saveDir,maxSize,encoding , new DefaultFileRenamePolicy());
-	  
-	    //전송된 데이터 받기 
-	  		String qnaNo = m.getParameter("qna_no"); 
-	  		String userId = m.getParameter("user_id"); 
-	  		String qnaSubject = m.getParameter("qna_subject"); 
-	  		String qnaContent = m.getParameter("qna_content"); 
-	  		String qnaDate = m.getParameter("qna_date"); 
-	  		String qnaImg = m.getParameter("qna_img"); 
-	  		String qnaPwd = m.getParameter("qna_pwd"); 
-	  		String goodsCode = m.getParameter("goods_code"); 
-	  		
-	  		QnaDTO elec = new QnaDTO();
-	  		
-	  		//파일첨부가되었다면...
-	  		if(m.getFilesystemName("file") != null) {
-	  			//파일이름 저장
-	  			elec. setFname(m.getFilesystemName("file"));
-	  			
-	  			//파일크기 저장
-	  			elec.setFsize((int)m.getFile("file").length());
-	  		}
-	  		
-	  		qnaService.insert(elec);
-	  		
-	  		
-	  		return new ModelAndView("front", true);
-	  	}
-	
+	 */
+	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
+		
+		String userId = dbDTO.getUserId();
+		
+		String saveDir = request.getServletContext().getRealPath("/save");
+		int maxSize = 1024 * 1024 * 100;// 100M
+		String encoding = "UTF-8";
+		
+		MultipartRequest m = new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
+
+		// 전송된 데이터 받기
+		
+		String goodsCode = m.getParameter("goodsCode");
+		String qnaSubject = m.getParameter("qnaSubject");
+		String qnaContent = m.getParameter("qnaContent");
+		String qnaImg = m.getParameter("qnaImg");
+		String qnaPwd = m.getParameter("qnaPwd");
+		
+		System.out.println(goodsCode+userId + qnaSubject +qnaContent+ qnaImg+qnaPwd+"123");
+		
+		QnaDTO qdto = new QnaDTO(Integer.parseInt(goodsCode),userId, qnaSubject, qnaContent, qnaPwd);
+		
+		System.out.println(goodsCode+userId + qnaSubject +qnaContent+ qnaImg+qnaPwd+"456");
+		
+		// 파일첨부가되었다면...
+		if (m.getFilesystemName("file") != null) {
+			// 파일이름 저장
+			qdto.setFname(m.getFilesystemName("file"));
+
+			// 파일크기 저장
+			qdto.setFsize((int) m.getFile("file").length());
+		}
+
+		qnaService.insert(qdto);
+
+		return new ModelAndView("board/Qna.jsp", true);
+	}
+
 	/**
 	 * 상세보기
-	 * */
-	public ModelAndView selectByQnaCode(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	 */
+	public ModelAndView selectByQnaCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String qnaNo = request.getParameter("qnaNo");
 		String pageNo = request.getParameter("pageNo");
-		
+
 		QnaDTO reviewDTO = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
-		 request.setAttribute("elec", reviewDTO);
-		 request.setAttribute("pageNo", pageNo);
-		 
-	   return new ModelAndView("elec/read.jsp");
+		request.setAttribute("elec", reviewDTO);
+		request.setAttribute("pageNo", pageNo);
+
+		return new ModelAndView("elec/read.jsp");
 	}
-	
+
 	/**
 	 * 수정폼
-	 * */
-	public ModelAndView updateForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	 */
+	public ModelAndView updateForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String qnaNo = request.getParameter("qnaNo");
 		QnaDTO elec = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
 		request.setAttribute("elec", elec);
-		
-		
-	   return new ModelAndView("elec/update.jsp");
+
+		return new ModelAndView("elec/update.jsp");
 	}
-	
+
 	/**
-	 * 수정하기 
-	 * */
-	public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String qnaNo = request.getParameter("qnaNo"); 
-		String userId = request.getParameter("userId"); 
-		String qnaSubject = request.getParameter("qnaSubject"); 
-		String qnaContent = request.getParameter("qnaContent"); 
-		String qnaDate = request.getParameter("qnaDate"); 
-		String qnaImg = request.getParameter("qnaImg"); 
-		String qnaPwd = request.getParameter("qnaPwd"); 
-		String goodsCode = request.getParameter("goodsCode"); 
-	 
-		
+	 * 수정하기
+	 */
+	public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String qnaNo = request.getParameter("qnaNo");
+		String userId = request.getParameter("userId");
+		String qnaSubject = request.getParameter("qnaSubject");
+		String qnaContent = request.getParameter("qnaContent");
+		String qnaDate = request.getParameter("qnaDate");
+		String qnaImg = request.getParameter("qnaImg");
+		String qnaPwd = request.getParameter("qnaPwd");
+		String goodsCode = request.getParameter("goodsCode");
+
 		QnaDTO qnaDTO = new QnaDTO();
-			
+
 		qnaService.update(qnaDTO);
-		
+
 		QnaDTO dbrev = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
 		request.setAttribute("elec", dbrev);
-		
-	return null;
+
+		return null;
 	}
-	
+
 	/**
 	 * 삭제하기
-	 * */
-	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String reviewNO  = request.getParameter("reviewNO");
-		
+	 */
+	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String reviewNO = request.getParameter("reviewNO");
+
 		String path = request.getServletContext().getRealPath("/save");
-		
+
 		qnaService.delete(Integer.parseInt(reviewNO), path);
-		
-	return null;	
-	}	
+
+		return null;
+	}
 
 }

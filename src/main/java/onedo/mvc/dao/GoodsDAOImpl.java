@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
 import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.dto.GoodsDTO;
+import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
 public class GoodsDAOImpl implements GoodsDAO {
@@ -50,12 +52,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 			DbUtil.dbClose(rs, ps, con);
 		}
 		return list;
-	}
-	
-	@Override
-	public List<GoodsDTO> getBoardList(int pageNo) throws SQLException {
-		//페이징처리
-		return null;
 	}
 
 	/**
@@ -124,13 +120,12 @@ public class GoodsDAOImpl implements GoodsDAO {
 			con = DbUtil.getConnection();
 			con.setAutoCommit(false);
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, goodsDTO.getGoodsCode());
-			ps.setString(2, goodsDTO.getGoodsType());
-			ps.setString(3, goodsDTO.getGoodsName());
-			ps.setInt(4, goodsDTO.getGoodsPrice());
-			ps.setInt(5, goodsDTO.getGoodsStock());
-			ps.setString(6, goodsDTO.getGoodsDetail());
-			ps.setInt(7, goodsDTO.getIsSoldout());
+			ps.setString(1, goodsDTO.getGoodsType());
+			ps.setString(2, goodsDTO.getGoodsName());
+			ps.setInt(3, goodsDTO.getGoodsPrice());
+			ps.setInt(4, goodsDTO.getGoodsStock());
+			ps.setString(5, goodsDTO.getGoodsDetail());
+			ps.setInt(6, goodsDTO.getIsSoldout());
 
 			result = ps.executeUpdate();
 
@@ -174,21 +169,48 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	/**
-	 * 상품삭제
+	 * 상품삭제 : isSoldout을 2판매중지로 바꾸는 메소드
 	 */
 	@Override
-	public int delete(int goodsCode, String password) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(int goodsCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = proFile.getProperty("goods.delete");//update goods set is_soldout = 2 where goods_code = ?
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, goodsCode);
+			
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(ps, con);
+		}
+		return result;
+		
 	}
+	
+	
+	  
+	 
 
 	/**
-	 * 상품 재고가 0이면 isSoldOut 0(품절)만들기
+	 * 상품 품절 자동처리
 	 */
 	@Override
-	public int isSoldoutUpdate(GoodsDTO goodsDTO) throws SQLException {
-		
-		return 0;
+	public int isSoldoutUpdate(Connection con, int goodsCode) throws SQLException {
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = proFile.getProperty("goods.soldout"); // stock 0 ->soldOut
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, goodsCode);
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(ps, null);
+		}
+		return result;
 		
 	}
 
@@ -196,23 +218,43 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 *  상품이름이나 타입으로 상품검색
 	 * */
 	@Override
-	public List<GoodsDTO> selectMulipleGoods(String searchField, String searchValue) throws SQLException{
+	public List<GoodsDTO> selectMultipleGoods(String searchField, String searchValue, int pageNo) throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
 		List<GoodsDTO> list = new ArrayList<GoodsDTO>();
 		
-		String sql=proFile.getProperty("goods.selectMulipleGoods"); //select * from goods where 
+		String sql=proFile.getProperty("goods.selectMultipleGoods");//select * from (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM goods where 
+		
 		switch(searchField) {
-		case "goodsType" : sql+="goods_type = ?"; break;
-		case "goodsName" : sql+="goods_name like ?"; break;
+			case "goodsType" : sql+="goods_type = ?";  break;
+			case "goodsName" : sql+="goods_name like ?"; break;
 		}
+		
 		try {
+			sql+=" ORDER BY goods_code) a) where rnum>=? and rnum <=?";
+		   
+			System.out.println("sql="+sql);
+			
+			int totalCount = this.getTotalCount(searchField, searchValue);
+			int totalPage = totalCount%PageCnt.getPagesize()==0? totalCount/PageCnt.getPagesize() : totalCount/PageCnt.getPagesize()+1;
+			
+			PageCnt pageCnt = new PageCnt();
+			pageCnt.setPageCnt(totalPage); //전체페이지수를 저장해준다.
+			pageCnt.setPageNo(pageNo); //사용자가 클릭한 page번호를 설정
+			
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			if(searchField.equals("goodsType"))ps.setString(1,searchValue);
-			else if(searchField.equals("goodsName")) ps.setString(1,"%"+searchValue+"%");
+			
+			switch(searchField) {
+			  case "goodsType" : ps.setString(1, searchValue);  break;
+			  case "goodsName" : ps.setString(1, "%"+searchValue+"%"); break;
+			}
+			
+			ps.setInt(2,(pageNo-1)*PageCnt.pagesize+1); //시작점번호
+			ps.setInt(3, pageNo*PageCnt.pagesize); //끝점 번호
+			
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
@@ -225,5 +267,41 @@ public class GoodsDAOImpl implements GoodsDAO {
 		}
 		return list;
 	}
+	
+
+	/**
+	 * 전체레코드수 가져오기
+	 * */
+	private int getTotalCount(String searchField, String searchValue) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int totalCount=0;
+		
+		String sql = proFile.getProperty("goods.totalCount");//select count(*) from goods where
+		switch(searchField) {
+		case "goodsType" : sql+="goods_type = ?"; break;
+		case "goodsName" : sql+="goods_name like ?"; break;
+		}
+		System.out.println(sql);
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			
+			if(searchField.equals("goodsType"))ps.setString(1,searchValue);
+			else if(searchField.equals("goodsName")) ps.setString(1,"%"+searchValue+"%");
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return totalCount;
+	}
+
 
 }

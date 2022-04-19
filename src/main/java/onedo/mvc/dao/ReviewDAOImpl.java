@@ -44,12 +44,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 			while (rs.next()) {
 				ReviewDTO rdto = new ReviewDTO(
 						rs.getInt(1),
-						rs.getString(2),
+						rs.getInt(2),
 						rs.getString(3),
 						rs.getString(4),
-						rs.getInt(5),
+						rs.getString(5),
 						rs.getString(6),
-						rs.getInt(7),
+						rs.getString(7),
 						rs.getInt(8));
 						
 				reviewList.add(rdto);
@@ -92,12 +92,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 			while(rs.next()) {
 				ReviewDTO rdto = new ReviewDTO(
 						rs.getInt(1),
-						rs.getString(2),
+						rs.getInt(2),
 						rs.getString(3),
 						rs.getString(4),
-						rs.getInt(5),
+						rs.getString(5),
 						rs.getString(6),
-						rs.getInt(7),
+						rs.getString(7),
 						rs.getInt(8));
 						
 				reviewList.add(rdto);
@@ -133,36 +133,36 @@ public class ReviewDAOImpl implements ReviewDAO {
 			return totalCount;
 		}
 
+	/**
+	 * 상품코드에 해당하는 모든 후기 검색
+	 * */
 	@Override
-	public ReviewDTO selectByGoodsCode(int goodsCode) throws SQLException {
+	public List<ReviewDTO> selectByGoodsCode(int goodsCode) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		ReviewDTO reviewDTO=null;
 		
-		String sql = proFile.getProperty("");
+		List<ReviewDTO> list = new ArrayList<ReviewDTO>();
+		ReviewDTO reviewDTO = null; //while문 밖에서 ReviewDTO 생성함
+		
+		String sql = proFile.getProperty("review.selectByGoodsCode");//select * from review_board where goods_code=?
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, goodsCode);
 			
 			rs = ps.executeQuery();
-			if(rs.next()) {
-				reviewDTO = new ReviewDTO(
-						rs.getInt(1),
-						rs.getString(2),
-						rs.getString(3),
-						rs.getString(4),
-						rs.getInt(5),
-						rs.getString(6),
-						rs.getInt(7),
-						rs.getInt(8));							
+			while(rs.next()) { //if에서 while로 변경함
+				reviewDTO = new ReviewDTO(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),
+						rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8));
+				//System.out.println(reviewDTO);
+				list.add(reviewDTO);
 			}
 		}finally {
 			DbUtil.dbClose(rs, ps, con);
 		}
-		
-		return reviewDTO;
+		//System.out.println(list); //동일한 값이 두 번 나온다
+		return list;
 	}
 
 	@Override
@@ -176,13 +176,13 @@ public class ReviewDAOImpl implements ReviewDAO {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, reviewDTO.getReviewNo());
-			ps.setString(2, reviewDTO.getUserId());
-			ps.setString(3, reviewDTO.getReviewSubject());
-			ps.setString(4, reviewDTO.getReviewContent());
-			ps.setInt(5, reviewDTO.getReviewDate());
-			ps.setString(6, reviewDTO.getReviewImg());
-			ps.setInt(7, reviewDTO.getReviewScore());
-			ps.setInt(8, reviewDTO.getGoodsCode());
+			ps.setInt(2, reviewDTO.getGoodsCode());
+			ps.setString(3, reviewDTO.getUserId());
+			ps.setString(4, reviewDTO.getReviewSubject());
+			ps.setString(5, reviewDTO.getReviewContent());
+			ps.setString(6, reviewDTO.getReviewDate());
+			ps.setString(7, reviewDTO.getReviewImg());
+			ps.setInt(8, reviewDTO.getReviewScore());
 			
 		}finally {
 			DbUtil.dbClose(ps, con);
@@ -205,7 +205,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 			
 			ps.setString(1, reviewDTO.getReviewSubject());
 			ps.setString(2, reviewDTO.getReviewContent());
-			ps.setInt(3, reviewDTO.getReviewDate());
+			ps.setString(3, reviewDTO.getReviewDate());
 			ps.setString(4, reviewDTO.getReviewImg());
 			ps.setInt(5, reviewDTO.getReviewScore());
 			

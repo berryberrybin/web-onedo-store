@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     <jsp:include page="common/header.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -36,6 +36,9 @@
 				//상품클릭시 조회수증가 함
 				location.href="${path}/front?key=goods&methodName=selectByGoodsCode&isIncrement=y&goodsCode="+goodsCode;
  		})
+ 		
+ 		//현재페이지 a태그에 active속성 주기
+ 		
  	});
  </script>
  </head>
@@ -75,8 +78,38 @@
 								
 						</c:forEach>
 						</c:otherwise>
-				    	</c:choose>
+				    	</c:choose> 	
 			</div>
+			
+			<jsp:useBean class="onedo.mvc.paging.PageCnt" id="p"/> 
+			<nav class="pagination-container">
+				<ul class="pagination"><!-- 페이징처리 -->
+					<c:set var="doneLoop" value="false"/>		
+					<c:set var="temp" value="${(pageNo-1) % p.blockcount}"/>
+					<c:set var="startPage" value="${pageNo - temp}"/>
+					<!-- \${pageNo} = ${pageNo} , 	\${temp}=${temp}  ,   \${startPage}=${startPage}  , -->
+					
+					<!-- String searchField, String searchValue 넣기 -->
+					<% 
+						String searchField = request.getParameter("searchField");
+						String searchValue = request.getParameter("searchValue");
+					%>
+					<c:if test="${(startPage-p.blockcount) > 0}">
+			      		<li><a class="pagination-newer" href="${path}/front?key=goods&methodName=selectMultipleGoods&searchField=<%=searchField %>&searchValue=<%=searchValue %>&pageNo=${startPage-1}">&laquo;</a></li>
+			  		</c:if>
+					<c:forEach var='i' begin='${startPage}' end='${(startPage-1)+p.blockcount}'> 
+						<c:if test="${(i-1)>=p.pageCnt}">
+							<c:set var="doneLoop" value="true"/>
+						</c:if> 
+						<c:if test="${not doneLoop}" >
+							<li><a class="${i==pageNo?'pagination-active':page}" href="${path}/front?key=goods&methodName=selectMultipleGoods&searchField=<%=searchField %>&searchValue=<%=searchValue %>&pageNo=${i}">${i}</a></li> 
+						</c:if>
+					</c:forEach>
+					<c:if test="${(startPage+p.blockcount)<=p.pageCnt}">
+					    <li><a class="pagination-older" href="${path}/front?key=goods&methodName=selectMultipleGoods&searchField=<%=searchField %>&searchValue=<%=searchValue %>&pageNo=${startPage+p.blockcount}">&raquo;</a></li>
+					</c:if>
+				</ul>
+			</nav>
 		</div>
 		</div>
 	</section>

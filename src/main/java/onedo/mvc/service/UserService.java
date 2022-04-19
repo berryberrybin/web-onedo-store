@@ -15,7 +15,7 @@ public interface UserService {
 	
 	
 	/**
-	 * 로그인 체크
+	 * 로그인 체크 (휴면 회원이라면 로그인 불가능하게)
 	 * */
 	UserDTO loginCheck(UserDTO userDTO)throws SQLException , AuthenticationException;
 	
@@ -27,6 +27,11 @@ public interface UserService {
 	 * */
      boolean idCheck(String userId) throws SQLException, AuthenticationException;
 	
+     /**
+      * 휴면 회원 여부 체크
+      * */
+     void dorCheck(String userId) throws SQLException, AuthenticationException;
+     
 	
 	/**
 	 * 전체 회원 검색

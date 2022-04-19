@@ -70,23 +70,28 @@ private Properties proFile = new Properties();
 		
 		List<QnaDTO> qnaList = new ArrayList<QnaDTO>();
 		
-		String sql = proFile.getProperty("");
+
+		String sql = "select * from  (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM QnA_board ORDER BY qna_No desc) a) where  rnum>=? and rnum <=?";
+		
 		try {
-			//전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.
+
+		
+			 //전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.
 			int totalCount = this.getTotalCount();
 			int totalPage = totalCount%PageCnt.getPagesize() ==0 ? totalCount/PageCnt.getPagesize() : (totalCount/PageCnt.getPagesize())+1 ;
 			
 			PageCnt pageCnt = new PageCnt();
 			pageCnt.setPageCnt(totalPage);//전페페이지수를 저장해준다.
 			pageCnt.setPageNo(pageNo); //사용자가 클릭한 page번호를 설정
+						
 			
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			
-			//?의 2개의 값 설정
+			//의 2개의 값 설정
 			ps.setInt(1, (pageNo-1)*PageCnt.pagesize+1); //시작점번호
 			ps.setInt(2, pageNo*PageCnt.pagesize); //끝점 번호
-			
+					
 			rs = ps.executeQuery();
 			while(rs.next()) {QnaDTO qdto = new QnaDTO(
 					rs.getInt(1),
@@ -115,7 +120,7 @@ private Properties proFile = new Properties();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		int totalCount=0;
-		String sql = proFile.getProperty(" ");
+		String sql = "select count(*) from QnA_board";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -138,7 +143,7 @@ private Properties proFile = new Properties();
 		ResultSet rs=null;
 		QnaDTO qnaDTO=null;
 		
-		String sql = proFile.getProperty("");
+		String sql = "select * from QnA_board where goods_code=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -168,22 +173,22 @@ private Properties proFile = new Properties();
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql = proFile.getProperty(" ");
+		String sql = "insert into QnA_board values(QNA_NO_SEQ.NEXTVAL,?,?,?,?,CURRENT_DATE,?,?)";
 		
+		System.out.println( qnaDTO.getGoodsCode());
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, qnaDTO.getQnaNo());
+			ps.setInt(1, qnaDTO.getGoodsCode());
 			ps.setString(2, qnaDTO.getUserid());
 			ps.setString(3, qnaDTO.getQnaSubject());
 			ps.setString(4, qnaDTO.getQnaContent());
-			ps.setString(5, qnaDTO.getQnaDate());
-			ps.setString(6, qnaDTO.getQnaImg());
-			ps.setString(7, qnaDTO.getQnaPwd());
-			ps.setInt(8, qnaDTO.getGoodsCode());
+			ps.setString(5, qnaDTO.getQnaImg());
+			ps.setString(6, qnaDTO.getQnaPwd());
 			
-			
+			result = ps.executeUpdate();
 		}finally {
+			
 			DbUtil.dbClose(ps, con);
 		}
 		return result;
