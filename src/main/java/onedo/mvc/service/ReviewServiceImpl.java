@@ -32,26 +32,30 @@ public class ReviewServiceImpl implements ReviewService {
 
 	}
 
+	/**
+	 * 상품코드에 해당하는 모든 후기 검색
+	 * */
 	@Override
-	public ReviewDTO selectByGoodsCode(int goodsCode) throws SQLException {
-		ReviewDTO rdto = rdao.selectByGoodsCode(goodsCode);
-		if(rdto==null) {
-			throw new SQLException("상세보기 오류 발생했습니다.");
+	public List<ReviewDTO> selectByGoodsCode(int goodsCode) throws SQLException {
+		List<ReviewDTO> list = rdao.selectByGoodsCode(goodsCode);
+		if(list==null) {
+			throw new SQLException("상품코드가 "+goodsCode+"인 상품의 후기를 불러올 수 없습니다.");
 		}
 		
-		return rdto;
+		return list;
 	}
 
 	@Override
 	public void delete(int reviewNO,String path) throws SQLException {
-		ReviewDTO riwDB =  rdao.selectByGoodsCode(reviewNO);
+		//ReviewDTO riwDB =  rdao.selectByGoodsCode(reviewNO);
 		if(rdao.delete(reviewNO)==0) {
 			throw new SQLException(reviewNO+"게시물을 삭제할수 없습니다.");
 		}
-		
+		/*
 		if(riwDB.getFname()!=null) {
 			new File(path+"/"+riwDB.getFname()).delete();//파일삭제
 		}
+		*/
 	}
 
 	@Override

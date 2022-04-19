@@ -30,6 +30,7 @@
 	<script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			//상품 속성
 			let attrs = [{name:'신맛',score:${goodsDTO.goodsAttrDTO.sour}},{name:'단맛',score:${goodsDTO.goodsAttrDTO.sweet}},
 						{name:'향미',score:${goodsDTO.goodsAttrDTO.aroma}},{name:'바디감',score:${goodsDTO.goodsAttrDTO.body}}];
 			
@@ -47,6 +48,37 @@
 			
 			let goodsDetail="<h3 style='color:#363432'>"+"${goodsDTO.goodsDetail}"+"</h3><p>";
 			$("#goodsAttr").html(goodsDetail+"<h4 style='color:#FE980F'>"+str+"</h4>");
+			
+			//상품코드에 해당하는 모든 후기 가져오기
+			$("#reviews").click(function(){
+				$.ajax({
+		   			url :"${path}/ajax" ,
+		   			type:"post",
+		   			dataType:"json"  ,
+		   			data: {key: "ajaxReview", methodName : "selectByGoodsCode", goodsCode : "${goodsDTO.goodsCode}"}, //서버에게 보낼 데이터정보(parameter정보)
+		   			success :function(result){
+		   				str = "";
+		   				$.each(result, function(index, item){
+		   					alert(index);
+		   					str += "<tr>";
+		   					str += "<td>"+(index+1)+"</td>";
+		   					str += "<td><a href='#'>"+item.reviewSubject+"</a></td>";
+		   					str += "<td>"+item.reviewDate+"</td>";
+		   					str += "<td>"+item.reviewScore+"</td>";
+		   					str += "</tr>";
+		   				});
+		   				
+		   				$("#reviewTable tr:gt(0)").remove();
+		   				$("#reviewTable tr:eq(0)").after(str);
+		   				
+		   			} , //성공했을때 실행할 함수 
+		   			error : function(err){  
+		   				alert(err+"에러 발생했어요.");
+		   			}  //실패했을때 실행할 함수 
+		   		});//ajax끝
+				
+			});
+			
 		});
 	</script>
 	<style type="text/css">
@@ -126,7 +158,7 @@
 				<li class="active"><a href="#details" data-toggle="tab">상세정보</a></li>
 				<li><a href="#searchQna" data-toggle="tab">상품문의</a></li>
 				<li><a href="#searchFaq" data-toggle="tab">자주묻는질문</a></li>
-				<li><a href="#reviews" data-toggle="tab">후기 (5)</a></li>
+				<li><a id="reviews" href="#searchReviews" data-toggle="tab">후기 (5)</a></li>
 			</ul>
 		</div>
 		<div class="tab-content">
@@ -148,15 +180,14 @@
 				자주묻는질문입니다
 			</div>
 			
-			<div class="tab-pane fade" id="reviews" >
+			<div class="tab-pane fade" id="searchReviews" >
 				<div class="col-sm-12">
 					<table id="reviewTable">
 						<tr>
 							<th>index</th><th>제목</th><th>날짜</th><th>별점</th>
 						</tr>
-						<c:forEach items="{list}" var="reviewDTO">
 						<!-- 상품코드로 검색한 후기목록 -->
-						</c:forEach>
+						
 					</table>
 				</div>
 			</div>

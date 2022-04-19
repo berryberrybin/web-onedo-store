@@ -61,7 +61,7 @@ public class ReviewController implements Controller {
 	  		String reviewScore = m.getParameter("review_score"); 
 	  		String goodsCode = m.getParameter("goods_code"); 
 	  		
-	  		ReviewDTO elec = new ReviewDTO(Integer.parseInt(reviewNo),userId,reviewSubject,reviewContent,Integer.parseInt(reviewDate),reviewImg,Integer.parseInt(reviewScore),Integer.parseInt(goodsCode));
+	  		ReviewDTO elec = new ReviewDTO(Integer.parseInt(reviewNo),Integer.parseInt(goodsCode),userId,reviewSubject,reviewContent,reviewDate,reviewImg,Integer.parseInt(reviewScore));
 	  		
 	  		//파일첨부가되었다면...
 	  		if(m.getFilesystemName("file") != null) {
@@ -79,26 +79,27 @@ public class ReviewController implements Controller {
 	  	}
 	    
 	/**
-	 * 상세보기
+	 * 상품코드에 해당하는 후기 검색
 	 * */
-	public ModelAndView selectByGoodsCode(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	/*public ModelAndView selectByGoodsCode(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String goodsCode = request.getParameter("goodsCode");
 		String pageNo = request.getParameter("pageNo");
 		
-		ReviewDTO reviewDTO = revService.selectByGoodsCode(Integer.parseInt(goodsCode));
-		 request.setAttribute("elec", reviewDTO);
+		List<ReviewDTO> list= revService.selectByGoodsCode(Integer.parseInt(goodsCode));
+		 request.setAttribute("list", list);
 		 request.setAttribute("pageNo", pageNo);
 		 
 	   return new ModelAndView("elec/read.jsp");
-	}
+	}*/
 	
 	/**
 	 * 수정폼
 	 * */
 	public ModelAndView updateForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String goodsCode = request.getParameter("goodsCode");
-		  ReviewDTO elec = revService.selectByGoodsCode(Integer.parseInt(goodsCode));
-		request.setAttribute("elec", elec);
+		//selectByReviewNo메소드 필요
+		/*ReviewDTO elec = revService.selectByGoodsCode(Integer.parseInt(goodsCode));
+		request.setAttribute("elec", elec);*/
 		
 		
 	   return new ModelAndView("elec/update.jsp");
@@ -117,12 +118,12 @@ public class ReviewController implements Controller {
 		String goodsCode = request.getParameter("goodsCode"); 
 	 
 		
-		ReviewDTO reviewDTO = new ReviewDTO(Integer.parseInt(reviewNo),userId,reviewSubject,reviewContent,Integer.parseInt(reviewDate),reviewImg,Integer.parseInt(reviewScore),Integer.parseInt(goodsCode));
+		ReviewDTO reviewDTO = new ReviewDTO(Integer.parseInt(reviewNo),Integer.parseInt(goodsCode),userId,reviewSubject,reviewContent,reviewDate,reviewImg,Integer.parseInt(reviewScore));
 			
 		revService.update(reviewDTO);
-		
-		ReviewDTO dbrev = revService.selectByGoodsCode(Integer.parseInt(reviewNo));
-		request.setAttribute("elec", dbrev);
+		//selectByReviewNo메소드 필요
+		//ReviewDTO dbrev = revService.selectByGoodsCode(Integer.parseInt(reviewNo));
+		//request.setAttribute("elec", dbrev);
 		
 	return null;
 	}

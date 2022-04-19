@@ -23,10 +23,9 @@ public interface ReviewService {
 	 
 	  
 	  /**
-	   * 모델번호에 해당하는 레코드 검색하는 메소드 호출
-	   * @param : boolean flag - 조회수 증가 여부를 판별하는 매개변수임(true이면 조회수증가 / false이면 조회수 증가 안함)
+	   * 상품번호에 해당하는 상품후기 검색하는 메소드 호출
 	   * */
-	  ReviewDTO selectByGoodsCode(int goodsCode)throws SQLException;
+	  List<ReviewDTO> selectByGoodsCode(int goodsCode)throws SQLException;
 		 
 		 
 	 /**

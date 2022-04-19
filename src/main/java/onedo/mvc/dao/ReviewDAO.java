@@ -20,7 +20,7 @@ public interface ReviewDAO {
 		 /**
 		  * 모델번호에 해당하는 레코드 검색
 		  * */
-		   ReviewDTO selectByGoodsCode(int goodsCode) throws SQLException;
+		   List<ReviewDTO> selectByGoodsCode(int goodsCode) throws SQLException;
 		/**
 		 * 레코드 삽입
 		 * @return : 1-삽입성공 , 0 - 삽입실패
