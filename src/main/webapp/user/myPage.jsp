@@ -76,7 +76,7 @@
           <div class="bio-graph-heading">
             <h4>최근 주문 내역</h4>
             <hr>
-            <table class="table table-condensed">
+            <table class="table">
 					<thead>
 						<tr class="cart_menu">
 							<td class="orderCode">주문번호</td>
@@ -87,28 +87,35 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${requestScope.cartItemList}" var="cartItem">
+					<c:choose>
+							<c:when test="${empty requestScope.myList}">
+								<tr>
+									<td colspan="5">
+										<p align="center">
+											<b><span style="font-size: 9pt;"> 해당 내역이 없습니다. </span></b>
+										</p>
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+							<c:forEach items="${requestScope.myList}" var="salesDTO">
 							<tr>
-								<td class="itemCode">
-									<h4>
-										<a href="">${cartItem.goods.goodsCode}</a>
-									</h4>
+								<td class="orderCode">
+										<a href="">${salesDTO.orderCode}</a>
 								</td>
-								<td class="itemName">
-									<h4>
-										<a href="">${cartItem.goods.goodsName}</a>
-									</h4>
+								<td class="orderName">
+										<a href="">${salesDTO.goodsName}</a>
 								</td>
-								<td class="cart_total">
-									<p class="cart_total_price">${cartItem.totalPrice}</p>
+								<td class="orderPrice">
+									<p class="cart_total_price">${salesDTO.orderPrice}</p>
 								</td>
-								<td class="itemPrice">
-									<h4>
-										<p>${cartItem.goods.goodsPrice}</p>
-									</h4>
+								<td class="orderDate">
+										<p>${salesDTO.orderDate}</p>
 								</td>
 							</tr>
 						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 					</tbody>
 			</table>
           </div><br>

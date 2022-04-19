@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 import onedo.mvc.util.DbUtil;
 
@@ -149,27 +150,6 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int delete(String userId) {
-		  PreparedStatement ps = null;
-		  Connection con =null;
-		  int result=0;
-		  
-		  try {
-			   con = DbUtil.getConnection();
-			   ps = con.prepareStatement("delete from users where user_id=?");
-			   ps.setString(1, userId);
-			   result = ps.executeUpdate();
-			   
-		  } catch (SQLException e) {
-		   e.printStackTrace();
-		   
-		  } finally {
-		   DbUtil.dbClose( ps, con);
-		  }
-		  return result;
-	}
-
-	@Override
 	public boolean idCheck(String userId) {
 			Connection con=null;
 			PreparedStatement ps=null;
@@ -245,7 +225,41 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return result;
 	}
-			
+
+	@Override
+	public List<SalesDTO> selectMyOrder(String userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		List<SalesDTO> myList = new ArrayList<SalesDTO>();
+		
+		String sql = "select goods_Name, goods_code, order_qty, order_date, order_price, order_Code, orderline_code from orders join orderline using(order_code) join goods using(goods_code) where user_id=? order by order_date desc";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				SalesDTO sales = new SalesDTO(
+						rs.getString(1),
+						rs.getInt(2), 
+						rs.getInt(3), 
+						rs.getString(4),
+						rs.getInt(5),
+						rs.getInt(6),
+						rs.getInt(7)
+						);
+				
+				myList.add(sales);
+			}
+
+		} finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return myList;
+	}
+	
 		
 	
 	
