@@ -42,13 +42,13 @@
 	
 	
 			function iamport(){//결재하기 클랙했을때
-		    	
+		    	uid = new Date().getTime();
 				//가맹점 식별코드
 				IMP.init('imp81895788');
 				IMP.request_pay({
 				    pg : 'kcp',
 				    pay_method : 'card',
-				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    merchant_uid : uid ,
 				    name : $("#payGoodsName").val() , //결제창에서 보여질 이름
 				    amount : ${paymentPrice}, //실제 결제되는 가격
 				    buyer_email : '${userId}',
@@ -64,9 +64,19 @@
 				        msg += '상점 거래ID : ' + rsp.merchant_uid;
 				        msg += '결제 금액 : ' + rsp.paid_amount;
 				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        
+				        //이동(값들가지고- )
+				        
+				        
+				       // $("#payForm").submit();//이동
+				        
 				    } else {
-				    	 var msg = '결제에 실패하였습니다.';
-				         msg += '에러내용 : ' + rsp.error_msg;
+				    	 //var msg = '결제에 실패하였습니다.';
+				        // msg += '에러내용 : ' + rsp.error_msg;
+				         $("#payForm #key").val("orders");
+					     $("#payForm #methodName").val("orderLine");
+					     $("#payForm #orderCode").val(uid);
+				         $("#payForm").submit();
 				    }
 				    alert(msg);
 				});
@@ -222,9 +232,19 @@ td {
 			<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
 		</ul>
 		<a class="btn btn-default update" href="front?key=cart&methodName=deleteAll">장바구니 비우기</a>
-		 <a class="btn btn-default check_out" href="front?key=checkout&methodName=select">결제하기</a>
+		 <a class="btn btn-default check_out" href="#">결제하기</a>
 	</div>
 </div>
+<form method="post" action="${path}/front" id="payForm">
+	<!-- 결재가 완료되었을때 가지고 가이동할 값들 설 -->
+	<input type="hidden" name="key" id="key" value="orders" />
+	<input type="hidden" name="methodName" id="methodName" value="orders" />
+	<input type="hidden" name="orderCode" id="orderCode" value="" />
+	<input type="hidden" name="orderPrice" id="orderPrice" value="${totalItemPrice}" />
+	<input type="hidden" name="userAddr" id="userAddr" value="${userAddr}" />
+	<input type="hidden" name="userPhone" id="userPhone" value="${userPhone}" />
+	
+</form>
 
 </body>
 <jsp:include page="common/footer.jsp" />

@@ -13,9 +13,7 @@ public class CartServiceImpl implements CartService {
 	private static CartService instance = new CartServiceImpl();
 	private Map<String, CartDTO> cartMap = new HashMap<>();
 
-	private CartServiceImpl() {
-		
-	}
+	private CartServiceImpl() { }
 	
 	public static CartService getInstance() {
 		return instance;
