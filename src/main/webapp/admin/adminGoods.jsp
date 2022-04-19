@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../../common/adminheader.jsp" />
+<jsp:include page="../common/adminheader.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -219,10 +219,10 @@
 			</form>
 		</div>
 		
-		<br><br><br><hr><br>
+		<br><br><hr><br>
 		
-		<div class="table-responsive cart_info">
-				<table class="table table-condensed" id="goodstable">
+		
+				<table class="table" id="goodstable">
 					<tr class="goods_menu">
 						<td class="goodsCode">상품코드</td>
 						<td class="goodsType">상품타입</td>
@@ -234,7 +234,7 @@
 						<td class="isSoldout">삭제</td>
 					</tr>
 				</table>
-			</div>
+			
 			
 		
 	</section> <!--/#cart_items-->
@@ -245,6 +245,6 @@
 	
 
 
-   <jsp:include page="../../common/adminfooter.jsp" />
+   <jsp:include page="../common/adminfooter.jsp" />
 </body>
 </html>
