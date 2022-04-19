@@ -1,16 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 
     pageEncoding="UTF-8"%>
+<jsp:include page="../common/adminheader.jsp"/>
+    
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>ONE DO</title>
+	<link href="${path}/css/bootstrap.min.css" rel="stylesheet">
+	<link href="${path}/css/font-awesome.min.css" rel="stylesheet">
+	<link href="${path}/css/prettyPhoto.css" rel="stylesheet">
+	<link href="${path}/css/price-range.css" rel="stylesheet">
+	<link href="${path}/css/animate.css" rel="stylesheet">
+	<link href="${path}/css/main.css" rel="stylesheet">
+	<link href="${path}/css/responsive.css" rel="stylesheet">
+	<!--[if lt IE 9]>
+	    <script src="js/html5shiv.js"></script>
+	    <script src="js/respond.min.js"></script>
+	    <![endif]-->
+	<link rel="shortcut icon" href="${path}images/ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="${path}/images/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="${path}/images/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${path}/images/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="${path}/images/ico/apple-touch-icon-57-precomposed.png">
+
 		<script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
+		
+		
 		<style type="text/css">
 			table{
 				text-align: center;
 			}
+			
+			th{
+				text-align: center;
+			}
+			
 		</style>
 		<script type="text/javascript">
 			$(function(){ 
@@ -97,10 +127,20 @@
 		</script>
 	</head>
 	<body>
-		<table id="uu">
+	<div class="col-sm-12">
+		<table id="uu" class="table">
 			<tr>
-				<th>아이디</th><th>이름</th><th>연락처</th><th>주소</th><th>생년월일</th><th>성별</th><th>계정정보</th>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>연락처</th>
+				<th>주소</th>
+				<th>생년월일</th>
+				<th>성별</th>
+				<th>계정정보</th>
+				<th>회원상태</th>
 			</tr>
 		</table>
+		</div>
+
 	</body>
 </html>
