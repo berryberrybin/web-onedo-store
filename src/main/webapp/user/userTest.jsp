@@ -70,7 +70,7 @@
 								if(item.userType==1){
 									str+=`<td>정상</td>`;
 								}else{
-									str+=`<td>정지</td>`;
+									str+=`<td style="color:red; font-weight: bold;">정지</td>`;
 								}
 								if(item.userType==1){
 									str+=`<td><input type='button' value='정지' name='${"${item.userId}"}'></td>`;
@@ -127,6 +127,7 @@
 		</script>
 	</head>
 	<body>
+	<div class="container">
 	<div class="col-sm-12">
 		<table id="uu" class="table">
 			<tr>
@@ -141,6 +142,6 @@
 			</tr>
 		</table>
 		</div>
-
+	</div>
 	</body>
 </html>

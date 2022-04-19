@@ -32,6 +32,42 @@
 				});
 			});
 		</script> 
+		
+		
+		<style type="text/css">
+			@font-face {
+		    font-family: 'GmarketSansBold';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+			@font-face {
+		    font-family: 'KOTRAHOPE';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+			
+			h1, body {
+				text-align: center;
+				color: #3D3D3D;
+				font-family: GmarketSansBold;
+			}
+			
+			h4 {
+				font-family: KOTRAHOPE;
+				color: #F58B00;
+			}	
+			
+			h2 { 
+				text-align: center;
+				color: #B45F04;
+				font-family: GmarketSansBold;
+			}
+			
+			</style>
+
 	</head>
 	<body>
 		
@@ -40,14 +76,18 @@
 				<div class="row">
 				<jsp:include page="../common/category.jsp"/>
 				<!-- 상품 페이지 추가-->
+					<hr>
+					<h2><i class="fa fa-coffee" aria-hidden="true"></i><br></h2>
 					<h1>나만의 원두 찾기</h1>
+					<hr>
 					<form action="${path}/front">
 						<input type=hidden name="methodName" value="survey">
 						<input type=hidden name="key" value="survey">
-						<h5>산뜻함이 느껴지면서 감귤류 등의 신맛을 좋아하시나요?</h5>
+						<h4>산뜻함이 느껴지면서 감귤류 등의 신맛을 좋아하시나요?</h4>
 						<table>
 							<tr>
 								<td rowspan="2">
+								<i class="fa fa-frown-o" aria-hidden="true"></i>&nbsp;
 									싫어함&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 								<th>
@@ -67,6 +107,7 @@
 								</th>
 								<td rowspan="2">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;좋아함
+									&nbsp;<i class="fa fa-smile-o" aria-hidden="true"></i>
 								</td>
 							</tr>
 							<tr>
@@ -77,10 +118,11 @@
 								<th>5</th>
 							</tr>
 						</table><br><br><br>
-						<h5>불향이 나거나 쌉쌉한맛을 좋아하나요?</h5>
+						<h4>불향이 나거나 쌉쌉한맛을 좋아하나요?</h4>
 						<table>
 							<tr>
 								<td rowspan="2">
+								<i class="fa fa-frown-o" aria-hidden="true"></i>&nbsp;
 									싫어함&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 								<th>
@@ -100,6 +142,7 @@
 								</th>
 								<td rowspan="2">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;좋아함
+									&nbsp;<i class="fa fa-smile-o" aria-hidden="true"></i>
 								</td>
 							</tr>
 							<tr>
@@ -110,10 +153,11 @@
 								<th>5</th>
 							</tr>
 						</table><br><br><br>
-						<h5>다소 단맛이 나는 것을 좋아하나요?</h5>
+						<h4>다소 단맛이 나는 것을 좋아하나요?</h4>
 						<table>
 							<tr>
 								<td rowspan="2">
+								<i class="fa fa-frown-o" aria-hidden="true"></i>&nbsp;
 									싫어함&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 								<th>
@@ -133,6 +177,7 @@
 								</th>
 								<td rowspan="2">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;좋아함
+									&nbsp;<i class="fa fa-smile-o" aria-hidden="true"></i>
 								</td>
 							</tr>
 							<tr>
@@ -143,10 +188,11 @@
 								<th>5</th>
 							</tr>
 						</table><br><br><br>
-						<h5>과일향, 허브향, 견과향 이러한 향들을 좋아하시나요?</h5>
+						<h4>과일향, 허브향, 견과향 이러한 향들을 좋아하시나요?</h4>
 						<table>
 							<tr>
 								<td rowspan="2">
+								<i class="fa fa-frown-o" aria-hidden="true"></i>&nbsp;
 									싫어함&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 								<th>
@@ -166,6 +212,7 @@
 								</th>
 								<td rowspan="2">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;좋아함
+									&nbsp;<i class="fa fa-smile-o" aria-hidden="true"></i>
 								</td>
 							</tr>
 							<tr>
@@ -176,7 +223,7 @@
 								<th>5</th>
 							</tr>
 						</table><br>
-						<input type="submit" value="확인하기">
+						<input type="submit" value="확인하기" class="btn btn-default"><br><br><br><br>
 					</form>
 				</div>
 			</div>
