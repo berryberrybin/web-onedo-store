@@ -37,14 +37,19 @@
 			let str="";
 			$.each(attrs,function(index,item){
 				str+=item.name+" : ";
-				for(let i=0;i<item.score;i++){
-					str+="★";
-				}
-				for(let i=5;i>item.score;i--){
-					str+="☆";
-				}
+				changeToStars(item.score);
 				str+="<br>"
 			});
+			
+			//5점 만점으로 별찍기 메소드
+			function changeToStars(num){
+				for(let i=0;i<num;i++){
+					str+="★";
+				}
+				for(let i=5;i>num;i--){
+					str+="☆";
+				}
+			}
 			
 			let goodsDetail="<h3 style='color:#363432'>"+"${goodsDTO.goodsDetail}"+"</h3><p>";
 			$("#goodsAttr").html(goodsDetail+"<h4 style='color:#FE980F'>"+str+"</h4>");
@@ -59,12 +64,21 @@
 		   			success :function(result){
 		   				str = "";
 		   				$.each(result, function(index, item){
-		   					alert(index);
 		   					str += "<tr>";
 		   					str += "<td>"+(index+1)+"</td>";
 		   					str += "<td><a href='#'>"+item.reviewSubject+"</a></td>";
-		   					str += "<td>"+item.reviewDate+"</td>";
-		   					str += "<td>"+item.reviewScore+"</td>";
+		   					str += "<td>"+item.reviewDate+"</td>"; //날짜 형식 바꾸기
+		   					//후기별점
+		   					let stars ="";
+	   						for(let i=0;i<item.reviewScore;i++){
+	   							stars+="★";
+	   						}
+	   						for(let i=5;i>item.reviewScore;i--){
+	   							stars+="☆";
+	   						}
+		   					str += "<td>"+stars+"</td>"; //별찍기로 표시
+		   					//str += "<td>"+item.reviewScore+"</td>"; //숫자로 표시
+		   					//str += "<td>"+changeToStars(item.reviewScore)+"</td>"; //ajax밖 메소드 호출시도
 		   					str += "</tr>";
 		   				});
 		   				
@@ -77,14 +91,14 @@
 		   			}  //실패했을때 실행할 함수 
 		   		});//ajax끝
 				
-			});
+			});//후기가져오기끝
 			
 		});
 	</script>
 	<style type="text/css">
 		#reviewTable{width: 100%;}
 		#reviewTable th,td{text-align: center;}
-		#reviewTable tr:nth-child(odd){background-color: #BDBDBD; color: white;}
+		#reviewTable th{background-color: #FE980F; color: white; padding: 5px;}
 	</style>
  </head>
 <body>
@@ -158,7 +172,7 @@
 				<li class="active"><a href="#details" data-toggle="tab">상세정보</a></li>
 				<li><a href="#searchQna" data-toggle="tab">상품문의</a></li>
 				<li><a href="#searchFaq" data-toggle="tab">자주묻는질문</a></li>
-				<li><a id="reviews" href="#searchReviews" data-toggle="tab">후기 (5)</a></li>
+				<li><a id="reviews" href="#searchReviews" data-toggle="tab">후기</a></li>
 			</ul>
 		</div>
 		<div class="tab-content">
