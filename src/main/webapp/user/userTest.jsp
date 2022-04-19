@@ -101,7 +101,7 @@
 					
 					if (delConfirm) {
 						$.ajax({
-				   			url :"../ajax" ,
+				   			url :"${path}/ajax" ,
 				   			type:"post", 
 				   			dataType:"text"  ,
 				   			data: {key : "ajaxUser", methodName : "typeUpdate", id : $(this).attr("name"), type : $(this).attr("value")} , 
