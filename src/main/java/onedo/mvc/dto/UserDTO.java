@@ -49,6 +49,20 @@ public class UserDTO {
 		this.gender = gender;
 		this.userType = userType;
 	}
+	
+
+	public UserDTO(String userId, String userPwd, String userName, String userPhone, String userAddr, String birth,
+			String gender, int userType) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.userPhone = userPhone;
+		this.userAddr = userAddr;
+		this.birth = birth;
+		this.gender = gender;
+		this.userType = userType;
+	}
 
 	public UserDTO(String userId, String userPwd, String userName, String userPhone, String userAddr, String birth,
 			String gender) {

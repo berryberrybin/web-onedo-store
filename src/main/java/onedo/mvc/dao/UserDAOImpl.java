@@ -65,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps =null;
 		ResultSet rs = null;
 		
-		String sql ="select user_id,user_pwd,user_name,user_phone,user_addr,TO_CHAR(birth, 'YYYYMMDD'),gender from users where user_id=? and user_pwd=?";
+		String sql ="select user_id,user_pwd,user_name,user_phone,user_addr,TO_CHAR(birth, 'YYYYMMDD'),gender,user_type from users where user_id=? and user_pwd=?";
 		UserDTO dbDTO = null;
 		
 		try {
@@ -78,7 +78,7 @@ public class UserDAOImpl implements UserDAO {
 			if(rs.next()) {
 				dbDTO = new UserDTO(rs.getString(1),
 						rs.getString(2), rs.getString(3),
-						rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+						rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8));
 			}
 			
 		}finally {
@@ -217,6 +217,32 @@ public class UserDAOImpl implements UserDAO {
 			DbUtil.dbClose( ps , con);
 		}
 		System.out.println(result);
+		return result;
+	}
+
+	@Override
+	public int dorCheck(String userId) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int result= 0;
+		String sql="select user_type from users where user_Id=?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			//?가 있다면 개수만큼 setXxx()필요
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
 		return result;
 	}
 			

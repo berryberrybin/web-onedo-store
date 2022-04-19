@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 		if(dbDTO==null) {
 			throw new AuthenticationException("회원 정보를 다시 입력해주세요");
 		}
-		
+
 		return dbDTO;
 	}
 
@@ -72,6 +72,16 @@ public class UserServiceImpl implements UserService {
 		}
 		int result = dao.userType(userId, type);
 		return result;
+	}
+
+	
+	@Override
+	public void dorCheck(String userId) throws SQLException, AuthenticationException {
+		int result = dao.dorCheck(userId);
+		if(result==2) {
+			throw new AuthenticationException("휴면 회원으로 전환되었습니다. 관리자에게 문의하세요.");
+		}
+		
 	}
 
 	

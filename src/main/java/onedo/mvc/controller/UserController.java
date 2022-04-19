@@ -53,6 +53,7 @@ public class UserController implements Controller {
 			String userPwd = request.getParameter("userPwd");
 			
 			//서비스 호출
+			userService.dorCheck(userId); //휴면회원 검증
 			UserDTO dbDTO = userService.loginCheck(new UserDTO(userId,userPwd));
 			
 			//로그인 성공 ↓
@@ -79,15 +80,6 @@ public class UserController implements Controller {
 		return new ModelAndView("index.jsp", true);
 	}
 	
-	/**
-	 * 아이디 비밀번호 찾기
-	 * */
-	public ModelAndView userFind (HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	
 	/**
 	 * 전체 회원 검색
@@ -99,7 +91,7 @@ public class UserController implements Controller {
 		List<UserDTO> list = userService.selectAll();
 
 		request.setAttribute("list", list);
-		return new ModelAndView("user/userAllTest.jsp");
+		return new ModelAndView("user/userTest.jsp");
 	}
 	
 	/**
@@ -145,11 +137,4 @@ public class UserController implements Controller {
 
 	}
 	
-	/**
-	 * 휴면 회원 (2일때 휴면 처리)
-	 * */
-	
-	
-	
-
 }

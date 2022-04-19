@@ -15,7 +15,7 @@ public interface UserDAO {
 	int join(UserDTO userDTO) throws SQLException;
 	
 	/**
-	 * 로그인 기능
+	 * 로그인 기능 (휴면회원 로그인 불가능)
 	 * */
 	UserDTO loginCheck(UserDTO userDTO)throws SQLException;
 	
@@ -27,6 +27,13 @@ public interface UserDAO {
 	 * */
      boolean idCheck(String userId);
 	
+     
+     /**
+      * 휴면 회원 여부 체크
+      * @reutrn: 1이면 정상회원이다, 2이면 휴면회원이다
+      * */
+     int dorCheck(String userId);
+     
 	
 	/**
 	 * 전체 회원 검색
