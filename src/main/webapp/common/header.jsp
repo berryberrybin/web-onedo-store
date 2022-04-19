@@ -31,7 +31,7 @@
 		$("#inputGoodsName").on("keyup",function(key){
 	        if(key.keyCode==13) {
 	        	let goodsName = $(this).val();
-				location.href="${path}/front?key=goods&methodName=selectMulipleGoods&searchField=goodsName&searchValue="+goodsName;
+				location.href="${path}/front?key=goods&methodName=selectMultipleGoods&searchField=goodsName&searchValue="+goodsName;
 	        }
 		});
 	});

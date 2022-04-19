@@ -14,11 +14,6 @@ public interface GoodsDAO {
 	List<GoodsDTO> selectAll() throws SQLException;
 	
 	/**
-	 * 상품 전체 검색(페이지처리)
-	 */
-	List<GoodsDTO> getBoardList(int pageNo) throws SQLException;
-
-	/**
 	 * 상품코드에 해당하는 상품검색
 	 */
 	GoodsDTO selectByGoodsCode(int goodsCode) throws SQLException;
@@ -60,7 +55,7 @@ public interface GoodsDAO {
 	/**
 	 *  상품이름이나 타입으로 상품검색
 	 * */
-	List<GoodsDTO> selectMulipleGoods(String searchField, String searchValue) throws SQLException;
+	List<GoodsDTO> selectMultipleGoods(String searchField, String searchValue, int pageNo) throws SQLException;
 
 
 

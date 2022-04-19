@@ -70,7 +70,10 @@ private Properties proFile = new Properties();
 		
 		List<QnaDTO> qnaList = new ArrayList<QnaDTO>();
 		
+
 		String sql = "select * from  (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM QnA_board ORDER BY qnaDate desc) a) where  rnum>=? and rnum <=?";
+
+
 		try {
 			
 			 //전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.

@@ -10,20 +10,14 @@ import onedo.mvc.dto.GoodsDTO;
 public class GoodsServiceImpl implements GoodsService {
 	private GoodsDAO goodsDAO = new GoodsDAOImpl();
 	
+	/**
+	 * 상품전체검색
+	 * */
 	@Override
 	public List<GoodsDTO> selectAll() throws SQLException {
         List<GoodsDTO> list = goodsDAO.selectAll();
         
 		return list;
-	}
-
-	/**
-	 * 상품전체검색
-	 * */
-	@Override
-	public List<GoodsDTO> selectAll(int pageNo) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	/**
@@ -54,9 +48,9 @@ public class GoodsServiceImpl implements GoodsService {
 	/**
 	 *  상품이름이나 타입으로 상품검색
 	 * */
-	public List<GoodsDTO> selectMulipleGoods(String searchField, String searchValue) throws SQLException {
-		List<GoodsDTO> list = goodsDAO.selectMulipleGoods(searchField, searchValue);
-		
+	public List<GoodsDTO> selectMultipleGoods(String searchField, String searchValue, int pageNo) throws SQLException {
+		List<GoodsDTO> list = goodsDAO.selectMultipleGoods(searchField, searchValue, pageNo);
+		System.out.println("service의 pageNo = " + pageNo);
 		return list;
 	}
 
