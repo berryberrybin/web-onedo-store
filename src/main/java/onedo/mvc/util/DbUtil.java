@@ -1,9 +1,11 @@
 package onedo.mvc.util;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,6 +18,7 @@ import javax.sql.DataSource;
  * */
 public class DbUtil {
 	static DataSource ds;
+	private static Properties proFile = new Properties();
 	
     /**
      * 로드
@@ -24,10 +27,16 @@ public class DbUtil {
 		try {
 		  Context initContext = new InitialContext();
 		  ds = (DataSource)initContext.lookup("java:/comp/env/jdbc/myoracle");
+		  proFile.load(new FileInputStream("resources/dbQuery.properties"));
 		  
+		  Class.forName(proFile.getProperty("driverName"));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static Properties getProFile() {
+		return proFile;
 	}
 	
 	/**

@@ -47,7 +47,6 @@ public class UserController implements Controller {
 	 * */
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
 			//넘어오는 userId, pwd 받기
 			String userId = request.getParameter("userId");
 			String userPwd = request.getParameter("userPwd");

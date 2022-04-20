@@ -15,20 +15,20 @@ import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
 public class FaqDAOImpl implements FaqDAO {
-private Properties proFile = new Properties();
-	
-	public FaqDAOImpl() {
-		try {
-			//proFile.load(new FileInputStream("src/~~~~"));
-			
-			//현재 프로젝트가 런타임(실행)될때, 즉 서버에서 실행될때 classes폴더의 위치를 동적으로 가져와서 경로를 설정해야한다.
-			proFile.load(getClass().getClassLoader().getResourceAsStream("dbQuery.properties"));
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	private Properties proFile = new Properties();
 		
-	}
+		public FaqDAOImpl() {
+			try {
+				//proFile.load(new FileInputStream("src/~~~~"));
+				
+				//현재 프로젝트가 런타임(실행)될때, 즉 서버에서 실행될때 classes폴더의 위치를 동적으로 가져와서 경로를 설정해야한다.
+				proFile.load(getClass().getClassLoader().getResourceAsStream("dbQuery.properties"));
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 
 	@Override
 	public List<FaqDTO> selectAll() throws SQLException {

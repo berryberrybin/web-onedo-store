@@ -1,31 +1,25 @@
 package onedo.mvc.dto;
 
 public class OrdersDTO {
-	private int orderCode;
 	private int stateNo;
 	private String userId;
 	private String orderDate;
 	private String orderAddr;
 	private String orderPhone;
 	private int orderPrice;
+
 	public OrdersDTO() {}
 	
-	public OrdersDTO(int orderCode, String userId, String orderAddr, String orderPhone, int orderPrice) {
+	public OrdersDTO(String userId, String orderAddr, String orderPhone, int orderPrice) {
 		super();
-		this.orderCode = orderCode;
+
 		this.userId = userId;
 		this.orderAddr = orderAddr;
 		this.orderPhone = orderPhone;
 		this.orderPrice = orderPrice;
 	}
 
-	public int getOrderCode() {
-		return orderCode;
-	}
 
-	public void setOrderCode(int orderCode) {
-		this.orderCode = orderCode;
-	}
 
 	public int getStateNo() {
 		return stateNo;
@@ -74,7 +68,8 @@ public class OrdersDTO {
 	public void setOrderPrice(int orderPrice) {
 		this.orderPrice = orderPrice;
 	}
-	
+
+
 	
 
 }

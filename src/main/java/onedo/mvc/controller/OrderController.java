@@ -10,14 +10,14 @@ import javax.servlet.http.HttpSession;
 
 import onedo.mvc.dto.CartDTO;
 import onedo.mvc.dto.CartItemDTO;
-import onedo.mvc.dto.UserDTO;
 import onedo.mvc.dto.OrdersDTO;
+import onedo.mvc.dto.UserDTO;
 import onedo.mvc.service.CartService;
 import onedo.mvc.service.CartServiceImpl;
 import onedo.mvc.service.OrderService;
 import onedo.mvc.service.OrderServiceImpl;
 
-public class OrdersController implements Controller {
+public class OrderController implements Controller {
 	private OrderService orderService = new OrderServiceImpl();
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
@@ -31,6 +31,8 @@ public class OrdersController implements Controller {
 	 */
 	public ModelAndView orders(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
+   
+		
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
@@ -39,17 +41,15 @@ public class OrdersController implements Controller {
 		
 		CartService cartService = CartServiceImpl.getInstance();
 		CartDTO cartDto =cartService.getCart(userId);
-		
-		List<CartItemDTO> cartList = cartDto.getCartItemList();
-        System.out.println("cartList : " + cartList.get(0).getGoods().getGoodsName());
-        String orderCode = request.getParameter("orderCode");
+
         String orderPrice = request.getParameter("orderPrice");
         String userAddr = request.getParameter("userAddr");
         String userPhone = request.getParameter("userPhone");
-		System.out.println(orderCode + orderPrice + userAddr + userPhone);
+
 		
-		orderService.orders(new OrdersDTO(Integer.parseInt(orderCode), userId, userAddr, userPhone, Integer.parseInt(orderPrice))); 
-		
+		OrdersDTO dto = new OrdersDTO(userId, userAddr, userPhone, Integer.parseInt(orderPrice));
+				
+		orderService.ordersInsert(dto, cartDto); 
 		
 		
 		

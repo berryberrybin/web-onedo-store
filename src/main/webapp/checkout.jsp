@@ -73,8 +73,8 @@
 				    } else {
 				    	 //var msg = '결제에 실패하였습니다.';
 				        // msg += '에러내용 : ' + rsp.error_msg;
-				         $("#payForm #key").val("orders");
-					     $("#payForm #methodName").val("orderLine");
+				         $("#payForm #key").val("order");
+					     $("#payForm #methodName").val("orders");
 					     $("#payForm #orderCode").val(uid);
 				         $("#payForm").submit();
 				    }
@@ -237,7 +237,7 @@ td {
 </div>
 <form method="post" action="${path}/front" id="payForm">
 	<!-- 결재가 완료되었을때 가지고 가이동할 값들 설 -->
-	<input type="hidden" name="key" id="key" value="orders" />
+	<input type="hidden" name="key" id="key" value="order" />
 	<input type="hidden" name="methodName" id="methodName" value="orders" />
 	<input type="hidden" name="orderCode" id="orderCode" value="" />
 	<input type="hidden" name="orderPrice" id="orderPrice" value="${totalItemPrice}" />

@@ -30,7 +30,7 @@
          auth="Container"
          type="javax.sql.DataSource" 
          driverClassName="oracle.jdbc.OracleDriver"
-          url="jdbc:oracle:thin:@stationery_high?TNS_ADMIN=wallet/Wallet_stationery"
+          url="jdbc:oracle:thin:@stationery_medium?TNS_ADMIN=C:/wallet/Wallet_stationery"
          username="admin" 
          password="kostaTeamNo2" 
          maxActive="20" 

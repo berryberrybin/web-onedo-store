@@ -12,11 +12,8 @@ import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.util.DbUtil;
 
 public class SurveyDAOImpl implements SurveyDAO {
-	private Properties proFile = new Properties();
+private Properties proFile = new Properties();
 	
-	/**
-	 * dbQuer.properties로딩해서 Properties객체에 저장
-	 */
 	public SurveyDAOImpl() {
 		try {
 			//proFile.load(new FileInputStream("src/~~~~"));
@@ -29,7 +26,6 @@ public class SurveyDAOImpl implements SurveyDAO {
 		}
 		
 	}
-	
 	@Override
 	public List<GoodsAttrDTO> survey(int sour, int body, int sweet, int aroma) throws SQLException {
 		Connection con=null;
