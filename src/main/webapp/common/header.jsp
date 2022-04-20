@@ -26,6 +26,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.contextPath}/images/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/images/ico/apple-touch-icon-57-precomposed.png">
 <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- 날짜형식변환 -->
 <script type="text/javascript">
 	$(function(){
 		$("#inputGoodsName").on("keyup",function(key){
