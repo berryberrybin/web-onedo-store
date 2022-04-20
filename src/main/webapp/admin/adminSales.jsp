@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="common/header.jsp" />
+<jsp:include page="../common/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,21 +29,28 @@
 <link rel="apple-touch-icon-precomposed" href="${path}/images/ico/apple-touch-icon-57-precomposed.png">
 
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript"> 
-google.charts.load('current', {'packages':['corechart']}); 
-google.charts.setOnLoadCallback(drawChart); 
 
-function drawChart() {
-	var data = google.visualization.arrayToDataTable([ ['goodsName', 'quantity'], ${result} ]); 
-	var options = { 
-		title: '상품별 주문 통계',
-		colors: ['#FF9AA2', '#FFDAC1', '#E2F0CB', '#B5EAD7', '#C7CEEA', '#FFB7B2']
-	}; 
-	var chart = new google.visualization.PieChart(document.getElementById('piechart')); 
-	chart.draw(data, options); } 
-</script>
 
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['주문 일자', '총 매출금액', '누적 매출금'],${result}
+        ]);
+
+        var options = {
+          title: '일자별 주문통계',
+          pointSize: 10,
+          curveType: 'function'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 
 <style>
 td {
@@ -77,10 +84,10 @@ td {
 									</ul></li>
 								<li class="dropdown"><a href="#">매출관리<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
-										<li><a href="front?key=sales&methodName=selectByOrderDate">일별매출조회</a></li>
-										<li><a href="blog.html">조건별 매출조회</a></li>
-										<li><a href="front?key=sales&methodName=selectByGoodsCode">상품별 매출조회</a></li>
-									</ul></li>
+										<li><a href="${path}/front?key=sales&methodName=selectByOrderDate">일별 매출조회</a></li>
+										<li><a href="${path}/front?key=sales&methodName=selectAll">전체 매출조회</a></li>
+										<li><a href="${path}/front?key=sales&methodName=selectByGoodsCode">상품별 매출조회</a></li>
+										</ul></li>
 							</ul>
 						</div>
 
@@ -95,9 +102,8 @@ td {
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="name">상품명</td>
-							<td class="code">상품코드</td>
-							<td class="quantity">총 주문 수량</td>
+							<td class="orderDate">주문 일자</td>
+							<td class="totalSales">총 매출 합계</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -114,20 +120,15 @@ td {
 							<c:otherwise>
 								<c:forEach items="${requestScope.salesList}" var="salesDTO">
 									<tr>
-										<td class="itemName">
+										<td class="orderDate">
 											<h4>
-												<a href="">${salesDTO.goodsName}</a>
+												<a href="">${salesDTO.orderDate}</a>
 											</h4>
 										</td>
 
-										<td class="itemCode">
+										<td class="totalSales">
 											<h4>
-												<a href="">${salesDTO.goodsCode}</a>
-											</h4>
-										</td>
-										<td class="itemPrice">
-											<h4>
-												<p>${salesDTO.orderQuantity}</p>
+												<a href="">${salesDTO.orderPrice}</a>
 											</h4>
 										</td>
 									</tr>
@@ -139,11 +140,11 @@ td {
 			</div>
 		</div>
 	</section>
-	
-	<div id="piechart" style="width: 1400px; height: 500px; margin:0 auto;"></div>
+	  <div id="chart_div" style="width: 1400px; height: 500px; margin:0 auto;"></div>
+
 
 	<!--/#do_action-->
 
 </body>
-<jsp:include page="common/footer.jsp" />
+<jsp:include page="../common/footer.jsp" />
 </html>
