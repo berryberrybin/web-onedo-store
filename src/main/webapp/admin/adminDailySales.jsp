@@ -42,8 +42,7 @@ td {
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="jquery.tablesorter.min.js"></script>
-<link rel="stylesheet" href="blue_style.css" type="text/css">
-<link rel="stylesheet" href="green_style.css" type="text/css">
+<link rel="stylesheet" href="css/blue_style.css" type="text/css">
 
 
 
