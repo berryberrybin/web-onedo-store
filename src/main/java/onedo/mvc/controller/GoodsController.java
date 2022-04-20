@@ -96,6 +96,11 @@ public class GoodsController implements Controller {
 	/**
 	 * 이미지 넣기
 	 * */
+	public ModelAndView insertGoodsImg(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		return null;
+	}
 	
 	
 }

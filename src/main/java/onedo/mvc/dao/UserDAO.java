@@ -3,6 +3,7 @@ package onedo.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 
 public interface UserDAO {
@@ -46,15 +47,18 @@ public interface UserDAO {
 	 * */
 	int update(UserDTO userDTO);
 	
-	
-	/**
-	 * 회원 삭제 (해당 ID의 회원 삭제)
-	 * */
-	int delete(String userId);
-	
+
 	/**
 	 * 회원타입변경
 	 */
 	int userType(String userId, int type);
+	
+	
+	/**
+	 * 마이페이지에서 나의 주문 목록 조회하기
+	 * */
+	List<SalesDTO> selectMyOrder(String userId) throws SQLException;
+	
+	
 
 }

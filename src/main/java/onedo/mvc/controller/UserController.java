@@ -1,6 +1,7 @@
 package onedo.mvc.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 import onedo.mvc.service.UserService;
 import onedo.mvc.service.UserServiceImpl;
@@ -112,28 +114,29 @@ public class UserController implements Controller {
 		UserDTO userDTO = new UserDTO(userId,userPwd,userName,userPhone,userAddr,birth,gender);
 		userService.update(userDTO);
 		
-		/*
-		 * try { userService.selectAll(); }catch(Exception e){ e.printStackTrace(); }
-		 * request.setAttribute("list", list);
-		 */
-		
 		return new ModelAndView("user/modifyOk.jsp");
 	}
 	
-	
 	/**
-	 * 회원 삭제
+	 * 마이페이지
 	 * */
-	public void userDelete (HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView myPage (HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
-		String userId = request.getParameter("userId");
-		
-		/*
-		 * try { userService.delete(); }catch(Exception e){ e.printStackTrace(); }
-		 * request.setAttribute("list", list);
-		 */
+		response.setContentType("text/html;charset=UTF-8");
 
+		//세션에 저장된 유저 아이디 불러오기
+		HttpSession session = request.getSession();
+		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
+		String userId = dbDTO.getUserId();
+		
+		//가져온 아이디로 DB호출
+		List<SalesDTO> myList = userService.selectMyOrder(userId);
+
+		request.setAttribute("myList", myList);
+		return new ModelAndView("user/myPage.jsp");
 	}
+	
+
+	
 	
 }

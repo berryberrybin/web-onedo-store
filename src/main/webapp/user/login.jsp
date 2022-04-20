@@ -29,8 +29,23 @@
     
  </head>
  
+ 	<script type="text/javascript"> //비밀번호 눈
+	    $(document).ready(function(){
+	        $('.pw i').on('click',function(){
+	            $('input').toggleClass('active');
+	            if($('input').hasClass('active')){
+	                $(this).attr('class',"fa fa-eye-slash fa-lg")
+	                .prev('input').attr('type',"text");
+	            }else{
+	                $(this).attr('class',"fa fa-eye fa-lg")
+	                .prev('input').attr('type','password');
+	            }
+	        });
+	    });
+    </script>
+ 
  	<script type="text/javascript">
-	//회원가입 폼 유효성 체크
+	//로그인 폼 유효성 체크
 	
 	function loginCheck() {
 		//변수에 입력 값 담기
@@ -80,11 +95,11 @@
 							<input type="hidden" name="methodName" value = "login" />  <!-- 메소드이름 -->
 							<input type="text" class="form-control" id="userId" name="userId"
 							placeholder="아이디" onkeyup="chkCharCode(event)" onKeyDown="if(event.keyCode == 13) loginCheck()"/>
+							<div class="pw">
 							<input type="password" class="form-control" id="userPwd" name="userPwd"
 							placeholder="비밀번호" onKeyDown="if(event.keyCode == 13) loginCheck()"/>
-							<span>
-								<a href="signup.jsp">회원가입</a>
-							</span>
+							<i class="fa fa-eye fa-lg"></i>&nbsp;&nbsp;&nbsp;<span><a href="signup.jsp">회원가입</a></span>
+							</div>
 							<button type="button" onclick="loginCheck();" class="btn btn-default">로그인</button>
 						</form>
 					</div><!--/login form-->

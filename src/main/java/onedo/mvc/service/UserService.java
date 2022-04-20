@@ -3,6 +3,7 @@ package onedo.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 import onedo.mvc.exception.AuthenticationException;
 
@@ -44,15 +45,18 @@ public interface UserService {
 	 * */
 	void update(UserDTO userDTO) throws SQLException, AuthenticationException;
 	
-	
-	/**
-	 * 회원 삭제 (해당 ID의 회원 삭제)
-	 * */
-	void delete(String userId) throws SQLException, AuthenticationException;
 
 	/**
 	 * 유저타입변경
 	 */
 	int typeUpdate(String userId, String userType) throws Exception;
 
+	
+	/**
+	 * 마이페이지 
+	 * @param userId 
+	 * */
+	List<SalesDTO> selectMyOrder(String userId) throws SQLException;
+
+	
 }

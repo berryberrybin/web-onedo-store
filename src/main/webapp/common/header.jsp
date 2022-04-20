@@ -112,7 +112,7 @@
 									<c:if test="${not empty loginUser}">
 										<ul class="nav navbar-nav">
 											<%-- <li class="active"><a href="#">${loginUser.userId}님</a></li> --%>
-											<li><a href="${path}/user/myPage.jsp"><i class="fa fa-user"></i>   ${loginUser.userId}님</a></li>
+											<li><a href="${path}/front?key=user&methodName=myPage"><i class="fa fa-user"></i>   ${loginUser.userId}님</a></li>
 										</ul>
 									</c:if>
 								</c:otherwise>

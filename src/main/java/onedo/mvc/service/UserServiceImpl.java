@@ -5,6 +5,7 @@ import java.util.List;
 
 import onedo.mvc.dao.UserDAO;
 import onedo.mvc.dao.UserDAOImpl;
+import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 import onedo.mvc.exception.AuthenticationException;
 
@@ -46,14 +47,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void delete(String userId) throws SQLException, AuthenticationException {
-		int result = dao.delete(userId);
-		if(result==0) {
-			throw new AuthenticationException("회원정보 삭제에 실패했습니다.");
-		}
-	}
-
-	@Override
 	public boolean idCheck(String userId) throws SQLException, AuthenticationException {
 		boolean result = dao.idCheck(userId);
 		if(result==false) {
@@ -82,6 +75,12 @@ public class UserServiceImpl implements UserService {
 			throw new AuthenticationException("휴면 회원으로 전환되었습니다. 관리자에게 문의하세요.");
 		}
 		
+	}
+
+	@Override
+	public List<SalesDTO> selectMyOrder(String userId) throws SQLException {
+		List<SalesDTO> myList = dao.selectMyOrder(userId);
+		return myList;
 	}
 
 	

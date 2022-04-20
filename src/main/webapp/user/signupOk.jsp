@@ -49,7 +49,7 @@
 	<section id="form"><!--form-->
 			<div id="logo" class="row">
 				<div class="col-md-6 col-md-offset-2">
-						<h2>회원 가입 완료되었습니다.</h2><br><br>
+						<h2>회원 가입이 완료되었습니다.</h2><br><br>
 						<button type="button" id="btn" class="btn btn-default" onclick="location.href='login.jsp' ">로그인 하기</button>
 					</div>
 <%-- 				<div class="col-md-4 col-md-offset-4">

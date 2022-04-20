@@ -8,6 +8,8 @@ public class SalesDTO {
 	private String userId;
 	private String orderDate;
 	private int orderPrice;
+	private int orderCode;
+	private int orderLineCode;
 
 	public SalesDTO(int goodsCode, int goods_price, int orderQuantity, String userId, String orderDate,
 			int orderPrice) {
@@ -39,6 +41,22 @@ public class SalesDTO {
 		this.goodsName = goodsName;
 		this.goodsCode = goodsCode;
 		this.orderQuantity = orderQuantity;
+	}
+
+
+
+
+
+	public SalesDTO(String goodsName, int goodsCode, int orderQuantity, String orderDate, int orderPrice, int orderCode,
+			int orderLineCode) {
+		super();
+		this.goodsName = goodsName;
+		this.goodsCode = goodsCode;
+		this.orderQuantity = orderQuantity;
+		this.orderDate = orderDate;
+		this.orderPrice = orderPrice;
+		this.orderCode = orderCode;
+		this.orderLineCode = orderLineCode;
 	}
 
 
@@ -109,4 +127,23 @@ public class SalesDTO {
 		this.goods_price = goods_price;
 	}
 
+	public int getOrderCode() {
+		return orderCode;
+	}
+
+	public void setOrderCode(int orderCode) {
+		this.orderCode = orderCode;
+	}
+
+	public int getOrderLineCode() {
+		return orderLineCode;
+	}
+
+	public void setOrderLineCode(int orderLineCode) {
+		this.orderLineCode = orderLineCode;
+	}
+
+	
+	
+	
 }
