@@ -14,21 +14,6 @@ import onedo.mvc.util.DbUtil;
 
 public class UserDAOImpl implements UserDAO {
 	private Properties proFile = new Properties();
-	
-	/**
-	 * dbQuery.properties 로딩해서 Properties 객체에 저장!!
-	 * */
-	public UserDAOImpl() {
-		try {
-			//proFile.load(new FileInputStream("src/~"));
-			//현재 프로젝트가 런타임(실행)될때, 즉 서버에서 실행될때 classes 폴더의 위치를 동적으로 가져와서 경로를 설정해야한다.
-			proFile.load(getClass().getClassLoader().getResourceAsStream("dbQuery.properties"));
-			//String value = proFile.getProperty("user.select");
-			//System.out.println("value = " + value);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public int join(UserDTO userDTO) throws SQLException {

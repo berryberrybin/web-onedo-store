@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import onedo.mvc.dto.GoodsAttrDTO;
+import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.service.SurveyService;
 import onedo.mvc.service.SurveyServiceImpl;
 
@@ -31,9 +32,8 @@ public class SurveyController implements Controller {
 		String body = request.getParameter("body");
 		String sweet = request.getParameter("sweet");
 		String aroma = request.getParameter("aroma");
-		System.out.println("sour = " + sour + " body = " + body + " sweet = " + sweet + " aroma = " + aroma);
-		
-		List<GoodsAttrDTO> list = surveyService.survey(Integer.parseInt(sour), Integer.parseInt(body), Integer.parseInt(sweet), Integer.parseInt(aroma));
+
+		List<GoodsDTO> list = surveyService.survey(new GoodsAttrDTO(Integer.parseInt(sour),  Integer.parseInt(sweet), Integer.parseInt(aroma), Integer.parseInt(body)) );
 		
 		request.setAttribute("list", list);
 		

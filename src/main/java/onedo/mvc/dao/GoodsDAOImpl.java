@@ -15,15 +15,6 @@ import onedo.mvc.util.DbUtil;
 
 public class GoodsDAOImpl implements GoodsDAO {
 	private Properties proFile = new Properties();
-
-	public GoodsDAOImpl() {
-		try {
-			proFile.load(getClass().getClassLoader().getResourceAsStream("dbQuery.properties"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	GoodsDTO goodsDTO = new GoodsDTO();
 
 	/**
