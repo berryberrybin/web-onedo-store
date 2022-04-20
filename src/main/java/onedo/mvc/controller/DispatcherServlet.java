@@ -38,7 +38,7 @@ public class DispatcherServlet extends HttpServlet {
 		}
 		
 		if(methodName==null || methodName.equals("")) {
-			methodName="searchSelectAll";
+			methodName="selectGoodsOrderBySalesRank";
 		}
 		System.out.println("key = " + key + " methodName = " + methodName);
 		

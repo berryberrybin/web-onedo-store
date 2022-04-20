@@ -75,6 +75,16 @@ public class GoodsServiceImpl implements GoodsService {
 		return result;
 
 	}
+
+	/**
+	 * 판매량 순으로 상품검색
+	 * */
+	@Override
+	public List<GoodsDTO> selectGoodsOrderBySalesRank() throws SQLException {
+        List<GoodsDTO> list = goodsDAO.selectGoodsOrderBySalesRank();
+        
+		return list;
+	}
 	
 	/**
 	 * 상품 이미지 등록

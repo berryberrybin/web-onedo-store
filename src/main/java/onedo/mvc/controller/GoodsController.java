@@ -42,7 +42,23 @@ public class GoodsController implements Controller {
 		return new ModelAndView("main.jsp");
 	}
 	
-	
+	/**
+	 * 판매량 순으로 상품검색
+	 * */
+	public ModelAndView selectGoodsOrderBySalesRank(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		List<GoodsDTO> list = null;
+
+		try {
+			list = service.selectGoodsOrderBySalesRank();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ModelAndView("error/error.jsp");
+		}
+
+		request.setAttribute("list", list);
+		return new ModelAndView("main.jsp");
+	}
 	/**
 	 *  상품이름이나 타입으로 상품검색
 	 * */
