@@ -71,7 +71,7 @@ public class SalesController implements Controller {
 		}
 		request.setAttribute("result", result);
 
-		return new ModelAndView("admin/adminSales.jsp");
+		return new ModelAndView("admin/adminGoodsSales.jsp");
 	}
 
 	public ModelAndView selectByOrderDate(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -99,7 +99,7 @@ public class SalesController implements Controller {
 		}
 		request.setAttribute("result", result);
 
-		return new ModelAndView("admin/adminDailySales.jsp");
+		return new ModelAndView("admin/adminSales.jsp");
 	}
 
 }
