@@ -43,10 +43,13 @@ public class CartController implements Controller {
 	 */
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
 		String userId = dbDTO.getUserId();
+		
+		
 		String goodsCode = request.getParameter("goodsCode");
 		GoodsDTO goods = goodsService.selectByGoodsCode(goodsCode, false);
 		int amount = 1;
@@ -188,10 +191,11 @@ public class CartController implements Controller {
 		for (CartItemDTO cartItem : cartItemList) {
 			if (cartItem.getGoods().getGoodsCode() == Integer.parseInt(goodsCode)) {
 				int originAmount = cartItem.getAmount();
-				if (originAmount > 0) {
+				if (originAmount > 1) {
 					cartItem.setAmount(--originAmount);
-				} else {
-					cartItem.setAmount(0);
+				}
+				else {
+					cartItem.setAmount(1);
 				}
 			}
 
