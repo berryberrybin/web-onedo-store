@@ -151,12 +151,14 @@ public class GoodsDAOImpl implements GoodsDAO {
 			con = DbUtil.getConnection();
 			con.setAutoCommit(false);
 			ps = con.prepareStatement(sql);
-			ps.setString(1, goodsDTO.getGoodsName());
-			ps.setInt(2, goodsDTO.getGoodsPrice());
-			ps.setInt(3, goodsDTO.getGoodsStock());
-			ps.setString(4, goodsDTO.getGoodsDetail());
-			ps.setInt(5, goodsDTO.getIsSoldout());
-			ps.setString(6, goodsDTO.getGoodsImg());
+			
+			ps.setString(1, goodsDTO.getGoodsType());
+			ps.setString(2, goodsDTO.getGoodsName());
+			ps.setInt(3, goodsDTO.getGoodsPrice());
+			ps.setInt(4, goodsDTO.getGoodsStock());
+			ps.setString(5, goodsDTO.getGoodsDetail());
+			ps.setInt(6, goodsDTO.getIsSoldout());	
+			ps.setInt(7, goodsDTO.getGoodsCode());
 
 			result = ps.executeUpdate();
 			con.commit();
@@ -190,9 +192,6 @@ public class GoodsDAOImpl implements GoodsDAO {
 		
 	}
 	
-	
-	  
-	 
 
 	/**
 	 * 상품 품절 자동처리

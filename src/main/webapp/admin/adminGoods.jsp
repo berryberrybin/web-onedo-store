@@ -9,25 +9,73 @@
 <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
 
 <style>
-	.a {border: solid red 5px}
-	table {width: 100%}
-	th, td {border: 1px gray solid;text-align: center;padding: 3px}
 	h2 {text-align: left;}
 	a {text-decoration: none;}
 	a:hover {color: red}
-	textarea{width:100px; height:100px; float: right;}
-	input, select{
-		border: solid gray 1px
-		width: 250px;
+
+	table{
+		width: 100%; 
+		border-top: 1px solid #555555; 
+		border-collspse: collapse; text-align: center;
 	}
-	form{
-		width: 250px;
+	
+	th {
+		border-left: none; 
+		padding: 10px;
+		text-align: center;
 	}
-	.col-sm-5 clearfix{
-		position: absolute;
-		float: right;
+			
+	td {
+		border-bottom: 1px solid  #555555 ;
+		border-left: none; 
+		padding: 10px;
+		text-align: center;
+		background-color: white;
 	}
-	#inForm{width: 100%}
+	
+	/* table th: first-child, td:first-child{border-left: none;} */
+	
+	input[type="text"],[type="number"]{
+		width:100%;
+		height:50px;
+		border: none;
+		text-align: center;
+		background-color: white; 
+		box-sizing: content-box;
+		font-size: 20px;
+	}
+	textarea{
+		width:100px; 
+		height:50px;
+		border: none;
+		text-align: center;
+		background-color: white;
+	}
+	select{
+		width:100px; 
+		border: none;
+		text-align: center;
+		padding: 5px;
+		background: transparent;
+		font-size: 20px; 
+	}
+	input[type="button"]{
+		border: none;
+		text-align: center;
+		background: transparent; 
+	}
+	
+	#btn{
+	    width:30%;
+	    height:30px;
+		border: 1px solid;
+		text-align: center;
+		background-color: #c0b9b0;
+		font-size: 20px;
+	}
+	
+
+	
 	
 </style>
 <script type="text/javascript">
@@ -50,13 +98,13 @@
 						str += "<td>" + item.goodsPrice + "</td>";
 						str += "<td>" + item.goodsStock + "</td>";
 						str += "<td><span>" + item.isSoldout +"</span><span style='display:none'>"+item.goodsDetail+"</span></td>";
-						str += `<td><input type='button' value='이미지넣기'></td>`;
+						str += `<td><input type='button' value='첨부' onclick='location.href="${path}/admin/insertGoodsImg.jsp"'></td>`;
 						str += `<td><input type='button' value='삭제' name='${'${item.goodsCode}'}'></td>`;
 						str += "</tr>";
 					});
 					$("#goodstable tr:gt(0)").remove();
 					$("#goodstable tr:eq(0)").after(str);
-
+					
 				},
 				error : function(err) {
 					alert(err + "에러 발생했습니다.");
@@ -72,22 +120,18 @@
 				
 			$("input[type=text], [type=select]").each(function(index, item) { 
 				if($(this).val()==""){
-					alert("값을 입력해 주세요.");
+					alert("값을 빠짐없이 입력해 주세요.");
 					$(this).focus();
 	
 					state = false;
 					return false;
 				}
 			});
-		
 			
 			if (state) {
 				 if ($(this).val == "수정") {
-					$("[name=methodName]").val("insert");  //수정이지만, insert메소드로
-				
-					//버튼글씨 '등록' 변경,  readonly속성제거
+					$("[name=methodName]").val("update");
 					$("#btn").val("등록");
-					
 				}  
 
 				 $.ajax({  //등록
@@ -97,15 +141,17 @@
 					data : $("#inForm").serialize(),
 					success : function(result) {
 						if (result == 0) {
-							alert("실패하였습니다!"); //
+							alert("상품 등록을 실패하였습니다.");
 						} else {
 						  
 							//text내용 지우고 화면 갱신
-							alert("등록성공하였습니다!"); 
-							$("input[type=text] ,[type=select], [type=number]").val("");
+							alert("상품 등록을 완료하였습니다."); 
+							$("input[type=text], [type=number]").val("");
+							$("#goodsType").val("");
+							$("#isSoldout").val("");
 							$("#goodsDetail").val("");
 							selectAll();
-							$("[name=methodName]").val("insert"); //등록이라 insert메소드
+							$("[name=methodName]").val("insert");
 						}
 
 					}, 
@@ -131,7 +177,7 @@
 			let goodsDetail  = goodsType.next();
 			
 			//상품코드 저장하기 
-			$("#goodsCode").val($(this).text());
+			$("#goodsCode").val($(this).parent().text());
 			$("#goodsType").val($(this).parent().next().text());
 			$("#goodsName").val(goodsName.text());
 			$("#goodsPrice").val(goodsPrice.text());
@@ -139,10 +185,12 @@
 			$("#isSoldout").val(isSoldout.find("span:first").text());
 			$("#goodsDetail").text(isSoldout.find("span:last").text());
 			
+			
 			$("#goodsCode").attr("readonly", "readonly");
 			$("#btn").val("수정");
-			
 			$("h2").text("상품수정");
+			$("[name=methodName]").val("update");
+			
 		});
 		
 
@@ -154,10 +202,11 @@
 	   			dataType:"text", 
 	   			data: {key:"ajaxGoods", methodName:"delete", goodsCode : $(this).attr("name") }, //서버에게 보낼 데이터정보(parameter정보)
 	   			success :function(result){
+	   				alert("상품 삭제 완료되었습니다.");
 	   				selectAll();
 	   			} ,
 	   			error : function(err){  
-	   				alert(err+"에러 발생했어요.");
+	   				alert(err+"에러가 발생했습니다.");
 	   			}  
 	   		}); //ajax끝
 	   		
@@ -171,40 +220,37 @@
 
 	<section id="cart_items">
 		<div class="container">
-
 				<h2>상품등록</h2>
-			
-			
+
 			<form name="inForm" method="post" id="inForm">
-				<table cellspacing="0">
+				<table id=insertTable>
 					<tr>
-						<td colspan="2"><input type="text" size="50" name="goodsName" id="goodsName" placeholder="상품이름"></td>
-		
+						<td colspan="2"><input type="text" name="goodsName" id="goodsName" placeholder="상품이름"></td>
 					</tr>
 					<tr>
 					    <td>
-							<select name="goodsType" id="goodsType">
-								<option value="">-- 상품타입 --</option>
+							<select name="goodsType" id="goodsType" style="font-size: 20px; background-color: white;">
+								<option value="">상품타입</option>
 								<option value="O">원두</option>
 								<option value="D">드립백</option>
 								<option value="C">캡슐</option>
-							</select><br><br>
+							</select>
 						</td>
-						<td><input type="number" size="50" name="goodsPrice" id="goodsPrice" placeholder="상품가격"></td>
+						<td><input type="number" name="goodsPrice" id="goodsPrice" placeholder="상품가격"></td>
 					</tr>
 					<tr>
 					    <td>
-							<select name="isSoldout" id="isSoldout">
-								<option value="">-- 품절여부 --</option>
+							<select name="isSoldout" id="isSoldout" style="font-size: 20px; background-color: white;">
+								<option value="">품절여부</option>
 								<option value="0">판매중</option>
 								<option value="1">품절</option>
 								<option value="2">판매중지</option>
 							</select>
 						</td>
-						<td><input type="number" size="50" name="goodsStock" id="goodsStock" placeholder="상품수량"></td>
+						<td><input type="number" name="goodsStock" id="goodsStock" placeholder="상품수량"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><textarea name="goodsDetail" id="goodsDetail" placeholder="상품설명"></textarea></td>
+						<td colspan="2"><textarea name="goodsDetail" id="goodsDetail" style="font-size: 20px; background-color: white;" placeholder="상품설명"></textarea></td>
 						
 					</tr>
 					<tr>
@@ -213,13 +259,14 @@
 							<input type="hidden" name="key" value="ajaxGoods">
 							<input type="hidden" name="methodName" value="insert">
 							<input type="button" value="등록"  id="btn">
+							
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
 		
-		<br><br><hr><br>
+		<br><hr><br>
 		
 		
 				<table class="table" id="goodstable">
@@ -230,7 +277,7 @@
 						<td class="goodsPrice">상품가격</td>
 						<td class="goodsStock">상품재고</td>
 						<td class="isSoldout">품절여부</td>
-						<td class="addImg">이미지추가</td>
+						<td class="addImg">이미지</td>
 						<td class="isSoldout">삭제</td>
 					</tr>
 				</table>

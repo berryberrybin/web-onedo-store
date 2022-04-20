@@ -147,7 +147,7 @@
 <!-- 								<li><a href="index.html" class="active">Home</a></li>
  -->								<li class="dropdown"><a href="#">상품관리<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
-										<li><a href="${path}/front">상품조회</a></li>
+										<li><a href="${path}/admin/adminGoods.jsp">상품조회</a></li>
 									</ul></li>
 								<li class="dropdown"><a href="#">회원관리<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">

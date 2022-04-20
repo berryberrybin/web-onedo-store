@@ -35,7 +35,7 @@ public interface GoodsService {
 	/**
 	 * GoodsDAOImpl의 상품코드에 해당하는 레코드 수정 메소드 호출
 	 */
-	void update(GoodsDTO goodsDTO) throws SQLException;
+	int update(GoodsDTO goodsDTO) throws SQLException;
 
 	/**
 	 *  상품이름이나 타입으로 상품검색

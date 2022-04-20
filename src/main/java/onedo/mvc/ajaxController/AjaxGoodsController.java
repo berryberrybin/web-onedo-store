@@ -21,7 +21,8 @@ import onedo.mvc.service.GoodsServiceImpl;
 
 public class AjaxGoodsController implements AjaxController {
 	GoodsService goodsService = new GoodsServiceImpl();
-	private GoodsDAO goodsDAO = new GoodsDAOImpl();
+    GoodsDAO goodsDAO = new GoodsDAOImpl();
+	
 	@Override
 	public void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,7 +30,7 @@ public class AjaxGoodsController implements AjaxController {
 	}
 	
 	/**
-	 * 상품등록&수정
+	 * 상품등록
 	 * */
 	public void insert(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -53,6 +54,37 @@ public class AjaxGoodsController implements AjaxController {
 	    out.print(result); //0,1
 	    
 	}
+	
+	/**
+	 * 상품 수정
+	 * */
+	public void update(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String goodsCode = request.getParameter("goodsCode");
+		String goodsType = request.getParameter("goodsType");
+		String goodsName = request.getParameter("goodsName");
+		String goodsPrice = request.getParameter("goodsPrice");
+		String goodsStock = request.getParameter("goodsStock");
+		String goodsDetail = request.getParameter("goodsDetail");
+		String isSoldout = request.getParameter("isSoldout");
+		
+		System.out.println("goodsCode"+ goodsCode);
+		System.out.println("goodsType"+ goodsType);
+
+		
+	    GoodsDTO goodsDTO = new GoodsDTO(Integer.parseInt(goodsCode), goodsType,
+	    goodsName, Integer.parseInt(goodsPrice), Integer.parseInt(goodsStock),
+	    goodsDetail, Integer.parseInt(isSoldout)); 
+	    
+	    int result = goodsService.update(goodsDTO); 
+
+	    PrintWriter out = response.getWriter(); 
+	    out.print(result);
+	   
+	    
+	}
+	
 	
 
 	/**
