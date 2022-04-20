@@ -14,6 +14,7 @@ import onedo.mvc.dto.CartDTO;
 import onedo.mvc.dto.CartItemDTO;
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.dto.UserDTO;
+import onedo.mvc.exception.AuthenticationException;
 import onedo.mvc.service.CartService;
 import onedo.mvc.service.CartServiceImpl;
 import onedo.mvc.service.GoodsService;

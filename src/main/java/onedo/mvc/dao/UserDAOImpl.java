@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 import onedo.mvc.util.DbUtil;
@@ -218,8 +219,8 @@ public class UserDAOImpl implements UserDAO {
 		ResultSet rs = null;
 
 		List<SalesDTO> myList = new ArrayList<SalesDTO>();
-		
-		String sql = "select goods_Name, goods_code, order_qty, order_date, order_price, order_Code, orderline_code from orders join orderline using(order_code) join goods using(goods_code) where user_id=? order by order_date desc";
+		int num = 0;
+		String sql = "select min(goods_Name), min(goods_code), min(order_qty), min(order_date), min(order_price), order_Code, min(orderline_code), count(*) from orders join orderline using(order_code) join goods using(goods_code) where user_id=? group by order_code order by order_code desc";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -235,7 +236,9 @@ public class UserDAOImpl implements UserDAO {
 						rs.getInt(6),
 						rs.getInt(7)
 						);
-				
+
+				num = rs.getInt(8);
+				if(num>1) sales.setGoodsName(sales.getGoodsName()+" 외 "+ (num-1) +"건");
 				myList.add(sales);
 			}
 
@@ -244,7 +247,76 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return myList;
 	}
-	
+
+	@Override
+	public List<SalesDTO> selectMyOrderLine(String userId, int orderCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		List<SalesDTO> myList = new ArrayList<SalesDTO>();
+		String sql = "select goods_Name, goods_code, order_qty, order_date, order_price, order_Code, orderline_code, goods_price from orders join orderline using(order_code) join goods using(goods_code) where user_id=? and order_code=? order by goods_name";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			ps.setInt(2, orderCode);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				SalesDTO sales = new SalesDTO(
+						rs.getString(1),
+						rs.getInt(2), 
+						rs.getInt(3), 
+						rs.getString(4),
+						rs.getInt(5),
+						rs.getInt(6),
+						rs.getInt(7),
+						rs.getInt(8)
+						);
+
+				myList.add(sales);
+			}
+
+		} finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return myList;
+	}
+
+	@Override
+	public List<QnaDTO> selectMyBoard(String userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		List<QnaDTO> myBoard = new ArrayList<QnaDTO>();
+		String sql = "select qna_no, goods_code, user_id, qna_subject, qna_content, qna_date, qna_img, qna_pwd from qna_board where user_id=? order by qna_date desc";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				QnaDTO boards = new QnaDTO(
+						rs.getInt(1),
+						rs.getInt(2), 
+						rs.getString(3), 
+						rs.getString(4),
+						rs.getString(5),
+						rs.getString(6),
+						rs.getString(7),
+						rs.getString(8)
+						);
+
+				myBoard.add(boards);
+			}
+
+		} finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return myBoard;
+	}
 		
 	
 	

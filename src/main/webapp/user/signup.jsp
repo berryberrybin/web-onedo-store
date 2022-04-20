@@ -121,9 +121,9 @@
 		  }
 	};
 	
-	////////////생년월일에 숫자 이외에는 입력 불가능 하도록
+	////////////생년월일에 숫자,/ 이외에는 입력 불가능 하도록
 	function chkBdCode(event) {
-		const regExp = /[^0-9]/g;
+		const regExp = /[^0-9\/]/g;
 		  const ele = event.target;
 		  if (regExp.test(ele.value)) {
 		    ele.value = ele.value.replace(regExp,'');
@@ -198,7 +198,7 @@
 							* 휴대폰번호<input type="text" class="form-control" id="userPhone" name="userPhone"
 							placeholder="ex)010-0000-0000" onkeyup="chkPhCode(event)" onKeyDown="if(event.keyCode == 13) joinCheck()"/>
 							생년월일<input type="text" class="form-control" id="birth" name="birth"
-							placeholder="생년월일 8자리" onkeyup="chkBdCode(event)" maxlength='8'/>
+							placeholder="ex)2022/04/22" onkeyup="chkBdCode(event)" maxlength='10'/>
 							성별 <select name="gender">
 							  <option value=""selected>성별을 선택해주세요</option>
 							  <option value="f">여성</option>

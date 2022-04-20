@@ -59,7 +59,7 @@
           <div class="user-heading round">
               <!-- <h5>사용자 아이디</h5> -->
 				<c:if test="${not empty loginUser}">
-					<h4><i class="fa fa-user"></i>&nbsp;&nbsp;${loginUser.userId}님 환영합니다 :)</h4>
+					<h4><i class="fa fa-user"></i>&nbsp;&nbsp;${loginUser.userId}님 환영합니다</h4>
 				</c:if>
 				<hr>
               <p></p>
@@ -79,16 +79,17 @@
             <table class="table">
 					<thead>
 						<tr class="cart_menu">
-							<td class="orderCode">주문번호</td>
-							<td class="name">주문 목록</td>
-							<td class="price">가격 합계</td>
-							<td class="date">구매일</td>
+							<td class="orderCode">주문 상세 번호</td>
+							<td class="goodsCode">상품 코드</td>
+							<td class="name">상품 목록</td>
+							<td class="price">상품 가격</td>
+							<td class="date">주문 수량</td>
 							<td></td>
 						</tr>
 					</thead>
 					<tbody>
 					<c:choose>
-							<c:when test="${empty requestScope.myList}">
+							<c:when test="${empty requestScope.orderLine}">
 								<tr>
 									<td colspan="5">
 										<p align="center">
@@ -98,19 +99,22 @@
 								</tr>
 							</c:when>
 							<c:otherwise>
-							<c:forEach items="${requestScope.myList}" var="salesDTO">
+							<c:forEach items="${requestScope.orderLine}" var="salesDTO">
 							<tr>
 								<td class="orderCode">
-										<a href="${path}/front?key=user&methodName=myOrderLine&orderCode=${salesDTO.orderCode}">${salesDTO.orderCode}</a>
+										<a href="">${salesDTO.orderLineCode}</a>
+								</td>
+								<td class="goodsCode">
+										<p>${salesDTO.goodsCode}</p>
 								</td>
 								<td class="orderName">
-										<p>${salesDTO.goodsName}</p>
+										<a href="${path}/front?key=goods&methodName=selectByGoodsCode&isIncrement=n&goodsCode=${salesDTO.goodsCode}">${salesDTO.goodsName}</a>
 								</td>
 								<td class="orderPrice">
-									<p class="cart_total_price">${salesDTO.orderPrice}</p>
+									<p class="cart_total_price">${salesDTO.goods_price}</p>
 								</td>
-								<td class="orderDate">
-										<p>${salesDTO.orderDate}</p>
+								<td class="orderQty">
+										<p>${salesDTO.orderQuantity}</p>
 								</td>
 							</tr>
 						</c:forEach>
