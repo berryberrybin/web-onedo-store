@@ -111,7 +111,7 @@
 										<a href="${path}/front?key=goods&methodName=selectByGoodsCode&isIncrement=n&goodsCode=${salesDTO.goodsCode}">${salesDTO.goodsName}</a>
 								</td>
 								<td class="orderPrice">
-									<p class="cart_total_price">${salesDTO.goods_price}</p>
+									<p class="cart_total_price">${salesDTO.goodsPrice}</p>
 								</td>
 								<td class="orderQty">
 										<p>${salesDTO.orderQuantity}</p>
