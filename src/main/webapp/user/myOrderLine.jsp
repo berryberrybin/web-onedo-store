@@ -67,6 +67,7 @@
 
           <ul class="nav nav-pills nav-stacked">
               <li><a href="${path}/user/modify.jsp"> <i class="fa fa-edit"></i>&nbsp;&nbsp;내 정보 수정</a></li>
+              <li><a href="${path}/front?key=user&methodName=myPage"> <i class="fa fa-tags"></i>&nbsp;&nbsp;주문 내역 조회</a></li>
               <li><a href="${path}/front?key=user&methodName=myBoard"> <i class="fa fa-file-text"></i>&nbsp;&nbsp;내가 쓴 글 보기</a></li>
           </ul>
       </div>
@@ -102,7 +103,7 @@
 							<c:forEach items="${requestScope.orderLine}" var="salesDTO">
 							<tr>
 								<td class="orderCode">
-										<a href="">${salesDTO.orderLineCode}</a>
+										<p>${salesDTO.orderLineCode}</p>
 								</td>
 								<td class="goodsCode">
 										<p>${salesDTO.goodsCode}</p>
@@ -111,10 +112,10 @@
 										<a href="${path}/front?key=goods&methodName=selectByGoodsCode&isIncrement=n&goodsCode=${salesDTO.goodsCode}">${salesDTO.goodsName}</a>
 								</td>
 								<td class="orderPrice">
-									<p class="cart_total_price">${salesDTO.goodsPrice}</p>
+									<p class="cart_total_price">${salesDTO.goodsPrice}원</p>
 								</td>
 								<td class="orderQty">
-										<p>${salesDTO.orderQuantity}</p>
+										<p>${salesDTO.orderQuantity}개</p>
 								</td>
 							</tr>
 						</c:forEach>

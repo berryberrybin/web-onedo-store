@@ -67,6 +67,7 @@
 
           <ul class="nav nav-pills nav-stacked">
               <li><a href="${path}/user/modify.jsp"> <i class="fa fa-edit"></i>&nbsp;&nbsp;내 정보 수정</a></li>
+              <li><a href="${path}/front?key=user&methodName=myPage"> <i class="fa fa-tags"></i>&nbsp;&nbsp;주문 내역 조회</a></li>
               <li><a href="${path}/front?key=user&methodName=myBoard"> <i class="fa fa-file-text"></i>&nbsp;&nbsp;내가 쓴 글 보기</a></li>
           </ul>
       </div>
@@ -74,7 +75,7 @@
   <div class="profile-info col-md-9">
       <div class="panel">
           <div class="bio-graph-heading">
-            <h4>최근 주문 내역</h4>
+            <h4>최근 주문 내역 조회</h4>
             <hr>
             <table class="table">
 					<thead>
@@ -107,7 +108,7 @@
 										<p>${salesDTO.goodsName}</p>
 								</td>
 								<td class="orderPrice">
-									<p class="cart_total_price">${salesDTO.orderPrice}</p>
+									<p class="cart_total_price">${salesDTO.orderPrice}원</p>
 								</td>
 								<td class="orderDate">
 										<p>${salesDTO.orderDate}</p>
