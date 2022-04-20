@@ -223,7 +223,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		}
 		
 		try {
-			sql+=" ORDER BY goods_code) a) where rnum>=? and rnum <=?";
+			sql+=" and not is_soldout =2 ORDER BY goods_code) a) where rnum>=? and rnum <=?";
 		   
 			System.out.println("sql="+sql);
 			
