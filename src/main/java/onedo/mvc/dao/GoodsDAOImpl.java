@@ -14,7 +14,7 @@ import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
 public class GoodsDAOImpl implements GoodsDAO {
-	private Properties proFile = new Properties();
+	private Properties proFile = DbUtil.getProFile();
 	GoodsDTO goodsDTO = new GoodsDTO();
 
 	/**
