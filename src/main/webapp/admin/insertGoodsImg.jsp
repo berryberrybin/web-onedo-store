@@ -5,6 +5,7 @@
 <html>
 <head>
 	<script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
+	
 	<style type="text/css">
 	
   table {
@@ -40,29 +41,11 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		$("#insert").click(function() {
-			 $("#upLoadForm").ajaxForm({
-				   url: "${path}/upLoadServlet" , 
-		      		type: "post", 
-		      		dataType: "json" ,
-		      		success: function(result){//중복, 사용가능
-		      			alert(result +"성공");
-		      		  var str="";
-		      		  $.each(result, function(index, item){
-		      			str+="filesystemName : " + item.filesystemName+"<br>";
-		      			str+="path : " + item.path+"<br>";  
-		      			
-		      		  });
-		      		  
-		      		  $("div").html(str);
-		      		} ,
-		      		error: function(err){
-		      			alert(err+" 예외가 발생했습니다.");
-		      		}
-			   });
-			   
-			   $("#insertGoodsImgForm").submit(); //전송
-		});
+		alert(${item.goodsCode});
+		$(document).on("click",function(){
+			let goodsCode = $(this).attr("name");
+			
+		})
 	});
 </script>
 	
@@ -70,22 +53,28 @@
 
 <body>
 <h2>상품이미지 등록</h2>
-	<form method="post"  enctype="multipart/form-data" id="insertGoodsImgForm">
+	<form method="post"  enctype="multipart/form-data" id="insertGoodsImgForm"
+		action="${path}/front?key=goods&methodName=insertGoodsImg"> <!-- request로 받으려고 get방식으로 따로 보내기 -->
 		<table>
 			<tr>
 				<td>상품코드</td>
-				<td><input type="text"  name="goodsCode" disabled="disabled"></td>
+				<td><input type="text"  name="goodsCode" disabled="disabled" value="${item.goodsCode}" ></td>
 			</tr>
 	
 			<tr>
 				<td>파일첨부</td>
-				<td><input type="file" name="goodsImg" id="goodsImg"></td>
+				<td><input type="file" name="goodsImg" id="goodsImg" placeholder="파일첨부"></td>
 			</tr>
-			<tr><td colspan="2"><input type="button" id="insertGoodsImg" value="등록"></td></tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" id="insertGoodsImg" value="등록">
+				</td>
+			</tr>
 			
 		</table>
 	</form>
 	<br><br><br><br>
+	<div><a href="${path}/admin/adminGoods.jsp">상품조회로 돌아가기</a></div>
 <jsp:include page="../common/adminfooter.jsp" />
 </body>
 </html>

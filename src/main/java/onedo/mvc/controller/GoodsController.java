@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.service.GoodsService;
@@ -93,13 +95,39 @@ public class GoodsController implements Controller {
 		return new ModelAndView("product-details.jsp");
 	}
 	
-	/**
-	 * 이미지 넣기
+	/** 
+	 * 이미지 넣기 insertGoodsImg
 	 * */
 	public ModelAndView insertGoodsImg(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		return null;
+		
+		String saveDir = request.getServletContext().getRealPath("/save");
+		int maxSize = 1024 * 1024 * 100;// 100M
+		String encoding = "UTF-8";
+		
+		MultipartRequest m = 
+				new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
+
+		//전송된 데이터 받기
+		String goodsCode = m.getParameter("goodsCode"); //form의 이름과 같게
+		
+		GoodsDTO goodsDTO = new GoodsDTO(Integer.parseInt(goodsCode));
+		
+		
+		System.out.println(goodsCode);
+		
+		//파일첨부를 뺀 데이터들↑ 파일첨부가 되면 ↓
+		//getFilesystemName 파일에 대한 정보를 얻어옴. 변경된 이름을 가져오는게 좋음.
+		/*
+		 * if(m.getFilesystemName("goodsImg")!=null) { //파일이 첨부가 되었다면 //파일이름 저장하기 (파일크기는
+		 * 생략함.) goodsDTO.setFname(m.getFilesystemName("goodsImg"));
+		 * 
+		 * }
+		 * 
+		 * GoodsService.insertGoodsImg(goodsDTO);
+		 */
+		return new ModelAndView("${path}/admin/insertGoodsImg.jsp", true);
 	}
 	
 	

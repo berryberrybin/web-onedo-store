@@ -57,6 +57,11 @@ public interface GoodsDAO {
 	 *  상품이름이나 타입으로 상품검색
 	 * */
 	List<GoodsDTO> selectMultipleGoods(String searchField, String searchValue, int pageNo) throws SQLException;
+	
+	/**
+	 * 상품 이미지 등록
+	 * */
+	int insertGoodsImg(GoodsDTO goodsDTO) throws SQLException;
 
 
 
