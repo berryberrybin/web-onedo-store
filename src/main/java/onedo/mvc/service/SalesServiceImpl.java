@@ -13,7 +13,7 @@ public class SalesServiceImpl implements SalesService{
 	
 	public List<SalesDTO> selectAll() throws SQLException {
 		List<SalesDTO> salesList = salesDAO.selectAll();
-
+		
 		return salesList;
 	}
 

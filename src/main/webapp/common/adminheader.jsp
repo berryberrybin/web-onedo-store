@@ -155,10 +155,10 @@
 									</ul></li>
 								<li class="dropdown"><a href="#">매출관리<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
-										<li><a href="blog.html">일별매출조회</a></li>
-										<li><a href="blog.html">조건별 매출조회</a></li>
-										<li><a href="blog.html">상품별 매출조회</a></li>
-
+										<li><a href="${path}/front?key=sales&methodName=selectByOrderDate">일별 매출조회</a></li>
+										<li><a href="${path}/front?key=sales&methodName=selectAll">전체 매출조회</a></li>
+										<li><a href="${path}/front?key=sales&methodName=selectByGoodsCode">상품별 매출조회</a></li>
+									
 									</ul>
 								</li>
 							</ul>

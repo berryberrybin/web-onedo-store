@@ -1,30 +1,44 @@
 package onedo.mvc.dto;
 
 public class SalesDTO {
+	private int orderCode;
+	private int orderLineCode;
 	private String goodsName;
 	private int goodsCode;
-	private int goods_price;
+	private int goodsPrice;
 	private int orderQuantity;
 	private String userId;
 	private String orderDate;
 	private int orderPrice;
-	private int orderCode;
-	private int orderLineCode;
 
-	public SalesDTO(int goodsCode, int goods_price, int orderQuantity, String userId, String orderDate,
+	public SalesDTO(int orderCode, int orderLineCode, String goodsName, int goodsPrice, int orderQuantity, String userId, String orderDate,
 			int orderPrice) {
 		super();
-		this.goodsCode = goodsCode;
-		this.goods_price = goods_price;
+		this.orderCode = orderCode;
+		this.orderLineCode = orderLineCode;
+		this.goodsName = goodsName;
+		this.goodsPrice = goodsPrice;
 		this.orderQuantity = orderQuantity;
 		this.userId = userId;
 		this.orderDate = orderDate;
 		this.orderPrice = orderPrice;
 	}
-	
-	
-	
-	
+
+	public SalesDTO(int orderLineCode, String goodsName, int goodsPrice, int orderQuantity) {
+		super();
+		this.orderLineCode = orderLineCode;
+		this.goodsName = goodsName;
+		this.goodsPrice = goodsPrice;
+		this.orderQuantity = orderQuantity;
+	}
+
+	public SalesDTO(int orderCode, String userId, String orderDate, int orderPrice) {
+		super();
+		this.orderCode = orderCode;
+		this.userId = userId;
+		this.orderDate = orderDate;
+		this.orderPrice = orderPrice;
+	}
 
 	public SalesDTO(String orderDate, int orderPrice) {
 		super();
@@ -32,20 +46,12 @@ public class SalesDTO {
 		this.orderPrice = orderPrice;
 	}
 
-
-
-
-
 	public SalesDTO(String goodsName, int goodsCode, int orderQuantity) {
 		super();
 		this.goodsName = goodsName;
 		this.goodsCode = goodsCode;
 		this.orderQuantity = orderQuantity;
 	}
-
-
-
-
 
 	public SalesDTO(String goodsName, int goodsCode, int orderQuantity, String orderDate, int orderPrice, int orderCode,
 			int orderLineCode) {
@@ -58,26 +64,13 @@ public class SalesDTO {
 		this.orderCode = orderCode;
 		this.orderLineCode = orderLineCode;
 	}
-
-
-
-
-
 	public String getGoodsName() {
 		return goodsName;
 	}
 
-
-
-
-
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
 	}
-
-
-
-
 
 	public int getGoodsCode() {
 		return goodsCode;
@@ -119,12 +112,12 @@ public class SalesDTO {
 		this.orderQuantity = orderQuantity;
 	}
 
-	public int getGoods_price() {
-		return goods_price;
+	public int getGoodsPrice() {
+		return goodsPrice;
 	}
 
-	public void setGoods_price(int goods_price) {
-		this.goods_price = goods_price;
+	public void setGoodsPrice(int goodsPrice) {
+		this.goodsPrice = goodsPrice;
 	}
 
 	public int getOrderCode() {
@@ -142,8 +135,4 @@ public class SalesDTO {
 	public void setOrderLineCode(int orderLineCode) {
 		this.orderLineCode = orderLineCode;
 	}
-
-	
-	
-	
 }

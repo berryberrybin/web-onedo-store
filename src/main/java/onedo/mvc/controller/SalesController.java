@@ -30,6 +30,25 @@ public class SalesController implements Controller {
 	 * @throws Exception
 	 */
 
+	public ModelAndView selectAll(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		List<SalesDTO> salesList = null;
+		
+		try {
+			salesList = salesService.selectAll();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ModelAndView("error/error.jsp");
+		}
+
+		
+		request.setAttribute("salesList", salesList);
+
+		return new ModelAndView("admin/adminDailySales.jsp");
+	}
+
+	
 	public ModelAndView selectByGoodsCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		List<SalesDTO> salesList = null;
@@ -52,7 +71,7 @@ public class SalesController implements Controller {
 		}
 		request.setAttribute("result", result);
 
-		return new ModelAndView("adminSales.jsp");
+		return new ModelAndView("admin/adminSales.jsp");
 	}
 
 	public ModelAndView selectByOrderDate(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -80,7 +99,7 @@ public class SalesController implements Controller {
 		}
 		request.setAttribute("result", result);
 
-		return new ModelAndView("adminDailySales.jsp");
+		return new ModelAndView("admin/adminDailySales.jsp");
 	}
 
 }
