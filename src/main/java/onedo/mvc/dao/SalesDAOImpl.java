@@ -23,14 +23,14 @@ public class SalesDAOImpl implements SalesDAO {
 
 		List<SalesDTO> salesList = new ArrayList<SalesDTO>();
 
-		String sql = "select goods_code, goods_price, order_qty, user_id, order_date, order_price from orders join orderline using(order_code)join goods using(goods_code)";
+		String sql = "select order_code, orderline_code, goods_name, goods_price, order_qty, user_id, order_date, order_price from orders join orderline using(order_code)join goods using(goods_code)";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				SalesDTO sales = new SalesDTO(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
-						rs.getString(5), rs.getInt(6));
+				SalesDTO sales = new SalesDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6),
+						rs.getString(7), rs.getInt(8));
 				salesList.add(sales);
 			}
 

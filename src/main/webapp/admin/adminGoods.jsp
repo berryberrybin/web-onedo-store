@@ -98,7 +98,7 @@
 						str += "<td>" + item.goodsPrice + "</td>";
 						str += "<td>" + item.goodsStock + "</td>";
 						str += "<td><span>" + item.isSoldout +"</span><span style='display:none'>"+item.goodsDetail+"</span></td>";
-						str += `<td><input type='button' value='첨부' onclick='location.href="${path}/admin/insertGoodsImg.jsp"'></td>`;
+						str += `<td><input type='button' value='첨부' onclick='location.href="${path}/admin/insertGoodsImg.jsp"' name='${'${item.goodsCode}'}'></td>`;
 						str += `<td><input type='button' value='삭제' name='${'${item.goodsCode}'}'></td>`;
 						str += "</tr>";
 					});
@@ -225,10 +225,10 @@
 			<form name="inForm" method="post" id="inForm">
 				<table id=insertTable>
 					<tr>
-						<td colspan="2"><input type="text" name="goodsName" id="goodsName" placeholder="상품이름"></td>
+						<td colspan="4"><input type="text" name="goodsName" id="goodsName" placeholder="상품이름"></td>
 					</tr>
 					<tr>
-					    <td>
+					    <td colspan="2">
 							<select name="goodsType" id="goodsType" style="font-size: 20px; background-color: white;">
 								<option value="">상품타입</option>
 								<option value="O">원두</option>
@@ -236,10 +236,10 @@
 								<option value="C">캡슐</option>
 							</select>
 						</td>
-						<td><input type="number" name="goodsPrice" id="goodsPrice" placeholder="상품가격"></td>
+						<td colspan="2"><input type="number" name="goodsPrice" id="goodsPrice" placeholder="상품가격"></td>
 					</tr>
 					<tr>
-					    <td>
+					    <td colspan="2">
 							<select name="isSoldout" id="isSoldout" style="font-size: 20px; background-color: white;">
 								<option value="">품절여부</option>
 								<option value="0">판매중</option>
@@ -247,14 +247,55 @@
 								<option value="2">판매중지</option>
 							</select>
 						</td>
-						<td><input type="number" name="goodsStock" id="goodsStock" placeholder="상품수량"></td>
+						<td colspan="2"><input type="number" name="goodsStock" id="goodsStock" placeholder="상품수량"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><textarea name="goodsDetail" id="goodsDetail" style="font-size: 20px; background-color: white;" placeholder="상품설명"></textarea></td>
-						
+						<td colspan="4"><textarea name="goodsDetail" id="goodsDetail" style="font-size: 20px; background-color: white;" placeholder="상품설명"></textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"> 
+						<td>
+							<select name="sour" id="sour" style="font-size: 20px; background-color: white;">
+								<option value="">신맛</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</td>
+						<td>
+							<select name="sweet" id="sweet" style="font-size: 20px; background-color: white;">
+								<option value="">단맛</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</td>
+						<td>
+							<select name="aroma" id="aroma" style="font-size: 20px; background-color: white;">
+								<option value="">아로마</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</td>
+						<td>
+							<select name="body" id="body" style="font-size: 20px; background-color: white;">
+								<option value="">바디감</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" align="center"> 
 						     <input type="hidden"  name="goodsCode" id="goodsCode" >
 							<input type="hidden" name="key" value="ajaxGoods">
 							<input type="hidden" name="methodName" value="insert">
@@ -280,6 +321,7 @@
 						<td class="addImg">이미지</td>
 						<td class="isSoldout">삭제</td>
 					</tr>
+					
 				</table>
 			
 			

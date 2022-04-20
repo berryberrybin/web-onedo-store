@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="common/header.jsp" />
+
+<jsp:include page="../common/header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,32 +33,27 @@
 
 
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['주문 일자', '일별 매출금액', '누적 매출금'],${result}
-        ]);
-
-        var options = {
-          title: '일자별 주문통계',
-          pointSize: 10,
-          curveType: 'function'
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
 
 <style>
 td {
 	text-align: center;
 }
 </style>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+<link rel="stylesheet" href="css/blue_style.css" type="text/css">
+
+
+
 </head>
+<script type="text/javascript">
+
+   $(document).ready(function(){ 
+      $("#gcTable").tablesorter();
+   });
+</script>
+
 <body>
 
 	<section id="cart_items">
@@ -84,9 +80,10 @@ td {
 									</ul></li>
 								<li class="dropdown"><a href="#">매출관리<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
-										<li><a href="front?key=sales&methodName=selectByOrderDate">일별매출조회</a></li>
-										<li><a href="blog.html">조건별 매출조회</a></li>
-										<li><a href="front?key=sales&methodName=selectByGoodsCode">상품별 매출조회</a></li>
+										<li><a href="${path}/front?key=sales&methodName=selectByOrderDate">일별 매출조회</a></li>
+										<li><a href="${path}/front?key=sales&methodName=selectAll">전체 매출조회</a></li>
+										<li><a href="${path}/front?key=sales&methodName=selectByGoodsCode">상품별 매출조회</a></li>
+									
 									</ul></li>
 							</ul>
 						</div>
@@ -99,11 +96,17 @@ td {
 
 		<div class="container">
 			<div class="table-responsive cart_info">
-				<table class="table table-condensed">
+			<table id="gcTable" class="tablesorter">
 					<thead>
 						<tr class="cart_menu">
-							<td class="orderDate">주문 일자</td>
-							<td class="totalSales">총 매출 합계</td>
+							<th class="orderCode">주문번호</th>
+							<th class="userId">주문자아이디</th>
+							<th class="orderPrice">주문총가격</th>	
+							<th class="orderDate">주문날짜</th>
+							<th class="orderLineCode">주문상세번호</th>
+							<th class="goodsName">상품명</th>
+							<th class="goodsPrice">상품가격</th>
+							<th class="orderQuantity">상품수량</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -120,15 +123,45 @@ td {
 							<c:otherwise>
 								<c:forEach items="${requestScope.salesList}" var="salesDTO">
 									<tr>
-										<td class="orderDate">
+										<td class="itemOrderCode">
+											<h4>
+												<a href="">${salesDTO.orderCode}</a>
+											</h4>
+										</td>
+										<td class="itemUserId">
+											<h4>
+												<a href="">${salesDTO.userId}</a>
+											</h4>
+										</td>
+										<td class="itemOrderPrice">
+											<h4>
+												<a href="">${salesDTO.orderPrice}</a>
+											</h4>
+										</td>
+										<td class="itemOrderDate">
 											<h4>
 												<a href="">${salesDTO.orderDate}</a>
 											</h4>
 										</td>
-
-										<td class="totalSales">
+										<td class="itemOrderLineCode">
 											<h4>
-												<a href="">${salesDTO.orderPrice}</a>
+												<a href="">${salesDTO.orderLineCode}</a>
+											</h4>
+										</td>
+										
+										<td class="itemGoodsName">
+											<h4>
+												<a href="">${salesDTO.goodsName}</a>
+											</h4>
+										</td>
+										<td class="itemGoodsPrice">
+											<h4>
+												<a href="">${salesDTO.goodsPrice}</a>
+											</h4>
+										</td>
+										<td class="itemOrderQuantity">
+											<h4>
+												<a href="">${salesDTO.orderQuantity}</a>
 											</h4>
 										</td>
 									</tr>
@@ -140,11 +173,9 @@ td {
 			</div>
 		</div>
 	</section>
-	  <div id="chart_div" style="width: 1400px; height: 500px; margin:0 auto;"></div>
-
 
 	<!--/#do_action-->
 
 </body>
-<jsp:include page="common/footer.jsp" />
+<jsp:include page="../common/footer.jsp" />
 </html>

@@ -76,5 +76,14 @@ public class GoodsServiceImpl implements GoodsService {
 
 	}
 	
+	/**
+	 * 상품 이미지 등록
+	 * */
+	@Override
+	public int insertGoodsImg(GoodsDTO goodsDTO) throws SQLException {
+		int result = goodsDAO.insertGoodsImg(goodsDTO);
+		if (result == 0) throw new SQLException("상품 이미지 등록 실패");
+		return result;
+	}
 	
 }

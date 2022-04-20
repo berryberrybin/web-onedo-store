@@ -292,6 +292,29 @@ public class GoodsDAOImpl implements GoodsDAO {
 		}
 		return totalCount;
 	}
+	
+	/**
+	 * 상품이미지등록
+	 * */
+	@Override
+	public int insertGoodsImg(GoodsDTO goodsDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = proFile.getProperty("goods.insertGoodsImg"); //insert into goods values goods_image=? where goods_code=?
+	/*	try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, getFname());
+			ps.setInt(2, goodsCode);
+			
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.dbClose(ps, con);
+		}*/
+		return result;
+	}
 
+	}
+	
 
-}

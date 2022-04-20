@@ -23,6 +23,14 @@ public class GoodsDTO {
 	   
 	   
 
+	public GoodsDTO(int goodsCode) {
+		super();
+		this.goodsCode = goodsCode;
+	}
+
+
+
+
 	public GoodsDTO(int goodsCode, String goodsType, String goodsName, int goodsPrice, int goodsStock,
 			String goodsDetail, int isSoldout) {
 		super();
@@ -80,16 +88,18 @@ public class GoodsDTO {
 		this.goodsImg = goodsImg;
 		
 	}
-	
-	
 
 	public GoodsDTO(int goodsCode, int isSoldout) {
 		super();
 		this.goodsCode = goodsCode;
 		this.isSoldout = isSoldout;
 	}
-
-
+	
+	public GoodsDTO(int goodsCode, String goodsImg) {
+		super();
+		this.goodsCode = goodsCode;
+		this.goodsImg = goodsImg;
+	}
 
 	public int getGoodsCode() {
 		return goodsCode;
