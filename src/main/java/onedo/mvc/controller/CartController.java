@@ -14,7 +14,6 @@ import onedo.mvc.dto.CartDTO;
 import onedo.mvc.dto.CartItemDTO;
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.dto.UserDTO;
-import onedo.mvc.exception.AuthenticationException;
 import onedo.mvc.service.CartService;
 import onedo.mvc.service.CartServiceImpl;
 import onedo.mvc.service.GoodsService;
@@ -53,7 +52,8 @@ public class CartController implements Controller {
 		
 		String goodsCode = request.getParameter("goodsCode");
 		GoodsDTO goods = goodsService.selectByGoodsCode(goodsCode, false);
-		int amount = 1;
+		int goodsQuantity = Integer.parseInt(request.getParameter("quantity"));
+		int amount = goodsQuantity;
 
 		CartDTO cart = cartService.getCart(userId);
 		cartService.insert(cart, goods, amount);

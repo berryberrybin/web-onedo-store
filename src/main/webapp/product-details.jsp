@@ -91,7 +91,13 @@
 		   			}  //실패했을때 실행할 함수 
 		   		});//ajax끝
 				
+
 			});//후기가져오기끝
+			
+			//AddCart로 넘어가기 soobin
+			$("#cartButton").click(function(){
+				location.href="${path}/front?key=cart&methodName=insert&goodsCode=${goodsDTO.goodsCode}&quantity="+$("#quantity").val()		
+			})
 			
 		});
 	</script>
@@ -124,9 +130,11 @@
 				<span>
 					<span>&#8361; <fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></span>
 					<label for="quantity">수량:</label>
-					<input type="number" id="quantity" name="quantity" min="1" max="99" value="1"/>
-					<a href="front?key=cart&methodName=insert&goodsCode=${goodsDTO.goodsCode}" class="btn btn-default add-to-cart">
-					<i class="fa fa-shopping-cart"></i>Add to cart</a>
+					<input type="number" id="quantity" name="quantity" min="1" max="99" value="1"/> 
+					
+					<a href="#" class="btn btn-default add-to-cart" id="cartButton">
+					<i class="fa fa-shopping-cart"></i>Add to cart
+					</a>
 					
 				</span>
 				<p><b>Availability:</b> ${goodsDTO.isSoldout}</p>
