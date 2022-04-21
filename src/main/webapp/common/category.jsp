@@ -35,11 +35,6 @@
 									<h4 class="panel-title"><a href="#" name="category-name" id="D">드립백</a></h4>
 								</div>
 							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">구독</a></h4>
-								</div>
-							</div>
 						</div><!--/category-products-->
 </div>
 </div>
