@@ -17,8 +17,10 @@ import onedo.mvc.service.CartServiceImpl;
 import onedo.mvc.service.OrderService;
 import onedo.mvc.service.OrderServiceImpl;
 
+
 public class OrderController implements Controller {
 	private OrderService orderService = new OrderServiceImpl();
+	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -40,19 +42,19 @@ public class OrderController implements Controller {
 		System.out.println(userId);
 		
 		CartService cartService = CartServiceImpl.getInstance();
-		CartDTO cartDto =cartService.getCart(userId);
+		CartDTO cartDTO =cartService.getCart(userId);
 
         String orderPrice = request.getParameter("orderPrice");
         String userAddr = request.getParameter("userAddr");
         String userPhone = request.getParameter("userPhone");
-
+       
 		
 		OrdersDTO dto = new OrdersDTO(userId, userAddr, userPhone, Integer.parseInt(orderPrice));
 				
-		orderService.ordersInsert(dto, cartDto); 
-		
-		
-		
+		orderService.ordersInsert(dto, cartDTO); 
+		List<CartItemDTO> cartItemList = cartDTO.getCartItemList();
+		cartItemList.clear();
+		cartDTO.setCartItemList(cartItemList);
 		ModelAndView mv = new ModelAndView("orders/ordersTest.jsp");
 		
 		return mv;
