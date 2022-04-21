@@ -48,7 +48,7 @@
 				IMP.request_pay({
 				    pg : 'kcp',
 				    pay_method : 'card',
-				    merchant_uid : uid ,
+				    merchant_uid : 'merchant' + uid ,
 				    name : $("#payGoodsName").val() , //결제창에서 보여질 이름
 				    amount : ${paymentPrice}, //실제 결제되는 가격
 				    buyer_email : '${userId}',
@@ -59,24 +59,21 @@
 				}, function(rsp) {
 					console.log(rsp);
 				    if ( rsp.success ) {
-				    	var msg = '결제가 완료되었습니다.';
-				        msg += '고유ID : ' + rsp.imp_uid;
-				        msg += '상점 거래ID : ' + rsp.merchant_uid;
-				        msg += '결제 금액 : ' + rsp.paid_amount;
-				        msg += '카드 승인번호 : ' + rsp.apply_num;
-				        
-				        //이동(값들가지고- )
-				        
-				        
-				       // $("#payForm").submit();//이동
+				    	
+
 				        
 				    } else {
-				    	 //var msg = '결제에 실패하였습니다.';
+				    	//var msg = '결제에 실패하였습니다.';
 				        // msg += '에러내용 : ' + rsp.error_msg;
-				         $("#payForm #key").val("order");
-					     $("#payForm #methodName").val("orders");
-					     $("#payForm #orderCode").val(uid);
-				         $("#payForm").submit();
+				        var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + ${paymentPrice};
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        $("#payForm #key").val("order");
+					    $("#payForm #methodName").val("orders");
+					    $("#payForm #orderCode").val(uid);
+				        $("#payForm").submit();
 				    }
 				    alert(msg);
 				});

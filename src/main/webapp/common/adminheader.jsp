@@ -148,6 +148,7 @@
  -->								<li class="dropdown"><a href="#">상품관리<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
 										<li><a href="${path}/admin/adminGoods.jsp">상품조회</a></li>
+										<li><a href="${path}/front?key=order&methodName=orederSelectAll">상품주문조회</a></li>
 									</ul></li>
 								<li class="dropdown"><a href="#">회원관리<i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">

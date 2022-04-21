@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import onedo.mvc.dto.CartDTO;
 import onedo.mvc.dto.CartItemDTO;
 import onedo.mvc.dto.OrdersDTO;
+import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 import onedo.mvc.service.CartService;
 import onedo.mvc.service.CartServiceImpl;
@@ -55,9 +56,18 @@ public class OrderController implements Controller {
 		List<CartItemDTO> cartItemList = cartDTO.getCartItemList();
 		cartItemList.clear();
 		cartDTO.setCartItemList(cartItemList);
-		ModelAndView mv = new ModelAndView("orders/ordersTest.jsp");
+		ModelAndView mv = new ModelAndView("index.jsp");
 		
 		return mv;
+	}
+	/**
+	 * 주문목록 가져오기
+	 */
+	public ModelAndView orederSelectAll(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		List<SalesDTO> list = orderService.selectAll();
+		request.setAttribute("orderLine", list);
+		return new ModelAndView("admin/orderList.jsp");
 	}
 
 }
