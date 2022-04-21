@@ -39,14 +39,6 @@ public class QnaDTO {
 		this.qnaPwd = qnaPwd;
 	}
 	
-	
-
-
-
-
-
-
-
 	public QnaDTO(int goodsCode, String userid, String qnaSubject, String qnaContent, String qnaPwd) {
 		super();
 		this.goodsCode = goodsCode;
@@ -58,6 +50,8 @@ public class QnaDTO {
 
 
 
+<<<<<<< Updated upstream
+
 	public QnaDTO(String fname, int fsize, List<QnaReplyDTO> repliesList, int pageCnt) {
 		super();
 		this.fname = fname;
@@ -67,7 +61,8 @@ public class QnaDTO {
 	}
 
 
-
+=======
+>>>>>>> Stashed changes
 	public int getQnaNo() {
 		return qnaNo;
 	}

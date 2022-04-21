@@ -49,7 +49,8 @@
 <!--/head-->
 <style>
 .listTable {
-	width: 100%
+	width: 100%;
+	
 }
 
 th, td {
@@ -80,13 +81,12 @@ th, td {
 							<h2 align="center">문의 게시판 LIST</h2>
 						</caption>
 						<colgroup>
-							<col width="7%" />
-							<col width="8%" />
+							<col width="10%" />
+							<col width="10%" />
 							<col width="15%" />
 							<col width="30%" />
-							<col width="20%" />
 							<col width="10%" />
-							<col width="10%" />
+						
 
 						</colgroup>
 						<tr>
@@ -110,20 +110,10 @@ th, td {
 									<font color="white"><b><span style="font-size: 9pt;">제목</span></b></font>
 								</p>
 							</td>
-							<td bgcolor="#FE980F">
-								<p align="center">
-									<font color="white"><b><span style="font-size: 9pt;">내용</span></b></font>
-								</p>
-							</td>
 
 							<td bgcolor="#FE980F">
 								<p align="center">
 									<font color="white"><b><span style="font-size: 9pt;">작성날짜</span></b></font>
-								</p>
-							</td>
-							<td bgcolor="#FE980F">
-								<p align="center">
-									<font color="white"><b><span style="font-size: 9pt;">파일용량</span></b></font>
 								</p>
 							</td>
 							
@@ -135,11 +125,13 @@ th, td {
 								<td>${qnaBoard.qnaNo}</td>
 								<td>${qnaBoard.goodsCode}</td>
 								<td>${qnaBoard.userid}</td>
-								<td>${qnaBoard.qnaSubject}</td>
-								<td>${qnaBoard.qnaContent}</td>
-								<td>${qnaBoard.qnaDate}</td>
-								<td>${qnaBoard.qnaImg}</td>
+								<td>
+								<a href="${path}/front?key=qnaBoard&methodName=selectByQnaCode&qnaNo=${qnaBoard.qnaNo}&pageNo=${pageNo}">
+								${qnaBoard.qnaSubject} 
+								</a>
+								</td>
 								
+								<td>${qnaBoard.qnaDate}</td>
 
 							</tr>
 						</c:forEach>

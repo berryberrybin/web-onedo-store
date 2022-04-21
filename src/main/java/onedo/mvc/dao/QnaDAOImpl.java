@@ -130,11 +130,13 @@ public class QnaDAOImpl implements QnaDAO {
 		ResultSet rs=null;
 		QnaDTO qnaDTO=null;
 		
-		String sql = "select * from QnA_board where goods_code=?";
+		String sql = "select * from QnA_board where qna_no=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, qnaNo);
+			
+			System.out.println(qnaNo+"상세보기dao");
 			
 			rs = ps.executeQuery();
 			if(rs.next()) {
@@ -147,11 +149,13 @@ public class QnaDAOImpl implements QnaDAO {
 						rs.getString(6),
 						rs.getString(7),
 						rs.getString(8));
+					
+				
 			}
 		}finally {
 			DbUtil.dbClose(rs, ps, con);
 		}
-		
+		System.out.println(qnaDTO);
 		return qnaDTO;
 	}
 
@@ -162,7 +166,6 @@ public class QnaDAOImpl implements QnaDAO {
 		int result=0;
 		String sql = "insert into QnA_board values(QNA_NO_SEQ.NEXTVAL,?,?,?,?,CURRENT_DATE,?,?)";
 		
-		System.out.println( qnaDTO.getGoodsCode());
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -182,19 +185,21 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public int delete(int qnaNo) throws SQLException {
+	public int delete(int qnaNo,String qnaPwd) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql = proFile.getProperty(" ");
+		String sql = "delete QnA_board where qna_no=? and qna_pwd=?";
 		
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1,qnaNo);
+			ps.setString(2,qnaPwd);
 		
-			
+			System.out.println("deletedao1");
 			result = ps.executeUpdate();
+			System.out.println("deletedao2");
 			
 		}finally {
 			DbUtil.dbClose(ps, con);
@@ -250,7 +255,9 @@ public class QnaDAOImpl implements QnaDAO {
 			}
 			
 		}finally {
+			
 			DbUtil.dbClose(rs, ps, con);
+			
 		}
 		
 		return repliesList;

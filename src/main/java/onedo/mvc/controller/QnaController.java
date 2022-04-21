@@ -72,11 +72,8 @@ public class QnaController implements Controller {
 		String qnaImg = m.getParameter("qnaImg");
 		String qnaPwd = m.getParameter("qnaPwd");
 		
-		System.out.println(goodsCode+userId + qnaSubject +qnaContent+ qnaImg+qnaPwd+"123");
 		
 		QnaDTO qdto = new QnaDTO(Integer.parseInt(goodsCode),userId, qnaSubject, qnaContent, qnaPwd);
-		
-		System.out.println(goodsCode+userId + qnaSubject +qnaContent+ qnaImg+qnaPwd+"456");
 		
 		// 파일첨부가되었다면...
 		if (m.getFilesystemName("file") != null) {
@@ -99,11 +96,16 @@ public class QnaController implements Controller {
 		String qnaNo = request.getParameter("qnaNo");
 		String pageNo = request.getParameter("pageNo");
 
-		QnaDTO reviewDTO = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
-		request.setAttribute("elec", reviewDTO);
+		System.out.println(qnaNo+pageNo+"QnaController");
+		
+		QnaDTO qnaDTO = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
+		
+		request.setAttribute("qnaDTO", qnaDTO);
 		request.setAttribute("pageNo", pageNo);
-
-		return new ModelAndView("elec/read.jsp");
+		
+		
+		return new ModelAndView("board/Qnaread.jsp");
+		
 	}
 
 	/**
@@ -111,46 +113,60 @@ public class QnaController implements Controller {
 	 */
 	public ModelAndView updateForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String qnaNo = request.getParameter("qnaNo");
-		QnaDTO elec = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
-		request.setAttribute("elec", elec);
+		System.out.println(qnaNo+"수정폼");
+		
+		QnaDTO qnaDTO = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
+		request.setAttribute("qnaDTO", qnaDTO);
 
-		return new ModelAndView("elec/update.jsp");
+		return new ModelAndView("board/Qnaupdate.jsp");
 	}
 
 	/**
 	 * 수정하기
 	 */
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String qnaNo = request.getParameter("qnaNo");
-		String userId = request.getParameter("userId");
+		
+		String goodsCode = request.getParameter("goodsCode");
 		String qnaSubject = request.getParameter("qnaSubject");
 		String qnaContent = request.getParameter("qnaContent");
-		String qnaDate = request.getParameter("qnaDate");
 		String qnaImg = request.getParameter("qnaImg");
 		String qnaPwd = request.getParameter("qnaPwd");
-		String goodsCode = request.getParameter("goodsCode");
-
-		QnaDTO qnaDTO = new QnaDTO();
+		
+		System.out.println("QnaController");
+		
+		QnaDTO qnaDTO = new QnaDTO(Integer.parseInt(goodsCode),qnaSubject,qnaContent,qnaImg,qnaPwd);
 
 		qnaService.update(qnaDTO);
 
+		String qnaNo= request.getParameter("qnaNo");
+		
 		QnaDTO dbrev = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
-		request.setAttribute("elec", dbrev);
+		request.setAttribute("qnaDTO", dbrev);
 
-		return null;
+		return new ModelAndView("board/Qnaread.jsp");
 	}
 
 	/**
 	 * 삭제하기
 	 */
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String reviewNO = request.getParameter("reviewNO");
-
+		String qnaNo = request.getParameter("qnaNo");
+		String qnaPwd  = request.getParameter("qnaPwd");
+		
+		System.out.println(qnaNo+"deletecontroller1");
+		
 		String path = request.getServletContext().getRealPath("/save");
-
-		qnaService.delete(Integer.parseInt(reviewNO), path);
-
-		return null;
+		
+		System.out.println(qnaNo+qnaPwd+"delete값1");
+		
+		System.out.println(qnaNo+"deletecontroller2");
+		
+		qnaService.delete(Integer.parseInt(qnaNo),qnaPwd, path);
+		
+		System.out.println(qnaNo+qnaPwd+"delete값2");
+		System.out.println(qnaNo+"deletecontroller3");
+		
+		return new ModelAndView("board/Qna.jsp", true);
 	}
 
 }
