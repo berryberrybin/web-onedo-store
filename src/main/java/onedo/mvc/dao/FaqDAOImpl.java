@@ -15,7 +15,7 @@ import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
 public class FaqDAOImpl implements FaqDAO {
-	private Properties proFile = new Properties();
+	private Properties proFile = DbUtil.getProFile();
 
 	@Override
 	public List<FaqDTO> selectAll() throws SQLException {

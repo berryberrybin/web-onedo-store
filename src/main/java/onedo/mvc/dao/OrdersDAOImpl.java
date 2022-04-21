@@ -13,7 +13,7 @@ import onedo.mvc.dto.OrdersDTO;
 import onedo.mvc.util.DbUtil;
 
 public class OrdersDAOImpl implements OrdersDAO {
-	private Properties proFile = new Properties();
+	private Properties proFile = DbUtil.getProFile();
 
 	@Override
 	public int ordersInsert(OrdersDTO ordersDTO, CartDTO cartDTO) throws Exception {

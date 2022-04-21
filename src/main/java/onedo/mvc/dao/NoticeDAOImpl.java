@@ -13,7 +13,7 @@ import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
 public class NoticeDAOImpl implements NoticeDAO {
-	private Properties proFile = new Properties();
+	private Properties proFile = DbUtil.getProFile();
 
 	@Override
 	public List<NoticeDTO> selectAll() throws SQLException {
