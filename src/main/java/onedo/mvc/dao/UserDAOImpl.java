@@ -13,7 +13,7 @@ import onedo.mvc.dto.UserDTO;
 import onedo.mvc.util.DbUtil;
 
 public class UserDAOImpl implements UserDAO {
-	private Properties proFile = new Properties();
+	private Properties proFile = DbUtil.getProFile();
 
 	@Override
 	public int join(UserDTO userDTO) throws SQLException {
