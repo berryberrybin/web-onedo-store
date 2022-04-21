@@ -127,7 +127,6 @@
 		<div class="col-sm-5">
 			<div class="view-product">
 				<img src="${path}/img/${goodsDTO.goodsImg}" alt="" />
-				<h3>ZOOM</h3>
 			</div>
 			
 		</div>
@@ -135,7 +134,8 @@
 			<div class="product-information"><!--/product-information-->
 				<img src="images/product-details/new.jpg" class="newarrival" alt="" />
 				<h2>${goodsDTO.goodsName}</h2>
-				<p>goodsCode: ${goodsDTO.goodsCode}</p>
+				<p>상품코드: ${goodsDTO.goodsCode}</p>
+				<p>상품조회수: ${goodsDTO.goodsView}</p>
 				<span>
 					<span>&#8361; <fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></span>
 					<h4>
