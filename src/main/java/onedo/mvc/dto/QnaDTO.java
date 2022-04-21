@@ -50,19 +50,15 @@ public class QnaDTO {
 
 
 
-<<<<<<< Updated upstream
 
-	public QnaDTO(String fname, int fsize, List<QnaReplyDTO> repliesList, int pageCnt) {
+
+	public QnaDTO(String fname, int fsize, int pageCnt) {
 		super();
 		this.fname = fname;
 		this.fsize = fsize;
-		this.repliesList = repliesList;
 		this.pageCnt = pageCnt;
 	}
 
-
-=======
->>>>>>> Stashed changes
 	public int getQnaNo() {
 		return qnaNo;
 	}

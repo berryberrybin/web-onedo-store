@@ -16,7 +16,7 @@ public class ReviewDTO {
 	private String  fname; 
 	private int  fsize;
 	
-	private List<QnaReply> repliesList;
+	private List<ReviewDTO> repliesList;
 	private int pageCnt;
 	
 	public  ReviewDTO() {}
@@ -128,11 +128,11 @@ public class ReviewDTO {
 		this.fsize = fsize;
 	}
 
-	public List<QnaReply> getRepliesList() {
+	public List<ReviewDTO> getRepliesList() {
 		return repliesList;
 	}
 
-	public void setRepliesList(List<QnaReply> repliesList) {
+	public void setRepliesList(List<ReviewDTO> repliesList) {
 		this.repliesList = repliesList;
 	}
 

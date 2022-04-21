@@ -13,7 +13,7 @@ public class NoticeDTO {
 	private int  fsize;
 	private int pageCnt;
 	
-	private List<QnaReply> repliesList;
+	private List<NoticeDTO> repliesList;
 	
 	public NoticeDTO() {}
 
@@ -151,11 +151,11 @@ public class NoticeDTO {
 		this.pageCnt = pageCnt;
 	}
 
-	public List<QnaReply> getRepliesList() {
+	public List<NoticeDTO> getRepliesList() {
 		return repliesList;
 	}
 
-	public void setRepliesList(List<QnaReply> repliesList) {
+	public void setRepliesList(List<NoticeDTO> repliesList) {
 		this.repliesList = repliesList;
 	}
 	
