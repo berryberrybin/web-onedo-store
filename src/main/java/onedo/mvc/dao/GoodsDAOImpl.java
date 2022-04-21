@@ -370,8 +370,8 @@ public class GoodsDAOImpl implements GoodsDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, goodsDTO.getGoodsCode());
-			ps.setString(2, goodsDTO.getGoodsImg());
+			ps.setString(1, goodsDTO.getGoodsImg());
+			ps.setInt(2, goodsDTO.getGoodsCode());
 			
 			result = ps.executeUpdate(); //1
 		} finally {

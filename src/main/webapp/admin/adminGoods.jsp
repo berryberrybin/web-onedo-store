@@ -87,7 +87,7 @@
 				url : "${path}/ajax",
 				type : "post",
 				dataType : "json",
-				data : {key : "ajaxGoods", methodName : "selectAll"},
+				data : {key : "ajaxGoods", methodName : "selectAll" },
 				success : function(result) {
 					let str = "";
 					$.each(result, function(index, item) {
@@ -100,7 +100,11 @@
 						str += "<td>" + item.goodsPrice + "</td>";
 						str += "<td>" + item.goodsStock + "</td>";
 						str += "<td><span>" + item.isSoldout +"</span><span style='display:none'>"+item.goodsDetail+"</span></td>";
-						str += `<td><input type='button' value='첨부' onclick='location.href="${path}/admin/insertGoodsImg.jsp"' name='${'${item.goodsCode}'}'></td>`;
+						if(item.goodsImg==""){
+							str += `<td><input type='button' value='첨부' onclick='location.href="${path}/admin/insertGoodsImg.jsp?name=${'${item.goodsCode}'}"'></td>`;
+						}else{
+							str += `<td>${'${item.goodsImg}'}</td>`;
+						}
 						str += `<td><input type='button' value='삭제' name='${'${item.goodsCode}'}'></td>`;
 						str += "</tr>";
 						
