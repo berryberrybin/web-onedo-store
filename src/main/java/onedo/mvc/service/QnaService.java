@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import onedo.mvc.dto.QnaDTO;
+import onedo.mvc.dto.ReviewDTO;
 
 
 public interface QnaService {
@@ -41,6 +42,12 @@ public interface QnaService {
 	   *  모델번호에 해당하는 레코드 수정  메소드 호출
 	   * */
 	   void update(QnaDTO qnaDTO) throws SQLException;
+
+	  /**
+	  * 상품코드에 해당하는 모든 문의 검색
+	  * */
+	  List<QnaDTO> selectQnaByGoodsCode(int goodsCode) throws SQLException;
+	
 
 	
 }
