@@ -35,7 +35,7 @@ public interface QnaService {
 	 /**
 	   *  모델번호에 해당하는 레코드 삭제 메소드 호출
 	   * */
-	    void delete(int qnaNo,String qnaPwd ,String path) throws SQLException;
+	    void delete(int qnaNo,String qnaPwd ) throws SQLException;
 	  
 	  
 	  /**

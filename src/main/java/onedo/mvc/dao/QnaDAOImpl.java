@@ -198,9 +198,9 @@ public class QnaDAOImpl implements QnaDAO {
 			ps.setInt(1,qnaNo);
 			ps.setString(2,qnaPwd);
 		
-			System.out.println("deletedao1");
+			
 			result = ps.executeUpdate();
-			System.out.println("deletedao2");
+			
 			
 		}finally {
 			DbUtil.dbClose(ps, con);

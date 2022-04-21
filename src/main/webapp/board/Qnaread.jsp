@@ -51,6 +51,7 @@ function sendDelete(){
 	}
 	
 	document.requestForm.methodName.value ="delete";
+	alert(document.requestForm.password.value);
 	document.requestForm.submit();
 }
 </script>
