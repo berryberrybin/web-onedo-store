@@ -83,8 +83,13 @@ public class UserServiceImpl implements UserService {
 		List<SalesDTO> myList = dao.selectMyOrder(userId);
 		return myList;
 	}
-
 	
+	@Override
+	public List<SalesDTO> selectMyOrder(String userId, int pageNo) throws SQLException {
+		List<SalesDTO> myList = dao.selectMyOrder(userId, pageNo);
+		return myList;
+	}
+
 	@Override
 	public List<SalesDTO> selectMyOrderLine(String userId, int orderCode) throws SQLException {
 		List<SalesDTO> myList = dao.selectMyOrderLine(userId, orderCode);
@@ -96,6 +101,7 @@ public class UserServiceImpl implements UserService {
 		List<QnaDTO> myBoard = dao.selectMyBoard(userId);
 		return myBoard;
 	}
+
 
 	
 }

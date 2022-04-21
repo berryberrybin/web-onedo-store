@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <jsp:include page="../common/header.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -112,7 +113,7 @@
 										<a href="${path}/front?key=goods&methodName=selectByGoodsCode&isIncrement=n&goodsCode=${salesDTO.goodsCode}">${salesDTO.goodsName}</a>
 								</td>
 								<td class="orderPrice">
-									<p class="cart_total_price">${salesDTO.goodsPrice}원</p>
+									<p class="cart_total_price"><fmt:formatNumber>${salesDTO.goodsPrice}</fmt:formatNumber>원</p>
 								</td>
 								<td class="orderQty">
 										<p>${salesDTO.orderQuantity}개</p>

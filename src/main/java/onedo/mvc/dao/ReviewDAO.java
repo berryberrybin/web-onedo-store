@@ -3,6 +3,7 @@ package onedo.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.ReviewDTO;
 
 
@@ -38,6 +39,8 @@ public interface ReviewDAO {
 		    * @return : 1-수정성공 , 0 - 수정실패
 		    * */
 		  int update(ReviewDTO reviewDTO) throws SQLException;
+		  
+		  ReviewDTO selectByReviewCode(int reviewNo) throws SQLException;
 	  
 	
 	  

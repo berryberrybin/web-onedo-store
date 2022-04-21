@@ -38,4 +38,9 @@ public interface ReviewService {
 	   *  모델번호에 해당하는 레코드 수정  메소드 호출
 	   * */
 	   void update(ReviewDTO reviewDTO) throws SQLException;
+	   
+	   /**
+	    * 상세보기
+	    * */
+	   ReviewDTO selectByReviewCode(int reviewNO)throws SQLException;
 }

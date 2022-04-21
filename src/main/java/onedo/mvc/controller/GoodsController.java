@@ -1,6 +1,7 @@
 package onedo.mvc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.service.GoodsService;
 import onedo.mvc.service.GoodsServiceImpl;
@@ -59,6 +61,25 @@ public class GoodsController implements Controller {
 		request.setAttribute("list", list);
 		return new ModelAndView("main.jsp");
 	}
+	
+	public ModelAndView orderByCondition(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		
+		String orderMethod = request.getParameter("orderMethod");
+		
+		List<GoodsDTO> list = null;
+		try {
+			list = service.orderByCondition(Integer.parseInt(orderMethod));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ModelAndView("error/error.jsp");
+		}
+
+		request.setAttribute("list", list);
+		return new ModelAndView("shop.jsp");
+	}
+	
 	/**
 	 *  상품이름이나 타입으로 상품검색
 	 * */
@@ -115,7 +136,7 @@ public class GoodsController implements Controller {
 	 * 이미지 넣기 insertGoodsImg
 	 * */
 	public ModelAndView insertGoodsImg(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws Exception {
 		
 		
 		String saveDir = request.getServletContext().getRealPath("/save");
@@ -128,21 +149,23 @@ public class GoodsController implements Controller {
 		//전송된 데이터 받기
 		String goodsCode = m.getParameter("goodsCode"); //form의 이름과 같게
 		
-		GoodsDTO goodsDTO = new GoodsDTO(Integer.parseInt(goodsCode));
+		request.setAttribute("goodsCode", goodsCode);
 		
+		GoodsDTO goodsDTO = new GoodsDTO(Integer.parseInt(goodsCode));
 		
 		System.out.println(goodsCode);
 		
 		//파일첨부를 뺀 데이터들↑ 파일첨부가 되면 ↓
 		//getFilesystemName 파일에 대한 정보를 얻어옴. 변경된 이름을 가져오는게 좋음.
-		/*
-		 * if(m.getFilesystemName("goodsImg")!=null) { //파일이 첨부가 되었다면 //파일이름 저장하기 (파일크기는
-		 * 생략함.) goodsDTO.setFname(m.getFilesystemName("goodsImg"));
-		 * 
-		 * }
-		 * 
-		 * GoodsService.insertGoodsImg(goodsDTO);
-		 */
+		
+		   if(m.getFilesystemName("goodsImg")!=null) { //파일이 첨부가 되었다면 
+			   
+			   //파일이름 저장하기
+			   goodsDTO.setGoodsImg(m.getFilesystemName("goodsImg"));
+		  }
+		  
+		   service.insertGoodsImg(goodsDTO);
+		 
 		return new ModelAndView("${path}/admin/insertGoodsImg.jsp", true);
 	}
 	

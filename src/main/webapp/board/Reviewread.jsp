@@ -88,16 +88,44 @@ function sendDelete(){
             <p align="center"><b><span style="font-size:9pt;">글번호</span></b></p>
         </td>
         <td width="450" height="20" colspan="3">
-        	<span style="font-size:9pt;"><b>${faqDTO.faqNo}</b></span>
+        	<span style="font-size:9pt;"><b>${reviewDTO.reviewNo}</b></span>
         </td>
     </tr>
-    
+    <tr>
+        <td width="100" height="20" >
+            <p align="center"><b><span style="font-size:9pt;">아이디</span></b></p>
+        </td>
+        <td width="300" height="20">
+        	<span style="font-size:9pt;"><b>${reviewDTO.userId}</b></span>
+        </td>
+         <td width="100" height="20" >
+			<p align="center"><b><span style="font-size:9pt;">별점</span></b></p>
+		</td>
+        <td width="100" height="20">
+			<p><b><span style="font-size:9pt;"></span>${reviewDTO.reviewScore}</b></p>
+		</td>
+    </tr>
+     <tr>
+        <td width="100" height="20" >
+            <p align="center"><b><span style="font-size:9pt;">상품코드</span></b></p>
+        </td>
+        <td width="300" height="20">
+        	<span style="font-size:9pt;"><b>${reviewDTO.goodsCode}</b></span>
+        </td>
+        <td width="100" height="20" >
+			<p align="center"><b><span style="font-size:9pt;">날짜</span></b></p>
+		</td>
+        <td width="100" height="20">
+			<p><b><span style="font-size:9pt;"></span>${reviewDTO.reviewDate}</b></p>
+		</td>
+    </tr>
+    <tr>
     <tr>
         <td width="100" height="20">
             <p align="center"><b><span style="font-size:9pt;">제목</span></b></p>
         </td>
         <td width="450" height="20" colspan="3">
-        	<span style="font-size:9pt;"><b>${faqDTO.faqSubject}</b></span>
+        	<span style="font-size:9pt;"><b>${reviewDTO.reviewSubject}</b></span>
         </td>
     </tr>
     <tr>
@@ -106,14 +134,14 @@ function sendDelete(){
         </td>
 		<!-- 브라우저에 글 내용을 뿌려줄 때는 개행문자(\n)가 <br>태그로 변환된 문자열을 보여줘야 한다. -->
         <td width="450" height="200" valign="top" colspan="3">
-        <span style="font-size:9pt;"><b><pre>${faqDTO.faqContent}</pre></b></span></td>
+        <span style="font-size:9pt;"><b><pre>${reviewDTO.reviewContent}</pre></b></span></td>
     </tr>
    
     
     <tr>
         <td height="20" colspan="4" align="center" valign="middle">
 			<!-- 수정시 필요한 데이터들을 hidden으로 숨겨놓고 폼 데이터로 보내준다. -->
-				<input type="text" name="faqNo" value="${faqDTO.faqNo}">
+				<input type="text" name="faqNo" value="${reviewDTO.reviewImg}">
 				<input type="text" name="key" value=faqDTO>
 				<input type="text" name="methodName" >
 				<input type=button value="수정하기" onClick="sendUpdate()">

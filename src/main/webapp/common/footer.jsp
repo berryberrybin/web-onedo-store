@@ -26,11 +26,11 @@
 						<div class="single-widget">
 							<h2>Quock Shop</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">T-Shirt</a></li>
-								<li><a href="#">Mens</a></li>
-								<li><a href="#">Womens</a></li>
-								<li><a href="#">Gift Cards</a></li>
-								<li><a href="#">Shoes</a></li>
+								<li><a href="#">Espresso Machine</a></li>
+								<li><a href="#">Coffee Pot</a></li>
+								<li><a href="#">Grinder</a></li>
+								<li><a href="#">Tumbler</a></li>
+								<li><a href="#">Spoon&Cup</a></li>
 							</ul>
 						</div>
 					</div>

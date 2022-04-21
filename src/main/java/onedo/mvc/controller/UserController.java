@@ -1,13 +1,13 @@
 package onedo.mvc.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.SalesDTO;
@@ -125,15 +125,34 @@ public class UserController implements Controller {
 			throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 
+		
+		String pageNo = request.getParameter("pageNo"); //현재 페이지 번호 
+		if(pageNo==null || pageNo.equals("")) {
+			pageNo="1";
+		}
+		
+		System.out.println(pageNo);
+
 		//세션에 저장된 유저 아이디 불러오기
 		HttpSession session = request.getSession();
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		String userId = dbDTO.getUserId();
 		
-		//가져온 아이디로 DB호출
-		List<SalesDTO> myList = userService.selectMyOrder(userId);
+		/*
+		 * //가져온 아이디로 DB호출 List<SalesDTO> myList = userService.selectMyOrder(userId);
+		 */
 		
-		request.setAttribute("myList", myList);
+		//페이징 처리 DB 호출 
+		List<SalesDTO> myList = userService.selectMyOrder(userId,Integer.parseInt(pageNo));
+		request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
+		request.setAttribute("myList", myList); 
+		System.out.println(myList);
+		 
+		/*
+		 * System.out.println(myList); request.setAttribute("myList", myList);
+		 */
+		
+		//return new ModelAndView("front?key=user&methodName=myPage&pageNo="+pageNo);
 		return new ModelAndView("user/myPage.jsp");
 	}
 	

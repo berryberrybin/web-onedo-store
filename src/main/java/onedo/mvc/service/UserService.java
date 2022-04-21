@@ -61,6 +61,12 @@ public interface UserService {
 	
 	
 	/**
+	 * 마이페이지 페이징처리
+	 * */
+	List<SalesDTO> selectMyOrder(String userId, int pageNo) throws SQLException;
+
+	
+	/**
 	 * 마이페이지 주문 상세페이지
 	 * */
 	List<SalesDTO> selectMyOrderLine(String userId, int orderCode) throws SQLException;

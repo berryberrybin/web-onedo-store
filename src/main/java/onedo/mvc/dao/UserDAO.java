@@ -61,6 +61,11 @@ public interface UserDAO {
 	List<SalesDTO> selectMyOrder(String userId) throws SQLException;
 	
 	/**
+	 * 마이페이지에서 나의 주문 목록 페이징 처리
+	 * */
+	List<SalesDTO> selectMyOrder(String userId, int pageNo) throws SQLException;
+	
+	/**
 	 * 마이페이지의 주문 상세페이지 조회하기
 	 * */
 	List<SalesDTO> selectMyOrderLine(String userId, int orderCode) throws SQLException;

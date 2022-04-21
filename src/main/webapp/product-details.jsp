@@ -62,10 +62,10 @@
 		   				$("#searchReviews div details").remove();
 		   				$("#searchReviews div").append(str);
 		   				
-		   			} , //성공했을때 실행할 함수 
+		   			} , 
 		   			error : function(err){  
 		   				alert(err+"에러 발생했어요.");
-		   			}  //실패했을때 실행할 함수 
+		   			}
 		   		});//ajax끝
 		   	});//후기가져오기끝
 			
@@ -79,12 +79,6 @@
 		   			success :function(result){
 		   				str = "";
 		   				$.each(result, function(index, item){
-		   					/*str += "<tr>";
-		   					str += "<td>"+(index+1)+"</td>";
-		   					str += "<td><a href='#'>"+item.qnaSubject+"</a></td>";
-		   					str += "<td>"+moment(item.qnaDate).format("YYYY-MM-DD")+"</td>"; //날짜 형식 바꾸기
-		   					str += "<td>"+item.userid+"</td>";
-		   					str += "</tr>";*/
 		   					str += "<details>";
 		   					str += "<summary>"+(index+1)+"&emsp;&emsp;"+item.qnaSubject+"&emsp;"+"|"+"&emsp;"+moment(item.qnaDate).format("YYYY-MM-DD")+"&emsp;"+"|"+"&emsp;"+item.userid+"</summary>";
 		   					str += "<p>"+item.qnaContent+"</p>";
@@ -94,10 +88,10 @@
 		   				$("#searchQna div details").remove();
 		   				$("#searchQna div").append(str);
 		   				
-		   			} , //성공했을때 실행할 함수 
+		   			} ,
 		   			error : function(err){  
 		   				alert(err+"에러 발생했어요.");
-		   			}  //실패했을때 실행할 함수 
+		   			}
 		   		});//ajax끝
 		   	});//후기가져오기끝
 		   	
