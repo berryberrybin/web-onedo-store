@@ -90,7 +90,7 @@ td {
 
 										<td class="itemPrice">
 											<h4>
-												<p>${cartItem.goods.goodsPrice}</p>
+											<fmt:formatNumber value="${cartItem.goods.goodsPrice}"/>
 											</h4>
 										</td>
 
@@ -104,7 +104,9 @@ td {
 										</td>
 
 										<td class="cart_total">
-											<p class="cart_total_price">${cartItem.totalPrice}</p>
+											<p class="cart_total_price">
+											<fmt:formatNumber value="${cartItem.totalPrice}"/>
+											</p>
 										</td>
 
 
@@ -134,9 +136,9 @@ td {
 			<div class="col-sm-6">
 				<div class="total_area">
 					<ul>
-						<li>총 상품 가격 <span>${totalItemPrice}</span></li>
-						<li>배송비 <span>${deliveryPrice}</span></li>
-						<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
+						<li>총 상품 가격 <span><fmt:formatNumber value="${totalItemPrice}"/></span></li>
+						<li>배송비 <span><fmt:formatNumber value="${deliveryPrice}"/></span></li>
+						<li>총 결제 예상 금액 <span><fmt:formatNumber value="${paymentPrice}"/></span></li>
 					</ul>
 					<a class="btn btn-default update" href="front?key=cart&methodName=deleteAll">장바구니 비우기</a>
 					 <a class="btn btn-default check_out" href="front?key=checkout&methodName=select">결제하기</a>

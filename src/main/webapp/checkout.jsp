@@ -137,9 +137,9 @@ td {
 							<p>총 결제금액</p>
 							<div class="total_area">
 								<ul>
-									<li>총 상품 가격 <span>${totalItemPrice}</span></li>
-									<li>배송비 <span>${deliveryPrice}</span></li>
-									<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
+									<li>총 상품 가격 <span><fmt:formatNumber value="${totalItemPrice}"/></span></li>
+									<li>배송비 <span><fmt:formatNumber value="${deliveryPrice}"/></span></li>
+									<li>총 결제 예상 금액 <span><fmt:formatNumber value="${paymentPrice}"/></span></li>
 								</ul>
 							</div>
 						</div>
@@ -191,7 +191,7 @@ td {
 
 										<td class="itemPrice">
 											<h4>
-												<p>${cartItem.goods.goodsPrice}</p>
+												<p><fmt:formatNumber value="${cartItem.goods.goodsPrice}"/></p>
 											</h4>
 										</td>
 
@@ -204,7 +204,7 @@ td {
 										</td>
 
 										<td class="cart_total">
-											<p class="cart_total_price">${cartItem.totalPrice}</p>
+											<p class="cart_total_price"><fmt:formatNumber value="${cartItem.totalPrice}"/></p>
 										</td>
 									</tr>
 								</c:forEach>
