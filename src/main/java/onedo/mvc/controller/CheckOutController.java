@@ -66,19 +66,22 @@ public class CheckOutController implements Controller {
 	 * @throws Exception
 	 */
 	public void checkTotalPrice(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		UserDTO dbDTO = (UserDTO) session.getAttribute("loginUser");
-
+				HttpSession session = request.getSession();
+		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
+		
 		String userId = dbDTO.getUserId();
-
+		
 		List<CartItemDTO> cartItemList = cartService.getCart(userId).getCartItemList();
 		int sumTotalItemPrice = cartItemList.stream().mapToInt(cartItem -> cartItem.getTotalPrice()).sum();
-
+		
+		
 		int deliveryPrice = (sumTotalItemPrice > 0 && sumTotalItemPrice < 50000) ? 3000 : 0;
-
+		
+		int paymentPrice = sumTotalItemPrice + deliveryPrice;
+		
 		request.setAttribute("totalItemPrice", sumTotalItemPrice);
-		request.setAttribute("deliveryPrice", deliveryPrice);
-		request.setAttribute("paymentPrice", (sumTotalItemPrice - deliveryPrice));
+		request.setAttribute("deliveryPrice", deliveryPrice); 
+		request.setAttribute("paymentPrice", paymentPrice);
 	}
 
 	@Override

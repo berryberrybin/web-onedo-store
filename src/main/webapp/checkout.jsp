@@ -224,17 +224,6 @@ td {
 
 	</section>
 
-<div class="col-sm-6">
-	<div class="total_area">
-		<ul>
-			<li>총 상품 가격 <span>${totalItemPrice}</span></li>
-			<li>배송비 <span>${deliveryPrice}</span></li>
-			<li>총 결제 예상 금액 <span>${paymentPrice}</span></li>
-		</ul>
-		<a class="btn btn-default update" href="front?key=cart&methodName=deleteAll">장바구니 비우기</a>
-		 <a class="btn btn-default check_out" href="#">결제하기</a>
-	</div>
-</div>
 <form method="post" action="${path}/front" id="payForm">
 	<!-- 결재가 완료되었을때 가지고 가이동할 값들 설 -->
 	<input type="hidden" name="key" id="key" value="order" />
