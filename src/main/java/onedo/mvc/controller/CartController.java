@@ -154,9 +154,10 @@ public class CartController implements Controller {
 		
 		int deliveryPrice = (sumTotalItemPrice > 0 && sumTotalItemPrice < 50000) ? 3000 : 0;
 		
+		int paymentPrice = sumTotalItemPrice + deliveryPrice;
 		request.setAttribute("totalItemPrice", sumTotalItemPrice);
 		request.setAttribute("deliveryPrice", deliveryPrice);
-		request.setAttribute("paymentPrice", (sumTotalItemPrice - deliveryPrice));
+		request.setAttribute("paymentPrice", paymentPrice);
 	}
 
 	public ModelAndView increaseAmount(HttpServletRequest request, HttpServletResponse response) throws Exception {
