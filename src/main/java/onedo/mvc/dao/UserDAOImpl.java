@@ -11,6 +11,7 @@ import java.util.Properties;
 import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
+import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
 public class UserDAOImpl implements UserDAO {
@@ -248,6 +249,92 @@ public class UserDAOImpl implements UserDAO {
 		return myList;
 	}
 
+	/**
+	 * 마이페이지 내 아이디의 주문번호 갯수 계산
+	 * */
+	private int getTotalCount(String userId)throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int totalCount=0;
+		String sql = "select count(*) from orders join orderline using(order_code) join goods using(goods_code) where user_id=?";
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				totalCount = rs.getInt(1);
+					
+				}
+			}finally {
+				DbUtil.dbClose(rs, ps, con);
+			}
+			
+			return totalCount;
+		}
+
+	
+	@Override
+	public List<SalesDTO> selectMyOrder(String userId, int pageNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		List<SalesDTO> myOrder = new ArrayList<SalesDTO>();
+		String sql = "select * from (SELECT a.*, ROWNUM rnum FROM (select min(goods_Name),min(goods_code), min(order_qty), min(order_date), min(order_price),order_Code, min(orderline_code) , count(*) from orders join orderline using(order_code) join goods using(goods_code) where user_id=? group by order_code ORDER BY order_code desc) a) where rnum>=? and rnum <=?";
+
+		/*
+		 * select * from (SELECT a.*, ROWNUM rnum FROM (select min(goods_Name),
+		 * min(goods_code), min(order_qty), min(order_date), min(order_price),
+		 * order_Code, min(orderline_code) , count(*) from orders join orderline
+		 * using(order_code) join goods using(goods_code) where user_id=? group by
+		 * order_code ORDER BY order_code desc) a) where rnum>=? and rnum <=?
+		 */
+
+		try {
+			 //전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.
+			int totalCount = this.getTotalCount(userId);
+			System.out.println("totalCount = " + totalCount);
+			int totalPage = totalCount%PageCnt.getPagesize() ==0 ? totalCount/PageCnt.getPagesize() : (totalCount/PageCnt.getPagesize())+1 ;
+			System.out.println("totalPage = " + totalPage);
+			PageCnt pageCnt = new PageCnt();
+			pageCnt.setPageCnt(totalPage);//전체페이지수를 저장해준다.
+			pageCnt.setPageNo(pageNo); //사용자가 클릭한 page번호를 설정
+						
+			
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			//3개의 ? 값 설정
+			ps.setString(1, userId);
+			ps.setInt(2, (pageNo-1)*PageCnt.pagesize+1); //시작점번호
+			ps.setInt(3, pageNo*PageCnt.pagesize); //끝점 번호
+					
+			rs = ps.executeQuery();
+			while(rs.next()) {SalesDTO sales = new SalesDTO(
+					rs.getString(1),
+					rs.getInt(2),	
+					rs.getInt(3),
+					rs.getString(4),
+					rs.getInt(5),
+					rs.getInt(6),
+					rs.getInt(7),
+					rs.getInt(8));
+			
+			totalCount = rs.getInt(8);
+			if(totalCount>1) sales.setGoodsName(sales.getGoodsName()+" 외 "+ (totalCount-1) +"건");
+			myOrder.add(sales);
+		}
+		}finally {
+			DbUtil.dbClose(rs, ps, con);	
+		}
+		
+		return myOrder;
+	}
+	
+	
+	
 	@Override
 	public List<SalesDTO> selectMyOrderLine(String userId, int orderCode) throws SQLException {
 		Connection con = null;
@@ -317,8 +404,9 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return myBoard;
 	}
+
+
 		
-	
 	
 
 }

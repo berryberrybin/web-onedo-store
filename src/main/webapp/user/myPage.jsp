@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <jsp:include page="../common/header.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -108,7 +109,7 @@
 										<p>${salesDTO.goodsName}</p>
 								</td>
 								<td class="orderPrice">
-									<p class="cart_total_price">${salesDTO.orderPrice}원</p>
+									<p class="cart_total_price"><fmt:formatNumber>${salesDTO.orderPrice}</fmt:formatNumber>원</p>
 								</td>
 								<td class="orderDate">
 										<p>${salesDTO.orderDate}</p>
@@ -121,6 +122,34 @@
 			</table>
           </div><br>
       </div>
+      
+<jsp:useBean class="onedo.mvc.paging.PageCnt" id="p"/> 
+		<nav class="pagination-container">
+			<ul class="pagination">
+			<!-- 페이징처리 -->
+			<c:set var="doneLoop" value="false"/>
+		
+			<c:set var="temp" value="${(pageNo-1) % p.blockcount}"/> <!-- (1-1)%2  =0  , (2-1)%2    1 , (3-1)%2  0 -->
+			<c:set var="startPage" value="${pageNo - temp}"/> <!--   1- 1 -->
+		  <c:if test="${(startPage-p.blockcount) > 0}"> <!-- (-2) > 0  -->
+		      <li><a class="pagination-newer" href="${path}/front?key=user&methodName=myPage&pageNo=${startPage-1}">&laquo;</a></li>
+		  </c:if>
+	
+		  <c:forEach var='i' begin='${startPage}' end='${(startPage-1)+p.blockcount}'> 
+			  <c:if test="${(i-1)>=p.pageCnt}">
+			       <c:set var="doneLoop" value="true"/>
+			    </c:if> 
+			  <c:if test="${not doneLoop}" >
+			         <li><a class="${i==pageNo?'pagination-active':page}" href="${path}/front?key=user&methodName=myPage&pageNo=${i}">${i}</a> </li>
+		     </c:if>
+		</c:forEach>
+		
+		 <c:if test="${(startPage+p.blockcount)<=p.pageCnt}">
+		     <li><a class="pagination-older" href="${path}/front?key=user&methodName=myPage&pageNo=${startPage+p.blockcount}">&raquo;</a></li>
+		 </c:if>
+		 </ul>
+			</nav>
+      
       
  	</div> <!-- 최근 주문 내역 끝 -->
 
