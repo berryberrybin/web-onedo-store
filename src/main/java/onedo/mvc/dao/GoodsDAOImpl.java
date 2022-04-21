@@ -412,4 +412,40 @@ public class GoodsDAOImpl implements GoodsDAO {
 		}
 		return list;
 	}
+
+	@Override
+	public List<GoodsDTO> orderByCondition(int orderMethod) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<GoodsDTO> list = new ArrayList<GoodsDTO>();
+		
+		String sql=proFile.getProperty("goods.orderByCondition");//select * from goods join goods_attr using(goods_code) where not is_soldout = 2 order by 
+		switch(orderMethod) {
+			case 1: sql+= "goods_price"; break;
+			case 2: sql+= "goods_price desc"; break;
+			case 3: sql+= "goods_view desc"; break;
+		}
+		GoodsAttrDTO attrDTO = goodsDTO.getGoodsAttrDTO();
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
+						rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+				
+				//속성을 가져오는 메소드 호출
+				
+				attrDTO = new GoodsAttrDTO(rs.getInt(1), rs.getInt(10), rs.getInt(11), rs.getInt(12), rs.getInt(13));
+				goodsDTO.setGoodsAttrDTO(attrDTO);
+				list.add(goodsDTO);
+			}
+			
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return list;
+	}
 }

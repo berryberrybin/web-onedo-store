@@ -59,6 +59,25 @@ public class GoodsController implements Controller {
 		request.setAttribute("list", list);
 		return new ModelAndView("main.jsp");
 	}
+	
+	public ModelAndView orderByCondition(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		
+		String orderMethod = request.getParameter("orderMethod");
+		
+		List<GoodsDTO> list = null;
+		try {
+			list = service.orderByCondition(Integer.parseInt(orderMethod));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ModelAndView("error/error.jsp");
+		}
+
+		request.setAttribute("list", list);
+		return new ModelAndView("shop.jsp");
+	}
+	
 	/**
 	 *  상품이름이나 타입으로 상품검색
 	 * */

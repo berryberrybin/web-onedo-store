@@ -96,5 +96,12 @@ public class GoodsServiceImpl implements GoodsService {
 		if (result == 0) throw new SQLException("상품 이미지 등록 실패");
 		return result;
 	}
+
+	@Override
+	public List<GoodsDTO> orderByCondition(int orderMethod) throws SQLException {
+		List<GoodsDTO> list = goodsDAO.orderByCondition(orderMethod);
+        
+		return list;
+	}
 	
 }

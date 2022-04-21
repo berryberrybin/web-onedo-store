@@ -69,4 +69,6 @@ public interface GoodsDAO {
 	 * */
 	List<GoodsDTO> selectGoodsOrderBySalesRank() throws SQLException;
 
+	List<GoodsDTO> orderByCondition(int orderMethod) throws SQLException;
+
 }

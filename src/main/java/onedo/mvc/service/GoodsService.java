@@ -52,4 +52,6 @@ public interface GoodsService {
 	 * 판매량 순으로 상품검색
 	 * */
 	List<GoodsDTO> selectGoodsOrderBySalesRank() throws SQLException;
+
+	List<GoodsDTO> orderByCondition(int orderMethod) throws SQLException;
 }
