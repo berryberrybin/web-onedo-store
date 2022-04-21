@@ -54,7 +54,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
-		String sql=proFile.getProperty("goods.selectByGoodsCode"); //select * from goods where goods_code=?
+		String sql=proFile.getProperty("goods.selectByGoodsCode"); //select * from goods join goods_attr using(goods_code) where goods_code=?
 		GoodsAttrDTO attrDTO = goodsDTO.getGoodsAttrDTO();
 		try {
 			con = DbUtil.getConnection();
