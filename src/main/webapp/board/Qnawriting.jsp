@@ -37,7 +37,11 @@
 
 <script type="text/javascript">
 	$(function() {
-		alert(${'${loginUser.userId}'});
+		$("#writing").click(function(){
+			
+			
+		});
+		
 
 	})
 </script>
@@ -66,8 +70,6 @@
 
 						<table align="center" cellpadding="5" cellspacing="2" width="600"
 							border="0" >
-
-
 
 							<tr>
 								<td width="1400" height="40" colspan="2" bgcolor="#FE980F">
@@ -133,7 +135,7 @@
 							</tr>
 							<tr>
 								<td width="450" height="20" colspan="2" align="center"><b><span
-										style="font-size: 9pt;"><input type=submit value=글쓰기>
+										style="font-size: 9pt;"><input type=submit id=writing value=글쓰기>
 											<input type=reset value=다시쓰기></span></b></td>
 							</tr>
 						</table>

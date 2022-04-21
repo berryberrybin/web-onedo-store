@@ -16,14 +16,14 @@ public class ReviewDAOImpl implements ReviewDAO {
 	private Properties proFile = DbUtil.getProFile();
 
 	@Override
-	public List<ReviewDTO> selectAll() throws SQLException {
+	public List<ReviewDTO> reviewSelectAll() throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		
 		List<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
 		
-		String sql = proFile.getProperty("");
+		String sql = "select * from review_board order by review_no";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		
 		List<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
 		
-		String sql = proFile.getProperty("");
+		String sql = "select * from  (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM review_board ORDER BY review_no desc) a) where  rnum>=? and rnum <=?";
 		try {
 			//전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.
 			int totalCount = this.getTotalCount();
@@ -104,7 +104,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		int totalCount=0;
-		String sql = proFile.getProperty(" ");
+		String sql = "select count(*) from review_board";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -132,7 +132,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		List<ReviewDTO> list = new ArrayList<ReviewDTO>();
 		ReviewDTO reviewDTO = null; //while문 밖에서 ReviewDTO 생성함
 		
-		String sql = proFile.getProperty("review.selectByGoodsCode");//select * from review_board where goods_code=?
+		String sql = proFile.getProperty("");//select * from review_board where goods_code=?
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);

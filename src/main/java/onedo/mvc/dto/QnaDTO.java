@@ -18,7 +18,7 @@ public class QnaDTO {
 	private String  fname; 
 	private int  fsize;
 
-	private List<QnaReply> repliesList;
+	private List<QnaReplyDTO> repliesList;
 	
 	private int pageCnt;
 	
@@ -39,14 +39,6 @@ public class QnaDTO {
 		this.qnaPwd = qnaPwd;
 	}
 	
-	
-
-
-
-
-
-
-
 	public QnaDTO(int goodsCode, String userid, String qnaSubject, String qnaContent, String qnaPwd) {
 		super();
 		this.goodsCode = goodsCode;
@@ -58,7 +50,9 @@ public class QnaDTO {
 
 
 
-	public QnaDTO(String fname, int fsize, List<QnaReply> repliesList, int pageCnt) {
+<<<<<<< Updated upstream
+
+	public QnaDTO(String fname, int fsize, List<QnaReplyDTO> repliesList, int pageCnt) {
 		super();
 		this.fname = fname;
 		this.fsize = fsize;
@@ -67,7 +61,8 @@ public class QnaDTO {
 	}
 
 
-
+=======
+>>>>>>> Stashed changes
 	public int getQnaNo() {
 		return qnaNo;
 	}
@@ -172,11 +167,11 @@ public class QnaDTO {
 		this.pageCnt = pageCnt;
 	}
 
-	public List<QnaReply> getRepliesList() {
+	public List<QnaReplyDTO> getRepliesList() {
 		return repliesList;
 	}
 
-	public void setRepliesList(List<QnaReply> repliesList) {
+	public void setRepliesList(List<QnaReplyDTO> repliesList) {
 		this.repliesList = repliesList;
 	}
 	

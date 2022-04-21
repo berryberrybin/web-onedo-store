@@ -29,19 +29,24 @@ public class NoticeController implements Controller {
 	 *  전체검색하기 
 	 * */
 	public ModelAndView noticeSelectAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		/*
-		 * String pageNo = request.getParameter("pageNo");//현재페이지번호 if(pageNo==null ||
-		 * pageNo.equals("")) { pageNo="1"; }
-		 */
-		List<NoticeDTO> list = notService.selectAll();
+		
+		String pageNo = request.getParameter("pageNo");//현재페이지번호 
+		if(pageNo==null || pageNo.equals("")) {
+			pageNo="1";
+		}
+		 
+		List<NoticeDTO> list = notService.selectAll(Integer.parseInt(pageNo));
 		
 		 request.setAttribute("list", list);
-			/*
-			 * request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
-			 */	
+			
+			  request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
+			 
 		 return new ModelAndView("board/Notice.jsp") ;
 	}
 	
+	/**
+	 * 등록하기
+	 */
 	public ModelAndView insert(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String saveDir= request.getServletContext().getRealPath("/save");
 		int maxSize =1024*1024*100;//100M
@@ -50,27 +55,26 @@ public class NoticeController implements Controller {
 				new MultipartRequest(request, saveDir,maxSize,encoding , new DefaultFileRenamePolicy());
 	  
 	    //전송된 데이터 받기 
-	    String noticeNo = m.getParameter("notice_no");
+	  
 	    String noticeSubject = m.getParameter("notice_subject");
 	    String noticeContent = m.getParameter("notice_content");
-	    String noticeDate = m.getParameter("notice_date");
 	    String noticeImg = m.getParameter("notice_img");
 	    
-	    NoticeDTO elec = new NoticeDTO();
+	    NoticeDTO ndto = new NoticeDTO(noticeSubject,noticeContent,noticeImg);
 	    
 	  //파일첨부가되었다면...
   		if(m.getFilesystemName("file") != null) {
   			//파일이름 저장
-  			elec. setFname(m.getFilesystemName("file"));
+  			ndto. setFname(m.getFilesystemName("file"));
   			
   			//파일크기 저장
-  			elec.setFsize((int)m.getFile("file").length());
+  			ndto.setFsize((int)m.getFile("file").length());
   		}
   		
-  		notService.insert(elec);
+  		notService.insert(ndto);
   		
   		
-  		return new ModelAndView("front", true);
+  		return new ModelAndView("board/Notice.jsp", true);
   	}
 	
 	/**
