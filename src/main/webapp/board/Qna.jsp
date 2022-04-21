@@ -154,7 +154,7 @@ th, td {
 
 					<div align=right>
 						<span style="font-size: 9pt;"><a class="btn btn-primary"
-							href="${path}/board/QnaWriting.jsp">글쓰기</a></span>
+							href="${path}/board/Qnawriting.jsp">글쓰기</a></span>
 					</div>
 
 

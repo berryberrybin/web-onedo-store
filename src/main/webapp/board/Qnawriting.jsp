@@ -110,17 +110,6 @@
 												cols="50" rows="10"></textarea></span></b></td>
 							</tr>
 
-							<tr>
-								<td width="150" height="20">
-									<p align="center">
-										<b><span style="font-size: 9pt;">*파일첨부</span></b>
-									</p>
-								</td>
-								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <input type="file" name="qnaImg"
-											maxlength="60" size="40">
-									</span></b></td>
-							</tr>
 
 							<tr>
 								<td width="150" height="20">

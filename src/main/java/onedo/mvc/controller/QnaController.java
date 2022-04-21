@@ -104,7 +104,7 @@ public class QnaController implements Controller {
 		request.setAttribute("pageNo", pageNo);
 		
 		
-		return new ModelAndView("board/QnaRead.jsp");
+		return new ModelAndView("board/Qnaread.jsp");
 		
 	}
 
@@ -118,7 +118,7 @@ public class QnaController implements Controller {
 		QnaDTO qnaDTO = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
 		request.setAttribute("qnaDTO", qnaDTO);
 
-		return new ModelAndView("board/QnaUpdate.jsp");
+		return new ModelAndView("board/Qnaupdate.jsp");
 	}
 
 	/**
