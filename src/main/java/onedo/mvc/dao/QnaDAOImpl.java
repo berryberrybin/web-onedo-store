@@ -214,15 +214,16 @@ public class QnaDAOImpl implements QnaDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql = proFile.getProperty(" ");
+		String sql = "update QnA_board set goods_code=?,qna_subject=?,qna_content=? where qna_no=? and qna_pwd=?" ;
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			
-			ps.setString(1, qnaDTO.getQnaSubject());
-			ps.setString(2, qnaDTO.getQnaContent());
-			ps.setString(3, qnaDTO.getQnaDate());
-			ps.setString(4, qnaDTO.getQnaImg());
+		
+			ps.setInt(1,qnaDTO.getGoodsCode());
+			ps.setString(2, qnaDTO.getQnaSubject());
+			ps.setString(3, qnaDTO.getQnaContent());
+			ps.setInt(4,qnaDTO.getQnaNo());
 			ps.setString(5, qnaDTO.getQnaPwd());
 			
 			

@@ -38,7 +38,14 @@ public class QnaDTO {
 		this.qnaImg = qnaImg;
 		this.qnaPwd = qnaPwd;
 	}
-	
+	public QnaDTO(int qnaNo, int goodsCode, String qnaSubject, String qnaContent, String qnaPwd) {
+		super();
+		this.qnaNo = qnaNo;
+		this.goodsCode = goodsCode;
+		this.qnaSubject = qnaSubject;
+		this.qnaContent = qnaContent;
+		this.qnaPwd = qnaPwd;
+	}
 	public QnaDTO(int goodsCode, String userid, String qnaSubject, String qnaContent, String qnaPwd) {
 		super();
 		this.goodsCode = goodsCode;
