@@ -120,7 +120,11 @@ th, td {
 						<c:forEach items="${list}" var="noticeBoard">
 							<tr>
 								<td>${noticeBoard.noticeNo}</td>
-								<td>${noticeBoard.noticeSubject}</td>
+								<td>
+								<a href="${path}/front?key=noticeBoard&methodName=selectByNoticeCode&noticeNo=${noticeBoard.noticeNo}&pageNo=${pageNo}">
+								${noticeBoard.noticeSubject}
+								</a>
+								</td>
 								<td>${noticeBoard.noticeContent}</td>
 								<td>${noticeBoard.noticeDate}</td>
 								

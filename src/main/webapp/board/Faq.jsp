@@ -110,7 +110,11 @@ th, td {
 						<c:forEach items="${list}" var="faqBoard">
 							<tr>
 								<td>${faqBoard.faqNo}</td>
-								<td>${faqBoard.faqSubject}</td>
+								<td>
+								<a href="${path}/front?key=faqBoard&methodName=selectByFaqCode&faqNo=${faqBoard.faqNo}&pageNo=${pageNo}">
+								${faqBoard.faqSubject} 
+								</a>
+								</td>
 								<td>${faqBoard.faqContent}</td>
 
 

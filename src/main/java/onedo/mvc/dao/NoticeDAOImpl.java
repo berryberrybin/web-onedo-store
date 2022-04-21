@@ -120,7 +120,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 		ResultSet rs=null;
 		NoticeDTO noticeDTO=null;
 		
-		String sql = proFile.getProperty("");
+		String sql = "select * from notice_board where notice_no=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);

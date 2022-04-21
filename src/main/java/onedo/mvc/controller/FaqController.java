@@ -85,10 +85,10 @@ public class FaqController implements Controller{
 		String pageNo = request.getParameter("pageNo");
 		
 		FaqDTO faqDTO = faqService.selectByFaqCode(Integer.parseInt(faqNo));
-		 request.setAttribute("elec", faqDTO);
+		 request.setAttribute("faqDTO", faqDTO);
 		 request.setAttribute("pageNo", pageNo);
 		 
-	   return new ModelAndView("elec/read.jsp");
+	   return new ModelAndView("board/Faqread.jsp");
 	}
 	
 	/**

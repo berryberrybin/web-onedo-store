@@ -85,10 +85,10 @@ public class NoticeController implements Controller {
 		String pageNo = request.getParameter("pageNo");
 		
 		NoticeDTO noticeDTO = notService.selectByNoticeCode(Integer.parseInt(noticeNo));
-		 request.setAttribute("elec", noticeDTO);
+		 request.setAttribute("noticeDTO", noticeDTO);
 		 request.setAttribute("pageNo", pageNo);
 		 
-	   return new ModelAndView("elec/read.jsp");
+	   return new ModelAndView("board/Noticeread.jsp");
 	}
 	
 	/**

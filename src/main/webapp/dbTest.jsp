@@ -1,3 +1,4 @@
+
 <%@page import="onedo.mvc.util.DbUtil"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,7 +15,6 @@
 	Connection con = DbUtil.getConnection();
 	out.println("con = " + con);
 
-	
 %>
 </body>
 </html>
