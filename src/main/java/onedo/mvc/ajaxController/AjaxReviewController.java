@@ -33,7 +33,7 @@ public class AjaxReviewController implements AjaxController {
 		String goodsCode = request.getParameter("goodsCode");
 		//String pageNo = request.getParameter("pageNo");
 		
-		List<ReviewDTO> list= service.selectByRevieCode(Integer.parseInt(goodsCode));
+		List<ReviewDTO> list= service.selectByGoodsCode(Integer.parseInt(goodsCode));
 		//request.setAttribute("pageNo", pageNo);
 		
 		JSONArray arr = JSONArray.fromObject(list);
