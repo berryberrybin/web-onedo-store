@@ -42,17 +42,10 @@
 		   			success :function(result){
 		   				str = "";
 		   				$.each(result, function(index, item){
-		   					//후기별점
-		   					let stars ="";
-	   						for(let i=0;i<item.reviewScore;i++){
-	   							stars+="★";
-	   						}
-	   						for(let i=5;i>item.reviewScore;i--){
-	   							stars+="☆";
-	   						}
-		   					
 		   					str += "<details>";
-		   					str += "<summary>&nbsp;"+item.reviewSubject+"&emsp;&emsp;"+item.userId+"&emsp;"+"|"+"&emsp;"+moment(item.reviewDate).format("YYYY-MM-DD")+"&emsp;"+"|"+"&emsp;"+stars+"</summary>";
+		   					str += "<summary>&nbsp;"+item.reviewSubject+"&emsp;&emsp;"+item.userId+"&emsp;"+"|"+"&emsp;"+moment(item.reviewDate).format("YYYY-MM-DD")+"&emsp;"+"|"+"&emsp;";
+		   					changeToStars(item.reviewScore);
+		   					str += "</summary>";
 		   					str += "<p>"+item.reviewContent;
 		   					if(!item.reviewImg==null||!item.reviewImg=="") str += "<img src='${path}/img/"+item.reviewImg+"' alt=''>";
 		   					str += "</p>";
