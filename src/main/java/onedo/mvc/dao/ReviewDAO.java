@@ -12,7 +12,7 @@ public interface ReviewDAO {
 	  /**
 	  * 레코드 전체 검색
 	  * */
-		List<ReviewDTO> selectAll() throws SQLException;
+		List<ReviewDTO> reviewSelectAll() throws SQLException;
 		 /**
 		  * 레코드 전체 검색(페이지처리)
 		  * */
