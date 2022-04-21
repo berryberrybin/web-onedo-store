@@ -144,7 +144,7 @@ th, td {
 								<td>${revBoard.goodsCode}</td>
 								<td>${revBoard.userId}</td>
 								<td>
-								<a href="${path}/front?key=revBoard&methodName=selectByQnaCode&qnaNo=${qnaBoard.qnaNo}&pageNo=${pageNo}">
+								<a href="${path}/front?key=revBoard&methodName=selectByReviewCode&reviewNo=${revBoard.reviewNo}&pageNo=${pageNo}">
 								${revBoard.reviewSubject} 
 								</a>
 								</td>

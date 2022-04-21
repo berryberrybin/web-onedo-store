@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.ReviewDTO;
 import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
@@ -225,6 +226,42 @@ public class ReviewDAOImpl implements ReviewDAO {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public ReviewDTO selectByReviewCode(int reviewNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		ReviewDTO reviewDTO=null;
+		
+		String sql = "select * from review_board where review_no=?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, reviewNo);
+			
+			System.out.println(reviewNo+"상세보기dao");
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				reviewDTO = new ReviewDTO(
+						rs.getInt(1),
+						rs.getInt(2),	
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getString(6),
+						rs.getString(7),
+						rs.getInt(8));
+						
+				
+			}
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		System.out.println(reviewDTO);
+		return reviewDTO;
 	}
 
 

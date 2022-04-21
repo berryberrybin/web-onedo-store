@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.ReviewDTO;
 import onedo.mvc.service.ReviewService;
 import onedo.mvc.service.ReviewServiceImpl;
@@ -24,7 +25,6 @@ public class ReviewController implements Controller {
 		return null;
 	}
 	
-
 	/**
 	 *  전체검색하기 
 	 * */
@@ -79,20 +79,7 @@ public class ReviewController implements Controller {
 	  		
 	  		return new ModelAndView("front", true);
 	  	}
-	    
-	/**
-	 * 상품코드에 해당하는 후기 검색
-	 * */
-	/*public ModelAndView selectByGoodsCode(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String goodsCode = request.getParameter("goodsCode");
-		String pageNo = request.getParameter("pageNo");
-		
-		List<ReviewDTO> list= revService.selectByGoodsCode(Integer.parseInt(goodsCode));
-		 request.setAttribute("list", list);
-		 request.setAttribute("pageNo", pageNo);
-		 
-	   return new ModelAndView("elec/read.jsp");
-	}*/
+	
 	
 	/**
 	 * 수정폼
@@ -141,5 +128,23 @@ public class ReviewController implements Controller {
 		
 	return null;	
 	}	
+	
+	/**
+	 * 상세보기
+	 */
+	public ModelAndView selectByReviewCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String reviewNo = request.getParameter("reviewNo");
+		String pageNo = request.getParameter("pageNo");
+
+		
+		ReviewDTO reviewDTO = revService.selectByReviewCode(Integer.parseInt(reviewNo));
+		
+		request.setAttribute("reviewDTO", reviewDTO);
+		request.setAttribute("pageNo", pageNo);
+		
+		
+		return new ModelAndView("board/Reviewread.jsp");
+		
+	}
 	
 }

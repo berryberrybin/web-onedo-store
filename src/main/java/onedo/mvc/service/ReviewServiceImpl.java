@@ -5,6 +5,7 @@ import java.util.List;
 
 import onedo.mvc.dao.ReviewDAO;
 import onedo.mvc.dao.ReviewDAOImpl;
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.ReviewDTO;
 
 public class ReviewServiceImpl implements ReviewService {
@@ -63,6 +64,16 @@ public class ReviewServiceImpl implements ReviewService {
 		if(rdao.update(reviewDTO)==0) {
 			throw new SQLException("수정되지 않았습니다.");
 		}
+	}
+
+	@Override
+	public ReviewDTO selectByReviewCode(int reviewNo) throws SQLException {
+		ReviewDTO rdto = rdao.selectByReviewCode(reviewNo);
+		if(rdto==null) {
+			throw new SQLException("상세보기 오류 발생했습니다.");
+		}
+		
+		return rdto;
 	}
 
 }
