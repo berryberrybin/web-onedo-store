@@ -54,7 +54,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 		ResultSet rs=null;
 		
 		List<NoticeDTO> noticeList = new ArrayList<NoticeDTO>();
-		String sql = proFile.getProperty("");
+		String sql = "select * from  (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM notice_board ORDER BY notice_no desc) a) where  rnum>=? and rnum <=?";
 		try {
 			//전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.
 			int totalCount = this.getTotalCount();
@@ -97,7 +97,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		int totalCount=0;
-		String sql = proFile.getProperty(" ");
+		String sql = "select count(*) from notice_board";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -147,16 +147,14 @@ public class NoticeDAOImpl implements NoticeDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql = proFile.getProperty(" ");
+		String sql ="insert into notice_board values(QNA_NO_SEQ.NEXTVAL,?,?,CURRENT_DATE,?)";
 		
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1,noticeDTO.getNoticeNo() );
-			ps.setString(2,noticeDTO.getNoticeSubject() );
-			ps.setString(3,noticeDTO.getNoticeContent() );
-			ps.setString(4,noticeDTO.getNoticeDate() );
-			ps.setString(5,noticeDTO.getNoticeImg() );
+			ps.setString(1,noticeDTO.getNoticeSubject() );
+			ps.setString(2,noticeDTO.getNoticeContent() );
+			ps.setString(3,noticeDTO.getNoticeImg() );
 		
 			
 		}finally {

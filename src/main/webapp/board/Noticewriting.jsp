@@ -36,10 +36,14 @@
 <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js" ></script>
 
 <script type="text/javascript">
-	$(function() {
-		alert(${'${loginUser.userId}'});
+$(function() {
+	$("#writing").click(function(){
+		
+		
+	});
+	
 
-	})
+})
 </script>
 </head>
 <!--/head-->
@@ -61,7 +65,7 @@
 					<!--/blog-post-area-->
 
 					<form name="writeForm" method="post"
-						action="${path}/front?key=qnaBoard&methodName=insert"
+						action="${path}/front?key=noticeBoard&methodName=insert"
 						onSubmit='return checkValid()' enctype="multipart/form-data">
 
 						<table align="center" cellpadding="5" cellspacing="2" width="600"
@@ -76,16 +80,7 @@
 									</p>
 								</td>
 							</tr>
-							<tr>
-								<td width="150" height="20">
-									<p align="center">
-										<b><span style="font-size: 9pt;">상품 번호</span></b>
-									</p>
-								</td>
-								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <input type=text
-											name="model_num" size="30"></span></b></td>
-							</tr>
+							
 							<tr>
 								<td width="150" height="20">
 									<p align="center">
