@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import onedo.mvc.dto.QnaDTO;
-import onedo.mvc.dto.QnaReply;
+import onedo.mvc.dto.QnaReplyDTO;
 import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
@@ -229,11 +229,11 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaReply> selectRepliesByModelNum(String modelNum) throws SQLException {
+	public List<QnaReplyDTO> selectRepliesByModelNum(String modelNum) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps =null;
 		ResultSet rs = null;
-		List<QnaReply> repliesList = new ArrayList<QnaReply>();
+		List<QnaReplyDTO> repliesList = new ArrayList<QnaReplyDTO>();
 		String sql=proFile.getProperty("reply.selectByParentNum");
 		
 		try {
@@ -243,8 +243,8 @@ public class QnaDAOImpl implements QnaDAO {
 			rs= ps.executeQuery();
 			
 			while (rs.next()) {
-				QnaReply reply =
-					new QnaReply(rs.getInt(1), rs.getString(2), rs.getString(3),  rs.getString(4));
+				QnaReplyDTO reply =
+					new QnaReplyDTO(rs.getInt(1), rs.getString(2), rs.getString(3));
 				
 				repliesList.add(reply);
 			}
