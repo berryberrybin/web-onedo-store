@@ -6,29 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title> ONE DO </title>
-    <link href="${path}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${path}/css/font-awesome.min.css" rel="stylesheet">
-    <link href="${path}/css/prettyPhoto.css" rel="stylesheet">
-    <link href="${path}/css/price-range.css" rel="stylesheet">
-    <link href="${path}/css/animate.css" rel="stylesheet">
-	<link href="${path}/css/main.css" rel="stylesheet">
-	<link href="${path}/css/responsive.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${path}/images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${path}/images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${path}/images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
  </head>
- <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
  <script type="text/javascript">
  	$(function(){
  		$(document).on("click","#goods",function(){
@@ -55,17 +33,17 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-12">
-									<img src="${path}/images/home/OneDomain05.jpg" class="girl img-responsive" alt="" />
+									<img src="${path}/images/home/OneDomain05.jpg" class="girl img-responsive" alt="커피 추출중인 머신" />
 								</div>
 							</div>
 							<div class="item">
 								<div class="col-sm-12">
-									<img src="${path}/images/home/OneDomain04.jpg" class="girl img-responsive" alt="" />
+									<img src="${path}/images/home/OneDomain04.jpg" class="girl img-responsive" alt="하트모양 라떼아트" />
 								</div>
 							</div>
 							<div class="item">
 								<div class="col-sm-12">
-									<img src="${path}/images/home/OneDomain03.jpg" class="girl img-responsive" alt="" />
+									<img src="${path}/images/home/OneDomain03.jpg" class="girl img-responsive" alt="원두와 커피가루" />
 								</div>
 							</div>
 						</div>
@@ -84,7 +62,7 @@
 	
 		<section id="advertisement"> <!-- 배너 클릭시 설문으로.. -->
 		<div class="container">
-			<a href="${path}/survey/survey.jsp"><img src="images/shop/OneDObanner.jpg" alt="" /></a>
+			<a href="${path}/survey/survey.jsp"><img src="images/shop/OneDObanner02.jpg" alt="" /></a>
 		</div>
 		</section>
 		

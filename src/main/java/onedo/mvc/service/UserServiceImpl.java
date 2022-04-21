@@ -5,6 +5,7 @@ import java.util.List;
 
 import onedo.mvc.dao.UserDAO;
 import onedo.mvc.dao.UserDAOImpl;
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 import onedo.mvc.exception.AuthenticationException;
@@ -81,6 +82,19 @@ public class UserServiceImpl implements UserService {
 	public List<SalesDTO> selectMyOrder(String userId) throws SQLException {
 		List<SalesDTO> myList = dao.selectMyOrder(userId);
 		return myList;
+	}
+
+	
+	@Override
+	public List<SalesDTO> selectMyOrderLine(String userId, int orderCode) throws SQLException {
+		List<SalesDTO> myList = dao.selectMyOrderLine(userId, orderCode);
+		return myList;
+	}
+
+	@Override
+	public List<QnaDTO> selectMyBoard(String userId) throws SQLException {
+		List<QnaDTO> myBoard = dao.selectMyBoard(userId);
+		return myBoard;
 	}
 
 	

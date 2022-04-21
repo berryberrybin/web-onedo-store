@@ -64,6 +64,23 @@ public class SalesDTO {
 		this.orderCode = orderCode;
 		this.orderLineCode = orderLineCode;
 	}
+
+	public SalesDTO(String goodsName, int goodsCode, int orderQuantity, String orderDate,
+			int orderPrice, int orderCode, int orderLineCode , int goods_price) {
+		super();
+		this.goodsName = goodsName;
+		this.goodsCode = goodsCode;
+		this.orderQuantity = orderQuantity;
+		this.orderDate = orderDate;
+		this.orderPrice = orderPrice;
+		this.orderCode = orderCode;
+		this.orderLineCode = orderLineCode;
+		this.goodsPrice = goods_price;
+	}
+
+
+
+
 	public String getGoodsName() {
 		return goodsName;
 	}

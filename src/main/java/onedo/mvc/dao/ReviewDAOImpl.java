@@ -13,7 +13,7 @@ import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
 public class ReviewDAOImpl implements ReviewDAO {
-	private Properties proFile = new Properties();
+	private Properties proFile = DbUtil.getProFile();
 
 	@Override
 	public List<ReviewDTO> selectAll() throws SQLException {

@@ -14,7 +14,7 @@ import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
 public class GoodsDAOImpl implements GoodsDAO {
-	private Properties proFile = new Properties();
+	private Properties proFile = DbUtil.getProFile();
 	GoodsDTO goodsDTO = new GoodsDTO();
 
 	/**
@@ -223,7 +223,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		}
 		
 		try {
-			sql+=" ORDER BY goods_code) a) where rnum>=? and rnum <=?";
+			sql+=" and not is_soldout =2 ORDER BY goods_code) a) where rnum>=? and rnum <=?";
 		   
 			System.out.println("sql="+sql);
 			
@@ -315,6 +315,36 @@ public class GoodsDAOImpl implements GoodsDAO {
 		return result;
 	}
 
-	}
-	
 
+	/**
+	 * 판매량 순으로 상품검색
+	 * */
+	@Override
+	public List<GoodsDTO> selectGoodsOrderBySalesRank() throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<GoodsDTO> list = new ArrayList<GoodsDTO>();
+		
+		//굿즈코드 찾을 쿼리
+		String sql=proFile.getProperty("goods.selectGoodsOrderBySalesRank");//판매량높은순으로 4순위까지 가져온다
+		//굿즈코드 담을 변수
+		int goodsCode =0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				goodsCode = rs.getInt(1);
+				//굿즈코드로 GoodsDTO찾기
+				goodsDTO = selectByGoodsCode(goodsCode);
+				list.add(goodsDTO);
+			}
+			
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return list;
+	}
+}

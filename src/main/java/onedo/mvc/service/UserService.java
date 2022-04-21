@@ -3,6 +3,7 @@ package onedo.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 import onedo.mvc.exception.AuthenticationException;
@@ -57,6 +58,18 @@ public interface UserService {
 	 * @param userId 
 	 * */
 	List<SalesDTO> selectMyOrder(String userId) throws SQLException;
+	
+	
+	/**
+	 * 마이페이지 주문 상세페이지
+	 * */
+	List<SalesDTO> selectMyOrderLine(String userId, int orderCode) throws SQLException;
+	
+	
+	/**
+	 * 마이페이지 내가 쓴 글 조회
+	 * */
+	List<QnaDTO> selectMyBoard(String userId) throws SQLException;
 
 	
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 import onedo.mvc.service.UserService;
@@ -131,12 +132,55 @@ public class UserController implements Controller {
 		
 		//가져온 아이디로 DB호출
 		List<SalesDTO> myList = userService.selectMyOrder(userId);
-
+		
 		request.setAttribute("myList", myList);
 		return new ModelAndView("user/myPage.jsp");
 	}
 	
+	
+	/**
+	 * 마이페이지 주문 상세페이지
+	 * */
+	public ModelAndView myOrderLine (HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		
+		//주문번호를 받아온다
+		String orderCode = request.getParameter("orderCode");
+		
+		//세션에 저장된 유저 아이디 불러오기
+		HttpSession session = request.getSession();
+		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
+		String userId = dbDTO.getUserId();
+		
+		//주문번호 클릭 - 해당 주문번호의 주문 상세 띄우는 DB 이동 
+		List<SalesDTO> myList = userService.selectMyOrderLine(userId, Integer.parseInt(orderCode));
+		
+		request.setAttribute("orderLine", myList);
+		return new ModelAndView("user/myOrderLine.jsp");
+	}
+	
+	/**
+	 * 마이페이지 내가 쓴 글 보기 페이지
+	 * */
+	public ModelAndView myBoard (HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
 
+		//세션에 저장된 유저 아이디 불러오기
+		HttpSession session = request.getSession();
+		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
+		String userId = dbDTO.getUserId();
+		
+		//가져온 아이디로 DB 호출
+		List<QnaDTO> myBoard = userService.selectMyBoard(userId);
+		
+		request.setAttribute("myBoard", myBoard);
+		return new ModelAndView("user/myBoardPage.jsp");
+	}
+	
+	
+	
 	
 	
 }

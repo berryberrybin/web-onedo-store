@@ -29,8 +29,18 @@
 
 	<style>
 	    
+	   	@font-face {
+	    font-family: 'GmarketSansBold';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	    
+	    
 	   h2{
 	   		text-align: center;
+	   		font-family: GmarketSansBold;
+	   		color: #3D3D3D;
 	   }
 	    
        #btn{

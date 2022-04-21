@@ -59,7 +59,7 @@
           <div class="user-heading round">
               <!-- <h5>사용자 아이디</h5> -->
 				<c:if test="${not empty loginUser}">
-					<h4><i class="fa fa-user"></i>&nbsp;&nbsp;${loginUser.userId}님 환영합니다 :)</h4>
+					<h4><i class="fa fa-user"></i>&nbsp;&nbsp;${loginUser.userId}님 환영합니다</h4>
 				</c:if>
 				<hr>
               <p></p>
@@ -75,43 +75,48 @@
   <div class="profile-info col-md-9">
       <div class="panel">
           <div class="bio-graph-heading">
-            <h4>최근 주문 내역 조회</h4>
+            <h4>나의 게시물</h4>
             <hr>
             <table class="table">
 					<thead>
 						<tr class="cart_menu">
-							<td class="orderCode">주문번호</td>
-							<td class="name">주문 목록</td>
-							<td class="price">가격 합계</td>
-							<td class="date">구매일</td>
+							<td class="boardNo">글 번호</td>
+							<td class="goodsCode">문의 상품 코드</td>
+							<td class="subject">제목</td>
+							<td class="date">작성일</td>
+							<td class="id">아이디</td>
 							<td></td>
 						</tr>
 					</thead>
 					<tbody>
 					<c:choose>
-							<c:when test="${empty requestScope.myList}">
+							<c:when test="${empty requestScope.myBoard}">
 								<tr>
 									<td colspan="5">
 										<p align="center">
-											<b><span style="font-size: 9pt;"> 해당 내역이 없습니다. </span></b>
+											<b><span style="font-size: 9pt;"> 작성한 글이 없습니다. </span></b>
 										</p>
 									</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
-							<c:forEach items="${requestScope.myList}" var="salesDTO">
+							<c:forEach items="${requestScope.myBoard}" var="QnaDTO">
 							<tr>
-								<td class="orderCode">
-										<a href="${path}/front?key=user&methodName=myOrderLine&orderCode=${salesDTO.orderCode}">${salesDTO.orderCode}</a>
+								<td class="boardNo">
+									<p>${QnaDTO.qnaNo}</p>
 								</td>
-								<td class="orderName">
-										<p>${salesDTO.goodsName}</p>
+								<td class="goodsCode">
+									<p>${QnaDTO.goodsCode}</p>
 								</td>
-								<td class="orderPrice">
-									<p class="cart_total_price">${salesDTO.orderPrice}원</p>
+								<td class="qnaSub">
+									<a href="${path}/front?key=Qna&methodName=selectByQnaCode&orderCode=${QnaDTO.qnaNo}">
+									${QnaDTO.qnaSubject}</a>
 								</td>
-								<td class="orderDate">
-										<p>${salesDTO.orderDate}</p>
+								<td class="qnaDate">
+									<p>${QnaDTO.qnaDate}</p>
+								</td>
+								<td class="userId">
+									<p>${QnaDTO.userid}</p>
 								</td>
 							</tr>
 						</c:forEach>

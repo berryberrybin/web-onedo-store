@@ -3,6 +3,7 @@ package onedo.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.dto.UserDTO;
 
@@ -59,6 +60,15 @@ public interface UserDAO {
 	 * */
 	List<SalesDTO> selectMyOrder(String userId) throws SQLException;
 	
+	/**
+	 * 마이페이지의 주문 상세페이지 조회하기
+	 * */
+	List<SalesDTO> selectMyOrderLine(String userId, int orderCode) throws SQLException;
 	
+	
+	/**
+	 * 마이페이지에서 qna 게시판에서 내가 쓴 글 조회하기
+	 * */
+	List<QnaDTO> selectMyBoard(String userId) throws SQLException;
 
 }

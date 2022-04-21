@@ -63,6 +63,9 @@ public interface GoodsDAO {
 	 * */
 	int insertGoodsImg(GoodsDTO goodsDTO) throws SQLException;
 
-
+	/**
+	 * 판매량 순으로 상품검색
+	 * */
+	List<GoodsDTO> selectGoodsOrderBySalesRank() throws SQLException;
 
 }

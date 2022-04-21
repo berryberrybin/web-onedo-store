@@ -113,36 +113,7 @@
 				<img src="${path}/img/${goodsDTO.goodsImg}" alt="" />
 				<h3>ZOOM</h3>
 			</div>
-			<div id="similar-product" class="carousel slide" data-ride="carousel">
-				
-				  <!-- Wrapper for slides -->
-				    <div class="carousel-inner">
-						<div class="item active">
-						  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-						  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-						  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-						</div>
-						<div class="item">
-						  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-						  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-						  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-						</div>
-						<div class="item">
-						  <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-						  <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-						  <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-						</div>
-						
-					</div>
-
-				  <!-- Controls -->
-				  <a class="left item-control" href="#similar-product" data-slide="prev">
-					<i class="fa fa-angle-left"></i>
-				  </a>
-				  <a class="right item-control" href="#similar-product" data-slide="next">
-					<i class="fa fa-angle-right"></i>
-				  </a>
-			</div>
+			
 		</div>
 		<div class="col-sm-7">
 			<div class="product-information"><!--/product-information-->
@@ -209,90 +180,6 @@
 		</div>
 	</div><!--/category-tab-->
 	
-	<div class="recommended_items"><!--recommended_items-->
-		<h2 class="title text-center">recommended items</h2>
-		
-		<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="item active">	
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="images/home/recommend1.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="images/home/recommend2.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="images/home/recommend3.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item">	
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="images/home/recommend1.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="images/home/recommend2.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="images/home/recommend3.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-				<i class="fa fa-angle-left"></i>
-			  </a>
-			  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-				<i class="fa fa-angle-right"></i>
-			  </a>			
-		</div>
-	</div><!--/recommended_items-->
 </div>
 </section>
 </body>
