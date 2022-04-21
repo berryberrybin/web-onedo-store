@@ -135,7 +135,7 @@ td {
 										</td>
 										<td class="itemOrderPrice">
 											<h4>
-												<a href="">${salesDTO.orderPrice}</a>
+												<a href=""><fmt:formatNumber value="${salesDTO.orderPrice}"/></a>
 											</h4>
 										</td>
 										<td class="itemOrderDate">
@@ -156,7 +156,7 @@ td {
 										</td>
 										<td class="itemGoodsPrice">
 											<h4>
-												<a href="">${salesDTO.goodsPrice}</a>
+												<a href=""><fmt:formatNumber value="${salesDTO.goodsPrice}"/></a>
 											</h4>
 										</td>
 										<td class="itemOrderQuantity">

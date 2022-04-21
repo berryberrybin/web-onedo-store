@@ -128,7 +128,7 @@ td {
 
 										<td class="totalSales">
 											<h4>
-												<a href="">${salesDTO.orderPrice}</a>
+												<a href=""><fmt:formatNumber value="${salesDTO.orderPrice}"/></a>
 											</h4>
 										</td>
 									</tr>

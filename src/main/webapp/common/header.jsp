@@ -107,7 +107,7 @@
 							
 							<c:choose>
 								<c:when test="${loginUser.userId=='admin'}">
-									<li><a href="${path}/admin/adminPage.jsp"><i class="fa fa-cog"></i> 관리자</a></li>
+									<li><a href="${path}/front?key=sales&methodName=selectByOrderDate"><i class="fa fa-cog"></i> 관리자</a></li>
 								</c:when>
 								<c:otherwise>
 									<c:if test="${not empty loginUser}">
