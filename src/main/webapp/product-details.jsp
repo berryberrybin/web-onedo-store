@@ -42,10 +42,6 @@
 		   			success :function(result){
 		   				str = "";
 		   				$.each(result, function(index, item){
-		   					str += "<tr>";
-		   					str += "<td>"+(index+1)+"</td>";
-		   					str += "<td><a href='#'>"+item.reviewSubject+"</a></td>";
-		   					str += "<td>"+moment(item.reviewDate).format("YYYY-MM-DD")+"</td>"; //날짜 형식 바꾸기
 		   					//후기별점
 		   					let stars ="";
 	   						for(let i=0;i<item.reviewScore;i++){
@@ -54,14 +50,17 @@
 	   						for(let i=5;i>item.reviewScore;i--){
 	   							stars+="☆";
 	   						}
-		   					str += "<td>"+stars+"</td>"; //별찍기로 표시
-		   					//str += "<td>"+item.reviewScore+"</td>"; //숫자로 표시
-		   					//str += "<td>"+changeToStars(item.reviewScore)+"</td>"; //ajax밖 메소드 호출시도
-		   					str += "</tr>";
+		   					
+		   					str += "<details>";
+		   					str += "<summary>&nbsp;"+item.reviewSubject+"&emsp;&emsp;"+item.userId+"&emsp;"+"|"+"&emsp;"+moment(item.reviewDate).format("YYYY-MM-DD")+"&emsp;"+"|"+"&emsp;"+stars+"</summary>";
+		   					str += "<p>"+item.reviewContent;
+		   					if(!item.reviewImg==null||!item.reviewImg=="") str += "<img src='${path}/img/"+item.reviewImg+"' alt=''>";
+		   					str += "</p>";
+		   					str += "</details>";
 		   				});
 		   				
-		   				$("#reviewTable tr:gt(0)").remove();
-		   				$("#reviewTable tr:eq(0)").after(str);
+		   				$("#searchReviews div details").remove();
+		   				$("#searchReviews div").append(str);
 		   				
 		   			} , //성공했을때 실행할 함수 
 		   			error : function(err){  
@@ -80,18 +79,20 @@
 		   			success :function(result){
 		   				str = "";
 		   				$.each(result, function(index, item){
-		   					str += "<tr>";
+		   					/*str += "<tr>";
 		   					str += "<td>"+(index+1)+"</td>";
 		   					str += "<td><a href='#'>"+item.qnaSubject+"</a></td>";
 		   					str += "<td>"+moment(item.qnaDate).format("YYYY-MM-DD")+"</td>"; //날짜 형식 바꾸기
 		   					str += "<td>"+item.userid+"</td>";
-		   					//str += "<td>"+item.reviewScore+"</td>"; //숫자로 표시
-		   					//str += "<td>"+changeToStars(item.reviewScore)+"</td>"; //ajax밖 메소드 호출시도
-		   					str += "</tr>";
+		   					str += "</tr>";*/
+		   					str += "<details>";
+		   					str += "<summary>"+(index+1)+"&emsp;&emsp;"+item.qnaSubject+"&emsp;"+"|"+"&emsp;"+moment(item.qnaDate).format("YYYY-MM-DD")+"&emsp;"+"|"+"&emsp;"+item.userid+"</summary>";
+		   					str += "<p>"+item.qnaContent+"</p>";
+		   					str += "</details>";
 		   				});
 		   				
-		   				$("#qnaTable tr:gt(0)").remove();
-		   				$("#qnaTable tr:eq(0)").after(str);
+		   				$("#searchQna div details").remove();
+		   				$("#searchQna div").append(str);
 		   				
 		   			} , //성공했을때 실행할 함수 
 		   			error : function(err){  
@@ -111,6 +112,21 @@
 		table{width: 100%;}
 		table th,td{text-align: center;}
 		table th{background-color: #FE980F; color: white; padding: 5px;}
+		
+		details { margin:5px 0 10px; }
+		details > summary { background:#fff; color:#444; padding:10px; outline:0; border-radius:5px; cursor:pointer; transition:background 0.5s; text-align:left; box-shadow: 1px 1px 2px gray;}
+		details > summary::-webkit-details-marker { background:#444; color:#fff; background-size:contain; transform:rotate3d(0, 0, 1, 90deg); transition:transform 0.25s;}
+		details[open] > summary::-webkit-details-marker { transform:rotate3d(0, 0, 1, 180deg);}
+		details[open] > summary { background:#FE980F;}
+		details[open] > summary ~ * { animation:reveal 0.5s;}
+		.tpt { background:#444; color:#fff; margin:5px 0 10px; padding:5px 10px; line-height:25px; border-radius:5px; box-shadow: 1px 1px 2px gray;}
+		details > p {padding: 10px; font-size: 20px;}
+		details > p > img {padding-top: 10px; height: 300px;}
+		@keyframes reveal {
+		    from { opacity:0; transform:translate3d(0, -30px, 0); }
+		    to { opacity:1; transform:translate3d(0, 0, 0); }
+		}
+		
 	</style>
  </head>
 <body>
@@ -170,25 +186,15 @@
 			
 			<div class="tab-pane fade" id="searchQna" ><!-- 상품문의 -->
 				<div class="col-sm-12">
-					<table id="qnaTable">
-						<tr>
-							<th>index</th><th>제목</th><th>날짜</th><th>아이디</th>
-						</tr>
-						<!-- 상품코드로 검색한 문의목록 -->
+					<!-- 상품코드로 검색한 문의목록 -->
 						
-					</table>
 				</div>
 			</div>
 			
 			<div class="tab-pane fade" id="searchReviews" >
 				<div class="col-sm-12">
-					<table id="reviewTable">
-						<tr>
-							<th>index</th><th>제목</th><th>날짜</th><th>별점</th>
-						</tr>
-						<!-- 상품코드로 검색한 후기목록 -->
+					<!-- 상품코드로 검색한 후기목록 -->
 						
-					</table>
 				</div>
 			</div>
 			
