@@ -14,6 +14,7 @@ import onedo.mvc.dto.CartDTO;
 import onedo.mvc.dto.CartItemDTO;
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.dto.UserDTO;
+import onedo.mvc.exception.AuthenticationException;
 import onedo.mvc.service.CartService;
 import onedo.mvc.service.CartServiceImpl;
 import onedo.mvc.service.GoodsService;
@@ -45,9 +46,15 @@ public class CartController implements Controller {
 
 		
 		HttpSession session = request.getSession();
+		String userId = null;
+		
+		if(session.getAttribute("loginUser")==null) {
+			//인증 안되었음
+			throw new AuthenticationException("로그인 후 상품을 장바구니에 담을 수 있습니다.");
+		}else {
 		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
-		String userId = dbDTO.getUserId();
+		userId = dbDTO.getUserId();
 		
 		
 		String goodsCode = request.getParameter("goodsCode");
@@ -57,7 +64,7 @@ public class CartController implements Controller {
 
 		CartDTO cart = cartService.getCart(userId);
 		cartService.insert(cart, goods, amount);
-
+		}
 		return new ModelAndView("front?key=cart&methodName=select&userId="+userId, true); // 원래의 장바구니넣기한 상세페이지 머물러있어야 함!!
 	}
 
@@ -112,26 +119,32 @@ public class CartController implements Controller {
 	 * @return
 	 * @throws Exception
 	 */
-	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView select(HttpServletRequest request, HttpServletResponse response) throws Exception, AuthenticationException {
 		HttpSession session = request.getSession();
-		UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 		
-		String userId = dbDTO.getUserId();
+		if(session.getAttribute("loginUser")==null) {
+			//인증 안되었음
+			throw new AuthenticationException("로그인 후 장바구니 조회가 가능합니다.");
+		}else {
+			UserDTO dbDTO = (UserDTO)session.getAttribute("loginUser");
 
-		CartDTO cart =cartService.getCart(userId);
+			String userId = dbDTO.getUserId();
 
-		if (cart == null) {
-			// " 장바구니가 비어있습니다"
-			request.setAttribute("cartItemList", new ArrayList<>());
-		} else {
-			List<CartItemDTO> cartItemList = cart.getCartItemList();
-			request.setAttribute("cartItemList", cartItemList); // model에 데이터를 담아 보내는 역할
+			CartDTO cart =cartService.getCart(userId);
 
+			if (cart == null) {
+				// " 장바구니가 비어있습니다"
+				request.setAttribute("cartItemList", new ArrayList<>());
+			} else {
+				List<CartItemDTO> cartItemList = cart.getCartItemList();
+				request.setAttribute("cartItemList", cartItemList); // model에 데이터를 담아 보내는 역할
+
+			}
+
+			checkTotalPrice(request);
 		}
-
-		checkTotalPrice(request);
-
 		return new ModelAndView("cart.jsp");
+		
 	}
 
 	/**

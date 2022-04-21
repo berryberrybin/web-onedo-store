@@ -120,7 +120,7 @@ public class FaqDAOImpl implements FaqDAO {
 		ResultSet rs=null;
 		FaqDTO faqDTO=null;
 		
-		String sql = proFile.getProperty("");
+		String sql = "select * from FAQ_board where faq_no=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);

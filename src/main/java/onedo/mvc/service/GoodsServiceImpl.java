@@ -5,6 +5,7 @@ import java.util.List;
 
 import onedo.mvc.dao.GoodsDAO;
 import onedo.mvc.dao.GoodsDAOImpl;
+import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.dto.GoodsDTO;
 
 public class GoodsServiceImpl implements GoodsService {
@@ -24,9 +25,9 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 상품등록
 	 * */
 	@Override
-	public int insert(GoodsDTO goodsDTO) throws SQLException {
-		int result = goodsDAO.insert(goodsDTO);
-		if (result == 0) throw new SQLException("등록 실패");
+	public int insert(GoodsDTO goodsDTO, GoodsAttrDTO goodsAttrDTO) throws SQLException {
+		int result = goodsDAO.insert(goodsDTO, goodsAttrDTO);
+		if (result == 0) throw new SQLException("상품 등록 실패");
 		return result;
 	}
 
@@ -55,13 +56,13 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	/**
-	 * 상품삭제 --품절이면 안보이게
+	 * 상품삭제 --판매중지(2)이면 안보이게
 	 * */
 	@Override
 	public void delete(int goodsCode) throws SQLException {
 		int result = goodsDAO.delete(goodsCode);
 		if (result == 0)
-			throw new SQLException("삭제 실패");
+			throw new SQLException("상품 삭제 실패");
 
 	}
 
@@ -69,8 +70,8 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 상품수정
 	 * */
 	@Override
-	public int update(GoodsDTO goodsDTO) throws SQLException {
-		int result = goodsDAO.update(goodsDTO);
+	public int update(GoodsDTO goodsDTO, GoodsAttrDTO goodsAttrDTO) throws SQLException {
+		int result = goodsDAO.update(goodsDTO, goodsAttrDTO);
 		if (result == 0) throw new SQLException("수정 실패");
 		return result;
 

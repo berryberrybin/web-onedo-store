@@ -143,7 +143,11 @@ th, td {
 								<td>${revBoard.reviewNo}</td>
 								<td>${revBoard.goodsCode}</td>
 								<td>${revBoard.userId}</td>
-								<td>${revBoard.reviewSubject}</td>
+								<td>
+								<a href="${path}/front?key=revBoard&methodName=selectByQnaCode&qnaNo=${qnaBoard.qnaNo}&pageNo=${pageNo}">
+								${revBoard.reviewSubject} 
+								</a>
+								</td>
 								<td>${revBoard.reviewContent}</td>
 								<td>${revBoard.reviewDate}</td>
 								<td>${revBoard.reviewImg}</td>

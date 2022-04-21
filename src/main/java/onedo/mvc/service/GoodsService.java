@@ -3,6 +3,7 @@ package onedo.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.dto.GoodsDTO;
 
 public interface GoodsService {
@@ -15,7 +16,7 @@ public interface GoodsService {
 	/**
 	 * GoodsDAOImpl의 레코드 삽입하는 메소드 호출
 	 */
-	int insert(GoodsDTO goodsDTO) throws SQLException;
+	int insert(GoodsDTO goodsDTO, GoodsAttrDTO goodsAttrDTO) throws SQLException;
 
 	/**
 	 * GoodsDAOImpl의 상품코드에 해당하는 레코드 검색하는 메소드 호출
@@ -35,7 +36,7 @@ public interface GoodsService {
 	/**
 	 * GoodsDAOImpl의 상품코드에 해당하는 레코드 수정 메소드 호출
 	 */
-	int update(GoodsDTO goodsDTO) throws SQLException;
+	int update(GoodsDTO goodsDTO, GoodsAttrDTO goodsAttrDTO) throws SQLException;
 
 	/**
 	 *  상품이름이나 타입으로 상품검색
