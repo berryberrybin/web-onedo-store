@@ -31,7 +31,7 @@ public interface QnaDAO {
 		   * 글번호 에 해당하는 레코드 삭제
 		   * @return : 1-삭제성공 , 0 - 삭제실패
 		   * */
-		  int delete(int qnaNo,String password) throws SQLException;
+		  int delete(int qnaNo,String qnaPwd) throws SQLException;
 		  
 		  /**
 		    * 모델번호에 해당하는 레코드 수정
@@ -48,6 +48,7 @@ public interface QnaDAO {
 		   * 상품코드에 해당하는 문의 가져오기
 		   * */
 		  List<QnaDTO> selectQnaByGoodsCode(int goodsCode) throws SQLException;
+		
 	  
 	
 	  

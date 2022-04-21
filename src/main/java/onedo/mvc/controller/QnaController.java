@@ -125,25 +125,21 @@ public class QnaController implements Controller {
 	 * 수정하기
 	 */
 	public ModelAndView update(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		String qnaNo = request.getParameter("qnaNo");
 		String goodsCode = request.getParameter("goodsCode");
 		String qnaSubject = request.getParameter("qnaSubject");
 		String qnaContent = request.getParameter("qnaContent");
-		String qnaImg = request.getParameter("qnaImg");
 		String qnaPwd = request.getParameter("qnaPwd");
 		
-		System.out.println("QnaController");
+		System.out.println(qnaNo+"  "+goodsCode+"  "+qnaSubject+"  "+qnaContent+"  "+"  "+qnaPwd+"  "+"QnaController");
 		
-		QnaDTO qnaDTO = new QnaDTO(Integer.parseInt(goodsCode),qnaSubject,qnaContent,qnaImg,qnaPwd);
+		QnaDTO qnaDTO = new QnaDTO(Integer.parseInt(qnaNo),Integer.parseInt(goodsCode),qnaSubject,qnaContent,qnaPwd);
 
 		qnaService.update(qnaDTO);
 
-		String qnaNo= request.getParameter("qnaNo");
-		
-		QnaDTO dbrev = qnaService.selectByQnaCode(Integer.parseInt(qnaNo));
-		request.setAttribute("qnaDTO", dbrev);
 
-		return new ModelAndView("board/Qnaread.jsp");
+
+		return new ModelAndView("front?key=qnaBoard&methodName=qnaSelectAll");
 	}
 
 	/**
@@ -151,22 +147,17 @@ public class QnaController implements Controller {
 	 */
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String qnaNo = request.getParameter("qnaNo");
-		String qnaPwd  = request.getParameter("qnaPwd");
+		String qnaPwd  = request.getParameter("password");
+
+		System.out.println(qnaNo+qnaPwd+ "qnaController");
+		/* String path = request.getServletContext().getRealPath("/save"); */
 		
-		System.out.println(qnaNo+"deletecontroller1");
 		
-		String path = request.getServletContext().getRealPath("/save");
+		qnaService.delete(Integer.parseInt(qnaNo),qnaPwd);
 		
-		System.out.println(qnaNo+qnaPwd+"delete값1");
+	
 		
-		System.out.println(qnaNo+"deletecontroller2");
-		
-		qnaService.delete(Integer.parseInt(qnaNo),qnaPwd, path);
-		
-		System.out.println(qnaNo+qnaPwd+"delete값2");
-		System.out.println(qnaNo+"deletecontroller3");
-		
-		return new ModelAndView("board/Qna.jsp", true);
+		return new ModelAndView("front?key=qnaBoard&methodName=qnaSelectAll", true);
 	}
 
 }

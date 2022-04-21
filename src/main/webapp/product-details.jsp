@@ -8,7 +8,7 @@
 <head>
 	<script type="text/javascript">
 		$(function(){
-			//상품 속성
+			//상품 상세정보
 			let attrs = [{name:'신맛',score:${goodsDTO.goodsAttrDTO.sour}},{name:'단맛',score:${goodsDTO.goodsAttrDTO.sweet}},
 						{name:'향미',score:${goodsDTO.goodsAttrDTO.aroma}},{name:'바디감',score:${goodsDTO.goodsAttrDTO.body}}];
 			
@@ -29,8 +29,10 @@
 				}
 			}
 			
-			let goodsDetail="<h3 style='color:#363432'>"+"${goodsDTO.goodsDetail}"+"</h3><p>";
-			$("#goodsAttr").html(goodsDetail+"<h4 style='color:#FE980F'>"+str+"</h4>");
+			let goodsDetail="<h3>"+"${goodsDTO.goodsDetail}"+"</h3><p>";
+			$("#goodsAttr").html(goodsDetail+"<h4>"+str+"</h4>");
+			//상세정보 끝
+			
 			
 			//상품코드에 해당하는 모든 후기 가져오기
 			$("#reviews").click(function(){
@@ -42,19 +44,12 @@
 		   			success :function(result){
 		   				str = "";
 		   				$.each(result, function(index, item){
-		   					//후기별점
-		   					let stars ="";
-	   						for(let i=0;i<item.reviewScore;i++){
-	   							stars+="★";
-	   						}
-	   						for(let i=5;i>item.reviewScore;i--){
-	   							stars+="☆";
-	   						}
-		   					
 		   					str += "<details>";
-		   					str += "<summary>&nbsp;"+item.reviewSubject+"&emsp;&emsp;"+item.userId+"&emsp;"+"|"+"&emsp;"+moment(item.reviewDate).format("YYYY-MM-DD")+"&emsp;"+"|"+"&emsp;"+stars+"</summary>";
+		   					str += "<summary>&nbsp;"+item.reviewSubject+"&emsp;&emsp;"+item.userId+"&emsp;"+"|"+"&emsp;"+moment(item.reviewDate).format("YYYY-MM-DD")+"&emsp;"+"|"+"&emsp;";
+		   					changeToStars(item.reviewScore);
+		   					str += "</summary>";
 		   					str += "<p>"+item.reviewContent;
-		   					if(!item.reviewImg==null||!item.reviewImg=="") str += "<img src='${path}/img/"+item.reviewImg+"' alt=''>";
+		   					if(!item.reviewImg==null||!item.reviewImg=="") str += "<br><img src='${path}/img/"+item.reviewImg+"' alt=''>";
 		   					str += "</p>";
 		   					str += "</details>";
 		   				});
@@ -103,10 +98,7 @@
 		});
 	</script>
 	<style type="text/css">
-		table{width: 100%;}
-		table th,td{text-align: center;}
-		table th{background-color: #FE980F; color: white; padding: 5px;}
-		
+		.view-product img{height: 100%}
 		details { margin:5px 0 10px; }
 		details > summary { background:#fff; color:#444; padding:10px; outline:0; border-radius:5px; cursor:pointer; transition:background 0.5s; text-align:left; box-shadow: 1px 1px 2px gray;}
 		details > summary::-webkit-details-marker { background:#444; color:#fff; background-size:contain; transform:rotate3d(0, 0, 1, 90deg); transition:transform 0.25s;}
@@ -121,6 +113,8 @@
 		    to { opacity:1; transform:translate3d(0, 0, 0); }
 		}
 		
+		#goodsAttr h3{color: #363432;}
+		#goodsAttr h4{color: #FE980F;}
 	</style>
  </head>
 <body>
@@ -133,7 +127,6 @@
 		<div class="col-sm-5">
 			<div class="view-product">
 				<img src="${path}/img/${goodsDTO.goodsImg}" alt="" />
-				<h3>ZOOM</h3>
 			</div>
 			
 		</div>
@@ -141,22 +134,20 @@
 			<div class="product-information"><!--/product-information-->
 				<img src="images/product-details/new.jpg" class="newarrival" alt="" />
 				<h2>${goodsDTO.goodsName}</h2>
-				<p>goodsCode: ${goodsDTO.goodsCode}</p>
-				<img src="images/product-details/rating.png" alt="" />
+				<p>상품코드: ${goodsDTO.goodsCode}</p>
+				<p>상품조회수: ${goodsDTO.goodsView}</p>
 				<span>
 					<span>&#8361; <fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></span>
+					<h4>
 					<label for="quantity">수량:</label>
 					<input type="number" id="quantity" name="quantity" min="1" max="99" value="1"/> 
-					
+					</h4>
 					<a href="#" class="btn btn-default add-to-cart" id="cartButton">
 					<i class="fa fa-shopping-cart"></i>Add to cart
 					</a>
 					
 				</span>
-				<p><b>Availability:</b> ${goodsDTO.isSoldout}</p>
-				<p><b>Condition:</b> New</p>
-				<p><b>Brand:</b> E-SHOPPER</p>
-				<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+				
 			</div><!--/product-information-->
 		</div>
 	</div><!--/product-details-->

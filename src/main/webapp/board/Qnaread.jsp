@@ -51,6 +51,7 @@ function sendDelete(){
 	}
 	
 	document.requestForm.methodName.value ="delete";
+	alert(document.requestForm.password.value);
 	document.requestForm.submit();
 }
 </script>
@@ -75,7 +76,7 @@ function sendDelete(){
 					</div>
 					<!--/blog-post-area-->
 
-					
+		  <form name="requestForm" method=post action="${path}/front">			
 <table align="center" cellpadding="5" cellspacing="2" width="600" border='1'>
     <tr>
         <td width="1220" height="20" colspan="4" bgcolor="#FE980F">
@@ -151,7 +152,7 @@ function sendDelete(){
            <p align="center"><b><span style="font-size:9pt;">비밀번호</span></b></p>
         </td>
         
-    <form name="requestForm" method=post action="${path}/front">
+  
         <td height="20" colspan="3" align="left" valign="middle">
 				<input type=password name="password" value="">		
 		</td>
@@ -162,15 +163,16 @@ function sendDelete(){
         <td height="20" colspan="4" align="center" valign="middle">
 			<!-- 수정시 필요한 데이터들을 hidden으로 숨겨놓고 폼 데이터로 보내준다. -->
 				<input type="text" name="qnaNo" value="${qnaDTO.qnaNo}">
-				<input type="text" name="key" value=qnaBoard>
+				<input type="text" name="key" value="qnaBoard">
 				<input type="text" name="methodName" >
 				<input type=button value="수정하기" onClick="sendUpdate()">
 				<input type=button value="삭제하기" onClick="sendDelete()">
-    </form>
+   
 			
 		</td>
     </tr>
 </table>
+ </form>
 				</div>
 			</div>
 		</div>

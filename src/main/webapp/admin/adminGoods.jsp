@@ -100,7 +100,11 @@
 						str += "<td>" + item.goodsPrice + "</td>";
 						str += "<td>" + item.goodsStock + "</td>";
 						str += "<td><span>" + item.isSoldout +"</span><span style='display:none'>"+item.goodsDetail+"</span></td>";
-						str += `<td><input type='button' value='첨부' onclick='location.href="${path}/admin/insertGoodsImg.jsp"' name='${'${item.goodsCode}'}'></td>`;
+                        if(item.goodsImg==""){
+                            str += `<td><input type='button' value='첨부' onclick='location.href="${path}/admin/insertGoodsImg.jsp?name=${'${item.goodsCode}'}"'></td>`;
+                        }else{
+                            str += `<td>${'${item.goodsImg}'}</td>`;
+                        }
 						str += `<td><input type='button' value='삭제' name='${'${item.goodsCode}'}'></td>`;
 						str += "</tr>";
 						
@@ -109,18 +113,12 @@
 					$("#goodstable tr:gt(0)").remove();
 					$("#goodstable tr:eq(0)").after(str);
 					
-					/*"#inForm" 에 등록된 sour, sweet, aroma, body 값 가져오기
-					방법 1 - <span>태그로 숨기기 (시도했는데 안돌아감.. 상세 설명까지 안보여짐.)
-									<span style='display:none'>"+item.sour+"</span>
-					방법 2 -"+ item.goodsAttrDTO.sour+","+ item.goodsAttrDTO.sweet+","+item.goodsAttrDTO.aroma+","+item.goodsAttrDTO.body+"
-					
-					*/
 				},
 				error : function(err) {
 					alert(err + "에러 발생했습니다.");
 				}
-			}); //ajax
-		}//selectAll 함수 끝
+			});
+		}
 
 		/**
 		상품 등록 + 수정

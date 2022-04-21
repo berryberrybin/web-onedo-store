@@ -44,26 +44,27 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public void delete(int qnaNo,String qnaPwd,String path) throws SQLException {
+	public void delete(int qnaNo,String qnaPwd) throws SQLException {
 			
 			//비밀번호 일치 여부 체크
-			QnaDTO qnaDB =  qdao.selectByQnaCode(qnaNo);
-			if(!qnaDB.getQnaPwd().equals(qnaPwd)) {
-				throw new SQLException("비밀번호 오류로 삭제할수없습니다.");
-			}
-			if(qdao.delete(qnaNo,qnaPwd)==0) {
+			int result =  qdao.delete(qnaNo, qnaPwd);
+
+			if(result==0) {
 				throw new SQLException(qnaNo+"게시물을 삭제할수 없습니다.");
 			}
 			
-			if(qnaDB.getFname()!=null) {
-				new File(path+"/"+qnaDB.getFname()).delete();//파일삭제
-			}
+			/*
+			 * if(qnaDB.getFname()!=null) { new
+			 * File(path+"/"+qnaDB.getFname()).delete();//파일삭제 }
+			 */
 		}
 
 	@Override
 	public void update(QnaDTO qnaDTO) throws SQLException {
-
-		if(qdao.update(qnaDTO)==0) {
+		
+		int result = qdao.update(qnaDTO);
+		
+		if(result==0) {
 			throw new SQLException("수정되지 않았습니다.");
 		}
 	}

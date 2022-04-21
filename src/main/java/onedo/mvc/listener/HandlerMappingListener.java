@@ -20,11 +20,8 @@ public class HandlerMappingListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 
 		Map<String, Controller> map = new HashMap<String, Controller>();
-
 		Map<String, Class<?>> clzMap = new HashMap<String, Class<?>>();
-		
 		Map<String, AjaxController> ajaxMap = new HashMap<String, AjaxController>();
-
 		Map<String, Class<?>> ajaxClzMap = new HashMap<String, Class<?>>();
 
 		

@@ -37,7 +37,7 @@
 </script>
 
 <script type="text/javascript">
-	function checkValid() {
+	/* function checkValid() {
 		var f = window.document.updateForm;
 		if (f.modelName.value == "") {
 			alert("모델이름을 입력해 주세요.");
@@ -60,7 +60,7 @@
 			return false;
 		}
 
-	}
+	} */
 </script>
 
 
@@ -87,9 +87,9 @@
 
 					<form name=updateForm method=post action="${path}/front"
 						onSubmit="return checkValid()">
-						<input type="hidden" name="key" value="elec"> <input
+						<input type="hidden" name="key" value="qnaBoard"> <input
 							type="hidden" name="methodName" value="update"> <input
-							type='hidden' name='modelNum' value="${elec.modelNum}">
+							type='hidden' name='modelNum' value="${qnaDTO.qnaNo}">
 						<table align="center" cellpadding="5" cellspacing="1" width="600"
 							border="1">
 							<tr>
@@ -99,7 +99,16 @@
 									</p>
 								</td>
 							</tr>
-							
+							<tr>
+								<td width="150" height="20">
+									<p align="center">
+										<b><span style="font-size: 9pt;">글 번호</span></b>
+									</p>
+								</td>
+								<td width="450" height="20"><b><span
+										style="font-size: 9pt;"> <input type=text
+											name="qnaNo" size="20" value="${qnaDTO.qnaNo}" readonly="readonly"></span></b></td>
+							</tr>
 							<tr>
 								<td width="150" height="20">
 									<p align="center">
@@ -108,7 +117,7 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <input type=text
-											name="modelName" size="20" value="${qnaDTO.goodsCode}"></span></b></td>
+											name="goodsCode" size="20" value="${qnaDTO.goodsCode}"></span></b></td>
 							</tr>
 							<tr>
 								<td width="150" height="20">
@@ -117,7 +126,7 @@
 									</p>
 								</td>
 								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <input type=text name="price"
+										style="font-size: 9pt;"> <input type=text name="qnaSubject"
 											size="40" value="${qnaDTO.qnaSubject}"></span></b></td>
 							</tr>
 
@@ -128,7 +137,7 @@
 									</p>
 								</td>
 								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <textarea name="description"
+										style="font-size: 9pt;"> <textarea name="qnaContent"
 												cols="50" rows="10">${qnaDTO.qnaContent}</textarea></span></b></td>
 							</tr>
 							<tr>
@@ -139,7 +148,7 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"><input type=password
-											name="password" size="12"> (비밀번호가 맞아야 수정이 가능합니다.)</span></b></td>
+											name="qnaPwd" size="12"> (비밀번호가 맞아야 수정이 가능합니다.)</span></b></td>
 							</tr>
 							<tr>
 								<td width="450" height="20" colspan="2" align="center"><b><span

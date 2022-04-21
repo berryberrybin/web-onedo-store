@@ -10,8 +10,6 @@
  	$(function(){
  		$(document).on("click","#goods",function(){
 			let goodsCode = $(this).attr("name");
-			//alert(idValue);
-			//상품클릭시 조회수증가 함
 			location.href="${path}/front?key=goods&methodName=selectByGoodsCode&isIncrement=y&goodsCode="+goodsCode;
  		})
  		
@@ -92,9 +90,6 @@
 					<c:set var="doneLoop" value="false"/>		
 					<c:set var="temp" value="${(pageNo-1) % p.blockcount}"/>
 					<c:set var="startPage" value="${pageNo - temp}"/>
-					<!-- \${pageNo} = ${pageNo} , 	\${temp}=${temp}  ,   \${startPage}=${startPage}  , -->
-					
-					<!-- String searchField, String searchValue 넣기 -->
 					<% 
 						String searchField = request.getParameter("searchField");
 						String searchValue = request.getParameter("searchValue");
