@@ -44,7 +44,7 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public void delete(int qnaNo,String qnaPwd,String path) throws SQLException {
+	public void delete(int qnaNo,String qnaPwd) throws SQLException {
 			
 			//비밀번호 일치 여부 체크
 			QnaDTO qnaDB =  qdao.selectByQnaCode(qnaNo);
@@ -55,9 +55,10 @@ public class QnaServiceImpl implements QnaService {
 				throw new SQLException(qnaNo+"게시물을 삭제할수 없습니다.");
 			}
 			
-			if(qnaDB.getFname()!=null) {
-				new File(path+"/"+qnaDB.getFname()).delete();//파일삭제
-			}
+			/*
+			 * if(qnaDB.getFname()!=null) { new
+			 * File(path+"/"+qnaDB.getFname()).delete();//파일삭제 }
+			 */
 		}
 
 	@Override

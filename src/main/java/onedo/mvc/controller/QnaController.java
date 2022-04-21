@@ -152,19 +152,14 @@ public class QnaController implements Controller {
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String qnaNo = request.getParameter("qnaNo");
 		String qnaPwd  = request.getParameter("qnaPwd");
+
 		
-		System.out.println(qnaNo+"deletecontroller1");
+		/* String path = request.getServletContext().getRealPath("/save"); */
 		
-		String path = request.getServletContext().getRealPath("/save");
 		
-		System.out.println(qnaNo+qnaPwd+"delete값1");
+		qnaService.delete(Integer.parseInt(qnaNo),qnaPwd);
 		
-		System.out.println(qnaNo+"deletecontroller2");
-		
-		qnaService.delete(Integer.parseInt(qnaNo),qnaPwd, path);
-		
-		System.out.println(qnaNo+qnaPwd+"delete값2");
-		System.out.println(qnaNo+"deletecontroller3");
+	
 		
 		return new ModelAndView("board/Qna.jsp", true);
 	}
