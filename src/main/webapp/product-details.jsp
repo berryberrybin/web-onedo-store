@@ -45,7 +45,7 @@
 		   					str += "<tr>";
 		   					str += "<td>"+(index+1)+"</td>";
 		   					str += "<td><a href='#'>"+item.reviewSubject+"</a></td>";
-		   					str += "<td>"+item.reviewDate+"</td>"; //날짜 형식 바꾸기
+		   					str += "<td>"+moment(item.reviewDate).format("YYYY-MM-DD")+"</td>"; //날짜 형식 바꾸기
 		   					//후기별점
 		   					let stars ="";
 	   						for(let i=0;i<item.reviewScore;i++){
