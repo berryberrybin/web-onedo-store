@@ -55,7 +55,7 @@ public class FaqDAOImpl implements FaqDAO {
 		
 		List<FaqDTO> faqList = new ArrayList<FaqDTO>();
 		
-		String sql = proFile.getProperty("");
+		String sql = "select * from  (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM FAQ_board ORDER BY faq_no desc) a) where  rnum>=? and rnum <=?";
 		try {
 			//전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.
 			int totalCount = this.getTotalCount();
@@ -97,7 +97,7 @@ public class FaqDAOImpl implements FaqDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		int totalCount=0;
-		String sql = proFile.getProperty(" ");
+		String sql = "select count(*) from FAQ_board";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
