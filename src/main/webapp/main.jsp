@@ -76,7 +76,7 @@
 			<p align="center"><b><span style="font-size:9pt;">등록된 상품이 없습니다.</span></b></p>
 		</c:when>
 		<c:otherwise>
-		<h2 class="title text-center">Top 4 Items</h2>
+		<h2 class="title text-center">Top 5 Items</h2>
 		<c:forEach items="${requestScope.list}" var="goodsDTO">
 			<div class="col-sm-4">
 					<div class="product-image-wrapper">
