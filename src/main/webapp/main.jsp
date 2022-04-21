@@ -33,17 +33,17 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-12">
-									<img src="${path}/images/home/OneDomain05.jpg" class="girl img-responsive" alt="" />
+									<img src="${path}/images/home/OneDomain05.jpg" class="girl img-responsive" alt="커피 추출중인 머신" />
 								</div>
 							</div>
 							<div class="item">
 								<div class="col-sm-12">
-									<img src="${path}/images/home/OneDomain04.jpg" class="girl img-responsive" alt="" />
+									<img src="${path}/images/home/OneDomain04.jpg" class="girl img-responsive" alt="하트모양 라떼아트" />
 								</div>
 							</div>
 							<div class="item">
 								<div class="col-sm-12">
-									<img src="${path}/images/home/OneDomain03.jpg" class="girl img-responsive" alt="" />
+									<img src="${path}/images/home/OneDomain03.jpg" class="girl img-responsive" alt="원두와 커피가루" />
 								</div>
 							</div>
 						</div>
