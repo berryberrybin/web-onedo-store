@@ -49,7 +49,7 @@
 		   					changeToStars(item.reviewScore);
 		   					str += "</summary>";
 		   					str += "<p>"+item.reviewContent;
-		   					if(!item.reviewImg==null||!item.reviewImg=="") str += "<img src='${path}/img/"+item.reviewImg+"' alt=''>";
+		   					if(!item.reviewImg==null||!item.reviewImg=="") str += "<br><img src='${path}/img/"+item.reviewImg+"' alt=''>";
 		   					str += "</p>";
 		   					str += "</details>";
 		   				});
