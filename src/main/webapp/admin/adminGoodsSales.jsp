@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../common/adminheader.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,30 +64,12 @@ td {
 								<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 							</button>
 						</div>
-						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html" class="active">Home</a></li>
-								<li class="dropdown"><a href="#">상품관리<i class="fa fa-angle-down"></i></a>
-									<ul role="menu" class="sub-menu">
-										<li><a href="${path}/front">상품조회</a></li>
-									</ul></li>
-								<li class="dropdown"><a href="#">회원관리<i class="fa fa-angle-down"></i></a>
-									<ul role="menu" class="sub-menu">
-										<li><a href="${path}/front?key=user&methodName=userSelectAll">회원조회</a></li>
-									</ul></li>
-								<li class="dropdown"><a href="#">매출관리<i class="fa fa-angle-down"></i></a>
-									<ul role="menu" class="sub-menu">
-										<li><a href="${path}/front?key=sales&methodName=selectByOrderDate">일별 매출조회</a></li>
-										<li><a href="${path}/front?key=sales&methodName=selectAll">전체 매출조회</a></li>
-										<li><a href="${path}/front?key=sales&methodName=selectByGoodsCode">상품별 매출조회</a></li>
-									</ul></li>
-							</ul>
-						</div>
 
 					</div>
 				</div>
 			</div>
 		</div>
+	<div id="piechart" style="width: 1400px; height: 500px; margin:0 auto;"></div>
 
 
 		<div class="container">
@@ -140,7 +122,6 @@ td {
 		</div>
 	</section>
 	
-	<div id="piechart" style="width: 1400px; height: 500px; margin:0 auto;"></div>
 
 	<!--/#do_action-->
 
