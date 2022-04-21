@@ -100,6 +100,22 @@ public class GoodsDTO {
 		this.goodsCode = goodsCode;
 		this.goodsImg = goodsImg;
 	}
+	
+	public GoodsDTO(String goodsType, String goodsName, int goodsPrice, int goodsStock,
+			String goodsDetail, int isSoldout, GoodsAttrDTO goodsAttrDTO) {
+		super();
+		
+		this.goodsType = goodsType;
+		this.goodsName = goodsName;
+		this.goodsPrice = goodsPrice;
+		this.goodsStock = goodsStock;
+		this.goodsDetail = goodsDetail;
+		this.isSoldout = isSoldout;
+		this.goodsAttrDTO = goodsAttrDTO;
+	}//상품등록
+
+
+
 
 	public int getGoodsCode() {
 		return goodsCode;

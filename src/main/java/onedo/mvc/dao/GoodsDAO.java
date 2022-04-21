@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.dto.GoodsDTO;
 
 
@@ -28,7 +29,7 @@ public interface GoodsDAO {
 	 * 상품등록
 	 * @return : 1-삽입성공 , 0 - 삽입실패
 	 */
-	int insert(GoodsDTO goodsDTO) throws SQLException;
+	int insert(GoodsDTO goodsDTO, GoodsAttrDTO goodsAttrDTO) throws SQLException;
 
 	/**
 	 * 상품코드에 해당하는 레코드 삭제
@@ -42,7 +43,7 @@ public interface GoodsDAO {
 	 * 
 	 * @return : 1-수정성공 , 0 - 수정실패
 	 */
-	int update(GoodsDTO goodsDTO) throws SQLException;
+	int update(GoodsDTO goodsDTO, GoodsAttrDTO goodsAttrDTO) throws SQLException;
 
 	/**
 	 * 상품 정렬하기

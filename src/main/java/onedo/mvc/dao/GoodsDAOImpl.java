@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import onedo.mvc.dto.CartDTO;
+import onedo.mvc.dto.CartItemDTO;
 import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.paging.PageCnt;
@@ -29,6 +31,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 		List<GoodsDTO> list = new ArrayList<GoodsDTO>();
 		
 		String sql=proFile.getProperty("goods.selectAll");
+		GoodsAttrDTO attrDTO = goodsDTO.getGoodsAttrDTO();
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -36,6 +39,11 @@ public class GoodsDAOImpl implements GoodsDAO {
 			while(rs.next()) {
 				goodsDTO = new GoodsDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
 						rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+				
+				//속성을 가져오는 메소드 호출
+				
+				attrDTO = new GoodsAttrDTO(rs.getInt(1), rs.getInt(10), rs.getInt(11), rs.getInt(12), rs.getInt(13));
+				goodsDTO.setGoodsAttrDTO(attrDTO);
 				list.add(goodsDTO);
 			}
 			
@@ -77,7 +85,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 
 	/**
-	 * 상품조회수증가
+	 * 상품조회수증가 
 	 * */
 	@Override
 	public int increamentGoodsView(int goodsCode) throws SQLException {
@@ -102,7 +110,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	 * 상품등록
 	 */
 	@Override
-	public int insert(GoodsDTO goodsDTO) throws SQLException {
+	public int insert(GoodsDTO goodsDTO, GoodsAttrDTO goodsAttrDTO) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
@@ -118,22 +126,49 @@ public class GoodsDAOImpl implements GoodsDAO {
 			ps.setString(5, goodsDTO.getGoodsDetail());
 			ps.setInt(6, goodsDTO.getIsSoldout());
 
-			result = ps.executeUpdate();
-
+			result = ps.executeUpdate(); //등록되면 1
+			if(result==0) {
+				   con.rollback();
+				   throw new SQLException("상품등록 실패");
+			}else {
+				insertGoodsAttr(con, goodsAttrDTO); //상품특징 등록하기 
+			}
 			con.commit();
-
 		} finally {
 			con.rollback();
 			DbUtil.dbClose(ps, con);
 		}
 		return result;
 	}
+	
+	/**
+	 * 상품 속성 등록하기
+	 * */
+	public int insertGoodsAttr(Connection con  , GoodsAttrDTO goodsAttrDTO) throws SQLException{
+		PreparedStatement ps =null;
+		String sql = proFile.getProperty("goods.insertGoodsAttr");
+		
+		int result =0;
+		try {
+			ps = con.prepareStatement(sql);
+				ps.setInt(1, goodsAttrDTO.getSour());
+				ps.setInt(2, goodsAttrDTO.getSweet());
+				ps.setInt(3, goodsAttrDTO.getAroma());
+				ps.setInt(4, goodsAttrDTO.getBody());
+				
+				result = ps.executeUpdate();
+		
+		} finally {
+			DbUtil.dbClose(ps , null);
+		}
+		return result;
+	}
 
 	/**
-	 * 상품수정
+	 * 상품수정 //+goods.updateGoodsAttr
 	 */
 	@Override
-	public int update(GoodsDTO goodsDTO) throws SQLException {
+	public int update(GoodsDTO goodsDTO, GoodsAttrDTO goodsAttrDTO) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
@@ -151,12 +186,42 @@ public class GoodsDAOImpl implements GoodsDAO {
 			ps.setInt(6, goodsDTO.getIsSoldout());	
 			ps.setInt(7, goodsDTO.getGoodsCode());
 
-			result = ps.executeUpdate();
+			result = ps.executeUpdate(); //수정되면 1
+			if(result==0) {
+				   con.rollback();
+				   throw new SQLException("상품 수정 실패");
+			}else {
+				updateGoodsAttr(con, goodsAttrDTO); //상품특징 등록하기 
+			}
 			con.commit();
-
 		} finally {
 			con.rollback();
 			DbUtil.dbClose(ps, con);
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * 상품 속성 수정하기
+	 * */
+	public int updateGoodsAttr(Connection con  , GoodsAttrDTO goodsAttrDTO) throws SQLException{
+		PreparedStatement ps =null;
+		String sql = proFile.getProperty("goods.updateGoodsAttr");
+		System.out.println(goodsAttrDTO.getGoodsCode());
+		int result =0;
+		try {
+			ps = con.prepareStatement(sql);
+				ps.setInt(1, goodsAttrDTO.getSour());
+				ps.setInt(2, goodsAttrDTO.getSweet());
+				ps.setInt(3, goodsAttrDTO.getAroma());
+				ps.setInt(4, goodsAttrDTO.getBody());
+				ps.setInt(5, goodsAttrDTO.getGoodsCode());
+				
+				result = ps.executeUpdate();
+		
+		} finally {
+			DbUtil.dbClose(ps , null);
 		}
 		return result;
 	}
@@ -294,7 +359,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	}
 	
 	/**
-	 * 상품이미지등록
+	 * 상품이미지등록 //+insertGoodsImg
 	 * */
 	@Override
 	public int insertGoodsImg(GoodsDTO goodsDTO) throws SQLException {

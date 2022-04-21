@@ -92,7 +92,9 @@
 					let str = "";
 					$.each(result, function(index, item) {
 						str += "<tr>";
-						str += "<td><a href='#'>" + item.goodsCode + "</a></td>";
+						str += "<td><a href='#'>" + item.goodsCode +"</a>" ;
+						str += "<input type='hidden' name='attrInfo' value='"+ item.goodsAttrDTO.sour+","+ item.goodsAttrDTO.sweet+","+item.goodsAttrDTO.aroma+","+item.goodsAttrDTO.body+"'>"; 
+						str += "</td>";
 						str += "<td>" + item.goodsType + "</td>";
 						str += "<td>" + item.goodsName + "</td>";
 						str += "<td>" + item.goodsPrice + "</td>";
@@ -101,10 +103,18 @@
 						str += `<td><input type='button' value='첨부' onclick='location.href="${path}/admin/insertGoodsImg.jsp"' name='${'${item.goodsCode}'}'></td>`;
 						str += `<td><input type='button' value='삭제' name='${'${item.goodsCode}'}'></td>`;
 						str += "</tr>";
+						
+						console.log(item.goodsAttrDTO.sour);
 					});
 					$("#goodstable tr:gt(0)").remove();
 					$("#goodstable tr:eq(0)").after(str);
 					
+					/*"#inForm" 에 등록된 sour, sweet, aroma, body 값 가져오기
+					방법 1 - <span>태그로 숨기기 (시도했는데 안돌아감.. 상세 설명까지 안보여짐.)
+									<span style='display:none'>"+item.sour+"</span>
+					방법 2 -"+ item.goodsAttrDTO.sour+","+ item.goodsAttrDTO.sweet+","+item.goodsAttrDTO.aroma+","+item.goodsAttrDTO.body+"
+					
+					*/
 				},
 				error : function(err) {
 					alert(err + "에러 발생했습니다.");
@@ -150,7 +160,12 @@
 							$("#goodsType").val("");
 							$("#isSoldout").val("");
 							$("#goodsDetail").val("");
+							$("#sour").val("");
+							$("#sweet").val("");
+							$("#aroma").val("");
+							$("#body").val("");
 							selectAll();
+							$("#btn").val("등록");
 							$("[name=methodName]").val("insert");
 						}
 
@@ -167,6 +182,16 @@
 		//상품코드를 클릭했을 때 이벤트 처리
 		$(document).on("click", "#goodstable > tbody > tr > td:nth-child(1) > a", function() {
 			
+			//attrInfo가져오기 
+		    let attrV = $(this).next().val();
+		    let v = attrV.split(",");
+			$("#sour").val(v[0]);
+			$("#sweet").val(v[1]);
+			$("#aroma").val(v[2]);
+			$("#body").val(v[3]);
+			
+			/////////////////////////////////////
+			
 			//text박스에 값넣기
 			let goodsCode = $(this).parent().next(); 
 			let goodsName = goodsCode.next();
@@ -175,6 +200,11 @@
 			let isSoldout = goodsStock.next(); 
 			let goodsType = isSoldout.next();
 			let goodsDetail  = goodsType.next();
+			
+			let sour = goodsDetail.next();
+			let sweet = sour.next();
+			let aroma = sweet.next();
+			let body = aroma.next();
 			
 			//상품코드 저장하기 
 			$("#goodsCode").val($(this).parent().text());
@@ -190,6 +220,7 @@
 			$("#btn").val("수정");
 			$("h2").text("상품수정");
 			$("[name=methodName]").val("update");
+			
 			
 		});
 		
@@ -326,7 +357,7 @@
 			
 			
 		
-	</section> <!--/#cart_items-->
+	</section>
 
 	
 

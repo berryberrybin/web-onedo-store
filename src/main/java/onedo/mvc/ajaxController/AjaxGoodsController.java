@@ -14,6 +14,7 @@ import net.sf.json.JSONArray;
 
 import onedo.mvc.dao.GoodsDAO;
 import onedo.mvc.dao.GoodsDAOImpl;
+import onedo.mvc.dto.GoodsAttrDTO;
 import onedo.mvc.dto.GoodsDTO;
 import onedo.mvc.service.GoodsService;
 import onedo.mvc.service.GoodsServiceImpl;
@@ -37,6 +38,7 @@ public class AjaxGoodsController implements AjaxController {
 		
 		int result =0 ;
 		
+		//goodsDTO에 들어갈 내용
 		String goodsType = request.getParameter("goodsType");
 		String goodsName = request.getParameter("goodsName");
 		String goodsPrice = request.getParameter("goodsPrice");
@@ -44,11 +46,21 @@ public class AjaxGoodsController implements AjaxController {
 		String goodsDetail = request.getParameter("goodsDetail");
 		String isSoldout = request.getParameter("isSoldout");
 		
-	    GoodsDTO goodsDTO = new GoodsDTO(goodsType,
-	    goodsName, Integer.parseInt(goodsPrice), Integer.parseInt(goodsStock),
-	    goodsDetail, Integer.parseInt(isSoldout)); 
+		//goodsAttrDTO에 들어갈 내용
+		String sour = request.getParameter("sour");
+		String sweet = request.getParameter("sweet");
+		String aroma = request.getParameter("aroma");
+		String body = request.getParameter("body");
+		
+		System.out.println("sour"+sour);
+		
+		GoodsAttrDTO goodsAttrDTO = new GoodsAttrDTO(Integer.parseInt(sour),
+				Integer.parseInt(sweet), Integer.parseInt(aroma), Integer.parseInt(body));
+		
+	    GoodsDTO goodsDTO = new GoodsDTO(goodsType,goodsName, Integer.parseInt(goodsPrice), Integer.parseInt(goodsStock),
+	    goodsDetail, Integer.parseInt(isSoldout), goodsAttrDTO ); 
 	    
-	    result =goodsService.insert(goodsDTO); 
+	    result =goodsService.insert(goodsDTO, goodsAttrDTO); 
 
 	    PrintWriter out = response.getWriter(); 
 	    out.print(result); //0,1
@@ -61,6 +73,7 @@ public class AjaxGoodsController implements AjaxController {
 	public void update(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
+		//goodsDTO에 들어갈 내용
 		String goodsCode = request.getParameter("goodsCode");
 		String goodsType = request.getParameter("goodsType");
 		String goodsName = request.getParameter("goodsName");
@@ -69,15 +82,20 @@ public class AjaxGoodsController implements AjaxController {
 		String goodsDetail = request.getParameter("goodsDetail");
 		String isSoldout = request.getParameter("isSoldout");
 		
-		System.out.println("goodsCode"+ goodsCode);
-		System.out.println("goodsType"+ goodsType);
-
+		//goodsAttrDTO에 들어갈 내용
+		String sour = request.getParameter("sour");
+		String sweet = request.getParameter("sweet");
+		String aroma = request.getParameter("aroma");
+		String body = request.getParameter("body");
+		
+		GoodsAttrDTO goodsAttrDTO = new GoodsAttrDTO(Integer.parseInt(goodsCode), 
+				Integer.parseInt(sour), Integer.parseInt(sweet), Integer.parseInt(aroma), Integer.parseInt(body));
 		
 	    GoodsDTO goodsDTO = new GoodsDTO(Integer.parseInt(goodsCode), goodsType,
 	    goodsName, Integer.parseInt(goodsPrice), Integer.parseInt(goodsStock),
 	    goodsDetail, Integer.parseInt(isSoldout)); 
 	    
-	    int result = goodsService.update(goodsDTO); 
+	    int result = goodsService.update(goodsDTO, goodsAttrDTO); 
 
 	    PrintWriter out = response.getWriter(); 
 	    out.print(result);
@@ -109,13 +127,19 @@ public class AjaxGoodsController implements AjaxController {
 		
 		List<GoodsDTO> list = null;
 		
-		
 		list = goodsService.selectAll();
-		System.out.println(list);
+		System.out.println("sour = "+list.get(0).getGoodsAttrDTO().getSour());
+		System.out.println("sweet = "+list.get(0).getGoodsAttrDTO().getSweet());
+		System.out.println("aroma = "+list.get(0).getGoodsAttrDTO().getAroma());
+		System.out.println("body = "+list.get(0).getGoodsAttrDTO().getBody());
+	
+		//System.out.println(list);
 		JSONArray arr = JSONArray.fromObject(list);
+		
 		
 		PrintWriter out = response.getWriter();
 		out.print(arr);
+		
 		
 		
 	}
