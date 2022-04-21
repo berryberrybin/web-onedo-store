@@ -63,6 +63,7 @@ public interface GoodsDAO {
 	 * 상품 이미지 등록
 	 * */
 	int insertGoodsImg(GoodsDTO goodsDTO) throws SQLException;
+	
 
 	/**
 	 * 판매량 순으로 상품검색

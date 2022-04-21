@@ -128,10 +128,7 @@ public class AjaxGoodsController implements AjaxController {
 		List<GoodsDTO> list = null;
 		
 		list = goodsService.selectAll();
-		System.out.println("sour = "+list.get(0).getGoodsAttrDTO().getSour());
-		System.out.println("sweet = "+list.get(0).getGoodsAttrDTO().getSweet());
-		System.out.println("aroma = "+list.get(0).getGoodsAttrDTO().getAroma());
-		System.out.println("body = "+list.get(0).getGoodsAttrDTO().getBody());
+		
 	
 		//System.out.println(list);
 		JSONArray arr = JSONArray.fromObject(list);

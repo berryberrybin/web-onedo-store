@@ -11,7 +11,7 @@ public class GoodsDTO {
 	   private String goodsDetail;
 	   private int isSoldout; 
 	   private int goodsView; //조회수
-	   private String goodsImg;
+	   private String goodsImg; 
 	   
 	   /**
 	    * 상품속성
@@ -27,7 +27,8 @@ public class GoodsDTO {
 		super();
 		this.goodsCode = goodsCode;
 	}
-
+	
+	
 
 
 
@@ -95,10 +96,11 @@ public class GoodsDTO {
 		this.isSoldout = isSoldout;
 	}
 	
-	public GoodsDTO(int goodsCode, String goodsImg) {
+	public GoodsDTO(String goodsImg, int goodsCode) {
 		super();
-		this.goodsCode = goodsCode;
+		
 		this.goodsImg = goodsImg;
+		this.goodsCode = goodsCode;
 	}
 	
 	public GoodsDTO(String goodsType, String goodsName, int goodsPrice, int goodsStock,
