@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import onedo.mvc.dto.QnaDTO;
 import onedo.mvc.dto.QnaReplyDTO;
+import onedo.mvc.dto.ReviewDTO;
 import onedo.mvc.paging.PageCnt;
 import onedo.mvc.util.DbUtil;
 
@@ -261,6 +262,33 @@ public class QnaDAOImpl implements QnaDAO {
 		}
 		
 		return repliesList;
+	}
+
+	@Override
+	public List<QnaDTO> selectQnaByGoodsCode(int goodsCode) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<QnaDTO> list = new ArrayList<QnaDTO>();
+		QnaDTO qnaDTO = null;
+		
+		String sql = proFile.getProperty("qna.selectQnaByGoodsCode");//select * from qna_board where goods_code=?
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, goodsCode);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				qnaDTO = new QnaDTO(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),
+						rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+				list.add(qnaDTO);
+			}
+		}finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return list;
 	}
 
 }

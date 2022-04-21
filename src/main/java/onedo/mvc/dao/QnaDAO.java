@@ -43,6 +43,11 @@ public interface QnaDAO {
 		   * 해당하는 댓글정보가져오기
 		   * */
 		  List<QnaReplyDTO> selectRepliesByModelNum(String modelNum) throws SQLException;
+		  
+		  /**
+		   * 상품코드에 해당하는 문의 가져오기
+		   * */
+		  List<QnaDTO> selectQnaByGoodsCode(int goodsCode) throws SQLException;
 	  
 	
 	  

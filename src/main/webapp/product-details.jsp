@@ -68,10 +68,38 @@
 		   				alert(err+"에러 발생했어요.");
 		   			}  //실패했을때 실행할 함수 
 		   		});//ajax끝
-				
-
-			});//후기가져오기끝
+		   	});//후기가져오기끝
 			
+		  //상품코드에 해당하는 모든 문의 가져오기
+			$("#qnas").click(function(){
+				$.ajax({
+		   			url :"${path}/ajax" ,
+		   			type:"post",
+		   			dataType:"json"  ,
+		   			data: {key: "ajaxQna", methodName : "selectQnaByGoodsCode", goodsCode : "${goodsDTO.goodsCode}"}, //서버에게 보낼 데이터정보(parameter정보)
+		   			success :function(result){
+		   				str = "";
+		   				$.each(result, function(index, item){
+		   					str += "<tr>";
+		   					str += "<td>"+(index+1)+"</td>";
+		   					str += "<td><a href='#'>"+item.qnaSubject+"</a></td>";
+		   					str += "<td>"+moment(item.qnaDate).format("YYYY-MM-DD")+"</td>"; //날짜 형식 바꾸기
+		   					str += "<td>"+item.userid+"</td>";
+		   					//str += "<td>"+item.reviewScore+"</td>"; //숫자로 표시
+		   					//str += "<td>"+changeToStars(item.reviewScore)+"</td>"; //ajax밖 메소드 호출시도
+		   					str += "</tr>";
+		   				});
+		   				
+		   				$("#qnaTable tr:gt(0)").remove();
+		   				$("#qnaTable tr:eq(0)").after(str);
+		   				
+		   			} , //성공했을때 실행할 함수 
+		   			error : function(err){  
+		   				alert(err+"에러 발생했어요.");
+		   			}  //실패했을때 실행할 함수 
+		   		});//ajax끝
+		   	});//후기가져오기끝
+		   	
 			//AddCart로 넘어가기 soobin
 			$("#cartButton").click(function(){
 				location.href="${path}/front?key=cart&methodName=insert&goodsCode=${goodsDTO.goodsCode}&quantity="+$("#quantity").val()		
@@ -80,9 +108,9 @@
 		});
 	</script>
 	<style type="text/css">
-		#reviewTable{width: 100%;}
-		#reviewTable th,td{text-align: center;}
-		#reviewTable th{background-color: #FE980F; color: white; padding: 5px;}
+		table{width: 100%;}
+		table th,td{text-align: center;}
+		table th{background-color: #FE980F; color: white; padding: 5px;}
 	</style>
  </head>
 <body>
@@ -127,7 +155,7 @@
 		<div class="col-sm-12">
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#details" data-toggle="tab">상세정보</a></li>
-				<li><a href="#searchQna" data-toggle="tab">상품문의</a></li>
+				<li><a id="qnas" href="#searchQna" data-toggle="tab">상품문의</a></li>
 				<li><a id="reviews" href="#searchReviews" data-toggle="tab">상품후기</a></li>
 			</ul>
 		</div>
@@ -140,9 +168,16 @@
 				</div>
 			</div>
 			
-			<div class="tab-pane fade" id="searchQna" >
-				<!-- 상품문의 -->
-				상품문의입니다
+			<div class="tab-pane fade" id="searchQna" ><!-- 상품문의 -->
+				<div class="col-sm-12">
+					<table id="qnaTable">
+						<tr>
+							<th>index</th><th>제목</th><th>날짜</th><th>아이디</th>
+						</tr>
+						<!-- 상품코드로 검색한 문의목록 -->
+						
+					</table>
+				</div>
 			</div>
 			
 			<div class="tab-pane fade" id="searchReviews" >
