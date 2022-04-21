@@ -7,6 +7,7 @@ import onedo.mvc.dao.OrdersDAOImpl;
 import onedo.mvc.dto.CartDTO;
 import onedo.mvc.dto.CartItemDTO;
 import onedo.mvc.dto.OrdersDTO;
+import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.exception.AuthenticationException;
 
 public class OrderServiceImpl implements OrderService {
@@ -20,5 +21,12 @@ public class OrderServiceImpl implements OrderService {
 		}
 
 	}
+	@Override
+	public List<SalesDTO> selectAll() throws Exception {
+		List<SalesDTO> list = ordersDAO.selectAll();
+		return list;
+	}
+	
+	
 
 }

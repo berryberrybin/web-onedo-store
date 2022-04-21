@@ -2,7 +2,9 @@ package onedo.mvc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -10,6 +12,7 @@ import onedo.mvc.dto.CartDTO;
 import onedo.mvc.dto.CartItemDTO;
 import onedo.mvc.dto.OrderLineDTO;
 import onedo.mvc.dto.OrdersDTO;
+import onedo.mvc.dto.SalesDTO;
 import onedo.mvc.util.DbUtil;
 
 public class OrdersDAOImpl implements OrdersDAO {
@@ -103,4 +106,42 @@ public class OrdersDAOImpl implements OrdersDAO {
 			
 		return result;
 	}
+
+	@Override
+	public List<SalesDTO> selectAll() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		List<SalesDTO> myList = new ArrayList<SalesDTO>();
+		int num = 0;
+		String sql = proFile.getProperty("order.selectAll");
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				SalesDTO sales = new SalesDTO(
+						rs.getString(1),
+						rs.getInt(2), 
+						rs.getInt(3), 
+						rs.getString(4),
+						rs.getInt(5),
+						rs.getInt(6),
+						rs.getInt(7)
+						);
+
+				num = rs.getInt(8);
+				if(num>1) sales.setGoodsName(sales.getGoodsName()+" 외 "+ (num-1) +"건");
+				myList.add(sales);
+			}
+
+		} finally {
+			DbUtil.dbClose(rs, ps, con);
+		}
+		return myList;
+	}
+	
+	
+	
 }

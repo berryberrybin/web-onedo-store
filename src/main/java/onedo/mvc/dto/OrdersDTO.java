@@ -1,12 +1,16 @@
 package onedo.mvc.dto;
 
+import java.util.List;
+
 public class OrdersDTO {
+	private int orderCode;
 	private int stateNo;
 	private String userId;
 	private String orderDate;
 	private String orderAddr;
 	private String orderPhone;
 	private int orderPrice;
+	private List<OrderLineDTO> lineDTO;
 
 	public OrdersDTO() {}
 	
@@ -19,7 +23,26 @@ public class OrdersDTO {
 		this.orderPrice = orderPrice;
 	}
 
+	public OrdersDTO(int orderCode, int stateNo, String userId, String orderDate, String orderAddr, String orderPhone,
+			int orderPrice, List<OrderLineDTO> lineDTO) {
+		super();
+		this.orderCode = orderCode;
+		this.stateNo = stateNo;
+		this.userId = userId;
+		this.orderDate = orderDate;
+		this.orderAddr = orderAddr;
+		this.orderPhone = orderPhone;
+		this.orderPrice = orderPrice;
+		this.lineDTO = lineDTO;
+	}
 
+	public int getOrderCode() {
+		return orderCode;
+	}
+
+	public void setOrderCode(int orderCode) {
+		this.orderCode = orderCode;
+	}
 
 	public int getStateNo() {
 		return stateNo;
@@ -69,7 +92,13 @@ public class OrdersDTO {
 		this.orderPrice = orderPrice;
 	}
 
+	public List<OrderLineDTO> getLineDTO() {
+		return lineDTO;
+	}
+
+	public void setLineDTO(List<OrderLineDTO> lineDTO) {
+		this.lineDTO = lineDTO;
+	}
 
 	
-
 }
