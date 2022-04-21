@@ -103,10 +103,7 @@
 		});
 	</script>
 	<style type="text/css">
-		table{width: 100%;}
-		table th,td{text-align: center;}
-		table th{background-color: #FE980F; color: white; padding: 5px;}
-		
+		.view-product img{height: 100%}
 		details { margin:5px 0 10px; }
 		details > summary { background:#fff; color:#444; padding:10px; outline:0; border-radius:5px; cursor:pointer; transition:background 0.5s; text-align:left; box-shadow: 1px 1px 2px gray;}
 		details > summary::-webkit-details-marker { background:#444; color:#fff; background-size:contain; transform:rotate3d(0, 0, 1, 90deg); transition:transform 0.25s;}
@@ -142,21 +139,18 @@
 				<img src="images/product-details/new.jpg" class="newarrival" alt="" />
 				<h2>${goodsDTO.goodsName}</h2>
 				<p>goodsCode: ${goodsDTO.goodsCode}</p>
-				<img src="images/product-details/rating.png" alt="" />
 				<span>
 					<span>&#8361; <fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></span>
+					<h4>
 					<label for="quantity">수량:</label>
 					<input type="number" id="quantity" name="quantity" min="1" max="99" value="1"/> 
-					
+					</h4>
 					<a href="#" class="btn btn-default add-to-cart" id="cartButton">
 					<i class="fa fa-shopping-cart"></i>Add to cart
 					</a>
 					
 				</span>
-				<p><b>Availability:</b> ${goodsDTO.isSoldout}</p>
-				<p><b>Condition:</b> New</p>
-				<p><b>Brand:</b> E-SHOPPER</p>
-				<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+				
 			</div><!--/product-information-->
 		</div>
 	</div><!--/product-details-->
