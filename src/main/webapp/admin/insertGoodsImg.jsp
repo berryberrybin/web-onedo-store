@@ -48,11 +48,6 @@
 
 
 <script type="text/javascript">
-	<%-- 
-	
-	String name = request.getParameter("name"); 
-	
-	--%>
 
 	$(function() {
 		//alert("${name}");
