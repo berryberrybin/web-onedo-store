@@ -48,10 +48,6 @@ public class QnaDTO {
 		this.qnaPwd = qnaPwd;
 	}
 
-
-
-
-
 	public QnaDTO(String fname, int fsize, int pageCnt) {
 		super();
 		this.fname = fname;
