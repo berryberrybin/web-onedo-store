@@ -33,6 +33,18 @@
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
+
+<script type="text/javascript">
+ 	$(function(){
+ 		$(document).on("click",function(){
+				let goodsCode = $(this).attr("name");
+				
+ 		})
+ 		
+ 		//현재페이지 a태그에 active속성 주기
+ 		
+ 	});
+ </script>
 <!--/head-->
 <style>
 .listTable {
@@ -74,7 +86,7 @@ th, td {
 							<col width="30%" />
 							<col width="20%" />
 							<col width="10%" />
-							<col width="10%" />
+							
 
 						</colgroup>
 						<tr>
@@ -100,11 +112,7 @@ th, td {
 									<font color="white"><b><span style="font-size: 9pt;">작성날짜</span></b></font>
 								</p>
 							</td>
-							<td bgcolor="#FE980F">
-								<p align="center">
-									<font color="white"><b><span style="font-size: 9pt;">파일용량</span></b></font>
-								</p>
-							</td>
+						
 
 						</tr>
 
@@ -115,7 +123,7 @@ th, td {
 								<td>${noticeBoard.noticeSubject}</td>
 								<td>${noticeBoard.noticeContent}</td>
 								<td>${noticeBoard.noticeDate}</td>
-								<td>${noticeBoard.noticeImg}</td>
+								
 					
 
 							</tr>
@@ -141,12 +149,41 @@ th, td {
 					
 					<div align=right>
 						<span style="font-size: 9pt;"><a class="btn btn-primary"
-							href="${path}/writing.jsp">글쓰기</a></span>
+							href="${path}/board/Noticewriting.jsp">글쓰기</a></span>
 					</div>
 
 
-
-				</div>
+<jsp:useBean class="onedo.mvc.paging.PageCnt" id="p"/> 
+     
+ <!--  블럭당  -->
+ <nav class="pagination-container">
+		<ul class="pagination">
+		<c:set var="doneLoop" value="false"/>
+		
+		<c:set var="temp" value="${(pageNo-1) % p.blockcount}"/> <!-- (1-1)%2  =0  , (2-1)%2    1 , (3-1)%2  0 -->
+		<c:set var="startPage" value="${pageNo - temp}"/> <!--   1- 1 -->
+	
+		  <c:if test="${(startPage-p.blockcount) > 0}"> <!-- (-2) > 0  -->
+		      <li><a class="pagination-newer" href="${path}/front?key=noticeBoard&methodName=noticeSelectAll&pageNo=${startPage-1}">&laquo;</a></li>
+		  </c:if>
+		  
+	
+		  <c:forEach var='i' begin='${startPage}' end='${(startPage-1)+p.blockcount}'> 
+			  <c:if test="${(i-1)>=p.pageCnt}">
+			       <c:set var="doneLoop" value="true"/>
+			    </c:if> 
+			  <c:if test="${not doneLoop}" >
+			         <li><a class="${i==pageNo?'pagination-active':page}" href="${path}/front?key=noticeBoard&methodName=noticeSelectAll&pageNo=${i}">${i}</a> </li>
+		     </c:if>
+		</c:forEach>
+		
+	
+				
+		 <c:if test="${(startPage+p.blockcount)<=p.pageCnt}">
+		     <li><a class="pagination-older" href="${path}/front?key=noticeBoard&methodName=noticeSelectAll&pageNo=${startPage+p.blockcount}">&raquo;</a></li>
+		 </c:if>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</section>

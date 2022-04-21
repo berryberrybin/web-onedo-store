@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../common/header.jsp" />
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,8 +48,7 @@
 <!--/head-->
 <style>
 .listTable {
-	width: 100%;
-	
+	width: 100%
 }
 
 th, td {
@@ -61,6 +59,7 @@ th, td {
 </style>
 <body>
 
+
 	<section>
 		<div class="container">
 			<div class="row">
@@ -70,23 +69,25 @@ th, td {
 				<div class="col-sm-9">
 					<div class="blog-post-area">
 						<h2 class="title text-center">Latest From our Blog</h2>
-						
+
 					</div>
 					<!--/blog-post-area-->
-
 
 					<table align="center" border="0" cellpadding="5" cellspacing="2"
 						width="100%" bordercolordark="white" bordercolorlight="black">
 						<caption>
-							<h2 align="center">문의 게시판 LIST</h2>
+							<h2 align="center">후기 게시판</h2>
 						</caption>
 						<colgroup>
+
+							<col width="3%" />
+							<col width="5%" />
+							<col width="5%" />
+							<col width="8%" />
 							<col width="10%" />
 							<col width="10%" />
-							<col width="15%" />
-							<col width="30%" />
-							<col width="10%" />
-						
+							<col width="5%" />
+							<col width="3%" />
 
 						</colgroup>
 						<tr>
@@ -105,33 +106,50 @@ th, td {
 									<font color="white"><b><span style="font-size: 9pt;">아이디</span></b></font>
 								</p>
 							</td>
+
 							<td bgcolor="#FE980F">
 								<p align="center">
 									<font color="white"><b><span style="font-size: 9pt;">제목</span></b></font>
 								</p>
 							</td>
-
+							<td bgcolor="#FE980F">
+								<p align="center">
+									<font color="white"><b><span style="font-size: 9pt;">내용</span></b></font>
+								</p>
+							</td>
 							<td bgcolor="#FE980F">
 								<p align="center">
 									<font color="white"><b><span style="font-size: 9pt;">작성날짜</span></b></font>
 								</p>
 							</td>
-							
+							<td bgcolor="#FE980F">
+								<p align="center">
+									<font color="white"><b><span style="font-size: 9pt;">이미지</span></b></font>
+								</p>
+							</td>
+							<td bgcolor="#FE980F">
+								<p align="center">
+									<font color="white"><b><span style="font-size: 9pt;">별점</span></b></font>
+								</p>
+							</td>
+
+
+
 						</tr>
 
 
-						<c:forEach items="${list}" var="qnaBoard">
+						<c:forEach items="${list}" var="revBoard">
 							<tr>
-								<td>${qnaBoard.qnaNo}</td>
-								<td>${qnaBoard.goodsCode}</td>
-								<td>${qnaBoard.userid}</td>
-								<td>
-								<a href="${path}/front?key=qnaBoard&methodName=selectByQnaCode&qnaNo=${qnaBoard.qnaNo}&pageNo=${pageNo}">
-								${qnaBoard.qnaSubject} 
-								</a>
-								</td>
-								
-								<td>${qnaBoard.qnaDate}</td>
+								<td>${revBoard.reviewNo}</td>
+								<td>${revBoard.goodsCode}</td>
+								<td>${revBoard.userId}</td>
+								<td>${revBoard.reviewSubject}</td>
+								<td>${revBoard.reviewContent}</td>
+								<td>${revBoard.reviewDate}</td>
+								<td>${revBoard.reviewImg}</td>
+								<td>${revBoard.reviewScore}</td>
+
+
 
 							</tr>
 						</c:forEach>
@@ -154,8 +172,9 @@ th, td {
 
 					<div align=right>
 						<span style="font-size: 9pt;"><a class="btn btn-primary"
-							href="${path}/board/Qnawriting.jsp">글쓰기</a></span>
+							href="${path}/writing.jsp">글쓰기</a></span>
 					</div>
+
 
 
 <jsp:useBean class="onedo.mvc.paging.PageCnt" id="p"/> 
@@ -169,7 +188,7 @@ th, td {
 		<c:set var="startPage" value="${pageNo - temp}"/> <!--   1- 1 -->
 	
 		  <c:if test="${(startPage-p.blockcount) > 0}"> <!-- (-2) > 0  -->
-		      <li><a class="pagination-newer" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll&pageNo=${startPage-1}">&laquo;</a></li>
+		      <li><a class="pagination-newer" href="${path}/front?key=revBoard&methodName=reviewSelectAll&pageNo=${startPage-1}">&laquo;</a></li>
 		  </c:if>
 		  
 	
@@ -178,14 +197,14 @@ th, td {
 			       <c:set var="doneLoop" value="true"/>
 			    </c:if> 
 			  <c:if test="${not doneLoop}" >
-			         <li><a class="${i==pageNo?'pagination-active':page}" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll&pageNo=${i}">${i}</a> </li>
+			         <li><a class="${i==pageNo?'pagination-active':page}" href="${path}/front?key=revBoard&methodName=reviewSelectAll&pageNo=${i}">${i}</a> </li>
 		     </c:if>
 		</c:forEach>
 		
 	
 				
 		 <c:if test="${(startPage+p.blockcount)<=p.pageCnt}">
-		     <li><a class="pagination-older" href="${path}/front?key=qnaBoard&methodName=qnaSelectAll&pageNo=${startPage+p.blockcount}">&raquo;</a></li>
+		     <li><a class="pagination-older" href="${path}/front?key=revBoard&methodName=reviewSelectAll&pageNo=${startPage+p.blockcount}">&raquo;</a></li>
 		 </c:if>
 					</ul>
 				</nav>

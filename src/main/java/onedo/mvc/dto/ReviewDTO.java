@@ -1,5 +1,7 @@
 package onedo.mvc.dto;
 
+import java.util.List;
+
 public class ReviewDTO {
 
 	private int reviewNo;
@@ -13,7 +15,8 @@ public class ReviewDTO {
 	
 	private String  fname; 
 	private int  fsize;
-
+	
+	private List<ReviewDTO> repliesList;
 	private int pageCnt;
 	
 	public  ReviewDTO() {}
@@ -32,14 +35,8 @@ public class ReviewDTO {
 		
 	}
 	
-
-	public ReviewDTO(int reviewNo, int goodsCode, String userId, String reviewSubject, String reviewContent, String reviewDate,
-			String reviewImg, int reviewScore, String fname, int fsize, int pageCnt) {
-		this(reviewNo,goodsCode,userId,reviewSubject,reviewContent,reviewDate,reviewImg,reviewScore);
-		this.fname = fname;
-		this.fsize = fsize;
-		
-	}
+	
+	
 
 	public int getReviewNo() {
 		return reviewNo;
@@ -131,12 +128,12 @@ public class ReviewDTO {
 		this.fsize = fsize;
 	}
 
-	@Override
-	public String toString() {
-		return "ReviewDTO [reviewNo=" + reviewNo + ", goodsCode=" + goodsCode + ", userId=" + userId
-				+ ", reviewSubject=" + reviewSubject + ", reviewContent=" + reviewContent + ", reviewDate=" + reviewDate
-				+ ", reviewImg=" + reviewImg + ", reviewScore=" + reviewScore + ", fname=" + fname + ", fsize=" + fsize
-				+ ", pageCnt=" + pageCnt + "]";
+	public List<ReviewDTO> getRepliesList() {
+		return repliesList;
+	}
+
+	public void setRepliesList(List<ReviewDTO> repliesList) {
+		this.repliesList = repliesList;
 	}
 
 	

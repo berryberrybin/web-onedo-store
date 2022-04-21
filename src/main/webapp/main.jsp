@@ -76,6 +76,7 @@
 			<p align="center"><b><span style="font-size:9pt;">등록된 상품이 없습니다.</span></b></p>
 		</c:when>
 		<c:otherwise>
+		<h2 class="title text-center">Top 4 Items</h2>
 		<c:forEach items="${requestScope.list}" var="goodsDTO">
 			<div class="col-sm-4">
 					<div class="product-image-wrapper">
@@ -89,7 +90,7 @@
 									<div class="overlay-content">
 										<h2><fmt:formatNumber>${goodsDTO.goodsPrice}</fmt:formatNumber></h2>
 										<p>${goodsDTO.goodsName}</p>
-										<a href="front?key=cart&methodName=insert&goodsCode=${goodsDTO.goodsCode}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<a href="front?key=cart&methodName=insert&goodsCode=${goodsDTO.goodsCode}&quantity=1" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 								</div>
 						</div>

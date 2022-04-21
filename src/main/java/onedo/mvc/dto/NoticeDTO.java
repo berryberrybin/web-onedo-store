@@ -1,5 +1,7 @@
 package onedo.mvc.dto;
 
+import java.util.List;
+
 public class NoticeDTO {
 	private int noticeNo;
 	private String noticeSubject;
@@ -10,6 +12,8 @@ public class NoticeDTO {
 	private String fname; 
 	private int  fsize;
 	private int pageCnt;
+	
+	private List<NoticeDTO> repliesList;
 	
 	public NoticeDTO() {}
 
@@ -26,19 +30,13 @@ public class NoticeDTO {
 	}
 
 
-	
-
-	
 
 
-
-	public NoticeDTO(int noticeNo, String noticeSubject, String noticeContent, String noticeDate, String noticeImg,
-			String fname, int fsize, int pageCnt) {
+	public NoticeDTO(String noticeSubject, String noticeContent, String noticeImg) {
 		super();
-		
-		this.fname = fname;
-		this.fsize = fsize;
-		this.pageCnt = pageCnt;
+		this.noticeSubject = noticeSubject;
+		this.noticeContent = noticeContent;
+		this.noticeImg = noticeImg;
 	}
 
 
@@ -153,7 +151,13 @@ public class NoticeDTO {
 		this.pageCnt = pageCnt;
 	}
 
+	public List<NoticeDTO> getRepliesList() {
+		return repliesList;
+	}
 
+	public void setRepliesList(List<NoticeDTO> repliesList) {
+		this.repliesList = repliesList;
+	}
 	
 	
 	

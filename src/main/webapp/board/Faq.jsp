@@ -33,6 +33,17 @@
 <link rel="apple-touch-icon-precomposed"
 	href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
+<script type="text/javascript">
+ 	$(function(){
+ 		$(document).on("click",function(){
+				let goodsCode = $(this).attr("name");
+				
+ 		})
+ 		
+ 		//현재페이지 a태그에 active속성 주기
+ 		
+ 	});
+ </script>
 <!--/head-->
 <style>
 .listTable {
@@ -128,8 +139,37 @@ th, td {
 					</div>
 
 
-
-				</div>
+<jsp:useBean class="onedo.mvc.paging.PageCnt" id="p"/> 
+     
+ <!--  블럭당  -->
+ <nav class="pagination-container">
+		<ul class="pagination">
+		<c:set var="doneLoop" value="false"/>
+		
+		<c:set var="temp" value="${(pageNo-1) % p.blockcount}"/> <!-- (1-1)%2  =0  , (2-1)%2    1 , (3-1)%2  0 -->
+		<c:set var="startPage" value="${pageNo - temp}"/> <!--   1- 1 -->
+	
+		  <c:if test="${(startPage-p.blockcount) > 0}"> <!-- (-2) > 0  -->
+		      <li><a class="pagination-newer" href="${path}/front?key=faqBoard&methodName=faqSelectAll&pageNo=${startPage-1}">&laquo;</a></li>
+		  </c:if>
+		  
+	
+		  <c:forEach var='i' begin='${startPage}' end='${(startPage-1)+p.blockcount}'> 
+			  <c:if test="${(i-1)>=p.pageCnt}">
+			       <c:set var="doneLoop" value="true"/>
+			    </c:if> 
+			  <c:if test="${not doneLoop}" >
+			         <li><a class="${i==pageNo?'pagination-active':page}" href="${path}/front?key=faqBoard&methodName=faqSelectAll&pageNo=${i}">${i}</a> </li>
+		     </c:if>
+		</c:forEach>
+		
+	
+				
+		 <c:if test="${(startPage+p.blockcount)<=p.pageCnt}">
+		     <li><a class="pagination-older" href="${path}/front?key=faqBoard&methodName=faqSelectAll&pageNo=${startPage+p.blockcount}">&raquo;</a></li>
+		 </c:if>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</section>

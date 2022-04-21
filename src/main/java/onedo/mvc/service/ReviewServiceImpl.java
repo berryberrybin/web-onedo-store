@@ -1,6 +1,5 @@
 package onedo.mvc.service;
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public List<ReviewDTO> selectAll() throws SQLException {
-		List<ReviewDTO> list = rdao.selectAll();
+		List<ReviewDTO> list = rdao.reviewSelectAll();
 		
 		return list;
 	}
