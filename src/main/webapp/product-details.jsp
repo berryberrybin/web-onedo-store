@@ -8,7 +8,7 @@
 <head>
 	<script type="text/javascript">
 		$(function(){
-			//상품 속성
+			//상품 상세정보
 			let attrs = [{name:'신맛',score:${goodsDTO.goodsAttrDTO.sour}},{name:'단맛',score:${goodsDTO.goodsAttrDTO.sweet}},
 						{name:'향미',score:${goodsDTO.goodsAttrDTO.aroma}},{name:'바디감',score:${goodsDTO.goodsAttrDTO.body}}];
 			
@@ -29,8 +29,10 @@
 				}
 			}
 			
-			let goodsDetail="<h3 style='color:#363432'>"+"${goodsDTO.goodsDetail}"+"</h3><p>";
-			$("#goodsAttr").html(goodsDetail+"<h4 style='color:#FE980F'>"+str+"</h4>");
+			let goodsDetail="<h3>"+"${goodsDTO.goodsDetail}"+"</h3><p>";
+			$("#goodsAttr").html(goodsDetail+"<h4>"+str+"</h4>");
+			//상세정보 끝
+			
 			
 			//상품코드에 해당하는 모든 후기 가져오기
 			$("#reviews").click(function(){
@@ -111,6 +113,8 @@
 		    to { opacity:1; transform:translate3d(0, 0, 0); }
 		}
 		
+		#goodsAttr h3{color: #363432;}
+		#goodsAttr h4{color: #FE980F;}
 	</style>
  </head>
 <body>
