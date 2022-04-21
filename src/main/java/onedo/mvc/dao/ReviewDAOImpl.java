@@ -130,9 +130,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 		ResultSet rs=null;
 		
 		List<ReviewDTO> list = new ArrayList<ReviewDTO>();
-		ReviewDTO reviewDTO = null; //while문 밖에서 ReviewDTO 생성함
+		ReviewDTO reviewDTO = null;
 		
-		String sql = proFile.getProperty("");//select * from review_board where goods_code=?
+		String sql = proFile.getProperty("review.selectByGoodsCode");//select * from review_board where goods_code=?
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
