@@ -107,18 +107,9 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <input type=text
-											name="qnaNo" size="20" value="${qnaDTO.qnaNo}" readonly="readonly"></span></b></td>
+											name="qnaNo" size="20" value="${noticeDTO.noticeNo}" readonly="readonly"></span></b></td>
 							</tr>
-							<tr>
-								<td width="150" height="20">
-									<p align="center">
-										<b><span style="font-size: 9pt;">상품 코드</span></b>
-									</p>
-								</td>
-								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <input type=text
-											name="goodsCode" size="20" value="${qnaDTO.goodsCode}"></span></b></td>
-							</tr>
+							
 							<tr>
 								<td width="150" height="20">
 									<p align="center">
@@ -127,7 +118,7 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <input type=text name="qnaSubject"
-											size="40" value="${qnaDTO.qnaSubject}"></span></b></td>
+											size="40" value="${noticeDTO.noticeSubject}"></span></b></td>
 							</tr>
 
 							<tr>
@@ -138,18 +129,9 @@
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <textarea name="qnaContent"
-												cols="50" rows="10">${qnaDTO.qnaContent}</textarea></span></b></td>
+												cols="50" rows="10">${noticeDTO.noticeContent}</textarea></span></b></td>
 							</tr>
-							<tr>
-								<td width="150" height="20">
-									<p align="center">
-										<b><span style="font-size: 9pt;">비밀번호</span></b>
-									</p>
-								</td>
-								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"><input type=password
-											name="qnaPwd" size="12"> (비밀번호가 맞아야 수정이 가능합니다.)</span></b></td>
-							</tr>
+							
 							<tr>
 								<td width="450" height="20" colspan="2" align="center"><b><span
 										style="font-size: 9pt;"> <input type="submit"
@@ -158,7 +140,7 @@
 						</table>
 					</form>
 					<hr>
-				
+					
 				</div>
 			</div>
 		</div>

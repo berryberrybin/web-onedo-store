@@ -86,7 +86,7 @@ public class QnaController implements Controller {
 
 		qnaService.insert(qdto);
 
-		return new ModelAndView("board/Qna.jsp", true);
+		return new ModelAndView("front?key=qnaBoard&methodName=qnaSelectAll", true);
 	}
 
 	/**

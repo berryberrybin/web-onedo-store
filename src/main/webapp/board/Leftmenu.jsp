@@ -78,7 +78,7 @@
 			</div>
 
 
-			<div class="panel panel-default">
+		<%-- 	<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a href="${path}/front?key=faqBoard&methodName=faqSelectAll">
@@ -94,7 +94,7 @@
 							후기 게시판 </a>
 					</h4>
 				</div>
-			</div>
+			</div> --%>
 
 		</div>
 	

@@ -33,7 +33,7 @@ public interface NoticeService {
 	 /**
 	   *  모델번호에 해당하는 레코드 삭제 메소드 호출
 	   * */
-	    void delete(int noticeNo,String path) throws SQLException;
+	    void delete(int noticeNo) throws SQLException;
 	  
 	  
 	  /**

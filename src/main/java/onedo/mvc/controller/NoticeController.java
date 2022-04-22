@@ -11,7 +11,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import onedo.mvc.dto.NoticeDTO;
-import onedo.mvc.dto.ReviewDTO;
 import onedo.mvc.service.NoticeService;
 import onedo.mvc.service.NoticeServiceImpl;
 
@@ -56,11 +55,11 @@ public class NoticeController implements Controller {
 	  
 	    //전송된 데이터 받기 
 	  
-	    String noticeSubject = m.getParameter("notice_subject");
-	    String noticeContent = m.getParameter("notice_content");
-	    String noticeImg = m.getParameter("notice_img");
+	    String noticeSubject = m.getParameter("noticeSubject");
+	    String noticeContent = m.getParameter("noticeContent");
 	    
-	    NoticeDTO ndto = new NoticeDTO(noticeSubject,noticeContent,noticeImg);
+	    
+	    NoticeDTO ndto = new NoticeDTO(noticeSubject,noticeContent);
 	    
 	  //파일첨부가되었다면...
   		if(m.getFilesystemName("file") != null) {
@@ -96,11 +95,12 @@ public class NoticeController implements Controller {
 	 * */
 	public ModelAndView updateForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String noticeNo = request.getParameter("noticeNo");
-		NoticeDTO elec = notService.selectByNoticeCode(Integer.parseInt(noticeNo));
-		request.setAttribute("elec", elec);
+		
+		NoticeDTO noticeDTO = notService.selectByNoticeCode(Integer.parseInt(noticeNo));
+		request.setAttribute("noticeDTO", noticeDTO);
 		
 		
-	   return new ModelAndView("elec/update.jsp");
+	   return new ModelAndView("board/Noticeupdate.jsp");
 	}
 	
 	/**
@@ -111,18 +111,15 @@ public class NoticeController implements Controller {
 		String noticeNo = request.getParameter("noticeNo");
 		String noticeSubject = request.getParameter("noticeSubject");
 		String noticeContent = request.getParameter("noticeContent");
-		String noticeDate = request.getParameter("noticeDate");
-		String noticeImg = request.getParameter("noticeImg");
-	 
 		
-		NoticeDTO noticeDTO = new NoticeDTO();
+
+		
+		NoticeDTO noticeDTO = new NoticeDTO(Integer.parseInt(noticeNo),noticeSubject,noticeContent);
 			
 		notService.update(noticeDTO);
 		
-		NoticeDTO dbnot = notService.selectByNoticeCode(Integer.parseInt(noticeNo));
-		request.setAttribute("elec", dbnot);
 		
-	return null;
+		return new ModelAndView("front?key=noticeBoard&methodName=noticeSelectAll");
 	}
 	
 	/**
@@ -131,10 +128,10 @@ public class NoticeController implements Controller {
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String noticeNo  = request.getParameter("noticeNo");
 		
-		String path = request.getServletContext().getRealPath("/save");
 		
-		notService.delete(Integer.parseInt(noticeNo), path);
 		
-	return null;	
+		notService.delete(Integer.parseInt(noticeNo));
+		
+		return new ModelAndView("front?key=noticeBoard&methodName=noticeSelectAll", true);
 	}	
 }

@@ -43,19 +43,20 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public void delete(int noticeNo, String path) throws SQLException {
-		NoticeDTO notDB = ndao.selectByNoticeCode(noticeNo);
-		if(ndao.delete(noticeNo)==0) {
+	public void delete(int noticeNo) throws SQLException {
+		int result = ndao.delete(noticeNo);
+
+		if(result==0) {
 			throw new SQLException(noticeNo+"게시물을 삭제할수 없습니다.");
 		}
-		if(notDB.getFname()!=null) {
-			new File(path+"/"+notDB.getFname()).delete();//파일삭제
-		}
+		
 	}
 
 	@Override
 	public void update(NoticeDTO noticeDTO) throws SQLException {
-		if(ndao.update(noticeDTO)==0) {
+		int result = ndao.update(noticeDTO);
+		
+		if(result==0) {
 			throw new SQLException("수정되지 않았습니다.");
 		}
 

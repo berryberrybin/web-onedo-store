@@ -147,7 +147,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql ="insert into notice_board values(QNA_NO_SEQ.NEXTVAL,?,?,CURRENT_DATE,?)";
+		String sql ="insert into notice_board values(NOTICE_NO_SEQ.NEXTVAL,?,?,CURRENT_DATE,?)";
 		
 		try {
 			con = DbUtil.getConnection();
@@ -169,7 +169,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql = proFile.getProperty(" ");
+		String sql = "delete notice_board where faq_no=?";
 		
 		try {
 			con = DbUtil.getConnection();
@@ -191,7 +191,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql = proFile.getProperty(" ");
+		String sql = "update notice_board set faq_subject=?,faq_content=? where faq_no=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -199,8 +199,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 			
 			ps.setString(1,noticeDTO.getNoticeSubject() );
 			ps.setString(2,noticeDTO.getNoticeContent() );
-			ps.setString(3,noticeDTO.getNoticeDate() );
-			ps.setString(4,noticeDTO.getNoticeImg() );
+
 			
 		}finally {
 			DbUtil.dbClose(ps, con);

@@ -44,11 +44,6 @@ function sendUpdate(){
 }
 
 function sendDelete(){
-	if(document.requestForm.password.value==""){
-		alert("비밀번호 입력하세요.");
-		document.requestForm.password.focus();
-		return;
-	}
 	
 	document.requestForm.methodName.value ="delete";
 	document.requestForm.submit();
@@ -116,14 +111,14 @@ function sendDelete(){
         <td width="450" height="200" valign="top" colspan="3">
         <span style="font-size:9pt;"><b><pre>${noticeDTO.noticeContent}</pre></b></span></td>
     </tr>
-   
+   		
     
     <tr>
         <td height="20" colspan="4" align="center" valign="middle">
 			<!-- 수정시 필요한 데이터들을 hidden으로 숨겨놓고 폼 데이터로 보내준다. -->
-				<input type="text" name="noticeNo" value="${noticeDTO.noticeNo}">
-				<input type="text" name="key" value=noticeBoard>
-				<input type="text" name="methodName" >
+				<input type="hidden" name="noticeNo" value="${noticeDTO.noticeNo}">
+				<input type="hidden"name="key" value=noticeBoard>
+				<input type="hidden" name="methodName" >
 				<input type=button value="수정하기" onClick="sendUpdate()">
 				<input type=button value="삭제하기" onClick="sendDelete()">
     </form>

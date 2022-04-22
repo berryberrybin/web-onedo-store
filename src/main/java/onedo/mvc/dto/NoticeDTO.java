@@ -31,12 +31,20 @@ public class NoticeDTO {
 
 
 
-
-	public NoticeDTO(String noticeSubject, String noticeContent, String noticeImg) {
+	public NoticeDTO(String noticeSubject, String noticeContent) {
 		super();
 		this.noticeSubject = noticeSubject;
 		this.noticeContent = noticeContent;
-		this.noticeImg = noticeImg;
+	}
+
+
+
+
+	public NoticeDTO(int noticeNo, String noticeSubject, String noticeContent) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeSubject = noticeSubject;
+		this.noticeContent = noticeContent;
 	}
 
 

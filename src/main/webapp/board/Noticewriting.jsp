@@ -89,7 +89,7 @@ $(function() {
 								</td>
 								<td width="450" height="20"><b><span
 										style="font-size: 9pt;"> <input type=text
-											name="model_name" size="30"></span></b></td>
+											name="noticeSubject" size="30"></span></b></td>
 							</tr>
 							
 							<tr>
@@ -99,7 +99,7 @@ $(function() {
 									</p>
 								</td>
 								<td width="450" height="20"><b><span
-										style="font-size: 9pt;"> <textarea name="description"
+										style="font-size: 9pt;"> <textarea name=noticeContent
 												cols="50" rows="10"></textarea></span></b></td>
 							</tr>
 
