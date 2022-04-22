@@ -80,7 +80,7 @@
 					<h2><i class="fa fa-coffee" aria-hidden="true"></i><br></h2>
 					<h1>나만의 원두 찾기</h1>
 					<hr>
-					<form action="${path}/front">
+					<form action="${path}/front" method="post">
 						<input type=hidden name="methodName" value="survey">
 						<input type=hidden name="key" value="survey">
 						<h4>산뜻함이 느껴지면서 감귤류 등의 신맛을 좋아하시나요?</h4>
