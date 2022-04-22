@@ -109,7 +109,7 @@
 									<p>${QnaDTO.goodsCode}</p>
 								</td>
 								<td class="qnaSub">
-									<a href="${path}/front?key=Qna&methodName=selectByQnaCode&orderCode=${QnaDTO.qnaNo}">
+									<a href="${path}/front?key=qnaBoard&methodName=selectByQnaCode&qnaNo=${QnaDTO.qnaNo}">
 									${QnaDTO.qnaSubject}</a>
 								</td>
 								<td class="qnaDate">

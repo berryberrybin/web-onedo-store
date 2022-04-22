@@ -144,8 +144,8 @@ public class UserController implements Controller {
 		
 		//페이징 처리 DB 호출 
 		List<SalesDTO> myList = userService.selectMyOrder(userId,Integer.parseInt(pageNo));
-		request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
 		request.setAttribute("myList", myList); 
+		request.setAttribute("pageNo", pageNo); //뷰에서 사용하기 위해서 ${pageNo}
 		System.out.println(myList);
 		 
 		/*
@@ -197,9 +197,6 @@ public class UserController implements Controller {
 		request.setAttribute("myBoard", myBoard);
 		return new ModelAndView("user/myBoardPage.jsp");
 	}
-	
-	
-	
-	
-	
+
+
 }

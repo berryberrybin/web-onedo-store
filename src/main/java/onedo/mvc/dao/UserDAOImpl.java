@@ -296,9 +296,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			 //전체레코드 수를 구해서 총페이지 수를 구하고 db에서 꺼내올 게시물을 개수를 pagesize만큼 가져온다.
 			int totalCount = this.getTotalCount(userId);
-			System.out.println("totalCount = " + totalCount);
 			int totalPage = totalCount%PageCnt.getPagesize() ==0 ? totalCount/PageCnt.getPagesize() : (totalCount/PageCnt.getPagesize())+1 ;
-			System.out.println("totalPage = " + totalPage);
 			PageCnt pageCnt = new PageCnt();
 			pageCnt.setPageCnt(totalPage);//전체페이지수를 저장해준다.
 			pageCnt.setPageNo(pageNo); //사용자가 클릭한 page번호를 설정
